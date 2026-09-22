@@ -13,6 +13,6 @@ Un seul membre remplit le formulaire pour l'équipe. Ce fichier est le contenu �
 | Rôle — Membre 2 | Master Prompt Engineer et Responsable Impact |
 | E-mail GitHub — Membre 2 | à saisir par Rogelle |
 | Membres 3, 4, 5 | non constitués |
-| URL du dépôt GitHub | à coller après création de https://github.com/reymouhid95/GET409-RelaisYoon |
+| URL du dépôt GitHub | https://github.com/reymouhid95/RelaisYoon |
 
 Le champ URL se remplit au retour de l'étape C, pas avant.
