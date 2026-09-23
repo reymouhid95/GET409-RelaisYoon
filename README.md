@@ -23,9 +23,12 @@ Probleme : Comment pourrions-nous permettre à une usagère de Guédiawaye de sa
 
 ## Livrables S1
 
-- [x] Fiche equipe préparée — docs/fiche-equipe.md (formulaire e-Academy non soumis : lien absent des fichiers du cours)
-- [x] Carte d'empathie — voir classe01/GET409_S1_RelaisYoon.docx
-- [x] Enonce HMW
+- [x] Fiche equipe — docs/fiche-equipe.md (formulaire e-Academy non soumis : lien absent des fichiers du cours)
+- [x] Carte d'empathie — docs/carte-empathie.md
+- [x] Guide d'interview + notes — docs/guide-interview.md, docs/notes-interview.md
+- [x] Prompts S1 + pitch 90 s — docs/prompts-s1.md, docs/pitch-90s.md
+- [x] Dossier complet — docs/GET409_S1_RelaisYoon.docx
+- [x] Enonce HMW — dans la carte d'empathie
 - [x] Depot public : https://github.com/reymouhid95/GET409-RelaisYoon.git — format GET409-RelaisYoon conforme
 - [x] Collaboratrice invitée en Write — @Rogelle-2MR (acceptation en attente)
 - [x] Collaborateur invité en Write — @DarvyValtine (acceptation en attente)
