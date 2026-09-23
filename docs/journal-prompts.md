@@ -126,3 +126,15 @@ itération si < 3/5.
 - Note : 4/5. Script solide, mais les valeurs sont des cibles : le MVP
   n'existe pas encore. Le vrai travail sera le remplacement par les réelles.
 - Itération : aucune. Action : rejouer le script à blanc dès US-01 construite.
+
+## P-HMW-JURY
+
+- Technique : HMW + traçabilité → 5 questions probables + 2 pièges.
+- Prompt : `hmw-definitif.md` + `vpc-connections.md`, niveau Master,
+  réponses traçables vers un fichier précis.
+- Réponse : appli (C2), pluie (C2/A2), cadrage (critères), chauffeurs (I1),
+  impact (Nord). Pièges : interview simulée assumée, naïveté
+  institutionnelle contrée par R01A et les 100 M$.
+- Note : 5/5. Chaque réponse ouvre un fichier exact. Le piège 1 est le
+  plus important : il protège l'équipe de son propre point faible.
+- Itération : aucune. Action : répéter les 2 pièges à voix haute avant S6.
