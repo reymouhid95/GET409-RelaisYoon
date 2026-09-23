@@ -53,8 +53,9 @@ Phase HMW — non commencée (0/4) :
 
 - [ ] docs/hmw-definitif.md — P-HMW, décision engageante
 - [x] docs/hmw-alignement.md — filtre sprint S3 : US-01, US-02, US-03 si temps, US-04 reportée
-- [ ] docs/hmw-demo.md — script démo S6
-- [ ] docs/hmw-jury.md — 5 questions + 2 pièges
+- [x] docs/hmw-demo.md — script démo S6 (valeurs cibles, à remplacer)
+- [x] docs/hmw-jury.md — 5 questions + 2 pièges
+- [x] docs/pitch-vpc-draft.md — bloc 60 s, 2 versions
 
 Transverse :
 

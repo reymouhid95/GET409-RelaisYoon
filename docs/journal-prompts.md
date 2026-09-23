@@ -138,3 +138,14 @@ itération si < 3/5.
 - Note : 5/5. Chaque réponse ouvre un fichier exact. Le piège 1 est le
   plus important : il protège l'équipe de son propre point faible.
 - Itération : aucune. Action : répéter les 2 pièges à voix haute avant S6.
+
+## P-VPC-PITCH
+
+- Technique : VPC → bloc pitch 60 secondes, 2 registres + accroche.
+- Prompt : `vpc.md` complet, HMW, équipe, persona, 60 secondes.
+- Réponse : version formelle (Awa, prix datés, forfait vide), version
+  directe (chiffres, cible 60 %), accroche « Savoir avant la porte »,
+  3 jargons bannis avec remplacements.
+- Note : 4/5. Les deux versions tiennent en 60 secondes. La directe cite
+  la cible 60 % comme acquise : à reformuler après les mesures S3.
+- Itération : aucune. Action : réécrire la directe avec les vraies valeurs.
