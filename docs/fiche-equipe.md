@@ -11,7 +11,7 @@ Un seul membre remplit le formulaire pour l'équipe. Ce fichier est le contenu �
 | E-mail GitHub — Membre 1 | thiernooury89@gmail.com |
 | Prénom & Nom — Membre 2 | Rogelle Mombo |
 | Rôle — Membre 2 | Master Prompt Engineer et Responsable Impact |
-| E-mail GitHub — Membre 2 | à saisir par Rogelle |
+| E-mail GitHub — Membre 2 | invitation envoyée au compte @Rogelle-2MR (Write, 22 septembre 2026) |
 | Membres 3, 4, 5 | non constitués |
 | URL du dépôt GitHub | https://github.com/reymouhid95/RelaisYoon |
 

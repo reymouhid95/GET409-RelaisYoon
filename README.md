@@ -5,10 +5,10 @@
 | Prenom Nom | Role | GitHub |
 |---|---|---|
 | Amadou Oury BAH | Dev UI (No-Code), Chef de Produit | @reymouhid95 |
-| Rogelle Mombo | Master Prompt Engineer, Responsable Impact | à inviter |
+| Rogelle Mombo | Master Prompt Engineer, Responsable Impact | @Rogelle-2MR |
 
 E-mail GitHub Amadou Oury BAH : thiernooury89@gmail.com
-E-mail GitHub Rogelle Mombo : non communiqué — invitation Write impossible tant qu'il manque.
+Rogelle Mombo : @Rogelle-2MR, invitée en Write le 22 septembre 2026 — en attente de son acceptation (e-mail d'invitation GitHub).
 
 Dépôt : [reymouhid95/RelaisYoon](https://github.com/reymouhid95/RelaisYoon.git) — public, branche `main`, créé le 22 septembre 2026.
 Écart à corriger : le handout impose `GET409-RelaisYoon`. Renommer dans Settings du dépôt, ou assumer `RelaisYoon` devant le jury.
@@ -25,5 +25,5 @@ Probleme : Comment pourrions-nous permettre à une usagère de Guédiawaye de sa
 - [x] Carte d'empathie — voir classe01/GET409_S1_RelaisYoon.docx
 - [x] Enonce HMW
 - [x] Depot public : https://github.com/reymouhid95/RelaisYoon — vide, nom hors format GET409-RelaisYoon
-- [ ] Collaboratrice invitée en Write
+- [x] Collaboratrice invitée en Write — @Rogelle-2MR (acceptation en attente)
 - [x] URL connue — à coller dans le formulaire
