@@ -15,7 +15,7 @@ Un seul membre remplit le formulaire pour l'équipe. Ce fichier est le contenu �
 | Prénom & Nom — Membre 3 | Darvy Valtine |
 | Rôle — Membre 3 | à confirmer en équipe |
 | GitHub — Membre 3 | @DarvyValtine, invité en Write le 22 septembre 2026 |
-| Membres 4, 5 | non constitués |
+| Membres 4, 5 | non pourvus — équipe arrêtée à 3 le 22 septembre 2026 |
 | URL du dépôt GitHub | https://github.com/reymouhid95/GET409-RelaisYoon.git |
 
 Le champ URL se remplit au retour de l'étape C, pas avant.

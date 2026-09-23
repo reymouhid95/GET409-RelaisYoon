@@ -8,6 +8,8 @@
 | Rogelle Mombo | Master Prompt Engineer, Responsable Impact | @Rogelle-2MR |
 | Darvy Valtine | Membre — rôle à confirmer en équipe | @DarvyValtine |
 
+Équipe arrêtée à 3 membres le 22 septembre 2026 (écart assumé : le handout demande 4 à 5, aucun membre fictif ajouté).
+
 E-mail GitHub Amadou Oury BAH : thiernooury89@gmail.com
 Rogelle Mombo : @Rogelle-2MR, invitée en Write le 22 septembre 2026 — en attente de son acceptation (e-mail d'invitation GitHub).
 
