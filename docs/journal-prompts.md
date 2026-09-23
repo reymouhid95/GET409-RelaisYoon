@@ -54,3 +54,15 @@ itération si < 3/5.
   l'affichage reste fragile : à fiabiliser par comptage direct en S3.
 - Itération : aucune. Action : prévoir un comptage direct des lectures
   d'affichage dès le pilote.
+
+## P-VPC (S2 · Étape 05)
+
+- Technique : Value Proposition Canvas, profil client puis proposition,
+  FIT check final.
+- Prompt : sections Blanc, Rouge, Noir de `chapeaux-bono.md`.
+- Réponse : 3 jobs, 3 pains, 3 gains d'Awa ; service d'info correspondance
+  sans data ; 3 relievers et 3 creators mappés 1-pour-1 ; FIT sans orphelin.
+- Note : 4/5. Mapping complet et traçable. Le Creator 3 (rentrée à l'heure)
+  dépend de facteurs hors MVP (pluie, trafic) : bénéfice à formuler avec
+  prudence en soutenance.
+- Itération : aucune. Action : P-VPC-CONNECTIONS vérifiera chaque origine.
