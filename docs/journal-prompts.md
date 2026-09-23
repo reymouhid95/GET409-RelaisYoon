@@ -41,3 +41,16 @@ itération si < 3/5.
 - Note : 4/5. Indicateurs mesurables sans technologie. Le seuil de 200 FCFA
   de C2 est une première proposition, à calibrer sur les premiers relevés.
 - Itération : aucune. Action : calibrer le seuil C2 dès 5 relevés réels.
+
+## P-CHAPEAUX-METRIQUES (S2 · Étape 04)
+
+- Technique : valeur (chapeau jaune) → Nord + progression + alertes.
+- Prompt : section Jaune de `chapeaux-bono.md`, HMW, persona, MVP en
+  2 phrases.
+- Réponse : Nord = % d'usagères informées avant la descente (cible 60 %) ;
+  P1 usage au forfait vide, P2 fraîcheur < 1 h, P3 écart < 200 FCFA ;
+  A1 sous-usage, A2 prix contredits. Tableau de bord S6 à 3 chiffres.
+- Note : 4/5. Tout est mesurable sans technologie. P1 en déclaratif pour
+  l'affichage reste fragile : à fiabiliser par comptage direct en S3.
+- Itération : aucune. Action : prévoir un comptage direct des lectures
+  d'affichage dès le pilote.
