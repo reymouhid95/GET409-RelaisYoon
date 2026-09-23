@@ -66,3 +66,15 @@ itération si < 3/5.
   dépend de facteurs hors MVP (pluie, trafic) : bénéfice à formuler avec
   prudence en soutenance.
 - Itération : aucune. Action : P-VPC-CONNECTIONS vérifiera chaque origine.
+
+## P-VPC-CONNECTIONS (S2 · Étape 06)
+
+- Technique : traçabilité, chaque élément VPC rattaché à un chapeau
+  avec citation.
+- Prompt : `vpc.md` + `chapeaux-bono.md` complets.
+- Réponse : 3 jobs, 3 pains, 3 gains, 3 relievers, 3 creators tous tracés ;
+  1 tension honnête (Creator 3 promet une heure non contrôlée) avec
+  recommandation de reformulation.
+- Note : 5/5. Aucun orphelin, une vraie tension détectée au lieu d'être
+  masquée. C'est le fichier qui répondra au jury.
+- Itération : aucune.
