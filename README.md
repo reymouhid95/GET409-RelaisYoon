@@ -11,7 +11,8 @@
 Équipe arrêtée à 3 membres le 22 septembre 2026 (écart assumé : le handout demande 4 à 5, aucun membre fictif ajouté).
 
 E-mail GitHub Amadou Oury BAH : thiernooury89@gmail.com
-Rogelle Mombo : @Rogelle-2MR, invitée en Write le 22 septembre 2026 — en attente de son acceptation (e-mail d'invitation GitHub).
+E-mail GitHub Rogelle Mombo : rogellereolia3@gmail.com (@Rogelle-2MR, invitation acceptée)
+E-mail GitHub Darvy Valtine : darvyvaltine@gmail.com (@DarvyValtine, invitation acceptée)
 
 Dépôt : [reymouhid95/GET409-RelaisYoon](https://github.com/reymouhid95/GET409-RelaisYoon.git) — public, branche `main`, créé le 22 septembre 2026, renommé au format `GET409-RelaisYoon` le même jour.
 
