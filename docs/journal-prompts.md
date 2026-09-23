@@ -92,3 +92,15 @@ itération si < 3/5.
   du SMS/USSD au Sénégal n'est pas chiffré : à valider avant d'en faire
   le canal par défaut.
 - Itération : aucune. Action : chiffrer le coût SMS/USSD en S3.
+
+## P-HMW — HMW définitif
+
+- Technique : HMW draft + chapeaux + FIT VPC → décision engageante.
+- Prompt : HMW S1, fait clé du Blanc, risque prioritaire du Noir, question
+  structurante du Bleu, FIT (Pain 1 → Reliever 1).
+- Réponse : HMW confirmé sans réécriture. 6 critères validés un par un.
+  3 reformulations écartées avec motif (solution imposée 2 fois,
+  largeur 1 fois).
+- Note : 5/5. Confirmer au lieu de réécrire pour le plaisir est aussi une
+  décision — elle est écrite et motivée.
+- Itération : aucune.
