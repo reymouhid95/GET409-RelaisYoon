@@ -10,10 +10,10 @@ Un seul membre remplit le formulaire pour l'équipe. Ce fichier est le contenu �
 | Rôle — Membre 1 | Dev UI (No-Code) et Chef de Produit |
 | E-mail GitHub — Membre 1 | thiernooury89@gmail.com |
 | Prénom & Nom — Membre 2 | Rogelle Mombo |
-| Rôle — Membre 2 | Master Prompt Engineer et Responsable Impact |
+| Rôle — Membre 2 | Master Prompt Engineer |
 | E-mail GitHub — Membre 2 | @Rogelle-2MR — invitation acceptée le 23 septembre 2026 |
 | Prénom & Nom — Membre 3 | Darvy Valtine |
-| Rôle — Membre 3 | Dev UI (No-Code), co-bâtisseur — profil bâtisseur web (HTML, PHP) selon rolesEquipe.docx |
+| Rôle — Membre 3 | Responsable Impact (décision équipe du 23 septembre 2026) |
 | GitHub — Membre 3 | @DarvyValtine — invitation acceptée le 23 septembre 2026 |
 | Membres 4, 5 | non pourvus — équipe arrêtée à 3 le 22 septembre 2026 |
 | URL du dépôt GitHub | https://github.com/reymouhid95/GET409-RelaisYoon.git |

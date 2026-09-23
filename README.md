@@ -5,8 +5,8 @@
 | Prenom Nom | Role | GitHub |
 |---|---|---|
 | Amadou Oury BAH | Dev UI (No-Code), Chef de Produit | @reymouhid95 |
-| Rogelle Mombo | Master Prompt Engineer, Responsable Impact | @Rogelle-2MR |
-| Darvy Valtine | Dev UI (No-Code) — co-bâtisseur avec Amadou | @DarvyValtine |
+| Rogelle Mombo | Master Prompt Engineer | @Rogelle-2MR |
+| Darvy Valtine | Responsable Impact | @DarvyValtine |
 
 Équipe arrêtée à 3 membres le 22 septembre 2026 (écart assumé : le handout demande 4 à 5, aucun membre fictif ajouté).
 
