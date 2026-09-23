@@ -104,3 +104,13 @@ itération si < 3/5.
 - Note : 5/5. Confirmer au lieu de réécrire pour le plaisir est aussi une
   décision — elle est écrite et motivée.
 - Itération : aucune.
+
+## P-HMW-ALIGNEMENT
+
+- Technique : backlog noté Persona / Problème / Contexte, ordre de sprint.
+- Prompt : `hmw-definitif.md` + `backlog-s3.md` complets.
+- Réponse : US-01 et US-02 à 6/6, US-03 à 5/6 si temps, US-04 reportée
+  (4/6, dépend de S1 non validée). Décision : US-01 → US-02 → US-03.
+- Note : 5/5. Chaque score est motivé en 1 phrase. La démo S6 est déjà
+  définie : US-01 en live au forfait vide.
+- Itération : aucune.

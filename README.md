@@ -52,7 +52,7 @@ Phase VPC — en cours (1/4) :
 Phase HMW — non commencée (0/4) :
 
 - [ ] docs/hmw-definitif.md — P-HMW, décision engageante
-- [ ] docs/hmw-alignement.md — filtre sprint S3
+- [x] docs/hmw-alignement.md — filtre sprint S3 : US-01, US-02, US-03 si temps, US-04 reportée
 - [ ] docs/hmw-demo.md — script démo S6
 - [ ] docs/hmw-jury.md — 5 questions + 2 pièges
 
