@@ -13,7 +13,7 @@ Un seul membre remplit le formulaire pour l'équipe. Ce fichier est le contenu �
 | Rôle — Membre 2 | Master Prompt Engineer et Responsable Impact |
 | E-mail GitHub — Membre 2 | invitation envoyée au compte @Rogelle-2MR (Write, 22 septembre 2026) |
 | Prénom & Nom — Membre 3 | Darvy Valtine |
-| Rôle — Membre 3 | à confirmer en équipe |
+| Rôle — Membre 3 | Dev UI (No-Code), co-bâtisseur — profil bâtisseur web (HTML, PHP) selon rolesEquipe.docx |
 | GitHub — Membre 3 | @DarvyValtine, invité en Write le 22 septembre 2026 |
 | Membres 4, 5 | non pourvus — équipe arrêtée à 3 le 22 septembre 2026 |
 | URL du dépôt GitHub | https://github.com/reymouhid95/GET409-RelaisYoon.git |
