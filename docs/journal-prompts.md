@@ -78,3 +78,17 @@ itération si < 3/5.
 - Note : 5/5. Aucun orphelin, une vraie tension détectée au lieu d'être
   masquée. C'est le fichier qui répondra au jury.
 - Itération : aucune.
+
+## P-VPC-BACKLOG (S2 · Étape 07)
+
+- Technique : proposition de valeur → user stories priorisées MUST /
+  SHOULD / COULD avec outil, effort, adresse et critère d'acceptation.
+- Prompt : sections Produits, Relievers, Creators, FIT de `vpc.md` +
+  contraintes de `contraintes-mvp.md`, HMW, persona, outils Bolt.new + Dify.
+- Réponse : US-01 et US-02 MUST (info avant descente, heure de relevé),
+  US-03 SHOULD (code court sans data), US-04 COULD (ardoises, post-MVP).
+  Sprint S3 en 2 semaines, démo S6 = US-01 en live au forfait vide.
+- Note : 4/5. US-01 et US-02 testent directement C1 + C3. Le coût réel
+  du SMS/USSD au Sénégal n'est pas chiffré : à valider avant d'en faire
+  le canal par défaut.
+- Itération : aucune. Action : chiffrer le coût SMS/USSD en S3.
