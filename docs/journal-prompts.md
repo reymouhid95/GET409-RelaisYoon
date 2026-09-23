@@ -114,3 +114,15 @@ itération si < 3/5.
 - Note : 5/5. Chaque score est motivé en 1 phrase. La démo S6 est déjà
   définie : US-01 en live au forfait vide.
 - Itération : aucune.
+
+## P-HMW-DEMO
+
+- Technique : HMW + métriques → script démo 5 minutes en 4 blocs.
+- Prompt : `hmw-definitif.md` + sections Nord, Progression, Tableau de bord
+  de `metriques-succes.md`, MVP en 2 phrases, outils Dify + SMS.
+- Réponse : situation avant (45 s), MVP en action (2 min 30, téléphone sans
+  data), métriques (1 min), réponse au HMW (45 s). 2 questions anticipées,
+  signal de succès observable.
+- Note : 4/5. Script solide, mais les valeurs sont des cibles : le MVP
+  n'existe pas encore. Le vrai travail sera le remplacement par les réelles.
+- Itération : aucune. Action : rejouer le script à blanc dès US-01 construite.
