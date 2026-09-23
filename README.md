@@ -10,8 +10,7 @@
 E-mail GitHub Amadou Oury BAH : thiernooury89@gmail.com
 Rogelle Mombo : @Rogelle-2MR, invitée en Write le 22 septembre 2026 — en attente de son acceptation (e-mail d'invitation GitHub).
 
-Dépôt : [reymouhid95/RelaisYoon](https://github.com/reymouhid95/RelaisYoon.git) — public, branche `main`, créé le 22 septembre 2026.
-Écart à corriger : le handout impose `GET409-RelaisYoon`. Renommer dans Settings du dépôt, ou assumer `RelaisYoon` devant le jury.
+Dépôt : [reymouhid95/GET409-RelaisYoon](https://github.com/reymouhid95/GET409-RelaisYoon.git) — public, branche `main`, créé le 22 septembre 2026, renommé au format `GET409-RelaisYoon` le même jour.
 
 ## Notre defi
 
@@ -24,6 +23,6 @@ Probleme : Comment pourrions-nous permettre à une usagère de Guédiawaye de sa
 - [x] Fiche equipe préparée — docs/fiche-equipe.md (formulaire e-Academy non soumis : lien absent des fichiers du cours)
 - [x] Carte d'empathie — voir classe01/GET409_S1_RelaisYoon.docx
 - [x] Enonce HMW
-- [x] Depot public : https://github.com/reymouhid95/RelaisYoon — vide, nom hors format GET409-RelaisYoon
+- [x] Depot public : https://github.com/reymouhid95/GET409-RelaisYoon.git — format GET409-RelaisYoon conforme
 - [x] Collaboratrice invitée en Write — @Rogelle-2MR (acceptation en attente)
 - [x] URL connue — à coller dans le formulaire
