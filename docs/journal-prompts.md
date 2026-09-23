@@ -29,3 +29,15 @@ itération si < 3/5.
   admet une limite : le MVP démarre là où un relevé existe, ce qui reste
   à prouver station par station.
 - Itération : aucune. Action : lister les stations avec relevé en S3.
+
+## P-CHAPEAUX-HYPOTHESES (S2 · Étape 03)
+
+- Technique : risques → hypothèses testables, classées par criticité.
+- Prompt : sections Noir + Synthèse bleue de `chapeaux-bono.md`.
+- Réponse : 3 critiques (compréhension sans formation, fiabilité du soir,
+  usage au forfait vide), 1 importante (acceptation des chauffeurs),
+  1 secondaire (correspondantes de quai). Priorité S3 : tester C1 + C3
+  en un seul passage à la descente.
+- Note : 4/5. Indicateurs mesurables sans technologie. Le seuil de 200 FCFA
+  de C2 est une première proposition, à calibrer sur les premiers relevés.
+- Itération : aucune. Action : calibrer le seuil C2 dès 5 relevés réels.
