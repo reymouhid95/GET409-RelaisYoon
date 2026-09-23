@@ -149,3 +149,34 @@ itération si < 3/5.
 - Note : 4/5. Les deux versions tiennent en 60 secondes. La directe cite
   la cible 60 % comme acquise : à reformuler après les mesures S3.
 - Itération : aucune. Action : réécrire la directe avec les vraies valeurs.
+
+## L3 — Journal S3 (3 prompts, 3 techniques)
+
+### P1 Chercheur — Zero-Shot structuré
+
+- Prompt : rôle + mission + processus 3 étapes + format de sortie imposé,
+  sans exemple. Variables interdites dans le SYSTEM : la question arrive
+  par message USER (Debut · query).
+- Réponse attendue : champs STATION / QUARTIER / PRIX / HEURE / SOURCES,
+  ou « INSUFFISANT : raison » uniquement.
+- Note provisoire : 4/5. À confirmer après run : le modèle suit-il le
+  format sans exemple ?
+
+### P2 Rédacteur — Few-Shot
+
+- Prompt : même structure + EXEMPLE de rapport complet (INFO
+  CORRESPONDANCE Guédiawaye). Données via message USER (Chercheur · text).
+- Réponse attendue : rapport calqué sur l'exemple, 100 mots max,
+  « Non disponible » si donnée manquante.
+- Note provisoire : 4/5. À confirmer : l'exemple est-il copié ou le
+  modèle dérive-t-il ?
+
+### P3 Éthique — Chain-of-Thought
+
+- Prompt du Template S3 : « Raisonne étape par étape », identifier 2
+  risques → évaluer gravité → proposer garde-fous (technique, message,
+  règle prompt). Placeholders RelaisYoon.
+- Réponse : 2 risques (prix périmé, chauffeurs braqués) + règle d'or.
+  Voir `reflexion-ethique-s3.md`.
+- Note : 5/5. Spécifique au projet, aucun point générique — critère
+  éliminatoire L4 respecté.
