@@ -33,3 +33,32 @@ Probleme : Comment pourrions-nous permettre à une usagère de Guédiawaye de sa
 - [x] Collaboratrice invitée en Write — @Rogelle-2MR (acceptation en attente)
 - [x] Collaborateur invité en Write — @DarvyValtine (acceptation en attente)
 - [x] URL connue — à coller dans le formulaire
+
+## Livrables S2 — niveau d'implémentation au 23 septembre 2026
+
+Phase 6 chapeaux — terminée (4/4) :
+
+- [x] docs/chapeaux-bono.md — 18 insights + synthèse
+- [x] docs/contraintes-mvp.md — 4 contraintes + critère final
+- [x] docs/hypotheses-validation.md — 3 critiques, 1 importante, 1 secondaire
+- [x] docs/metriques-succes.md — Nord 60 %, P1-P3, A1-A2
+
+Phase VPC — en cours (1/4) :
+
+- [x] docs/vpc.md — profil Awa + proposition, FIT sans orphelin
+- [ ] docs/vpc-connections.md — étape 06, traçabilité chapeaux → VPC
+- [ ] docs/backlog-s3.md — étape 07, user stories MUST/SHOULD/COULD
+- [ ] docs/pitch-vpc-draft.md — bloc 60 s pour la soutenance
+
+Phase HMW — non commencée (0/4) :
+
+- [ ] docs/hmw-definitif.md — P-HMW, décision engageante
+- [ ] docs/hmw-alignement.md — filtre sprint S3
+- [ ] docs/hmw-demo.md — script démo S6
+- [ ] docs/hmw-jury.md — 5 questions + 2 pièges
+
+Transverse :
+
+- [~] docs/journal-prompts.md — 5 entrées de la chaîne S2 notées /5 ;
+  les 5 prompts métier P1-P5 du TP (Zero-Shot, Few-Shot, CoT, libre)
+  restent à documenter
