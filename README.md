@@ -30,8 +30,7 @@ Probleme : Comment pourrions-nous permettre à une usagère de Guédiawaye de sa
 - [x] Dossier complet — docs/GET409_S1_RelaisYoon.docx
 - [x] Enonce HMW — dans la carte d'empathie
 - [x] Depot public : https://github.com/reymouhid95/GET409-RelaisYoon.git — format GET409-RelaisYoon conforme
-- [x] Collaboratrice invitée en Write — @Rogelle-2MR (acceptation en attente)
-- [x] Collaborateur invité en Write — @DarvyValtine (acceptation en attente)
+- [x] @Rogelle-2MR et @DarvyValtine collaborateurs Write — invitations acceptées le 23 septembre 2026 (vérifié via l'API)
 - [x] URL connue — à coller dans le formulaire
 
 ## Livrables S2 — niveau d'implémentation au 23 septembre 2026
