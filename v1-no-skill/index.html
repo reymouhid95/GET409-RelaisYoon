@@ -1,0 +1,682 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ATA suarl — Studio de technologie créative à Dakar</title>
+    <meta
+      name="description"
+      content="ATA suarl, studio de technologie créative à Dakar : animation 3D, XR, jeux vidéo et IA générative."
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --primary: #2563eb;
+        --primary-dark: #1d4ed8;
+        --text: #1f2937;
+        --muted: #6b7280;
+        --bg: #ffffff;
+        --surface: #f9fafb;
+        --border: #e5e7eb;
+        --radius: 16px;
+        --shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+        color: var(--text);
+        background: var(--bg);
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 8px;
+        background: var(--primary);
+        color: #fff;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        transition: background 0.2s ease;
+      }
+
+      .btn:hover {
+        background: var(--primary-dark);
+      }
+
+      .btn-secondary {
+        background: #fff;
+        color: var(--primary);
+        border: 1px solid var(--primary);
+      }
+
+      .btn-secondary:hover {
+        background: #eff6ff;
+      }
+
+      .eyebrow {
+        display: block;
+        text-align: center;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--primary);
+        margin-bottom: 12px;
+      }
+
+      .section {
+        padding: 72px 0;
+      }
+
+      .section-alt {
+        background: var(--surface);
+      }
+
+      h2 {
+        font-size: 32px;
+        text-align: center;
+        margin-bottom: 12px;
+      }
+
+      .section-sub {
+        text-align: center;
+        color: var(--muted);
+        max-width: 640px;
+        margin: 0 auto 40px;
+      }
+
+      /* Hero */
+      .hero {
+        background: linear-gradient(135deg, #eff6ff 0%, #ffffff 60%);
+        text-align: center;
+        padding: 90px 0 80px;
+      }
+
+      .hero h1 {
+        font-size: 46px;
+        line-height: 1.2;
+        margin-bottom: 18px;
+      }
+
+      .hero h1 span {
+        color: var(--primary);
+      }
+
+      .hero p {
+        font-size: 19px;
+        color: var(--muted);
+        max-width: 620px;
+        margin: 0 auto 30px;
+      }
+
+      .hero-actions {
+        display: flex;
+        gap: 14px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      /* Quiz */
+      .quiz {
+        max-width: 720px;
+        margin: 0 auto;
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 32px;
+      }
+
+      .quiz-progress {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 24px;
+      }
+
+      .quiz-progress span {
+        flex: 1;
+        height: 6px;
+        border-radius: 999px;
+        background: var(--border);
+      }
+
+      .quiz-progress span.active {
+        background: var(--primary);
+      }
+
+      .quiz-step-label {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--primary);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 8px;
+      }
+
+      .quiz h3 {
+        font-size: 22px;
+        margin-bottom: 20px;
+      }
+
+      .quiz-options {
+        display: grid;
+        gap: 12px;
+      }
+
+      .quiz-option {
+        text-align: left;
+        padding: 16px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: #fff;
+        font-size: 16px;
+        color: var(--text);
+        cursor: pointer;
+        transition: 0.15s ease;
+      }
+
+      .quiz-option:hover {
+        border-color: var(--primary);
+        background: #eff6ff;
+      }
+
+      .quiz-result {
+        text-align: center;
+      }
+
+      .quiz-result h3 {
+        color: var(--primary);
+      }
+
+      .quiz-result p {
+        color: var(--muted);
+        margin-bottom: 20px;
+      }
+
+      .quiz-back {
+        background: none;
+        border: none;
+        color: var(--muted);
+        font-size: 14px;
+        cursor: pointer;
+        margin-top: 18px;
+        text-decoration: underline;
+      }
+
+      /* Grilles */
+      .grid-4 {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 24px;
+      }
+
+      .card {
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 26px;
+      }
+
+      .card .icon {
+        font-size: 30px;
+        margin-bottom: 12px;
+        display: block;
+      }
+
+      .card h3 {
+        font-size: 19px;
+        margin-bottom: 8px;
+      }
+
+      .card p {
+        font-size: 15px;
+        color: var(--muted);
+        margin-bottom: 14px;
+      }
+
+      .card a {
+        color: var(--primary);
+        font-weight: 600;
+        text-decoration: none;
+        font-size: 15px;
+      }
+
+      .card a:hover {
+        text-decoration: underline;
+      }
+
+      .grid-6 {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 24px;
+      }
+
+      .project-thumb {
+        height: 150px;
+        border-radius: 10px;
+        background: linear-gradient(135deg, #e5e7eb, #f3f4f6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--muted);
+        font-size: 15px;
+        margin-bottom: 16px;
+        border: 1px dashed #cbd5e1;
+      }
+
+      .tag {
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--primary);
+        background: #eff6ff;
+        border-radius: 999px;
+        padding: 4px 12px;
+        margin-bottom: 10px;
+      }
+
+      /* Contact */
+      .form {
+        max-width: 640px;
+        margin: 0 auto;
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 32px;
+      }
+
+      .field {
+        margin-bottom: 18px;
+      }
+
+      label {
+        display: block;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 6px;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: 12px 14px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        font-size: 15px;
+        font-family: inherit;
+        color: var(--text);
+      }
+
+      input:focus,
+      textarea:focus {
+        outline: 2px solid var(--primary);
+        outline-offset: 1px;
+        border-color: var(--primary);
+      }
+
+      textarea {
+        min-height: 130px;
+        resize: vertical;
+      }
+
+      .error {
+        display: none;
+        color: #dc2626;
+        font-size: 13px;
+        margin-top: 5px;
+      }
+
+      .field.invalid input,
+      .field.invalid textarea {
+        border-color: #dc2626;
+      }
+
+      .field.invalid .error {
+        display: block;
+      }
+
+      .form-message {
+        display: none;
+        background: #ecfdf5;
+        border: 1px solid #a7f3d0;
+        color: #047857;
+        border-radius: 8px;
+        padding: 14px;
+        margin-bottom: 18px;
+        font-size: 15px;
+      }
+
+      footer {
+        background: #111827;
+        color: #9ca3af;
+        text-align: center;
+        padding: 30px 20px;
+        font-size: 14px;
+      }
+
+      footer strong {
+        color: #fff;
+      }
+
+      @media (max-width: 640px) {
+        .hero h1 {
+          font-size: 32px;
+        }
+
+        h2 {
+          font-size: 26px;
+        }
+
+        .section {
+          padding: 52px 0;
+        }
+
+        .quiz,
+        .form {
+          padding: 22px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="hero">
+      <div class="container">
+        <span class="eyebrow">Studio créatif · Dakar · Sénégal</span>
+        <h1>Des mondes réels et <span>imaginaires</span>, fabriqués à Dakar</h1>
+        <p>
+          ATA suarl accompagne les marques et les institutions culturelles en animation 3D,
+          expériences XR, jeux vidéo et IA générative.
+        </p>
+        <div class="hero-actions">
+          <a class="btn" href="#quiz">Trouver mon projet →</a>
+          <a class="btn btn-secondary" href="#contact">Nous contacter →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="quiz">
+      <div class="container">
+        <span class="eyebrow">Projet finder</span>
+        <h2>Trouvez le bon format pour votre projet</h2>
+        <p class="section-sub">
+          Trois questions rapides, une recommandation adaptée à votre besoin.
+        </p>
+
+        <div class="quiz" id="quizBox">
+          <div class="quiz-progress">
+            <span class="active"></span><span></span><span></span>
+          </div>
+          <div id="quizBody"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="container">
+        <span class="eyebrow">Nos services</span>
+        <h2>Quatre expertises, une même exigence</h2>
+        <p class="section-sub">
+          De l'image à l'interaction, nous concevons des expériences numériques sur mesure.
+        </p>
+
+        <div class="grid-4">
+          <article class="card">
+            <span class="icon">🎬</span>
+            <h3>Animation 3D</h3>
+            <p>Films de marque, motion design et habillage animé, du storyboard au rendu final.</p>
+            <a href="#contact">En savoir plus →</a>
+          </article>
+          <article class="card">
+            <span class="icon">🥽</span>
+            <h3>Expériences XR</h3>
+            <p>Réalité augmentée et virtuelle pour la culture, l'éducation et l'industrie.</p>
+            <a href="#contact">En savoir plus →</a>
+          </article>
+          <article class="card">
+            <span class="icon">🎮</span>
+            <h3>Jeux vidéo</h3>
+            <p>Prototypes jouables, jeux promotionnels et expériences interactives.</p>
+            <a href="#contact">En savoir plus →</a>
+          </article>
+          <article class="card">
+            <span class="icon">✨</span>
+            <h3>IA générative</h3>
+            <p>Outils et prototypes qui intègrent l'IA générative dans vos processus créatifs.</p>
+            <a href="#contact">En savoir plus →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="projets">
+      <div class="container">
+        <span class="eyebrow">Réalisations</span>
+        <h2>Nos projets</h2>
+        <p class="section-sub">
+          Les emplacements ci-dessous seront remplis au fil des productions de l'équipe.
+        </p>
+
+        <div class="grid-6">
+          <article class="card">
+            <div class="project-thumb">[Projet à venir]</div>
+            <span class="tag">Animation 3D</span>
+            <h3>Emplacement 1</h3>
+            <p>Prochaine production à venir.</p>
+          </article>
+          <article class="card">
+            <div class="project-thumb">[Projet à venir]</div>
+            <span class="tag">XR</span>
+            <h3>Emplacement 2</h3>
+            <p>Prochaine production à venir.</p>
+          </article>
+          <article class="card">
+            <div class="project-thumb">[Projet à venir]</div>
+            <span class="tag">Jeu vidéo</span>
+            <h3>Emplacement 3</h3>
+            <p>Prochaine production à venir.</p>
+          </article>
+          <article class="card">
+            <div class="project-thumb">[Projet à venir]</div>
+            <span class="tag">IA générative</span>
+            <h3>Emplacement 4</h3>
+            <p>Prochaine production à venir.</p>
+          </article>
+          <article class="card">
+            <div class="project-thumb">[Projet à venir]</div>
+            <span class="tag">Animation 3D</span>
+            <h3>Emplacement 5</h3>
+            <p>Prochaine production à venir.</p>
+          </article>
+          <article class="card">
+            <div class="project-thumb">[Projet à venir]</div>
+            <span class="tag">XR</span>
+            <h3>Emplacement 6</h3>
+            <p>Prochaine production à venir.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <span class="eyebrow">Contact</span>
+        <h2>Parlons de votre projet</h2>
+        <p class="section-sub">Remplissez le formulaire, l'équipe vous répondra par email.</p>
+
+        <form class="form" id="contactForm" novalidate>
+          <div class="form-message" id="formMessage">
+            Merci ! Votre message a bien été enregistré.
+          </div>
+
+          <div class="field" id="fieldName">
+            <label for="name">Nom</label>
+            <input type="text" id="name" name="name" autocomplete="name" />
+            <span class="error">Veuillez indiquer votre nom.</span>
+          </div>
+
+          <div class="field" id="fieldEmail">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" autocomplete="email" />
+            <span class="error">Veuillez entrer une adresse email valide.</span>
+          </div>
+
+          <div class="field" id="fieldOrg">
+            <label for="org">Organisation</label>
+            <input type="text" id="org" name="org" autocomplete="organization" />
+            <span class="error">Veuillez indiquer votre organisation.</span>
+          </div>
+
+          <div class="field" id="fieldMessage">
+            <label for="message">Message</label>
+            <textarea id="message" name="message"></textarea>
+            <span class="error">Votre message doit contenir au moins 10 caractères.</span>
+          </div>
+
+          <button class="btn" type="submit">Envoyer →</button>
+        </form>
+      </div>
+    </section>
+
+    <footer>
+      <p><strong>ATA suarl</strong> — Studio de technologie créative · Dakar, Sénégal</p>
+      <p>contact@ata.example</p>
+    </footer>
+
+    <script>
+      var steps = [
+        {
+          label: "Étape 1 sur 3",
+          question: "Quel est votre secteur ?",
+          options: ["Marque & communication", "Musée & patrimoine", "Éducation", "Autre"],
+        },
+        {
+          label: "Étape 2 sur 3",
+          question: "Quel format vous intéresse ?",
+          options: ["Animation", "XR", "Jeu", "IA"],
+        },
+        {
+          label: "Étape 3 sur 3",
+          question: "Quel budget envisagez-vous ?",
+          options: ["Je ne sais pas encore", "Budget serré", "Budget confortable"],
+        },
+      ];
+
+      var offers = {
+        Animation:
+          "Animation 3D : film de marque, motion design ou habillage animé, du storyboard au rendu final.",
+        XR:
+          "Expérience XR : réalité augmentée ou virtuelle pour vos espaces, expositions et formations.",
+        Jeu: "Jeu vidéo : prototype jouable ou série interactive pour faire découvrir votre univers.",
+        IA: "IA générative : assistant visuel ou prototype intégrant l'IA dans vos processus créatifs.",
+      };
+
+      var answers = [];
+      var current = 0;
+      var body = document.getElementById("quizBody");
+      var progress = document.querySelectorAll(".quiz-progress span");
+
+      function render() {
+        progress.forEach(function (bar, i) {
+          bar.classList.toggle("active", i <= current && current < steps.length);
+        });
+
+        if (current >= steps.length) {
+          var format = answers[1];
+          body.innerHTML =
+            '<div class="quiz-result">' +
+            "<h3>Notre recommandation</h3>" +
+            "<p>" + offers[format] + "</p>" +
+            '<a class="btn" href="#contact">Discuter de ce format →</a>' +
+            '<br><button class="quiz-back" type="button" id="restart">Recommencer le quiz</button>' +
+            "</div>";
+          document.getElementById("restart").addEventListener("click", function () {
+            answers = [];
+            current = 0;
+            render();
+          });
+          return;
+        }
+
+        var step = steps[current];
+        var html =
+          '<div class="quiz-step-label">' + step.label + "</div>" +
+          "<h3>" + step.question + "</h3>" +
+          '<div class="quiz-options">';
+        step.options.forEach(function (opt, i) {
+          html +=
+            '<button class="quiz-option" type="button" data-index="' + i + '">' + opt + "</button>";
+        });
+        html += "</div>";
+        if (current > 0) {
+          html += '<button class="quiz-back" type="button" id="back">← Retour</button>';
+        }
+        body.innerHTML = html;
+
+        body.querySelectorAll(".quiz-option").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            answers[current] = step.options[btn.dataset.index];
+            current++;
+            render();
+          });
+        });
+
+        var back = document.getElementById("back");
+        if (back) {
+          back.addEventListener("click", function () {
+            current--;
+            render();
+          });
+        }
+      }
+
+      render();
+
+      var form = document.getElementById("contactForm");
+
+      function setInvalid(id, invalid) {
+        document.getElementById(id).classList.toggle("invalid", invalid);
+        return !invalid;
+      }
+
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        var name = document.getElementById("name").value.trim();
+        var email = document.getElementById("email").value.trim();
+        var org = document.getElementById("org").value.trim();
+        var message = document.getElementById("message").value.trim();
+        var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+        var ok = true;
+        ok = setInvalid("fieldName", name.length === 0) && ok;
+        ok = setInvalid("fieldEmail", !emailOk) && ok;
+        ok = setInvalid("fieldOrg", org.length === 0) && ok;
+        ok = setInvalid("fieldMessage", message.length < 10) && ok;
+
+        document.getElementById("formMessage").style.display = ok ? "block" : "none";
+        if (ok) form.reset();
+      });
+    </script>
+  </body>
+</html>

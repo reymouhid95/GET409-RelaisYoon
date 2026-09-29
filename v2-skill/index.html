@@ -1,0 +1,952 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ATA suarl — Studio de technologie créative à Dakar</title>
+    <meta
+      name="description"
+      content="ATA suarl, studio de technologie créative à Dakar : animation 3D, XR, jeux vidéo et IA générative."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ocean: #0f3b4f;
+        --ocean-deep: #0a2b3a;
+        --ink: #123039;
+        --paper: #eef1ee;
+        --chalk: #e6eef0;
+        --sun: #f4b942;
+        --coral: #ef5b39;
+        --sea: #3fbf9a;
+        --sky: #6fc2e0;
+        --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+        --text: "Newsreader", Georgia, "Times New Roman", serif;
+        --rule: rgba(18, 48, 57, 0.18);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: var(--text);
+        font-size: 17px;
+        line-height: 1.65;
+        color: var(--ink);
+        background: var(--paper);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      h1,
+      h2,
+      h3,
+      .display {
+        font-family: var(--display);
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        line-height: 1.02;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      button {
+        font-family: var(--display);
+      }
+
+      :focus-visible {
+        outline: 3px solid var(--sun);
+        outline-offset: 3px;
+      }
+
+      .wrap {
+        max-width: 1160px;
+        margin: 0 auto;
+        padding: 0 clamp(20px, 5vw, 56px);
+      }
+
+      .btn {
+        display: inline-block;
+        font-family: var(--display);
+        font-size: 1rem;
+        font-weight: 600;
+        padding: 15px 26px;
+        border: 1.5px solid var(--ocean);
+        background: var(--ocean);
+        color: #fff;
+        cursor: pointer;
+        text-decoration: none;
+        transition: transform 0.15s ease, background 0.15s ease;
+      }
+
+      .btn:hover {
+        background: var(--ocean-deep);
+        transform: translateY(-2px);
+      }
+
+      .btn-ghost {
+        background: transparent;
+        color: var(--ocean);
+      }
+
+      .btn-ghost:hover {
+        background: rgba(15, 59, 79, 0.08);
+      }
+
+      /* ---------- Hero ---------- */
+      .hero {
+        position: relative;
+        background: var(--ocean);
+        color: var(--chalk);
+        padding: clamp(56px, 10vh, 110px) 0 0;
+        overflow: hidden;
+      }
+
+      .hero .wrap {
+        display: grid;
+        grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+        gap: clamp(24px, 5vw, 64px);
+        align-items: end;
+        padding-bottom: clamp(48px, 8vh, 96px);
+      }
+
+      .wordmark {
+        font-family: var(--display);
+        font-weight: 600;
+        font-size: 1.1rem;
+        color: var(--sun);
+        grid-column: 1 / -1;
+        margin-bottom: clamp(24px, 6vh, 64px);
+      }
+
+      .hero h1 {
+        font-size: clamp(2.9rem, 8vw, 6.4rem);
+        line-height: 0.94;
+        color: #fff;
+      }
+
+      .hero h1 em {
+        font-family: var(--text);
+        font-style: italic;
+        font-weight: 400;
+        color: var(--sun);
+      }
+
+      .hero-side {
+        padding-bottom: 8px;
+      }
+
+      .hero-side p {
+        max-width: 46ch;
+        font-size: 1.1rem;
+        color: rgba(230, 238, 240, 0.86);
+        margin-bottom: 26px;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+      }
+
+      .hero .btn {
+        border-color: var(--sun);
+        background: var(--sun);
+        color: var(--ocean-deep);
+      }
+
+      .hero .btn:hover {
+        background: #ffc95c;
+      }
+
+      .hero .btn-ghost {
+        background: transparent;
+        color: var(--chalk);
+        border-color: rgba(230, 238, 240, 0.5);
+      }
+
+      .hero .btn-ghost:hover {
+        background: rgba(230, 238, 240, 0.1);
+      }
+
+      /* Signature : bande de pirogues peintes */
+      .band {
+        display: block;
+        width: 100%;
+        height: clamp(34px, 5vw, 56px);
+        animation: band-in 900ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+      }
+
+      @keyframes band-in {
+        from {
+          transform: translateY(100%);
+        }
+        to {
+          transform: translateY(0);
+        }
+      }
+
+      /* ---------- Sections ---------- */
+      section {
+        padding: clamp(56px, 9vw, 110px) 0;
+      }
+
+      .section-title {
+        font-size: clamp(2rem, 4.6vw, 3.3rem);
+        max-width: 18ch;
+        margin-bottom: 18px;
+      }
+
+      .section-intro {
+        max-width: 58ch;
+        font-size: 1.1rem;
+        color: rgba(18, 48, 57, 0.75);
+      }
+
+      /* ---------- Quiz ---------- */
+      .quiz-section {
+        background: var(--paper);
+      }
+
+      .quiz-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+        gap: clamp(32px, 6vw, 80px);
+        align-items: start;
+      }
+
+      .quiz-panel {
+        background: #fff;
+        border: 1.5px solid var(--ink);
+        padding: clamp(24px, 3vw, 38px);
+        box-shadow: 10px 10px 0 rgba(18, 48, 57, 0.12);
+      }
+
+      .quiz-steps {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 26px;
+      }
+
+      .quiz-steps span {
+        flex: 1;
+        height: 7px;
+        background: rgba(18, 48, 57, 0.14);
+      }
+
+      .quiz-steps span.done {
+        background: var(--sea);
+      }
+
+      .quiz-steps span.now {
+        background: var(--coral);
+      }
+
+      .quiz-meta {
+        font-family: var(--display);
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: rgba(18, 48, 57, 0.6);
+        margin-bottom: 10px;
+      }
+
+      .quiz-panel h3 {
+        font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+        margin-bottom: 22px;
+      }
+
+      .quiz-options {
+        display: grid;
+        gap: 10px;
+      }
+
+      .quiz-option {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        width: 100%;
+        text-align: left;
+        font-family: var(--display);
+        font-size: 1.05rem;
+        font-weight: 500;
+        padding: 16px 18px;
+        background: #fff;
+        border: 1.5px solid var(--rule);
+        color: var(--ink);
+        cursor: pointer;
+        transition: border-color 0.15s ease, transform 0.15s ease;
+      }
+
+      .quiz-option::before {
+        content: "";
+        width: 14px;
+        height: 14px;
+        flex: none;
+        background: var(--opt, var(--sea));
+        transition: transform 0.15s ease;
+      }
+
+      .quiz-option:hover {
+        border-color: var(--ink);
+        transform: translateX(4px);
+      }
+
+      .quiz-option:hover::before {
+        transform: rotate(45deg);
+      }
+
+      .quiz-back {
+        margin-top: 20px;
+        background: none;
+        border: none;
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: rgba(18, 48, 57, 0.65);
+        cursor: pointer;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+
+      .quiz-result .offer-label {
+        font-family: var(--display);
+        font-weight: 600;
+        font-size: 0.95rem;
+        color: var(--coral);
+        margin-bottom: 8px;
+      }
+
+      .quiz-result h3 {
+        font-size: clamp(1.6rem, 3vw, 2.3rem);
+        margin-bottom: 14px;
+      }
+
+      .quiz-result p {
+        color: rgba(18, 48, 57, 0.8);
+        margin-bottom: 24px;
+      }
+
+      /* ---------- Services ---------- */
+      .services {
+        background: var(--ocean);
+        color: var(--chalk);
+      }
+
+      .services .section-title {
+        color: #fff;
+      }
+
+      .services .section-intro {
+        color: rgba(230, 238, 240, 0.78);
+      }
+
+      .service-list {
+        margin-top: clamp(36px, 5vw, 64px);
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: clamp(24px, 3vw, 44px);
+      }
+
+      .service {
+        border-top: 3px solid var(--key, var(--sun));
+        padding-top: 20px;
+      }
+
+      .service h3 {
+        font-size: clamp(1.5rem, 2.4vw, 2rem);
+        color: #fff;
+        margin-bottom: 10px;
+      }
+
+      .service p {
+        color: rgba(230, 238, 240, 0.8);
+        max-width: 40ch;
+      }
+
+      .service .key {
+        font-family: var(--display);
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--key, var(--sun));
+        margin-bottom: 14px;
+      }
+
+      /* ---------- Portfolio ---------- */
+      .portfolio-grid {
+        margin-top: clamp(36px, 5vw, 64px);
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: clamp(16px, 2vw, 26px);
+      }
+
+      .project {
+        grid-column: span 1;
+        min-height: 190px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 22px;
+        background: var(--key, var(--sea));
+        color: var(--ocean-deep);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .project .frame {
+        position: absolute;
+        inset: 14px;
+        border: 1.5px dashed rgba(10, 43, 58, 0.45);
+        pointer-events: none;
+      }
+
+      .project .cat {
+        font-family: var(--display);
+        font-size: 0.85rem;
+        font-weight: 700;
+        margin-bottom: 6px;
+        position: relative;
+      }
+
+      .project .placeholder {
+        font-family: var(--display);
+        font-size: clamp(1.15rem, 2vw, 1.5rem);
+        font-weight: 700;
+        position: relative;
+      }
+
+      /* ---------- Contact ---------- */
+      .contact {
+        background: var(--paper);
+      }
+
+      .contact-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+        gap: clamp(32px, 6vw, 80px);
+        align-items: start;
+      }
+
+      .contact-note {
+        font-size: 1.1rem;
+        color: rgba(18, 48, 57, 0.78);
+        max-width: 44ch;
+        margin-top: 18px;
+      }
+
+      .contact-note a {
+        font-weight: 600;
+        color: var(--ocean);
+        text-underline-offset: 3px;
+      }
+
+      .form-message {
+        display: none;
+        background: var(--sea);
+        color: var(--ocean-deep);
+        font-family: var(--display);
+        font-weight: 600;
+        padding: 14px 18px;
+        margin-bottom: 24px;
+      }
+
+      .form-message.show {
+        display: block;
+      }
+
+      .field {
+        margin-bottom: 26px;
+      }
+
+      .field label {
+        display: block;
+        font-family: var(--display);
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+
+      .field input,
+      .field textarea {
+        width: 100%;
+        font-family: var(--text);
+        font-size: 1.05rem;
+        color: var(--ink);
+        background: transparent;
+        border: none;
+        border-bottom: 1.5px solid var(--rule);
+        padding: 10px 2px;
+      }
+
+      .field textarea {
+        min-height: 120px;
+        resize: vertical;
+      }
+
+      .field input:focus,
+      .field textarea:focus {
+        outline: none;
+        border-bottom-color: var(--coral);
+      }
+
+      .field .error {
+        display: none;
+        font-size: 0.9rem;
+        color: #b8341a;
+        margin-top: 7px;
+      }
+
+      .field.invalid input,
+      .field.invalid textarea {
+        border-bottom-color: #b8341a;
+      }
+
+      .field.invalid .error {
+        display: block;
+      }
+
+      .form .btn {
+        width: 100%;
+        text-align: center;
+      }
+
+      /* ---------- Footer ---------- */
+      footer {
+        background: var(--ocean-deep);
+        color: rgba(230, 238, 240, 0.75);
+        padding: 44px 0;
+      }
+
+      footer .wrap {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 14px;
+        align-items: baseline;
+      }
+
+      footer strong {
+        font-family: var(--display);
+        font-weight: 700;
+        color: var(--sun);
+      }
+
+      /* ---------- Responsive ---------- */
+      @media (min-width: 561px) {
+        .portfolio-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (min-width: 901px) {
+        .portfolio-grid {
+          grid-template-columns: repeat(6, minmax(0, 1fr));
+        }
+
+        .project {
+          grid-column: span 3;
+          min-height: 220px;
+        }
+
+        .project:nth-child(1),
+        .project:nth-child(4) {
+          grid-column: span 4;
+          min-height: 250px;
+        }
+
+        .project:nth-child(2),
+        .project:nth-child(3) {
+          grid-column: span 2;
+          min-height: 250px;
+        }
+      }
+
+      @media (max-width: 900px) {
+        .hero .wrap,
+        .quiz-layout,
+        .contact-layout {
+          grid-template-columns: 1fr;
+        }
+
+        .hero .wrap {
+          align-items: start;
+        }
+
+        .service-list {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 560px) {
+        body {
+          font-size: 16px;
+        }
+
+        .service-list {
+          grid-template-columns: minmax(0, 1fr);
+        }
+
+        .hero-actions .btn {
+          width: 100%;
+          text-align: center;
+        }
+
+        .quiz-panel {
+          box-shadow: 6px 6px 0 rgba(18, 48, 57, 0.12);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        .band {
+          animation: none;
+        }
+
+        .btn,
+        .quiz-option,
+        .quiz-option::before {
+          transition: none;
+        }
+
+        .btn:hover,
+        .quiz-option:hover {
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="hero">
+      <div class="wrap">
+        <div class="wordmark">ATA suarl</div>
+        <h1>
+          Des mondes réels<br />
+          et <em>imaginaires</em>,<br />
+          fabriqués à Dakar
+        </h1>
+        <div class="hero-side">
+          <p>
+            Studio de technologie créative : animation 3D, expériences XR, jeux vidéo et IA
+            générative pour les marques et les institutions culturelles.
+          </p>
+          <div class="hero-actions">
+            <a class="btn" href="#quiz">Trouver le format de mon projet</a>
+            <a class="btn btn-ghost" href="#contact">Écrire à l'équipe</a>
+          </div>
+        </div>
+      </div>
+
+      <svg
+        class="band"
+        viewBox="0 0 1200 56"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <defs>
+          <pattern id="pirogue" width="120" height="56" patternUnits="userSpaceOnUse">
+            <path d="M0 56 L15 0 L30 56 Z" fill="#f4b942" />
+            <path d="M30 56 L45 0 L60 56 Z" fill="#ef5b39" />
+            <path d="M60 56 L75 0 L90 56 Z" fill="#3fbf9a" />
+            <path d="M90 56 L105 0 L120 56 Z" fill="#6fc2e0" />
+          </pattern>
+        </defs>
+        <rect width="1200" height="56" fill="url(#pirogue)" />
+      </svg>
+    </header>
+
+    <section class="quiz-section" id="quiz">
+      <div class="wrap quiz-layout">
+        <div>
+          <h2 class="section-title">Trois questions, un format qui correspond</h2>
+          <p class="section-intro">
+            Le projet finder traduit votre contexte en l'un des quatre métiers du studio.
+            Aucune donnée n'est envoyée : tout se passe dans cette page.
+          </p>
+        </div>
+
+        <div class="quiz-panel">
+          <div class="quiz-steps" aria-hidden="true">
+            <span class="now"></span><span></span><span></span>
+          </div>
+          <div id="quizBody" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="services" id="services">
+      <div class="wrap">
+        <h2 class="section-title">Quatre métiers, une seule équipe</h2>
+        <p class="section-intro">
+          De l'image à l'interaction : le studio conçoit, prototype et produit dans un même
+          atelier, à Dakar.
+        </p>
+
+        <div class="service-list">
+          <article class="service" style="--key: var(--sun)">
+            <div class="key">Image en mouvement</div>
+            <h3>Animation 3D</h3>
+            <p>Film de marque, motion design et habillage animé, du storyboard au rendu final.</p>
+          </article>
+          <article class="service" style="--key: var(--coral)">
+            <div class="key">Espaces augmentés</div>
+            <h3>Expériences XR</h3>
+            <p>Réalité augmentée et virtuelle pour la culture, l'éducation et l'industrie.</p>
+          </article>
+          <article class="service" style="--key: var(--sea)">
+            <div class="key">Jouable</div>
+            <h3>Jeux vidéo</h3>
+            <p>Prototype jouable, jeu promotionnel et expérience interactive sur mesure.</p>
+          </article>
+          <article class="service" style="--key: var(--sky)">
+            <div class="key">Génératif</div>
+            <h3>IA générative</h3>
+            <p>Outils et prototypes qui intègrent l'IA générative dans vos processus créatifs.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="portfolio" id="projets">
+      <div class="wrap">
+        <h2 class="section-title">Emplacements de projets</h2>
+        <p class="section-intro">
+          Six emplacements ouverts, à remplir au fil des productions. Rien n'est publié avant
+          l'accord de l'équipe.
+        </p>
+
+        <div class="portfolio-grid">
+          <article class="project" style="--key: var(--sun)">
+            <div class="frame"></div>
+            <div class="cat">Animation 3D</div>
+            <div class="placeholder">[Projet à venir]</div>
+          </article>
+          <article class="project" style="--key: var(--coral)">
+            <div class="frame"></div>
+            <div class="cat">XR</div>
+            <div class="placeholder">[Projet à venir]</div>
+          </article>
+          <article class="project" style="--key: var(--sea)">
+            <div class="frame"></div>
+            <div class="cat">Jeu vidéo</div>
+            <div class="placeholder">[Projet à venir]</div>
+          </article>
+          <article class="project" style="--key: var(--sky)">
+            <div class="frame"></div>
+            <div class="cat">IA générative</div>
+            <div class="placeholder">[Projet à venir]</div>
+          </article>
+          <article class="project" style="--key: var(--coral)">
+            <div class="frame"></div>
+            <div class="cat">Animation 3D</div>
+            <div class="placeholder">[Projet à venir]</div>
+          </article>
+          <article class="project" style="--key: var(--sun)">
+            <div class="frame"></div>
+            <div class="cat">XR</div>
+            <div class="placeholder">[Projet à venir]</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="wrap contact-layout">
+        <div>
+          <h2 class="section-title">Décrivez votre projet</h2>
+          <p class="contact-note">
+            Dites-nous le contexte, le format envisagé et l'échéance. Écrivez aussi à
+            <a href="mailto:contact@ata.example">contact@ata.example</a>.
+          </p>
+        </div>
+
+        <form class="form" id="contactForm" novalidate>
+          <div class="form-message" id="formMessage" role="status">
+            Message enregistré. L'équipe vous répondra par email.
+          </div>
+
+          <div class="field" id="fieldName">
+            <label for="name">Nom</label>
+            <input type="text" id="name" name="name" autocomplete="name" />
+            <span class="error">Indiquez votre nom.</span>
+          </div>
+
+          <div class="field" id="fieldEmail">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" autocomplete="email" />
+            <span class="error">Entrez une adresse email valide.</span>
+          </div>
+
+          <div class="field" id="fieldOrg">
+            <label for="org">Organisation</label>
+            <input type="text" id="org" name="org" autocomplete="organization" />
+            <span class="error">Indiquez votre organisation.</span>
+          </div>
+
+          <div class="field" id="fieldMessage">
+            <label for="message">Message</label>
+            <textarea id="message" name="message"></textarea>
+            <span class="error">Le message doit faire au moins 10 caractères.</span>
+          </div>
+
+          <button class="btn" type="submit">Envoyer le message</button>
+        </form>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrap">
+        <span><strong>ATA suarl</strong> — Dakar, Sénégal</span>
+        <span>contact@ata.example</span>
+      </div>
+    </footer>
+
+    <script>
+      var steps = [
+        {
+          label: "Question 1 sur 3",
+          question: "Quel est votre secteur ?",
+          options: ["Marque & communication", "Musée & patrimoine", "Éducation", "Autre"],
+        },
+        {
+          label: "Question 2 sur 3",
+          question: "Quel format vous intéresse ?",
+          options: ["Animation", "XR", "Jeu", "IA"],
+        },
+        {
+          label: "Question 3 sur 3",
+          question: "Quel budget envisagez-vous ?",
+          options: ["Je ne sais pas encore", "Budget serré", "Budget confortable"],
+        },
+      ];
+
+      var formatColors = {
+        Animation: "#f4b942",
+        XR: "#ef5b39",
+        Jeu: "#3fbf9a",
+        IA: "#6fc2e0",
+      };
+
+      var offers = {
+        Animation:
+          "Animation 3D : film de marque, motion design ou habillage animé, du storyboard au rendu final.",
+        XR:
+          "Expérience XR : réalité augmentée ou virtuelle pour vos espaces, expositions et formations.",
+        Jeu: "Jeu vidéo : prototype jouable ou série interactive pour faire découvrir votre univers.",
+        IA: "IA générative : assistant visuel ou prototype intégrant l'IA dans vos processus créatifs.",
+      };
+
+      var answers = [];
+      var current = 0;
+      var body = document.getElementById("quizBody");
+      var bars = document.querySelectorAll(".quiz-steps span");
+
+      function renderBars() {
+        bars.forEach(function (bar, i) {
+          bar.className = "";
+          if (i < current) bar.className = "done";
+          else if (i === current && current < steps.length) bar.className = "now";
+        });
+      }
+
+      function render() {
+        renderBars();
+
+        if (current >= steps.length) {
+          var format = answers[1];
+          body.innerHTML =
+            '<div class="quiz-result">' +
+            '<div class="offer-label">Format recommandé</div>' +
+            "<h3>" + format + "</h3>" +
+            "<p>" + offers[format] + "</p>" +
+            '<a class="btn" href="#contact">Envoyer un brief</a>' +
+            '<button class="quiz-back" type="button" id="restart">Refaire le questionnaire</button>' +
+            "</div>";
+          document.getElementById("restart").addEventListener("click", function () {
+            answers = [];
+            current = 0;
+            render();
+          });
+          return;
+        }
+
+        var step = steps[current];
+        var html =
+          '<div class="quiz-meta">' + step.label + "</div>" +
+          "<h3>" + step.question + "</h3>" +
+          '<div class="quiz-options">';
+
+        step.options.forEach(function (opt, i) {
+          var color = formatColors[opt] || "#3fbf9a";
+          html +=
+            '<button class="quiz-option" type="button" style="--opt:' + color +
+            '" data-index="' + i + '">' + opt + "</button>";
+        });
+
+        html += "</div>";
+        if (current > 0) {
+          html += '<button class="quiz-back" type="button" id="back">Question précédente</button>';
+        }
+        body.innerHTML = html;
+
+        body.querySelectorAll(".quiz-option").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            answers[current] = step.options[btn.dataset.index];
+            current++;
+            render();
+          });
+        });
+
+        var back = document.getElementById("back");
+        if (back) {
+          back.addEventListener("click", function () {
+            current--;
+            render();
+          });
+        }
+      }
+
+      render();
+
+      var form = document.getElementById("contactForm");
+
+      function setInvalid(id, invalid) {
+        document.getElementById(id).classList.toggle("invalid", invalid);
+        return !invalid;
+      }
+
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        var name = document.getElementById("name").value.trim();
+        var email = document.getElementById("email").value.trim();
+        var org = document.getElementById("org").value.trim();
+        var message = document.getElementById("message").value.trim();
+        var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+        var ok = true;
+        ok = setInvalid("fieldName", name.length === 0) && ok;
+        ok = setInvalid("fieldEmail", !emailOk) && ok;
+        ok = setInvalid("fieldOrg", org.length === 0) && ok;
+        ok = setInvalid("fieldMessage", message.length < 10) && ok;
+
+        document.getElementById("formMessage").classList.toggle("show", ok);
+        if (ok) form.reset();
+      });
+    </script>
+  </body>
+</html>
