@@ -161,6 +161,11 @@ itération si < 3/5.
   ou « INSUFFISANT : raison » uniquement.
 - Note provisoire : 4/5. À confirmer après run : le modèle suit-il le
   format sans exemple ?
+- Incident run 23 septembre : 404 `llama-3.1-8b-instant does not exist`.
+  Cause : modèle retiré côté fournisseur, pas erreur de prompt. Repli :
+  modèle configuré disponible, températures inchangées. Leçon : un prompt
+  valide ne compense pas un modèle indisponible — toujours tester le run
+  avant de figer.
 
 ### P2 Rédacteur — Few-Shot
 

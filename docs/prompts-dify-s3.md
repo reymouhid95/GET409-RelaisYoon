@@ -1,9 +1,14 @@
 # Prompts Dify S3 — RelaisYoon
 
 Conformes au Template Étudiant S3 (juin 2026). Règles du template respectées :
-modèle Llama-3.1-8b-instant, températures 0,3 / 0,7, INSUFFISANT en capitales,
-et surtout : **aucune variable écrite dans les SYSTEM** — les variables
-passent par des messages USER via {x}.
+températures 0,3 / 0,7, INSUFFISANT en capitales, et surtout : **aucune
+variable écrite dans les SYSTEM** — les variables passent par des messages
+USER via {x}.
+
+Écart modèle (23 septembre 2026) : le Template impose Llama-3.1-8b-instant,
+mais le fournisseur répond 404 `model_not_found` au run. Repli : tout autre
+modèle proposé comme configuré dans le workspace (ex. gpt-5 vu dans la
+liste), en gardant les températures. Prompts inchangés.
 
 Nom du Workflow : `RelaisYoon_FicheCorrespondance_v1_RelaisYoon`
 
