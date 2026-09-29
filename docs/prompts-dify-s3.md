@@ -19,9 +19,14 @@ DÉBUT (query) → RÉCUPÉRATION DE CONNAISSANCES (releve-test-s3.md)
 → IF : Sortie « message erreur » (Chercheur · text)
 → ELSE : RÉDACTEUR → Sortie 2 « fiche » (Rédacteur · text)
 
-Modèles : gpt-5 sur les deux nœuds (repli après 404 llama).
+Modèles : gpt-oss-20b via Groq sur les deux nœuds (écart documenté : llama
+404, puis 0 crédits sandbox pour gpt-5).
 Variables par messages USER via {x}, jamais dans les SYSTEM.
 Sortie du nœud Récupération injectée dans le USER du Chercheur.
+Indexation : le modèle d'embedding est indisponible dans le sandbox
+(0 crédits) — la base `releve-test-s3` a été recréée en **Recherche
+Texte Intégral** (aucun embedding requis), segmentée par ligne ; le nœud
+Récupération pointe cette nouvelle base.
 
 ## P1 — SYSTEM Chercheur (Zero-Shot structuré)
 

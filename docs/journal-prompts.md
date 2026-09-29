@@ -207,3 +207,32 @@ itération si < 3/5.
   Voir `reflexion-ethique-s3.md`.
 - Note : 5/5. Spécifique au projet, aucun point générique — critère
   éliminatoire L4 respecté.
+
+### Runs S3 — chaîne complète validée sur app publique (29 septembre)
+
+- Q1 (« Je descends à Petersen à 18h30, correspondances vers Guédiawaye
+  et prix ? ») → Récupération 2-3 segments (Prix 400 FCFA, Quartier
+  Guédiawaye Ndiarème, relevé 18h45) → Chercheur format valide →
+  **branche ELSE → Rédacteur → fiche affichée**. La branche ELSE, non
+  prouvée depuis le 23, est désormais vertueuse.
+- Q2 (« Correspondances depuis Petersen vers Yoff à 2h du matin ? ») →
+  Chercheur INSUFFISANT motivé → **branche IF → Sortie message d'erreur**.
+  Les deux branches sont prouvées sur la version publiée.
+- URL publique : https://udify.app/workflow/Ssl70Rg8K9Q3epGM
+- Incidents résolus (leçons) :
+  1. Variables `{x}` du Chercheur : contexte par message USER, jamais
+     dans le SYSTEM (conforme Template S3). Vérifier la présence des DEUX
+     variables (query + contexte) avant de soupçonner le prompt.
+  2. Sortie 2 `fiche: null` = variable de sortie non mappée → re-mapper
+     Rédacteur · text via {x}.
+  3. Sandbox 0 crédits → modèle d'embedding indisponible → retrieval en
+     échec silencieux (`result: []`) et erreur 400 « vectors dimensions
+     does not fit » après changement de modèle → remplacer la base par une
+     base en **Recherche Texte Intégral** (aucun embedding requis) et
+     re-pointer le nœud Récupération. Le token de test isolé via le menu
+     Test de Récupération a évité de re-déboguer le workflow à tort.
+  4. Modèle passé à gpt-oss-20b (Groq) : le raisonnement `<think>` part
+     parfois dans la sortie → la condition SI/SINON sur « INSUFFISANT »
+     reste robuste car le texte final reste concaténé.
+- Reste : captures L1/L2 à verser dans docs/, invitation workspace
+  membres, soumission formulaire e-Academy, push Git.

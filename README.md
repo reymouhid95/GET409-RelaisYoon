@@ -76,14 +76,19 @@ Infra Dify :
 - [x] Condition : Chercheur · text contient INSUFFISANT (capitales)
 - [x] SYSTEM P1/P2 conformes (sans variables) + messages USER via {x}
 - [x] Sorties configurées : message_erreur (Chercheur) / fiche (Rédacteur)
-- [x] Modèles : gpt-5 (llama 404, écart documenté)
+- [x] Modèles : gpt-5 puis gpt-oss-20b via Groq (llama 404, écart documenté)
+- [x] Base de connaissances : embedding indisponible (sandbox 0 crédits) →
+  base `releve-test-s3` recréée en **Recherche Texte Intégral** (document
+  réindexé, segmenté par ligne)
 - [x] Test Q2 (vague) : INSUFFISANT → Sortie, message affiché
-- [ ] Test Q1 (précise) : ELSE → Rédacteur vert
-- [ ] Publication + URL publique
+- [x] Test Q1 (précise) : ELSE → Rédacteur → fiche (29 sept.)
+- [x] Publication + URL publique : https://udify.app/workflow/Ssl70Rg8K9Q3epGM
 
 Livrables (100 pts, 48h sur e-Academy) :
 
-- [~] L1 Agent V1 — tests IF prouvés, ELSE en attente, URL à publier (40 pts)
-- [ ] L2 Schéma d'architecture — capture annotée (30 pts)
+- [~] L1 Agent V1 — Q1/Q2 testés sur l'app publique, captures à déposer
+  dans docs/ (l1-q1-fiche.png, l1-q2-erreur.png) (40 pts)
+- [~] L2 Schéma d'architecture — capture prise (l2-schema.png) à déposer
+  dans docs/ (30 pts)
 - [x] L3 Journal S3 — docs/journal-prompts.md, Zero/Few/CoT + runs (20 pts)
 - [x] L4 Réflexion éthique — docs/reflexion-ethique-s3.md, 2 risques (10 pts)
