@@ -34,7 +34,7 @@ Probleme : Comment pourrions-nous permettre à une usagère de Guédiawaye de sa
 - [x] @Rogelle-2MR et @DarvyValtine collaborateurs Write — invitations acceptées le 23 septembre 2026 (vérifié via l'API)
 - [x] URL connue — à coller dans le formulaire
 
-## Livrables S2 — niveau d'implémentation au 23 septembre 2026
+## Livrables S2 — terminés le 23 septembre 2026
 
 Phase 6 chapeaux — terminée (4/4) :
 
@@ -43,16 +43,16 @@ Phase 6 chapeaux — terminée (4/4) :
 - [x] docs/hypotheses-validation.md — 3 critiques, 1 importante, 1 secondaire
 - [x] docs/metriques-succes.md — Nord 60 %, P1-P3, A1-A2
 
-Phase VPC — en cours (1/4) :
+Phase VPC — terminée (4/4) :
 
 - [x] docs/vpc.md — profil Awa + proposition, FIT sans orphelin
-- [ ] docs/vpc-connections.md — étape 06, traçabilité chapeaux → VPC
-- [ ] docs/backlog-s3.md — étape 07, user stories MUST/SHOULD/COULD
-- [ ] docs/pitch-vpc-draft.md — bloc 60 s pour la soutenance
+- [x] docs/vpc-connections.md — étape 06, traçabilité chapeaux → VPC
+- [x] docs/backlog-s3.md — étape 07, user stories MUST/SHOULD/COULD
+- [x] docs/pitch-vpc-draft.md — bloc 60 s pour la soutenance
 
-Phase HMW — non commencée (0/4) :
+Phase HMW — terminée (4/4) :
 
-- [ ] docs/hmw-definitif.md — P-HMW, décision engageante
+- [x] docs/hmw-definitif.md — P-HMW, décision engageante
 - [x] docs/hmw-alignement.md — filtre sprint S3 : US-01, US-02, US-03 si temps, US-04 reportée
 - [x] docs/hmw-demo.md — script démo S6 (valeurs cibles, à remplacer)
 - [x] docs/hmw-jury.md — 5 questions + 2 pièges
@@ -60,16 +60,17 @@ Phase HMW — non commencée (0/4) :
 
 Transverse :
 
-- [~] docs/journal-prompts.md — 5 entrées de la chaîne S2 notées /5 ;
-  les 5 prompts métier P1-P5 du TP (Zero-Shot, Few-Shot, CoT, libre)
-  restent à documenter
+- [x] docs/journal-prompts.md — 12 entrées S2 notées /5 (chapeaux,
+  VPC, HMW, pitch) + journal S3 L3
 
-## Livrables S3 — niveau d'implémentation au 23 septembre 2026
+## Livrables S3 — terminés le 29 septembre 2026
 
 Infra Dify :
 
 - [x] Compte Dify créé (via GitHub) + workspace `GET409-RelaisYoon`
-- [ ] Membres invités au workspace — à vérifier
+- [x] Membres invités — clos : impossible sur le plan gratuit Dify
+  (sandbox 0 crédits, option d'invitation réservée aux plans payants) ;
+  répartition des rôles tracée dans docs/fiche-equipe.md
 - [x] Workflow `RelaisYoon_FicheCorrespondance_v1_RelaisYoon` (type Workflow) :
   DÉBUT (query) → RÉCUPÉRATION (releve-test-s3.md) → CHERCHEUR →
   SI/SINON → IF : Sortie erreur / ELSE : RÉDACTEUR → Sortie 2
@@ -86,9 +87,10 @@ Infra Dify :
 
 Livrables (100 pts, 48h sur e-Academy) :
 
-- [~] L1 Agent V1 — Q1/Q2 testés sur l'app publique, captures à déposer
-  dans docs/ (l1-q1-fiche.png, l1-q2-erreur.png) (40 pts)
-- [~] L2 Schéma d'architecture — capture prise (l2-schema.png) à déposer
-  dans docs/ (30 pts)
+- [x] L1 Agent V1 (40 pts) — Q1/Q2 testés sur l'app publique,
+  captures docs/l1-q1-fiche.png + docs/l1-q2-erreur.png
+- [x] L2 Schéma d'architecture (30 pts) — docs/l2-schema.png
 - [x] L3 Journal S3 — docs/journal-prompts.md, Zero/Few/CoT + runs (20 pts)
 - [x] L4 Réflexion éthique — docs/reflexion-ethique-s3.md, 2 risques (10 pts)
+
+Reste hors livrables : `git push`, soumission du formulaire e-Academy.

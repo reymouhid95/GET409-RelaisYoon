@@ -159,8 +159,9 @@ itération si < 3/5.
   par message USER (Debut · query).
 - Réponse attendue : champs STATION / QUARTIER / PRIX / HEURE / SOURCES,
   ou « INSUFFISANT : raison » uniquement.
-- Note provisoire : 4/5. À confirmer après run : le modèle suit-il le
-  format sans exemple ?
+- Note : 5/5 (confirmée le 29/09 par les runs Q1/Q2) : le modèle suit le
+  format imposé sans exemple et refuse d'inventer quand les segments
+  manquent.
 - Incident run 23 septembre : 404 `llama-3.1-8b-instant does not exist`.
   Cause : modèle retiré côté fournisseur, pas erreur de prompt. Repli :
   modèle configuré disponible, températures inchangées. Leçon : un prompt
@@ -173,8 +174,9 @@ itération si < 3/5.
   CORRESPONDANCE Guédiawaye). Données via message USER (Chercheur · text).
 - Réponse attendue : rapport calqué sur l'exemple, 100 mots max,
   « Non disponible » si donnée manquante.
-- Note provisoire : 4/5. À confirmer : l'exemple est-il copié ou le
-  modèle dérive-t-il ?
+- Note : 5/5 (confirmée le 29/09) : le Rédacteur calque l'exemple sans
+  dériver — fiche Q1 fidèle au format INFO CORRESPONDANCE, donnée manquante
+  rendue en « Non disponible ».
 
 ### Runs S3 — validation du garde-fou
 
@@ -184,9 +186,8 @@ itération si < 3/5.
   à chaque fois (« aucun relevé du soir disponible »). Le Chercheur refuse
   d'inventer : la règle d'or L4 (« se taire plutôt qu'afficher faux »)
   est vérifiée en pratique, pas seulement écrite.
-- Reste à prouver : la branche ELSE (Rédacteur). Blocage identifié : aucune
-  source de données branchée. Actions : activer Web Search (clé Serper),
-  sinon verser un relevé test en base de connaissances.
+- ELSE (Rédacteur) non prouvée à cette date : aucune source branchée.
+  Résolu le 29/09 par la base de connaissances (voir runs ci-dessous).
 
 ### Runs S3 — base branchée, Sortie 2 posée (29 septembre)
 
