@@ -12,6 +12,17 @@ liste), en gardant les températures. Prompts inchangés.
 
 Nom du Workflow : `RelaisYoon_FicheCorrespondance_v1_RelaisYoon`
 
+## Architecture réelle (29 septembre 2026)
+
+DÉBUT (query) → RÉCUPÉRATION DE CONNAISSANCES (releve-test-s3.md)
+→ CHERCHEUR → SI/SINON (Chercheur · text contient INSUFFISANT)
+→ IF : Sortie « message erreur » (Chercheur · text)
+→ ELSE : RÉDACTEUR → Sortie 2 « fiche » (Rédacteur · text)
+
+Modèles : gpt-5 sur les deux nœuds (repli après 404 llama).
+Variables par messages USER via {x}, jamais dans les SYSTEM.
+Sortie du nœud Récupération injectée dans le USER du Chercheur.
+
 ## P1 — SYSTEM Chercheur (Zero-Shot structuré)
 
 Coller dans SYSTEM. Puis ajouter un message USER portant la variable

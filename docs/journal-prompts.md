@@ -188,6 +188,16 @@ itération si < 3/5.
   source de données branchée. Actions : activer Web Search (clé Serper),
   sinon verser un relevé test en base de connaissances.
 
+### Runs S3 — base branchée, Sortie 2 posée (29 septembre)
+
+- Base `releve-test-s3.md` créée en Connaissance, nœud Récupération entre
+  DÉBUT et Chercheur (requête = Debut · query), sortie injectée dans le
+  USER du Chercheur.
+- Sortie 2 ajoutée après Rédacteur (variable « fiche » = Rédacteur · text) ;
+  Sortie IF = « message erreur » (Chercheur · text).
+- Modèles passés sur gpt-5 (llama toujours 404).
+- Prochain run : Q1 complète → ELSE attendu, Rédacteur vert.
+
 ### P3 Éthique — Chain-of-Thought
 
 - Prompt du Template S3 : « Raisonne étape par étape », identifier 2

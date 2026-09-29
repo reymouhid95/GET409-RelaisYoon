@@ -71,16 +71,19 @@ Infra Dify :
 - [x] Compte Dify créé (via GitHub) + workspace `GET409-RelaisYoon`
 - [ ] Membres invités au workspace — à vérifier
 - [x] Workflow `RelaisYoon_FicheCorrespondance_v1_RelaisYoon` (type Workflow) :
-  DÉBUT → CHERCHEUR → SI/SINON → RÉDACTEUR → Réception
+  DÉBUT (query) → RÉCUPÉRATION (releve-test-s3.md) → CHERCHEUR →
+  SI/SINON → IF : Sortie erreur / ELSE : RÉDACTEUR → Sortie 2
 - [x] Condition : Chercheur · text contient INSUFFISANT (capitales)
-- [x] IF → Sortie erreur, ELSE → Rédacteur (conforme au Template Étudiant)
-- [ ] SYSTEM P1/P2 conformes (sans variables) + messages USER via {x}
-- [ ] Nœuds Réception configurés (message_erreur / Sortie 2)
-- [ ] Test Q1/Q2 + publication + URL publique
+- [x] SYSTEM P1/P2 conformes (sans variables) + messages USER via {x}
+- [x] Sorties configurées : message_erreur (Chercheur) / fiche (Rédacteur)
+- [x] Modèles : gpt-5 (llama 404, écart documenté)
+- [x] Test Q2 (vague) : INSUFFISANT → Sortie, message affiché
+- [ ] Test Q1 (précise) : ELSE → Rédacteur vert
+- [ ] Publication + URL publique
 
 Livrables (100 pts, 48h sur e-Academy) :
 
-- [ ] L1 Agent V1 — URL publique + 2 captures (40 pts)
+- [~] L1 Agent V1 — tests IF prouvés, ELSE en attente, URL à publier (40 pts)
 - [ ] L2 Schéma d'architecture — capture annotée (30 pts)
-- [x] L3 Journal S3 — docs/journal-prompts.md, Zero/Few/CoT (20 pts)
+- [x] L3 Journal S3 — docs/journal-prompts.md, Zero/Few/CoT + runs (20 pts)
 - [x] L4 Réflexion éthique — docs/reflexion-ethique-s3.md, 2 risques (10 pts)
