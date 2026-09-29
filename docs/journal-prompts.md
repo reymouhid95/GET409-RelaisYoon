@@ -176,6 +176,18 @@ itération si < 3/5.
 - Note provisoire : 4/5. À confirmer : l'exemple est-il copié ou le
   modèle dérive-t-il ?
 
+### Runs S3 — validation du garde-fou
+
+- Q vague (« Deplacement ») → INSUFFISANT → Sortie : branche IF prouvée,
+  message d'erreur affiché (Sortie configurée avec Chercheur · text).
+- Q précise sans station, puis avec station + heure → INSUFFISANT motivé
+  à chaque fois (« aucun relevé du soir disponible »). Le Chercheur refuse
+  d'inventer : la règle d'or L4 (« se taire plutôt qu'afficher faux »)
+  est vérifiée en pratique, pas seulement écrite.
+- Reste à prouver : la branche ELSE (Rédacteur). Blocage identifié : aucune
+  source de données branchée. Actions : activer Web Search (clé Serper),
+  sinon verser un relevé test en base de connaissances.
+
 ### P3 Éthique — Chain-of-Thought
 
 - Prompt du Template S3 : « Raisonne étape par étape », identifier 2
