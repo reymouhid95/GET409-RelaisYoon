@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ATA suarl — Carte de visite</title>
+    <style>
+      :root {
+        --bg: #0b0d12;
+        --panel: #12161f;
+        --line: #232a38;
+        --text: #eef1f7;
+        --muted: #97a1b3;
+        --accent: #ff6a3d;
+        --accent-2: #4dd8ff;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        background: radial-gradient(1200px 600px at 20% -10%, #1a2030 0%, var(--bg) 60%);
+        color: var(--text);
+        font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+      }
+
+      .card {
+        width: 100%;
+        max-width: 640px;
+        background: linear-gradient(160deg, var(--panel), #0e111a);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 36px 32px;
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45);
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .logo {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        display: grid;
+        place-items: center;
+        font-weight: 800;
+        font-size: 18px;
+        color: #0b0d12;
+        letter-spacing: -0.5px;
+        flex: none;
+      }
+
+      .name {
+        font-size: 22px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+      }
+
+      .role {
+        font-size: 13px;
+        color: var(--muted);
+        margin-top: 2px;
+      }
+
+      .pitch {
+        font-size: 17px;
+        line-height: 1.5;
+        color: var(--text);
+        border-left: 3px solid var(--accent);
+        padding-left: 14px;
+      }
+
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        list-style: none;
+      }
+
+      .tags li {
+        font-size: 13px;
+        padding: 8px 14px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.03);
+        color: var(--muted);
+        transition: 0.2s;
+      }
+
+      .tags li:hover {
+        color: var(--text);
+        border-color: var(--accent);
+      }
+
+      .contact {
+        border-top: 1px solid var(--line);
+        padding-top: 18px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 24px;
+        font-size: 14px;
+        color: var(--muted);
+      }
+
+      .contact a {
+        color: var(--accent-2);
+        text-decoration: none;
+      }
+
+      .contact a:hover {
+        text-decoration: underline;
+      }
+
+      @media (max-width: 420px) {
+        .card {
+          padding: 26px 20px;
+          gap: 18px;
+        }
+
+        .pitch {
+          font-size: 15px;
+        }
+
+        .name {
+          font-size: 19px;
+        }
+
+        .contact {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="card">
+      <header class="brand">
+        <div class="logo">ATA</div>
+        <div>
+          <div class="name">ATA suarl</div>
+          <div class="role">Studio de technologie créative — Dakar</div>
+        </div>
+      </header>
+
+      <p class="pitch">
+        Nous imaginons et construisons des expériences numériques qui mêlent
+        création, code et innovation.
+      </p>
+
+      <ul class="tags">
+        <li>Animation</li>
+        <li>Réalités étendues (XR)</li>
+        <li>Jeux vidéo</li>
+        <li>IA générative</li>
+      </ul>
+
+      <footer class="contact">
+        <span>Dakar, Sénégal</span>
+        <a href="mailto:contact@ata.example">contact@ata.example</a>
+      </footer>
+    </main>
+  </body>
+</html>
