@@ -3,23 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Flyer — Atelier XR &amp; IA générative · ATA suarl</title>
+    <title>Flyer — Atelier vidéo générée · Séquence</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Newsreader:opsz,wght@6..72,400..600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500&display=swap"
       rel="stylesheet"
     />
     <style>
       :root {
-        --ocean: #0f3b4f;
-        --paper: #eef1ee;
-        --ink: #123039;
-        --sun: #f4b942;
-        --coral: #ef5b39;
-        --sea: #3fbf9a;
-        --sky: #6fc2e0;
-        --chalk: #e6eef0;
+        --nuit: #0d0f14;
+        --papier: #f5f2ea;
+        --encre: #14161c;
+        --lime: #cdff4f;
+        --corail: #ff6b4a;
+        --ciel: #7cc4ff;
+        --violet: #b7a4ff;
+        --gris: #8a8f98;
       }
 
       * {
@@ -29,9 +29,9 @@
       }
 
       body {
-        background: #dfe4e6;
-        font-family: Newsreader, Georgia, serif;
-        color: var(--ink);
+        background: #e4e0d5;
+        font-family: Inter, system-ui, sans-serif;
+        color: var(--encre);
         padding: 24px 12px;
       }
 
@@ -39,17 +39,17 @@
         width: min(100%, 794px);
         aspect-ratio: 210 / 297;
         margin: 0 auto;
-        background: var(--paper);
+        background: var(--papier);
         display: flex;
         flex-direction: column;
         overflow: hidden;
-        box-shadow: 0 18px 40px rgba(18, 48, 57, 0.25);
+        box-shadow: 0 18px 40px rgba(13, 15, 20, 0.28);
       }
 
       /* Bandeau marque */
       .head {
-        background: var(--ocean);
-        color: var(--chalk);
+        background: var(--nuit);
+        color: var(--papier);
         padding: 3.2% 6%;
         display: flex;
         justify-content: space-between;
@@ -58,10 +58,10 @@
       }
 
       .head .name {
-        font-family: "Bricolage Grotesque", system-ui, sans-serif;
-        font-weight: 800;
+        font-family: "Space Grotesk", system-ui, sans-serif;
+        font-weight: 700;
         font-size: clamp(15px, 2.4vw, 22px);
-        color: var(--sun);
+        color: var(--lime);
       }
 
       .head .tagline {
@@ -69,11 +69,11 @@
         font-style: italic;
       }
 
-      /* Image de production */
+      /* Image de séquence */
       .media {
         position: relative;
         flex: 0 0 31%;
-        background: var(--ocean);
+        background: var(--nuit);
         overflow: hidden;
       }
 
@@ -83,7 +83,7 @@
         object-fit: contain;
         object-position: center;
         display: block;
-        background: var(--ocean);
+        background: var(--nuit);
       }
 
       .media .fallback {
@@ -92,7 +92,7 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
-        background: linear-gradient(180deg, var(--ocean), #0a2b3a);
+        background: linear-gradient(180deg, var(--nuit), #161922);
       }
 
       .media .fallback .swatches {
@@ -105,10 +105,10 @@
       }
 
       .media .fallback .label {
-        font-family: "Bricolage Grotesque", system-ui, sans-serif;
-        font-weight: 600;
+        font-family: "Space Grotesk", system-ui, sans-serif;
+        font-weight: 500;
         font-size: clamp(10px, 1.5vw, 14px);
-        color: var(--chalk);
+        color: var(--papier);
         padding: 3% 6%;
       }
 
@@ -122,20 +122,20 @@
       }
 
       .kicker {
-        font-family: "Bricolage Grotesque", system-ui, sans-serif;
+        font-family: "Space Grotesk", system-ui, sans-serif;
         font-weight: 700;
         font-size: clamp(10px, 1.5vw, 13px);
-        color: var(--coral);
+        color: var(--corail);
         margin-bottom: 1.2%;
       }
 
       h1 {
-        font-family: "Bricolage Grotesque", system-ui, sans-serif;
-        font-weight: 800;
+        font-family: "Space Grotesk", system-ui, sans-serif;
+        font-weight: 700;
         font-size: clamp(24px, 5.6vw, 46px);
-        line-height: 0.96;
+        line-height: 0.98;
         letter-spacing: -0.02em;
-        color: var(--ocean);
+        color: var(--encre);
         margin-bottom: 2.4%;
       }
 
@@ -157,40 +157,42 @@
         display: flex;
         gap: 12px;
         align-items: flex-start;
-        border-top: 3px solid var(--key, var(--sun));
+        border-top: 3px solid var(--key, var(--lime));
         padding-top: clamp(5px, 1vw, 10px);
         font-size: clamp(10px, 1.6vw, 14px);
         line-height: 1.4;
       }
 
       .benefits li strong {
-        font-family: "Bricolage Grotesque", system-ui, sans-serif;
+        font-family: "Space Grotesk", system-ui, sans-serif;
         font-weight: 700;
         display: block;
         margin-bottom: 2px;
-        color: var(--ocean);
+        color: var(--encre);
       }
 
       .meta {
         display: flex;
         flex-wrap: wrap;
         gap: clamp(8px, 2vw, 22px);
-        font-family: "Bricolage Grotesque", system-ui, sans-serif;
-        font-weight: 600;
+        font-family: "Space Grotesk", system-ui, sans-serif;
+        font-weight: 700;
         font-size: clamp(10px, 1.5vw, 13px);
-        color: var(--ocean);
+        color: var(--encre);
         background: #ffffff;
-        border: 1.5px solid rgba(18, 48, 57, 0.2);
+        border: 1.5px solid rgba(20, 22, 28, 0.2);
         padding: clamp(7px, 1.4vw, 13px);
         margin-bottom: 3.6%;
       }
 
       .cta {
-        font-family: "Bricolage Grotesque", system-ui, sans-serif;
+        font-family: "Space Grotesk", system-ui, sans-serif;
         font-weight: 700;
         font-size: clamp(12px, 1.9vw, 16px);
-        background: var(--ocean);
-        color: #ffffff;
+        background: var(--lime);
+        color: var(--nuit);
+        border: 1.5px solid var(--nuit);
+        border-radius: 999px;
         text-decoration: none;
         padding: clamp(9px, 1.6vw, 14px) clamp(14px, 2.6vw, 24px);
         align-self: flex-start;
@@ -198,8 +200,8 @@
 
       .foot {
         margin-top: auto;
-        background: var(--ocean);
-        color: var(--chalk);
+        background: var(--nuit);
+        color: var(--papier);
         display: flex;
         justify-content: space-between;
         gap: 10px;
@@ -209,7 +211,7 @@
 
       .foot .sign {
         font-style: italic;
-        color: var(--sun);
+        color: var(--lime);
       }
 
       @media print {
@@ -234,62 +236,62 @@
   <body>
     <div class="sheet">
       <div class="head">
-        <div class="name">ATA suarl</div>
-        <div class="tagline">Des mondes réels et imaginaires, fabriqués à Dakar.</div>
+        <div class="name">Séquence</div>
+        <div class="tagline">La vidéo générée, dirigée comme un tournage.</div>
       </div>
 
       <div class="media">
         <div class="fallback" aria-hidden="true">
-          <div class="label">[ Photo de production — déposer hero.jpg à côté du fichier ]</div>
+          <div class="label">[ Image de séquence — déposer hero.jpg à côté du fichier ]</div>
           <div class="swatches">
-            <span style="background: #f4b942"></span>
-            <span style="background: #ef5b39"></span>
-            <span style="background: #3fbf9a"></span>
-            <span style="background: #6fc2e0"></span>
+            <span style="background: #cdff4f"></span>
+            <span style="background: #ff6b4a"></span>
+            <span style="background: #7cc4ff"></span>
+            <span style="background: #b7a4ff"></span>
           </div>
         </div>
         <img
           src="hero.jpg"
-          alt="Photo de production ATA suarl"
+          alt="Image de séquence Séquence"
           onerror="this.style.display='none'"
         />
       </div>
 
       <div class="content">
         <div class="kicker">Atelier · une journée · 12 places</div>
-        <h1>Atelier XR<br />&amp; IA générative</h1>
+        <h1>Atelier<br />vidéo générée</h1>
 
         <p class="intro">
-          Une journée en atelier à Dakar pour prototyper une expérience immersive : de la
-          maquette au prototype jouable, avec les outils que nous utilisons en production.
+          Une journée en atelier à Dakar pour construire une séquence complète : du cadrage
+          au prompt, de la lumière à l'étalonnage, avec la chaîne que nous utilisons en production.
         </p>
 
         <ul class="benefits">
-          <li style="--key: var(--sun)">
-            <span><strong>Comprendre</strong> Les usages réels de la XR, sans jargon.</span>
+          <li style="--key: var(--lime)">
+            <span><strong>Comprendre</strong> Les usages réels de la vidéo générée, sans jargon.</span>
           </li>
-          <li style="--key: var(--coral)">
-            <span><strong>Prototyper</strong> Construire une première scène temps réel.</span>
+          <li style="--key: var(--corail)">
+            <span><strong>Cadrer</strong> Écrire storyboard, prompt et lumière avant de générer.</span>
           </li>
-          <li style="--key: var(--sky)">
-            <span><strong>Intégrer</strong> Ajouter l'IA générative à votre chaîne de production.</span>
+          <li style="--key: var(--ciel)">
+            <span><strong>Étalonner</strong> Monter, colorier et livrer aux bons formats.</span>
           </li>
         </ul>
 
         <div class="meta">
           <span>[ Date ]</span>
           <span>[ Lieu ] — Dakar</span>
-          <span>Inscription : contact@ata.example</span>
+          <span>Inscription : hello@sequence.studio</span>
         </div>
 
-        <a class="cta" href="mailto:contact@ata.example?subject=Inscription%20—%20Atelier%20XR%20%26%20IA"
+        <a class="cta" href="mailto:hello@sequence.studio?subject=Inscription%20%E2%80%94%20Atelier%20vid%C3%A9o%20g%C3%A9n%C3%A9r%C3%A9e"
           >Réserver une place</a
         >
       </div>
 
       <div class="foot">
-        <span>ATA suarl · animation 3D · XR · jeux vidéo · IA générative</span>
-        <span class="sign">À très vite, — L'équipe ATA suarl</span>
+        <span>Séquence · publicité · institutionnel · clip &amp; social · ateliers</span>
+        <span class="sign">À très vite, — L'équipe Séquence</span>
       </div>
     </div>
   </body>

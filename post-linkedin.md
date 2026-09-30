@@ -1,24 +1,24 @@
-# Post LinkedIn — coulisses Unreal Engine
+# Post LinkedIn — coulisses de l'étalonnage
 
-Cette semaine, trois heures passées à calibrer une scène 3D temps réel dans Unreal
-Engine, pour une installation immersive.
+Cette semaine, trois heures passées à calibrer la lumière d'une séquence générée,
+pour un film institutionnel.
 
-Le décalage venait d'un détail : les ombres suivaient la mauvaise lumière. Rien de
-spectaculaire à l'écran — et pourtant tout le rendu basculait du plausible au faux.
+Le décalage venait d'un détail : la source principale ne suivait pas le sujet. Rien de
+spectaculaire à l'écran — et pourtant tout le plan basculait du plausible au faux.
 
-Sur le terrain, nos projets avancent souvent ainsi : une itération après l'autre,
-jusqu'à ce que l'image tienne debout quand le public bouge autour.
+Sur nos productions, l'image avance ainsi : un étalonnage après l'autre, jusqu'à ce que
+la lumière tienne debout quand la caméra bouge.
 
-La captation complète arrive dans quelques jours.
+La version déclinée arrive dans quelques jours.
 
 À très vite,
-L'équipe ATA suarl — Dakar
+L'équipe Séquence — Dakar
 
-#RealTime3D #InstallationImmersive #Dakar
+#Etalonnage #VideoIA #Dakar
 
 ---
 
 Auto-contrôle (2 lignes) :
 
-- Règles appliquées : palette ocean/soleil · ton précis-concret-chaleureux · clôture « À très vite, ».
+- Règles appliquées : palette nuit/lime · ton direct-vivant-net · clôture « À très vite, ».
 - Mots évités : révolutionnaire, disruptif, leader, meilleur — aucun superlatif, 3 hashtags maximum.
