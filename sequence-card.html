@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Séquence — Carte de visite</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --nuit: #0d0f14;
+        --papier: #f5f2ea;
+        --texte: #f5f2ea;
+        --lime: #cdff4f;
+        --corail: #ff6b4a;
+        --gris: #8a8f98;
+        --line: rgba(245, 242, 234, 0.14);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        background:
+          radial-gradient(900px 480px at 85% -10%, rgba(205, 255, 79, 0.12) 0%, transparent 55%),
+          radial-gradient(700px 420px at -10% 110%, rgba(255, 107, 74, 0.14) 0%, transparent 60%),
+          var(--nuit);
+        color: var(--texte);
+        font-family: "Inter", system-ui, -apple-system, Arial, sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+      }
+
+      .card {
+        width: 100%;
+        max-width: 640px;
+        background: rgba(245, 242, 234, 0.04);
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        padding: 40px 36px;
+        backdrop-filter: blur(6px);
+        box-shadow: 0 40px 80px rgba(0, 0, 0, 0.55);
+        display: flex;
+        flex-direction: column;
+        gap: 26px;
+        transition: transform 0.25s ease, border-color 0.25s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(205, 255, 79, 0.5);
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .logo {
+        width: 52px;
+        height: 52px;
+        border-radius: 14px;
+        background: var(--lime);
+        color: var(--nuit);
+        display: grid;
+        place-items: center;
+        font-family: "Space Grotesk", system-ui, sans-serif;
+        font-weight: 700;
+        font-size: 20px;
+        letter-spacing: -1px;
+        flex: none;
+      }
+
+      .name {
+        font-family: "Space Grotesk", system-ui, sans-serif;
+        font-size: 26px;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+      }
+
+      .role {
+        font-size: 13px;
+        color: var(--gris);
+        margin-top: 3px;
+      }
+
+      .rec {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        font-family: "Space Grotesk", system-ui, sans-serif;
+        font-size: 11px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--corail);
+        margin-left: auto;
+      }
+
+      .rec::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--corail);
+        animation: blink 1.6s steps(2, start) infinite;
+      }
+
+      @keyframes blink {
+        50% {
+          opacity: 0.25;
+        }
+      }
+
+      .pitch {
+        font-size: 19px;
+        line-height: 1.45;
+        border-left: 3px solid var(--lime);
+        padding-left: 16px;
+      }
+
+      .pitch em {
+        font-style: normal;
+        color: var(--lime);
+      }
+
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        list-style: none;
+      }
+
+      .tags li {
+        font-size: 13px;
+        padding: 8px 15px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        color: var(--gris);
+        transition: 0.2s;
+        cursor: default;
+      }
+
+      .tags li:hover {
+        color: var(--nuit);
+        background: var(--lime);
+        border-color: var(--lime);
+      }
+
+      .contact {
+        border-top: 1px solid var(--line);
+        padding-top: 18px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 24px;
+        font-size: 14px;
+        color: var(--gris);
+      }
+
+      .contact a {
+        color: var(--lime);
+        text-decoration: none;
+      }
+
+      .contact a:hover {
+        text-decoration: underline;
+      }
+
+      @media (max-width: 420px) {
+        .card {
+          padding: 28px 22px;
+          gap: 20px;
+        }
+
+        .pitch {
+          font-size: 16px;
+        }
+
+        .name {
+          font-size: 21px;
+        }
+
+        .rec {
+          display: none;
+        }
+
+        .contact {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="card">
+      <header class="brand">
+        <div class="logo">Sé</div>
+        <div>
+          <div class="name">Séquence</div>
+          <div class="role">Studio de production vidéo par IA — Dakar</div>
+        </div>
+        <span class="rec">rec</span>
+      </header>
+
+      <p class="pitch">
+        La vidéo générée, <em>dirigée comme un tournage</em> : cadre, lumière,
+        étalonnage — puis le prompt.
+      </p>
+
+      <ul class="tags">
+        <li>Film publicitaire</li>
+        <li>Institutionnel</li>
+        <li>Clip &amp; social</li>
+        <li>Ateliers</li>
+      </ul>
+
+      <footer class="contact">
+        <span>Dakar, Sénégal</span>
+        <a href="mailto:hello@sequence.studio">hello@sequence.studio</a>
+      </footer>
+    </main>
+  </body>
+</html>
