@@ -14,12 +14,12 @@
     --line:rgba(20,22,28,.16); --card:#fff;
   }
   *{box-sizing:border-box}
-  body{margin:0;background:var(--paper);color:var(--encre);
+  body{margin:0;background:var(--papier);color:var(--encre);
     font-family:"Inter",system-ui,sans-serif;font-size:17px;line-height:1.55}
   h1,h2,h3,.kicker,table th,nav a,.badge{font-family:"Space Grotesk","Helvetica Neue",Arial,sans-serif}
   header{background:var(--nuit);color:var(--papier);padding:40px 24px 32px}
   .wrap{max-width:960px;margin:0 auto}
-  .kicker{letter-spacing:.14em;text-transform:uppercase;font-size:12px;color:var(--sun);margin:0 0 10px}
+  .kicker{letter-spacing:.14em;text-transform:uppercase;font-size:12px;color:var(--lime);margin:0 0 10px}
   header h1{margin:0;font-size:34px;line-height:1.15}
   header p{margin:12px 0 0;max-width:62ch;color:rgba(245,242,234,.86)}
   nav{display:flex;gap:14px;flex-wrap:wrap;margin-top:22px}
@@ -81,10 +81,11 @@
     avec des preuves nommées et un bilinguisme FR/EN — les deux angles laissés libres par l'analyse
     concurrentielle du 30 septembre 2026.</p>
     <nav>
-      <a href="#s1">1 Vue d'ensemble</a><a href="#s2">2 Cibles</a><a href="#s3">3 Messages</a>
-      <a href="#s4">4 Canaux</a><a href="#s5">5 Calendrier</a><a href="#s6">6 Actifs</a>
-      <a href="#s7">7 KPI</a><a href="#s8">8 Budget</a><a href="#s9">9 Risques</a>
-      <a href="#s10">10 Actions</a><a href="#preuves">Preuves</a>
+      <a href="#s1">1 Vue d'ensemble</a><a href="#s2">2 Cibles</a><a href="#spiliers">3 Piliers</a>
+      <a href="#s3">4 Messages</a><a href="#s4">5 Canaux</a><a href="#s5">6 Calendrier</a>
+      <a href="#s7b">7 Améliorations</a><a href="#s8b">8 Acquisition</a><a href="#s6">9 Actifs</a>
+      <a href="#s7">10 KPI</a><a href="#s8">11 Budget</a><a href="#s9">12 Risques</a>
+      <a href="#s10">13 Actions</a><a href="#preuves">Preuves</a>
     </nav>
   </div>
 </header>
@@ -103,7 +104,7 @@
       <li><strong>Objectif interne :</strong> documenter un process de réponse aux briefs ≤ 48 h ouvrées (tenue avant d'être annoncée).</li>
     </ul>
     <p class="proof"><b>Preuve :</b> aucun des 3 concurrents n'affiche d'ancre Dakar ni de bilinguisme complet avec preuves —
-    <em>competitive-analysis.md</em> §4.1 (Dada §2.1, D5XR §2.2).</p>
+    <em>competitive-analysis.md</em> §4 (Dada §2.1, D5XR §2.2).</p>
   </section>
 
   <section id="s2">
@@ -142,8 +143,35 @@
     retour « en 2 minutes » — <em>competitive-analysis.md</em> §2.3 ; D5XR n'existe pas en français — §2.2.</p>
   </section>
 
+  <section id="spiliers">
+    <h2><span class="num">03</span>3 piliers de marque</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>1. Dirigé, pas subi</h3>
+        <p>Storyboard, cadre, lumière et étalonnage viennent <em>avant</em> le prompt : la vidéo générée
+        est conduite comme un tournage, pas laissée au hasard.</p>
+        <p class="proof"><b>Preuve :</b> aucun concurrent ne revendique de direction de production sur
+        l'IA — combinaison « 3D + XR + jeu + IA » déjà notée libre chez les trois (<em>competitive-analysis.md</em> §4).</p>
+      </div>
+      <div class="card">
+        <h3>2. Ancré à Dakar</h3>
+        <p>Même fuseau, français par défaut, ateliers en présentiel : un studio local au service de
+        l'Afrique de l'Ouest.</p>
+        <p class="proof"><b>Preuve :</b> l'ancre est libre chez Dada (§2.1) et D5XR (§2.2) ; seul Dardart
+        l'occupe, sans offre technique (§2.3).</p>
+      </div>
+      <div class="card">
+        <h3>3. Preuves, pas promesses</h3>
+        <p>Projets nommés, images légendées, aucun chiffre ni témoignage inventé — placeholders assumés
+        tant que les accords ne sont pas signés.</p>
+        <p class="proof"><b>Preuve :</b> Dada nomme 8 projets (§2.1) quand D5XR affiche zéro chiffre ni
+        nom (§2.2) : le standard observé est la preuve nominative.</p>
+      </div>
+    </div>
+  </section>
+
   <section id="s3">
-    <h2><span class="num">03</span>Messages</h2>
+    <h2><span class="num">04</span>Messages</h2>
     <p><strong>Message central :</strong> « La vidéo générée, dirigée comme un tournage. »</p>
     <table>
       <tr><th style="width:22%">Message support</th><th>Pour qui / douleur</th><th style="width:34%">Preuve à fournir</th></tr>
@@ -157,11 +185,12 @@
   </section>
 
   <section id="s4">
-    <h2><span class="num">04</span>Stratégie de canaux</h2>
+    <h2><span class="num">05</span>Stratégie de canaux</h2>
     <table>
       <tr><th style="width:16%">Canal</th><th style="width:34%">Pourquoi celui-là</th><th style="width:30%">Format</th><th>Effort</th></tr>
       <tr><td><strong>Owned</strong> — site Séquence</td><td>Point de vérité : page positionnement + 2 études de cas, bilingues</td><td>Page HTML, études de cas, formulaire</td><td>Élevé (une fois)</td></tr>
       <tr><td><strong>Owned</strong> — LinkedIn</td><td>Endroit où se trouvent les décideurs communication en Afrique de l'Ouest</td><td>1 post/sem. + 1 carrousel capture</td><td>Moyen</td></tr>
+      <tr><td><strong>Owned</strong> — Instagram</td><td>Reels verticaux et carrousels : même production que LinkedIn, format natif localement (Dardart l'utilise, §2.3)</td><td>3 Reels/sem. + coulisses d'atelier</td><td>Moyen</td></tr>
       <tr><td><strong>Earned</strong> — institutions & événements culturels</td><td>Crédibilité locale, introductions, coproductions</td><td>Prise de parole, atelier (suite de l'E05)</td><td>Élevé</td></tr>
       <tr><td><strong>Earned</strong> — podcasts / médias créa</td><td>Storytelling « studio dakarois qui produit de la vidéo générée »</td><td>Entretien 30 min, FR</td><td>Moyen</td></tr>
       <tr><td><strong>Paid</strong> — LinkedIn ciblé</td><td>Seulement après publication des preuves ; budget test limité</td><td>Sponsoring de 1 post étude de cas</td><td Faible (test)</td></tr>
@@ -171,26 +200,58 @@
   </section>
 
   <section id="s5">
-    <h2><span class="num">05</span>Calendrier — 4 semaines</h2>
+    <h2><span class="num">06</span>Calendrier — 4 semaines (LinkedIn + Instagram)</h2>
+    <p class="meta">LinkedIn : décideurs communication (Afrique de l'Ouest). Instagram : coulisses et
+    format vertical — présence locale déjà observée chez Dardart (§2.3, réseaux).</p>
     <table>
       <tr><th style="width:8%">Sem.</th><th style="width:38%">Contenu produit</th><th style="width:18%">Canal</th><th>Dépendance / jalon</th></tr>
-      <tr><td>S1</td><td>Page « Diriger l'image » (FR + EN) · squelette formulaire brief</td><td>Site</td><td>Textes validés avant mise en ligne ; <strong>bloque tout le reste</strong></td></tr>
-      <tr><td>S2</td><td>Étude de cas n°1 (projet réel) FR + EN · visuels nettoyés</td><td>Site + LinkedIn</td><td>Accord du client/contrepartie sur les images</td></tr>
-      <tr><td>S3</td><td>Étude de cas n°2 · Insights n°1 « produire de la vidéo générée depuis Dakar »</td><td>Site + LinkedIn</td><td>Dépend à S2 (réutilisation des visuels)</td></tr>
-      <tr><td>S4</td><td>Insights n°2 « du prompt à l'étalonnage : notre chaîne » · 1 post sponsorisé test</td><td>Site + LinkedIn</td><td>Uniquement si S1–S3 en ligne (sinon report)</td></tr>
+      <tr><td>S1</td><td>Page « Diriger l'image » (FR + EN) · squelette formulaire brief</td><td>Site + LinkedIn + Instagram</td><td>Textes validés avant mise en ligne ; <strong>bloque tout le reste</strong></td></tr>
+      <tr><td>S2</td><td>Étude de cas n°1 (projet réel) FR + EN · visuels nettoyés</td><td>Site + LinkedIn + Instagram</td><td>Accord du client/contrepartie sur les images</td></tr>
+      <tr><td>S3</td><td>Étude de cas n°2 · Insights n°1 « produire de la vidéo générée depuis Dakar »</td><td>Site + LinkedIn + Instagram</td><td>Dépend à S2 (réutilisation des visuels)</td></tr>
+      <tr><td>S4</td><td>Insights n°2 « du prompt à l'étalonnage : notre chaîne » · 1 post sponsorisé test</td><td>Site + LinkedIn + Instagram</td><td>Uniquement si S1–S3 en ligne (sinon report)</td></tr>
       <tr><td>+20 %</td><td>Créneaux laissés libres : réaction à l'actualité locale, prise de parole invitée</td><td>—</td><td>Réactivité, pas de remplissage à tout prix</td></tr>
     </table>
   </section>
 
+  <section id="s7b">
+    <h2><span class="num">07</span>7 améliorations de la landing page</h2>
+    <table>
+      <tr><th style="width:6%">#</th><th style="width:36%">Amélioration</th><th>Preuve (analyse)</th></tr>
+      <tr><td>1</td><td>Ancre Dakar au premier écran (studio + ville + fuseau)</td><td>§4 : aucune mention Afrique de l'Ouest chez Dada (§2.1) ni D5XR (§2.2)</td></tr>
+      <tr><td>2</td><td>Section projets avec placeholders visibles [Projet à venir]</td><td>§2.1 : Dada nomme 8 projets — le standard de preuve observé</td></tr>
+      <tr><td>3</td><td>Bascule FR/EN dès la page</td><td>§2.2 : D5XR sans version française, segment francophone non servi</td></tr>
+      <tr><td>4</td><td>CTA unique « Décrire mon projet » en header et footer</td><td>§2.3 : Dardart répète « Démarrer un projet » partout</td></tr>
+      <tr><td>5</td><td>Formulaire court (4 champs) + délai affiché seulement après mesure</td><td>§2.3 : benchmark Dardart « 2 minutes » + chat (non mesuré publiquement)</td></tr>
+      <tr><td>6</td><td>Bloc « comment on chiffre » (fourchette ou méthode)</td><td>§4.2 : aucun tarif public chez personne — angle libre</td></tr>
+      <tr><td>7</td><td>Diagnostic interactif (quiz de format) dans le héros</td><td>§2.1–§2.3 et §4.3 : aucun tunnel interactif observé chez les trois</td></tr>
+    </table>
+  </section>
+
+  <section id="s8b">
+    <h2><span class="num">08</span>5 idées d'acquisition que les concurrents n'utilisent pas</h2>
+    <ol>
+      <li><strong>Atelier présentiel « vidéo générée » à Dakar</strong> — aucun atelier observé chez Dada
+      (News, §2.1), D5XR (Insights, §2.2) ni Dardart (§2.3).</li>
+      <li><strong>Engagement « réponse sous 48 h », mesuré 2 semaines avant d'être annoncé</strong> —
+      Dardart annonce « 2 minutes » sans preuve publique (§2.3) ; nous ne communiquons qu'après mesure (§12).</li>
+      <li><strong>Série de coulisses « du prompt à l'étalonnage » en Reels</strong> — ni News (Dada) ni
+      Insights (D5XR) ne couvrent l'angle vidéo générée (§4).</li>
+      <li><strong>Coproductions avec institutions culturelles locales</strong> — absent chez Dada et D5XR
+      (aucun ancrage, §2.1/§2.2) ; Dardart est local mais sans offre technique (§2.3).</li>
+      <li><strong>Diagnostic interactif qui qualifie le brief avant l'appel</strong> — CTA statiques
+      uniquement chez les trois (§2.1–§2.3).</li>
+    </ol>
+  </section>
+
   <section id="s6">
-    <h2><span class="num">06</span>Actifs à produire</h2>
+    <h2><span class="num">09</span>Actifs à produire</h2>
     <table>
       <tr><th style="width:44%">Actif</th><th style="width:14%">Priorité</th><th style="width:20%">Échéance</th><th>Contenu</th></tr>
       <tr><td>Page de positionnement FR + EN</td><td><span class="badge hot">P0</span></td><td>S1</td><td>Promesse, chaîne de production, adresse Dakar, formulaire</td></tr>
       <tr><td>Étude de cas n°1</td><td><span class="badge hot">P0</span></td><td>S2</td><td>Contexte, rôle de Séquence, livrable, visuels réels</td></tr>
       <tr><td>Étude de cas n°2</td><td><span class="badge">P1</span></td><td>S3</td><td>Idem, angle technique (cohérence ou étalonnage)</td></tr>
       <tr><td>Billet Insights n°1 / n°2</td><td><span class="badge">P1</span></td><td>S3 / S4</td><td>600–900 mots, FR, résumé EN</td></tr>
-      <tr><td>Carrousel LinkedIn (captures)</td><td><span class="badge">P1</span></td><td>S2, S4</td><td>Captures d'écran des projets, 5 vues</td></tr>
+      <tr><td>Carrousels LinkedIn &amp; Instagram (captures)</td><td><span class="badge">P1</span></td><td>S2, S4</td><td>Captures d'écran des projets, 5 vues</td></tr>
       <tr><td>Signature e-mail bilingue + délai de réponse</td><td><span class="badge warn">P2</span></td><td>S1</td><td>Réutilise la charte E05</td></tr>
     </table>
     <p class="proof"><b>Preuve :</b> le P0 est la page + une première preuve : c'est exactement ce qui manque chez D5XR
@@ -198,7 +259,7 @@
   </section>
 
   <section id="s7">
-    <h2><span class="num">07</span>Indicateurs de succès</h2>
+    <h2><span class="num">10</span>Indicateurs de succès</h2>
     <table>
       <tr><th style="width:34%">Indicateur</th><th style="width:24%">Cible S4</th><th style="width:22%">Suivi</th><th>Cadence</th></tr>
       <tr><td>Demandes de brief via le formulaire</td><td>5 (objectif, pas un constat)</td><td>Boîte réception + journal de contact</td><td>Hebdo (vendredi)</td></tr>
@@ -212,7 +273,7 @@
   </section>
 
   <section id="s8">
-    <h2><span class="num">08</span>Budget (répartition indicative, aucun montant fourni)</h2>
+    <h2><span class="num">11</span>Budget (répartition indicative, aucun montant fourni)</h2>
     <table>
       <tr><th style="width:40%">Poste</th><th style="width:18%">Part</th><th>Commentaire</th></tr>
       <tr><td>Production de contenu (pages, études de cas, visuels)</td><td>45 %</td><td>Le poste dominant tant que les preuves manquent</td></tr>
@@ -224,21 +285,21 @@
   </section>
 
   <section id="s9">
-    <h2><span class="num">09</span>Risques & atténuations</h2>
+    <h2><span class="num">12</span>Risques &amp; atténuations</h2>
     <table>
       <tr><th style="width:34%">Risque</th><th>Atténuation</th></tr>
       <tr><td>Impossible d'obtenir l'accord pour publier une étude de cas</td><td>Choisir dès la S1 un projet où l'accord est déjà plausible ; alternative : étude de cas anonymisée <em>uniquement</em> si le client l'accepte — sinon on ne publie pas</td></tr>
       <tr><td>Calendrier S1 glisse et bloque les semaines suivantes</td><td>La page de positionnement est le seul P0 stricte ; les Insights et le paid sont par nature reportables</td></tr>
-      <tr><td>Annoncer un délai de réponse avant de le tenir</td><td>Mesurer le délai pendant 2 semaines (KPI §7) avant toute communication publique</td></tr>
+      <tr><td>Annoncer un délai de réponse avant de le tenir</td><td>Mesurer le délai pendant 2 semaines (KPI §10) avant toute communication publique</td></tr>
     </table>
   </section>
 
   <section id="s10" class="cta-strip">
-    <h2><span class="num" style="color:var(--coral)">10</span>Prochaines étapes — 3 actions immédiates</h2>
+    <h2><span class="num" style="color:var(--corail)">13</span>Gains rapides — 3 actions pour cette semaine</h2>
     <ol>
-      <li><strong>Cette semaine :</strong> rédiger la page « Diriger l'image » FR + EN (contenu §3) — elle débloque tout le calendrier.</li>
+      <li><strong>Cette semaine :</strong> rédiger la page « Diriger l'image » FR + EN (contenu §4) — elle débloque tout le calendrier.</li>
       <li><strong>Cette semaine :</strong> lister les projets réels de Séquence et demander l'accord de publication pour 2 d'entre eux (aucun projet inventé).</li>
-      <li><strong>Dès lundi prochain :</strong> brancher le formulaire de contact et commencer la mesure du délai de réponse (KPI §7) — 2 semaines de mesure avant d'afficher un engagement public.</li>
+      <li><strong>Dès lundi prochain :</strong> brancher le formulaire de contact et commencer la mesure du délai de réponse (KPI §10) — 2 semaines de mesure avant d'afficher un engagement public.</li>
     </ol>
   </section>
 
