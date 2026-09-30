@@ -1,6 +1,6 @@
 # E06 · Plugins (opencode adaptation)
 
-Competitive analysis + 4-week marketing plan for ATA suarl, produced with
+Competitive analysis + 4-week marketing plan for Séquence, produced with
 project-scoped skills instead of Claude Code plugins.
 
 ## Layout
@@ -9,7 +9,7 @@ project-scoped skills instead of Claude Code plugins.
 opencode.json                      # project config: MCP playwright + skill permissions
 .opencode/skills/*/SKILL.md        # 8 skills from anthropics/knowledge-work-plugins (marketing), Apache-2.0
 competitive-analysis.md            # 3 competitors, 6 pages, evidence-linked (FR)
-marketing-plan.html                # campaign brief, ATAWAD, FR, print-friendly
+marketing-plan.html                # campaign brief, « Diriger l'image », FR, print-friendly
 screenshots/                       # 12 page captures + marketing-plan(.png|-full.png)
 ```
 

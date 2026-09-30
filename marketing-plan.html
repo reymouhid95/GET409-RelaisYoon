@@ -3,66 +3,66 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Plan marketing — ATA suarl · Semaine 1 à 4</title>
+<title>Plan marketing — Séquence · Semaine 1 à 4</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=Newsreader:ital,opsz@0,6..72;1,6..72&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ocean:#0F3B4F; --paper:#EEF1EE; --encre:#123039;
-    --sun:#F4B942; --coral:#EF5B39; --sea:#3FBF9A; --sky:#6FC2E0;
-    --line:rgba(18,48,57,.16); --card:#fff;
+    --nuit:#0D0F14; --papier:#F5F2EA; --encre:#14161C;
+    --lime:#CDFF4F; --corail:#FF6B4A; --ciel:#7CC4FF; --violet:#B7A4FF;
+    --line:rgba(20,22,28,.16); --card:#fff;
   }
   *{box-sizing:border-box}
   body{margin:0;background:var(--paper);color:var(--encre);
-    font-family:"Newsreader",Georgia,serif;font-size:17px;line-height:1.55}
-  h1,h2,h3,.kicker,table th,nav a,.badge{font-family:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif}
-  header{background:var(--ocean);color:var(--paper);padding:40px 24px 32px}
+    font-family:"Inter",system-ui,sans-serif;font-size:17px;line-height:1.55}
+  h1,h2,h3,.kicker,table th,nav a,.badge{font-family:"Space Grotesk","Helvetica Neue",Arial,sans-serif}
+  header{background:var(--nuit);color:var(--papier);padding:40px 24px 32px}
   .wrap{max-width:960px;margin:0 auto}
   .kicker{letter-spacing:.14em;text-transform:uppercase;font-size:12px;color:var(--sun);margin:0 0 10px}
   header h1{margin:0;font-size:34px;line-height:1.15}
-  header p{margin:12px 0 0;max-width:62ch;color:rgba(238,241,238,.86)}
+  header p{margin:12px 0 0;max-width:62ch;color:rgba(245,242,234,.86)}
   nav{display:flex;gap:14px;flex-wrap:wrap;margin-top:22px}
-  nav a{color:var(--paper);text-decoration:none;font-size:13px;border:1px solid rgba(238,241,238,.35);
+  nav a{color:var(--papier);text-decoration:none;font-size:13px;border:1px solid rgba(245,242,234,.35);
     border-radius:999px;padding:6px 12px}
   main{padding:28px 24px 60px}
   section{background:var(--card);border:1px solid var(--line);border-radius:14px;
     padding:22px 24px;margin:18px 0}
-  h2{margin:0 0 4px;font-size:22px;color:var(--ocean)}
-  h2 .num{color:var(--coral);margin-right:8px}
-  h3{margin:18px 0 6px;font-size:16px;color:var(--ocean)}
+  h2{margin:0 0 4px;font-size:22px;color:var(--nuit)}
+  h2 .num{color:var(--corail);margin-right:8px}
+  h3{margin:18px 0 6px;font-size:16px;color:var(--nuit)}
   p{margin:8px 0}
-  .meta{font-size:13px;color:rgba(18,48,57,.66);margin:0 0 12px}
+  .meta{font-size:13px;color:rgba(20,22,28,.66);margin:0 0 12px}
   table{width:100%;border-collapse:collapse;font-size:15px;margin:12px 0 4px}
   th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
-  th{background:rgba(15,59,79,.07);font-size:13px;letter-spacing:.03em}
+  th{background:rgba(13,15,20,.07);font-size:13px;letter-spacing:.03em}
   ul,ol{margin:8px 0;padding-left:22px}
   li{margin:5px 0}
   .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:12px 0}
-  .card{border:1px solid var(--line);border-radius:10px;padding:14px;background:rgba(111,194,224,.10)}
+  .card{border:1px solid var(--line);border-radius:10px;padding:14px;background:rgba(124,196,255,.12)}
   .card h3{margin:0 0 6px;font-size:15px}
   .badge{display:inline-block;font-size:12px;border-radius:999px;padding:3px 10px;margin:2px 4px 2px 0;
-    background:rgba(63,191,154,.18);border:1px solid rgba(63,191,154,.5)}
-  .badge.warn{background:rgba(244,185,66,.2);border-color:rgba(244,185,66,.6)}
-  .badge.hot{background:rgba(239,91,57,.16);border-color:rgba(239,91,57,.5)}
-  .proof{font-size:13px;color:rgba(18,48,57,.72);border-left:3px solid var(--sea);padding:2px 0 2px 10px;margin:6px 0}
-  .proof b{color:var(--ocean)}
-  .cta-strip{background:var(--ocean);color:var(--paper);border-radius:12px;padding:18px 22px;margin:18px 0}
-  .cta-strip h2{color:var(--sun);margin-bottom:8px}
+    background:rgba(124,196,255,.18);border:1px solid rgba(124,196,255,.55)}
+  .badge.warn{background:rgba(205,255,79,.25);border-color:rgba(140,190,40,.6)}
+  .badge.hot{background:rgba(255,107,74,.16);border-color:rgba(255,107,74,.5)}
+  .proof{font-size:13px;color:rgba(20,22,28,.72);border-left:3px solid var(--ciel);padding:2px 0 2px 10px;margin:6px 0}
+  .proof b{color:var(--nuit)}
+  .cta-strip{background:var(--nuit);color:var(--papier);border-radius:12px;padding:18px 22px;margin:18px 0}
+  .cta-strip h2{color:var(--lime);margin-bottom:8px}
   .cta-strip li{margin:8px 0}
   figure{margin:14px 0;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff}
   figure img{display:block;width:100%;height:auto}
-  figcaption{font-size:13px;padding:8px 10px;color:rgba(18,48,57,.75);border-top:1px solid var(--line)}
-  footer{background:var(--ocean);color:var(--paper);padding:26px 24px;font-size:15px}
-  footer .sign{font-family:"Bricolage Grotesque",sans-serif;margin-top:14px}
-  footer a{color:var(--sun)}
-  .tag{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--coral);
-    font-family:"Bricolage Grotesque",sans-serif}
+  figcaption{font-size:13px;padding:8px 10px;color:rgba(20,22,28,.75);border-top:1px solid var(--line)}
+  footer{background:var(--nuit);color:var(--papier);padding:26px 24px;font-size:15px}
+  footer .sign{font-family:"Space Grotesk",sans-serif;margin-top:14px}
+  footer a{color:var(--lime)}
+  .tag{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--corail);
+    font-family:"Space Grotesk",sans-serif}
   @media print{
     body{background:#fff;font-size:11pt}
     section{break-inside:avoid;border-color:#999}
     nav{display:none}
-    header{background:#0F3B4F !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    header{background:#0D0F14 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   }
   @media (max-width:640px){
     header h1{font-size:26px}
@@ -75,9 +75,9 @@
 
 <header>
   <div class="wrap">
-    <p class="kicker">Plan marketing · Semaine 1 à 4 · ATAWAD</p>
-    <h1>« Mondes de Dakar » — campagne de positionnement ATA suarl</h1>
-    <p>4 semaines pour installer le territoire « Des mondes réels et imaginaires, fabriqués à Dakar »,
+    <p class="kicker">Plan marketing · Semaine 1 à 4 · Dakar · FR/EN</p>
+    <h1>« Diriger l'image » — campagne de positionnement Séquence</h1>
+    <p>4 semaines pour installer le territoire « La vidéo générée, dirigée comme un tournage »,
     avec des preuves nommées et un bilinguisme FR/EN — les deux angles laissés libres par l'analyse
     concurrentielle du 30 septembre 2026.</p>
     <nav>
@@ -93,9 +93,9 @@
 
   <section id="s1">
     <h2><span class="num">01</span>Vue d'ensemble</h2>
-    <p class="meta">Nom de campagne : <strong>Mondes de Dakar</strong> · Durée : 4 semaines · Bilingue FR/EN · Budget : réparti en % (aucun montant fourni)</p>
-    <p><strong>Résumé en une phrase :</strong> montrer depuis Dakar un studio qui combine animation 3D, XR, jeu et IA,
-    et transformer cette différence en contacts qualifiés.</p>
+    <p class="meta">Nom de campagne : <strong>Diriger l'image</strong> · Durée : 4 semaines · Bilingue FR/EN · Budget : réparti en % (aucun montant fourni)</p>
+    <p><strong>Résumé en une phrase :</strong> montrer depuis Dakar un studio de vidéo générée dont la chaîne
+    complète — cadrage, génération, montage, étalonnage — est dirigée comme un tournage, et transformer cette différence en contacts qualifiés.</p>
     <ul>
       <li><strong>Objectif principal (SMART) :</strong> publier 1 page de positionnement + 2 études de cas réelles +
       4 billets « Insights » en 4 semaines, et obtenir 5 demandes de brief via le formulaire de contact d'ici la fin de la S4.</li>
@@ -112,20 +112,20 @@
       <div class="card">
         <h3>Primaire — directions communication / marketing</h3>
         <p>Marques, institutions culturelles et bailleurs au Sénégal et en Afrique de l'Ouest, à la recherche d'un
-        partenaire capable de produire contenus immersifs et films d'animation <em>sans passer par l'Europe</em>.</p>
+        partenaire capable de produire films institutionnels et contenus courts <em>sans passer par l'Europe</em>.</p>
         <p><span class="badge">Décideur : directeur·rice communication</span><span class="badge">Stade : considération</span></p>
       </div>
       <div class="card">
         <h3>Secondaire — diffuseurs & éditeurs</h3>
-        <p>Chaînes, plateformes, studios de jeu et éditeurs qui cherchent un studio local pour coproduire
-        des contenus animés ou expériences XR.</p>
+        <p>Chaînes, plateformes, agences et éditeurs qui cherchent un studio local pour coproduire
+        des séries de contenus ou des films de marque.</p>
         <p><span class="badge warn">Décideur : responsable éditorial / production</span><span class="badge warn">Stade : découverte</span></p>
       </div>
       <div class="card">
         <h3>Douleurs observées</h3>
         <ul>
-          <li>Devoir sourcer à l'étranger pour de la 3D / du XR (délais, devises, décalage).</li>
-          <li>Des offres locales larges mais sans spécialisation technique 3D/XR/IA.</li>
+          <li>Devoir sourcer à l'étranger pour la production vidéo (délais, devises, décalage).</li>
+          <li>Des offres locales larges mais sans maîtrise de la vidéo générée (cohérence, lumière, étalonnage).</li>
           <li>Des portfolios qui parlent de promesses, pas de projets nommés.</li>
         </ul>
       </div>
@@ -134,7 +134,7 @@
         <ul>
           <li>LinkedIn (ciblage Sénégal / Afrique de l'Ouest, rôles communication).</li>
           <li>Écosystème local : événements culturels, incubateurs, institutions (contact en présentiel).</li>
-          <li>Recherche FR sur « studio animation 3D Dakar », « réalité virtuelle Sénégal ».</li>
+          <li>Recherche FR sur « studio vidéo IA Dakar », « production vidéo Sénégal ».</li>
         </ul>
       </div>
     </div>
@@ -144,12 +144,12 @@
 
   <section id="s3">
     <h2><span class="num">03</span>Messages</h2>
-    <p><strong>Message central :</strong> « Des mondes réels et imaginaires, fabriqués à Dakar. »</p>
+    <p><strong>Message central :</strong> « La vidéo générée, dirigée comme un tournage. »</p>
     <table>
       <tr><th style="width:22%">Message support</th><th>Pour qui / douleur</th><th style="width:34%">Preuve à fournir</th></tr>
-      <tr><td>Un seul studio : animation 3D, XR, jeu, IA</td><td>Décideurs qui doivent sous-traiter 3 prestataires</td><td>Page services listant les 4 métiers avec 1 réalisation chacun (projets réels uniquement)</td></tr>
+      <tr><td>Un seul studio : cadrage, génération, montage, étalonnage</td><td>Décideurs qui doivent sous-traiter 3 prestataires</td><td>Page services décrivant les 4 étapes de la chaîne avec 1 réalisation chacune (projets réels uniquement)</td></tr>
       <tr><td>Proximité : Dakar, même fuseau, FR &amp; EN</td><td>Marques qui veulent des allers-retours courts</td><td>Adresse, disponibilités et délai de réponse affichés sur la page contact</td></tr>
-      <tr><td>Preuves par projets nommés</td><td>Sceptiques face aux portfolios vagues</td><td>2 études de cas : contexte, rôle d'ATA, livrable, images — 0 chiffre inventé</td></tr>
+      <tr><td>Preuves par projets nommés</td><td>Sceptiques face aux portfolios vagues</td><td>2 études de cas : contexte, rôle de Séquence, livrable, images — 0 chiffre inventé</td></tr>
       <tr><td>Le local peut être international</td><td>Institutions culturelles, diffuseurs</td><td>Versions EN des pages + vocabulaire tourné vers l'export</td></tr>
     </table>
     <p class="proof"><b>Preuve :</b> Dada nomme 8 projets et tient un showreel — c'est le standard à atteindre (<em>competitive-analysis.md</em> §2.1) ;
@@ -160,10 +160,10 @@
     <h2><span class="num">04</span>Stratégie de canaux</h2>
     <table>
       <tr><th style="width:16%">Canal</th><th style="width:34%">Pourquoi celui-là</th><th style="width:30%">Format</th><th>Effort</th></tr>
-      <tr><td><strong>Owned</strong> — site ATA</td><td>Point de vérité : page positionnement + 2 études de cas, bilingues</td><td>Page HTML, études de cas, formulaire</td><td>Élevé (une fois)</td></tr>
+      <tr><td><strong>Owned</strong> — site Séquence</td><td>Point de vérité : page positionnement + 2 études de cas, bilingues</td><td>Page HTML, études de cas, formulaire</td><td>Élevé (une fois)</td></tr>
       <tr><td><strong>Owned</strong> — LinkedIn</td><td>Endroit où se trouvent les décideurs communication en Afrique de l'Ouest</td><td>1 post/sem. + 1 carrousel capture</td><td>Moyen</td></tr>
       <tr><td><strong>Earned</strong> — institutions & événements culturels</td><td>Crédibilité locale, introductions, coproductions</td><td>Prise de parole, atelier (suite de l'E05)</td><td>Élevé</td></tr>
-      <tr><td><strong>Earned</strong> — podcasts / médias créa</td><td>Storytelling « studio dakarois qui fait de la XR »</td><td>Entretien 30 min, FR</td><td>Moyen</td></tr>
+      <tr><td><strong>Earned</strong> — podcasts / médias créa</td><td>Storytelling « studio dakarois qui produit de la vidéo générée »</td><td>Entretien 30 min, FR</td><td>Moyen</td></tr>
       <tr><td><strong>Paid</strong> — LinkedIn ciblé</td><td>Seulement après publication des preuves ; budget test limité</td><td>Sponsoring de 1 post étude de cas</td><td Faible (test)</td></tr>
     </table>
     <p class="proof"><b>Preuve :</b> l'ordre Owned → Earned → Paid évite de payer de la visibilité avant d'avoir des
@@ -174,10 +174,10 @@
     <h2><span class="num">05</span>Calendrier — 4 semaines</h2>
     <table>
       <tr><th style="width:8%">Sem.</th><th style="width:38%">Contenu produit</th><th style="width:18%">Canal</th><th>Dépendance / jalon</th></tr>
-      <tr><td>S1</td><td>Page « Mondes de Dakar » (FR + EN) · squelette formulaire brief</td><td>Site</td><td>Textes validés avant mise en ligne ; <strong>bloque tout le reste</strong></td></tr>
+      <tr><td>S1</td><td>Page « Diriger l'image » (FR + EN) · squelette formulaire brief</td><td>Site</td><td>Textes validés avant mise en ligne ; <strong>bloque tout le reste</strong></td></tr>
       <tr><td>S2</td><td>Étude de cas n°1 (projet réel) FR + EN · visuels nettoyés</td><td>Site + LinkedIn</td><td>Accord du client/contrepartie sur les images</td></tr>
-      <tr><td>S3</td><td>Étude de cas n°2 · Insights n°1 « faire de la XR depuis Dakar »</td><td>Site + LinkedIn</td><td>Dépend à S2 (réutilisation des visuels)</td></tr>
-      <tr><td>S4</td><td>Insights n°2 « 3D + jeu + IA : notre stack » · 1 post sponsorisé test</td><td>Site + LinkedIn</td><td>Uniquement si S1–S3 en ligne (sinon report)</td></tr>
+      <tr><td>S3</td><td>Étude de cas n°2 · Insights n°1 « produire de la vidéo générée depuis Dakar »</td><td>Site + LinkedIn</td><td>Dépend à S2 (réutilisation des visuels)</td></tr>
+      <tr><td>S4</td><td>Insights n°2 « du prompt à l'étalonnage : notre chaîne » · 1 post sponsorisé test</td><td>Site + LinkedIn</td><td>Uniquement si S1–S3 en ligne (sinon report)</td></tr>
       <tr><td>+20 %</td><td>Créneaux laissés libres : réaction à l'actualité locale, prise de parole invitée</td><td>—</td><td>Réactivité, pas de remplissage à tout prix</td></tr>
     </table>
   </section>
@@ -186,9 +186,9 @@
     <h2><span class="num">06</span>Actifs à produire</h2>
     <table>
       <tr><th style="width:44%">Actif</th><th style="width:14%">Priorité</th><th style="width:20%">Échéance</th><th>Contenu</th></tr>
-      <tr><td>Page de positionnement FR + EN</td><td><span class="badge hot">P0</span></td><td>S1</td><td>Promesse, 4 métiers, adresse Dakar, formulaire</td></tr>
-      <tr><td>Étude de cas n°1</td><td><span class="badge hot">P0</span></td><td>S2</td><td>Contexte, rôle d'ATA, livrable, visuels réels</td></tr>
-      <tr><td>Étude de cas n°2</td><td><span class="badge">P1</span></td><td>S3</td><td>Idem, angle technique (XR ou jeu)</td></tr>
+      <tr><td>Page de positionnement FR + EN</td><td><span class="badge hot">P0</span></td><td>S1</td><td>Promesse, chaîne de production, adresse Dakar, formulaire</td></tr>
+      <tr><td>Étude de cas n°1</td><td><span class="badge hot">P0</span></td><td>S2</td><td>Contexte, rôle de Séquence, livrable, visuels réels</td></tr>
+      <tr><td>Étude de cas n°2</td><td><span class="badge">P1</span></td><td>S3</td><td>Idem, angle technique (cohérence ou étalonnage)</td></tr>
       <tr><td>Billet Insights n°1 / n°2</td><td><span class="badge">P1</span></td><td>S3 / S4</td><td>600–900 mots, FR, résumé EN</td></tr>
       <tr><td>Carrousel LinkedIn (captures)</td><td><span class="badge">P1</span></td><td>S2, S4</td><td>Captures d'écran des projets, 5 vues</td></tr>
       <tr><td>Signature e-mail bilingue + délai de réponse</td><td><span class="badge warn">P2</span></td><td>S1</td><td>Réutilise la charte E05</td></tr>
@@ -236,8 +236,8 @@
   <section id="s10" class="cta-strip">
     <h2><span class="num" style="color:var(--coral)">10</span>Prochaines étapes — 3 actions immédiates</h2>
     <ol>
-      <li><strong>Cette semaine :</strong> rédiger la page « Mondes de Dakar » FR + EN (contenu §3) — elle débloque tout le calendrier.</li>
-      <li><strong>Cette semaine :</strong> lister les projets réels d'ATA et demander l'accord de publication pour 2 d'entre eux (aucun projet inventé).</li>
+      <li><strong>Cette semaine :</strong> rédiger la page « Diriger l'image » FR + EN (contenu §3) — elle débloque tout le calendrier.</li>
+      <li><strong>Cette semaine :</strong> lister les projets réels de Séquence et demander l'accord de publication pour 2 d'entre eux (aucun projet inventé).</li>
       <li><strong>Dès lundi prochain :</strong> brancher le formulaire de contact et commencer la mesure du délai de réponse (KPI §7) — 2 semaines de mesure avant d'afficher un engagement public.</li>
     </ol>
   </section>
@@ -267,9 +267,9 @@
 
 <footer>
   <div class="wrap">
-    <p>Plan préparé pour ATA suarl à partir de l'analyse concurrentielle du 30 septembre 2026
+    <p>Plan préparé pour Séquence à partir de l'analyse concurrentielle du 30 septembre 2026
     (<a href="competitive-analysis.md">competitive-analysis.md</a>) — 3 sites consultés, 12 captures, aucune donnée inventée.</p>
-    <p class="sign">À très vite,<br>L'équipe ATA suarl — Dakar</p>
+    <p class="sign">À très vite,<br>L'équipe Séquence — Dakar</p>
   </div>
 </footer>
 

@@ -1,4 +1,4 @@
-# Analyse concurrentielle — ATA suarl
+# Analyse concurrentielle — Séquence
 
 **Date de recherche :** 30 septembre 2026
 **Méthode :** navigation automate (Chromium headless 1440×900, `playwright-core`), captures pleine page + captures du premier écran, extraction du DOM (title, meta, H1, liens, textes, styles calculés).
@@ -11,7 +11,7 @@
 
 Les trois concurrents occupent trois territoires distincts : Dada ! Animation (récits animés 3D, Paris), D5XR (expériences immersives pour marques, Londres), Dardart Dakar (production audiovisuelle 360, Dakar). Aucun des trois ne présente d'ancrage Afrique de l'Ouest sur les pages consultées, aucun n'affiche de tarifs publics, et aucun ne combine animation 3D + XR + jeu + IA dans un même discours.
 
-**Plus grande opportunité :** occuper le territoire « studio de mondes réels et imaginaires, fabriqués à Dakar » — bilingue, avec preuves nommées.
+**Plus grande opportunité :** occuper le territoire « la vidéo générée, dirigée comme un tournage, depuis Dakar » — bilingue, avec preuves nommées.
 **Plus grande menace :** Dardart Dakar, seul concurrent local, avec un tunnel de conversion très direct (CTA « Démarrer un projet », chat, réponse « en 2 minutes »).
 
 ---
@@ -115,7 +115,7 @@ Les trois concurrents occupent trois territoires distincts : Dada ! Animation (r
 5. **Dardart sans offre technique 3D/XR/IA** — la profondeur technologique n'est pas défendue localement.
 
 ### Opportunités
-- Preuves nommées (études de cas) : Dada montre la voie avec 8 projets listés ; ATA peut faire de même avec ses **vrais** projets.
+- Preuves nommées (études de cas) : Dada montre la voie avec 8 projets listés ; Séquence peut faire de même avec ses **vrais** projets.
 - Bilingue FR/EN + promesse de délai chiffrée et tenable (benchmark Dardart « 2 minutes »).
 - Contenus courts « animation/XR/jeu/IA vus depuis Dakar » : ni Dada (News) ni D5XR (Insights) ne couvrent cet angle.
 
@@ -128,7 +128,7 @@ Les trois concurrents occupent trois territoires distincts : Dada ! Animation (r
 
 ## 5. Recommandations (5)
 
-1. **Occuper l'ancre Dakar** : page/tiroir « mondes réels et imaginaires, fabriqués à Dakar » avec adresse et projets locaux — preuve visuelle, pas de slogan seul. *(Source : absence d'ancrage chez Dada et D5XR, §2.1, §2.2)*
+1. **Occuper l'ancre Dakar** : page/tiroir « vidéo générée, dirigée comme un tournage » avec adresse et projets locaux — preuve visuelle, pas de slogan seul. *(Source : absence d'ancrage chez Dada et D5XR, §2.1, §2.2)*
 2. **Système de preuves nommées** : lister les projets réels comme Dada (8 projets) — jamais de projet inventé. *(Source : §2.1, preuves)*
 3. **Bilingue dès le départ** : FR par défaut + EN, comme Dada et Dardart ; avantage direct sur D5XR. *(Source : §2.2, langues)*
 4. **Un CTA unique + engagement de délai** : « Démarrer un projet » + délai de réponse affiché et tenu (benchmark « 2 minutes » de Dardart). *(Source : §2.3, CTA)*
