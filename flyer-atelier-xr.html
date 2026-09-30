@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flyer — Atelier XR &amp; IA générative · ATA suarl</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Newsreader:opsz,wght@6..72,400..600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ocean: #0f3b4f;
+        --paper: #eef1ee;
+        --ink: #123039;
+        --sun: #f4b942;
+        --coral: #ef5b39;
+        --sea: #3fbf9a;
+        --sky: #6fc2e0;
+        --chalk: #e6eef0;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background: #dfe4e6;
+        font-family: Newsreader, Georgia, serif;
+        color: var(--ink);
+        padding: 24px 12px;
+      }
+
+      .sheet {
+        width: min(100%, 794px);
+        aspect-ratio: 210 / 297;
+        margin: 0 auto;
+        background: var(--paper);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        box-shadow: 0 18px 40px rgba(18, 48, 57, 0.25);
+      }
+
+      /* Bandeau marque */
+      .head {
+        background: var(--ocean);
+        color: var(--chalk);
+        padding: 3.2% 6%;
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 12px;
+      }
+
+      .head .name {
+        font-family: "Bricolage Grotesque", system-ui, sans-serif;
+        font-weight: 800;
+        font-size: clamp(15px, 2.4vw, 22px);
+        color: var(--sun);
+      }
+
+      .head .tagline {
+        font-size: clamp(9px, 1.4vw, 13px);
+        font-style: italic;
+      }
+
+      /* Image de production */
+      .media {
+        position: relative;
+        flex: 0 0 31%;
+        background: var(--ocean);
+        overflow: hidden;
+      }
+
+      .media img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+        display: block;
+        background: var(--ocean);
+      }
+
+      .media .fallback {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        background: linear-gradient(180deg, var(--ocean), #0a2b3a);
+      }
+
+      .media .fallback .swatches {
+        display: flex;
+        height: 38%;
+      }
+
+      .media .fallback .swatches span {
+        flex: 1;
+      }
+
+      .media .fallback .label {
+        font-family: "Bricolage Grotesque", system-ui, sans-serif;
+        font-weight: 600;
+        font-size: clamp(10px, 1.5vw, 14px);
+        color: var(--chalk);
+        padding: 3% 6%;
+      }
+
+      /* Contenu */
+      .content {
+        flex: 1;
+        min-height: 0;
+        padding: 4% 6% 0;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .kicker {
+        font-family: "Bricolage Grotesque", system-ui, sans-serif;
+        font-weight: 700;
+        font-size: clamp(10px, 1.5vw, 13px);
+        color: var(--coral);
+        margin-bottom: 1.2%;
+      }
+
+      h1 {
+        font-family: "Bricolage Grotesque", system-ui, sans-serif;
+        font-weight: 800;
+        font-size: clamp(24px, 5.6vw, 46px);
+        line-height: 0.96;
+        letter-spacing: -0.02em;
+        color: var(--ocean);
+        margin-bottom: 2.4%;
+      }
+
+      .intro {
+        font-size: clamp(11px, 1.7vw, 15px);
+        line-height: 1.5;
+        max-width: 58ch;
+        margin-bottom: 3.2%;
+      }
+
+      .benefits {
+        list-style: none;
+        display: grid;
+        gap: clamp(7px, 1.3vw, 13px);
+        margin-bottom: 3.6%;
+      }
+
+      .benefits li {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+        border-top: 3px solid var(--key, var(--sun));
+        padding-top: clamp(5px, 1vw, 10px);
+        font-size: clamp(10px, 1.6vw, 14px);
+        line-height: 1.4;
+      }
+
+      .benefits li strong {
+        font-family: "Bricolage Grotesque", system-ui, sans-serif;
+        font-weight: 700;
+        display: block;
+        margin-bottom: 2px;
+        color: var(--ocean);
+      }
+
+      .meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: clamp(8px, 2vw, 22px);
+        font-family: "Bricolage Grotesque", system-ui, sans-serif;
+        font-weight: 600;
+        font-size: clamp(10px, 1.5vw, 13px);
+        color: var(--ocean);
+        background: #ffffff;
+        border: 1.5px solid rgba(18, 48, 57, 0.2);
+        padding: clamp(7px, 1.4vw, 13px);
+        margin-bottom: 3.6%;
+      }
+
+      .cta {
+        font-family: "Bricolage Grotesque", system-ui, sans-serif;
+        font-weight: 700;
+        font-size: clamp(12px, 1.9vw, 16px);
+        background: var(--ocean);
+        color: #ffffff;
+        text-decoration: none;
+        padding: clamp(9px, 1.6vw, 14px) clamp(14px, 2.6vw, 24px);
+        align-self: flex-start;
+      }
+
+      .foot {
+        margin-top: auto;
+        background: var(--ocean);
+        color: var(--chalk);
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 2.2% 6%;
+        font-size: clamp(9px, 1.4vw, 12px);
+      }
+
+      .foot .sign {
+        font-style: italic;
+        color: var(--sun);
+      }
+
+      @media print {
+        body {
+          background: #fff;
+          padding: 0;
+        }
+
+        .sheet {
+          width: 210mm;
+          height: 297mm;
+          box-shadow: none;
+        }
+      }
+
+      @page {
+        size: A4;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sheet">
+      <div class="head">
+        <div class="name">ATA suarl</div>
+        <div class="tagline">Des mondes réels et imaginaires, fabriqués à Dakar.</div>
+      </div>
+
+      <div class="media">
+        <div class="fallback" aria-hidden="true">
+          <div class="label">[ Photo de production — déposer hero.jpg à côté du fichier ]</div>
+          <div class="swatches">
+            <span style="background: #f4b942"></span>
+            <span style="background: #ef5b39"></span>
+            <span style="background: #3fbf9a"></span>
+            <span style="background: #6fc2e0"></span>
+          </div>
+        </div>
+        <img
+          src="hero.jpg"
+          alt="Photo de production ATA suarl"
+          onerror="this.style.display='none'"
+        />
+      </div>
+
+      <div class="content">
+        <div class="kicker">Atelier · une journée · 12 places</div>
+        <h1>Atelier XR<br />&amp; IA générative</h1>
+
+        <p class="intro">
+          Une journée en atelier à Dakar pour prototyper une expérience immersive : de la
+          maquette au prototype jouable, avec les outils que nous utilisons en production.
+        </p>
+
+        <ul class="benefits">
+          <li style="--key: var(--sun)">
+            <span><strong>Comprendre</strong> Les usages réels de la XR, sans jargon.</span>
+          </li>
+          <li style="--key: var(--coral)">
+            <span><strong>Prototyper</strong> Construire une première scène temps réel.</span>
+          </li>
+          <li style="--key: var(--sky)">
+            <span><strong>Intégrer</strong> Ajouter l'IA générative à votre chaîne de production.</span>
+          </li>
+        </ul>
+
+        <div class="meta">
+          <span>[ Date ]</span>
+          <span>[ Lieu ] — Dakar</span>
+          <span>Inscription : contact@ata.example</span>
+        </div>
+
+        <a class="cta" href="mailto:contact@ata.example?subject=Inscription%20—%20Atelier%20XR%20%26%20IA"
+          >Réserver une place</a
+        >
+      </div>
+
+      <div class="foot">
+        <span>ATA suarl · animation 3D · XR · jeux vidéo · IA générative</span>
+        <span class="sign">À très vite, — L'équipe ATA suarl</span>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Suite de la démo VR — ATA suarl</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Newsreader:opsz,wght@6..72,400..600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        padding: 24px 12px;
+        background: #dfe4e6;
+        font-family: Newsreader, Georgia, serif;
+        color: #123039;
+      }
+
+      .mail {
+        max-width: 600px;
+        margin: 0 auto;
+        background: #eef1ee;
+      }
+
+      .head {
+        background: #0f3b4f;
+        padding: 26px 32px;
+      }
+
+      .head .name {
+        font-family: "Bricolage Grotesque", system-ui, sans-serif;
+        font-weight: 700;
+        font-size: 20px;
+        color: #f4b942;
+        letter-spacing: -0.01em;
+      }
+
+      .head .tagline {
+        margin-top: 6px;
+        font-size: 14px;
+        color: #e6eef0;
+      }
+
+      .rule {
+        height: 6px;
+        background: #f4b942;
+      }
+
+      .body {
+        padding: 30px 32px 34px;
+        font-size: 17px;
+        line-height: 1.6;
+      }
+
+      h1 {
+        font-family: "Bricolage Grotesque", system-ui, sans-serif;
+        font-weight: 800;
+        font-size: 24px;
+        line-height: 1.1;
+        margin: 0 0 18px;
+        color: #0f3b4f;
+      }
+
+      p {
+        margin: 0 0 16px;
+      }
+
+      ul {
+        margin: 0 0 18px;
+        padding-left: 20px;
+      }
+
+      li {
+        margin-bottom: 8px;
+      }
+
+      .cta {
+        display: inline-block;
+        font-family: "Bricolage Grotesque", system-ui, sans-serif;
+        font-weight: 600;
+        font-size: 15px;
+        background: #0f3b4f;
+        color: #ffffff;
+        padding: 13px 22px;
+        text-decoration: none;
+        margin-bottom: 20px;
+      }
+
+      .sign {
+        font-style: italic;
+        color: #123039;
+      }
+
+      .foot {
+        background: #0f3b4f;
+        color: #e6eef0;
+        padding: 18px 32px;
+        font-size: 13px;
+      }
+
+      .foot a {
+        color: #f4b942;
+      }
+
+      @media (max-width: 480px) {
+        .head,
+        .body,
+        .foot {
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="mail">
+      <div class="head">
+        <div class="name">ATA suarl</div>
+        <div class="tagline">Des mondes réels et imaginaires, fabriqués à Dakar.</div>
+      </div>
+      <div class="rule"></div>
+
+      <div class="body">
+        <h1>Suite de la démo VR</h1>
+
+        <p>Bonjour [Nom du client],</p>
+
+        <p>
+          Merci d'être venu hier à [Lieu] pour la démo VR de notre projet immersif. Voici
+          ce que nous retenons, et la suite.
+        </p>
+
+        <ul>
+          <li>La séquence d'ouverture tient bien à ce niveau de détail.</li>
+          <li>Le calibrage du casque reste à refaire sur place, avec votre équipe.</li>
+          <li>La captation montée sera prête dans 10 jours, nous vous l'envoyons alors.</li>
+        </ul>
+
+        <p>
+          Pour cadrer la phase suivante, je propose un appel de 30 minutes : mardi [Date]
+          ou jeudi [Date], à votre convenance.
+        </p>
+
+        <a class="cta" href="mailto:contact@ata.example?subject=Appel%20de%20cadrage%20—%2030%20minutes"
+          >Proposer un créneau</a
+        >
+
+        <p class="sign">À très vite,<br />L'équipe ATA suarl — Dakar</p>
+      </div>
+
+      <div class="foot">
+        ATA suarl · Dakar, Sénégal · <a href="mailto:contact@ata.example">contact@ata.example</a>
+      </div>
+    </div>
+  </body>
+</html>
