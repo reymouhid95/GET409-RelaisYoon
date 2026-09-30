@@ -38,6 +38,15 @@ ciel `#7CC4FF`, violet `#B7A4FF`.
   `prefers-reduced-motion` neutralise la bande et les transitions.
 - Responsive obligatoire à 360 px, sans scroll horizontal.
 
+## Do / Don't
+
+- **Do** : placeholders visibles `[Projet à venir]`, couleurs de format stables,
+  `:focus-visible`, validation quiz/form/360 px avant de dire « terminé ».
+- **Do** : forcer `loading="eager"` + `decode()` sur les images lazy avant capture.
+- **Don't** : inventer clients, chiffres, prix ou délais ; cacher les placeholders.
+- **Don't** : mots interdits (révolutionnaire, disruptif, leader, premium),
+  capitales espacées, « → » en bouton, dépendance npm ou second fichier.
+
 ## Validation avant de dire « terminé »
 
 1. Quiz de bout en bout, puis « Refaire le questionnaire ».
