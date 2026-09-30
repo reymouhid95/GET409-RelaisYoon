@@ -3,31 +3,32 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ATA suarl — Studio de technologie créative à Dakar</title>
+    <title>Séquence — Studio de production vidéo par IA à Dakar</title>
     <meta
       name="description"
-      content="ATA suarl, studio de technologie créative à Dakar : animation 3D, XR, jeux vidéo et IA générative."
+      content="Séquence, studio de production vidéo par IA à Dakar : film publicitaire, institutionnel, clip & social, ateliers."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500&display=swap"
       rel="stylesheet"
     />
     <style>
       :root {
-        --ocean: #0f3b4f;
-        --ocean-deep: #0a2b3a;
-        --ink: #123039;
-        --paper: #eef1ee;
-        --chalk: #e6eef0;
-        --sun: #f4b942;
-        --coral: #ef5b39;
-        --sea: #3fbf9a;
-        --sky: #6fc2e0;
-        --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
-        --text: "Newsreader", Georgia, "Times New Roman", serif;
-        --rule: rgba(18, 48, 57, 0.18);
+        --nuit: #0d0f14;
+        --nuit-soft: #161922;
+        --papier: #f5f2ea;
+        --chalk: #f5f2ea;
+        --encre: #14161c;
+        --lime: #cdff4f;
+        --corail: #ff6b4a;
+        --ciel: #7cc4ff;
+        --violet: #b7a4ff;
+        --gris: #8a8f98;
+        --display: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
+        --text: "Inter", system-ui, -apple-system, Arial, sans-serif;
+        --rule: rgba(20, 22, 28, 0.16);
       }
 
       * {
@@ -43,9 +44,9 @@
       body {
         font-family: var(--text);
         font-size: 17px;
-        line-height: 1.65;
-        color: var(--ink);
-        background: var(--paper);
+        line-height: 1.6;
+        color: var(--encre);
+        background: var(--papier);
         -webkit-font-smoothing: antialiased;
       }
 
@@ -54,9 +55,9 @@
       h3,
       .display {
         font-family: var(--display);
-        font-weight: 800;
+        font-weight: 700;
         letter-spacing: -0.02em;
-        line-height: 1.02;
+        line-height: 1.06;
       }
 
       a {
@@ -68,8 +69,13 @@
       }
 
       :focus-visible {
-        outline: 3px solid var(--sun);
+        outline: 3px solid var(--lime);
         outline-offset: 3px;
+      }
+
+      .hero :focus-visible,
+      .services :focus-visible {
+        outline-color: var(--lime);
       }
 
       .wrap {
@@ -82,34 +88,42 @@
         display: inline-block;
         font-family: var(--display);
         font-size: 1rem;
-        font-weight: 600;
-        padding: 15px 26px;
-        border: 1.5px solid var(--ocean);
-        background: var(--ocean);
-        color: #fff;
+        font-weight: 700;
+        padding: 15px 28px;
+        border: 1.5px solid var(--nuit);
+        background: var(--lime);
+        color: var(--nuit);
+        border-radius: 999px;
         cursor: pointer;
         text-decoration: none;
-        transition: transform 0.15s ease, background 0.15s ease;
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
       }
 
       .btn:hover {
-        background: var(--ocean-deep);
         transform: translateY(-2px);
+        box-shadow: 0 10px 26px rgba(205, 255, 79, 0.32);
       }
 
       .btn-ghost {
         background: transparent;
-        color: var(--ocean);
+        color: var(--chalk);
+        border-color: rgba(245, 242, 234, 0.45);
+        box-shadow: none;
       }
 
       .btn-ghost:hover {
-        background: rgba(15, 59, 79, 0.08);
+        border-color: var(--lime);
+        color: var(--lime);
+        box-shadow: none;
       }
 
       /* ---------- Hero ---------- */
       .hero {
         position: relative;
-        background: var(--ocean);
+        background:
+          radial-gradient(900px 480px at 88% -10%, rgba(205, 255, 79, 0.16) 0%, transparent 60%),
+          radial-gradient(700px 420px at -10% 110%, rgba(255, 107, 74, 0.15) 0%, transparent 60%),
+          var(--nuit);
         color: var(--chalk);
         padding: clamp(56px, 10vh, 110px) 0 0;
         overflow: hidden;
@@ -125,24 +139,40 @@
 
       .wordmark {
         font-family: var(--display);
-        font-weight: 600;
+        font-weight: 700;
         font-size: 1.1rem;
-        color: var(--sun);
+        color: var(--lime);
         grid-column: 1 / -1;
         margin-bottom: clamp(24px, 6vh, 64px);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .wordmark::before {
+        content: "";
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--corail);
+        animation: rec 1.6s steps(2, start) infinite;
+      }
+
+      @keyframes rec {
+        50% {
+          opacity: 0.25;
+        }
       }
 
       .hero h1 {
-        font-size: clamp(2.9rem, 8vw, 6.4rem);
-        line-height: 0.94;
+        font-size: clamp(2.7rem, 7.5vw, 6rem);
+        line-height: 0.98;
         color: #fff;
       }
 
       .hero h1 em {
-        font-family: var(--text);
-        font-style: italic;
-        font-weight: 400;
-        color: var(--sun);
+        font-style: normal;
+        color: var(--lime);
       }
 
       .hero-side {
@@ -152,7 +182,7 @@
       .hero-side p {
         max-width: 46ch;
         font-size: 1.1rem;
-        color: rgba(230, 238, 240, 0.86);
+        color: rgba(245, 242, 234, 0.82);
         margin-bottom: 26px;
       }
 
@@ -162,27 +192,7 @@
         gap: 14px;
       }
 
-      .hero .btn {
-        border-color: var(--sun);
-        background: var(--sun);
-        color: var(--ocean-deep);
-      }
-
-      .hero .btn:hover {
-        background: #ffc95c;
-      }
-
-      .hero .btn-ghost {
-        background: transparent;
-        color: var(--chalk);
-        border-color: rgba(230, 238, 240, 0.5);
-      }
-
-      .hero .btn-ghost:hover {
-        background: rgba(230, 238, 240, 0.1);
-      }
-
-      /* Signature : bande de pirogues peintes */
+      /* Signature : bande pellicule */
       .band {
         display: block;
         width: 100%;
@@ -213,12 +223,12 @@
       .section-intro {
         max-width: 58ch;
         font-size: 1.1rem;
-        color: rgba(18, 48, 57, 0.75);
+        color: rgba(20, 22, 28, 0.72);
       }
 
       /* ---------- Quiz ---------- */
       .quiz-section {
-        background: var(--paper);
+        background: var(--papier);
       }
 
       .quiz-layout {
@@ -230,9 +240,10 @@
 
       .quiz-panel {
         background: #fff;
-        border: 1.5px solid var(--ink);
+        border: 1.5px solid var(--encre);
+        border-radius: 24px;
         padding: clamp(24px, 3vw, 38px);
-        box-shadow: 10px 10px 0 rgba(18, 48, 57, 0.12);
+        box-shadow: 10px 10px 0 rgba(20, 22, 28, 0.12);
       }
 
       .quiz-steps {
@@ -244,22 +255,23 @@
       .quiz-steps span {
         flex: 1;
         height: 7px;
-        background: rgba(18, 48, 57, 0.14);
+        border-radius: 999px;
+        background: var(--rule);
       }
 
       .quiz-steps span.done {
-        background: var(--sea);
+        background: var(--nuit);
       }
 
       .quiz-steps span.now {
-        background: var(--coral);
+        background: var(--corail);
       }
 
       .quiz-meta {
         font-family: var(--display);
         font-size: 0.9rem;
-        font-weight: 600;
-        color: rgba(18, 48, 57, 0.6);
+        font-weight: 700;
+        color: var(--corail);
         margin-bottom: 10px;
       }
 
@@ -283,9 +295,10 @@
         font-size: 1.05rem;
         font-weight: 500;
         padding: 16px 18px;
-        background: #fff;
+        background: var(--papier);
         border: 1.5px solid var(--rule);
-        color: var(--ink);
+        border-radius: 14px;
+        color: var(--encre);
         cursor: pointer;
         transition: border-color 0.15s ease, transform 0.15s ease;
       }
@@ -295,12 +308,13 @@
         width: 14px;
         height: 14px;
         flex: none;
-        background: var(--opt, var(--sea));
+        border-radius: 4px;
+        background: var(--opt, var(--lime));
         transition: transform 0.15s ease;
       }
 
       .quiz-option:hover {
-        border-color: var(--ink);
+        border-color: var(--encre);
         transform: translateX(4px);
       }
 
@@ -314,7 +328,7 @@
         border: none;
         font-size: 0.95rem;
         font-weight: 600;
-        color: rgba(18, 48, 57, 0.65);
+        color: rgba(20, 22, 28, 0.65);
         cursor: pointer;
         text-decoration: underline;
         text-underline-offset: 3px;
@@ -322,9 +336,9 @@
 
       .quiz-result .offer-label {
         font-family: var(--display);
-        font-weight: 600;
+        font-weight: 700;
         font-size: 0.95rem;
-        color: var(--coral);
+        color: var(--corail);
         margin-bottom: 8px;
       }
 
@@ -334,13 +348,13 @@
       }
 
       .quiz-result p {
-        color: rgba(18, 48, 57, 0.8);
+        color: rgba(20, 22, 28, 0.78);
         margin-bottom: 24px;
       }
 
       /* ---------- Services ---------- */
       .services {
-        background: var(--ocean);
+        background: var(--nuit);
         color: var(--chalk);
       }
 
@@ -349,7 +363,7 @@
       }
 
       .services .section-intro {
-        color: rgba(230, 238, 240, 0.78);
+        color: rgba(245, 242, 234, 0.76);
       }
 
       .service-list {
@@ -360,7 +374,7 @@
       }
 
       .service {
-        border-top: 3px solid var(--key, var(--sun));
+        border-top: 3px solid var(--key, var(--lime));
         padding-top: 20px;
       }
 
@@ -371,15 +385,15 @@
       }
 
       .service p {
-        color: rgba(230, 238, 240, 0.8);
+        color: rgba(245, 242, 234, 0.78);
         max-width: 40ch;
       }
 
       .service .key {
         font-family: var(--display);
         font-size: 0.85rem;
-        font-weight: 600;
-        color: var(--key, var(--sun));
+        font-weight: 700;
+        color: var(--key, var(--lime));
         margin-bottom: 14px;
       }
 
@@ -398,8 +412,9 @@
         flex-direction: column;
         justify-content: flex-end;
         padding: 22px;
-        background: var(--key, var(--sea));
-        color: var(--ocean-deep);
+        background: var(--key, var(--lime));
+        color: var(--nuit);
+        border-radius: 18px;
         position: relative;
         overflow: hidden;
       }
@@ -407,7 +422,8 @@
       .project .frame {
         position: absolute;
         inset: 14px;
-        border: 1.5px dashed rgba(10, 43, 58, 0.45);
+        border: 1.5px dashed rgba(13, 15, 20, 0.45);
+        border-radius: 10px;
         pointer-events: none;
       }
 
@@ -428,7 +444,7 @@
 
       /* ---------- Contact ---------- */
       .contact {
-        background: var(--paper);
+        background: var(--papier);
       }
 
       .contact-layout {
@@ -440,24 +456,27 @@
 
       .contact-note {
         font-size: 1.1rem;
-        color: rgba(18, 48, 57, 0.78);
+        color: rgba(20, 22, 28, 0.76);
         max-width: 44ch;
         margin-top: 18px;
       }
 
       .contact-note a {
         font-weight: 600;
-        color: var(--ocean);
+        color: var(--encre);
+        text-decoration-color: var(--corail);
         text-underline-offset: 3px;
       }
 
       .form-message {
         display: none;
-        background: var(--sea);
-        color: var(--ocean-deep);
+        background: var(--lime);
+        border: 1.5px solid var(--nuit);
+        color: var(--nuit);
         font-family: var(--display);
-        font-weight: 600;
+        font-weight: 700;
         padding: 14px 18px;
+        border-radius: 14px;
         margin-bottom: 24px;
       }
 
@@ -473,7 +492,7 @@
         display: block;
         font-family: var(--display);
         font-size: 0.9rem;
-        font-weight: 600;
+        font-weight: 700;
         margin-bottom: 8px;
       }
 
@@ -482,11 +501,11 @@
         width: 100%;
         font-family: var(--text);
         font-size: 1.05rem;
-        color: var(--ink);
-        background: transparent;
-        border: none;
-        border-bottom: 1.5px solid var(--rule);
-        padding: 10px 2px;
+        color: var(--encre);
+        background: #fff;
+        border: 1.5px solid var(--rule);
+        border-radius: 12px;
+        padding: 12px 14px;
       }
 
       .field textarea {
@@ -497,19 +516,20 @@
       .field input:focus,
       .field textarea:focus {
         outline: none;
-        border-bottom-color: var(--coral);
+        border-color: var(--encre);
+        box-shadow: 0 0 0 3px rgba(205, 255, 79, 0.6);
       }
 
       .field .error {
         display: none;
         font-size: 0.9rem;
-        color: #b8341a;
+        color: #c2410c;
         margin-top: 7px;
       }
 
       .field.invalid input,
       .field.invalid textarea {
-        border-bottom-color: #b8341a;
+        border-color: var(--corail);
       }
 
       .field.invalid .error {
@@ -523,8 +543,8 @@
 
       /* ---------- Footer ---------- */
       footer {
-        background: var(--ocean-deep);
-        color: rgba(230, 238, 240, 0.75);
+        background: var(--nuit-soft);
+        color: rgba(245, 242, 234, 0.72);
         padding: 44px 0;
       }
 
@@ -539,7 +559,7 @@
       footer strong {
         font-family: var(--display);
         font-weight: 700;
-        color: var(--sun);
+        color: var(--lime);
       }
 
       /* ---------- Responsive ---------- */
@@ -603,7 +623,7 @@
         }
 
         .quiz-panel {
-          box-shadow: 6px 6px 0 rgba(18, 48, 57, 0.12);
+          box-shadow: 6px 6px 0 rgba(20, 22, 28, 0.12);
         }
       }
 
@@ -612,7 +632,8 @@
           scroll-behavior: auto;
         }
 
-        .band {
+        .band,
+        .wordmark::before {
           animation: none;
         }
 
@@ -632,16 +653,16 @@
   <body>
     <header class="hero">
       <div class="wrap">
-        <div class="wordmark">ATA suarl</div>
+        <div class="wordmark">Séquence</div>
         <h1>
-          Des mondes réels<br />
-          et <em>imaginaires</em>,<br />
-          fabriqués à Dakar
+          La vidéo générée,<br />
+          <em>dirigée comme</em><br />
+          un tournage
         </h1>
         <div class="hero-side">
           <p>
-            Studio de technologie créative : animation 3D, expériences XR, jeux vidéo et IA
-            générative pour les marques et les institutions culturelles.
+            Studio de production vidéo par IA à Dakar : film publicitaire, institutionnel,
+            clip &amp; social et ateliers pour les marques et les institutions culturelles.
           </p>
           <div class="hero-actions">
             <a class="btn" href="#quiz">Trouver le format de mon projet</a>
@@ -658,14 +679,14 @@
         focusable="false"
       >
         <defs>
-          <pattern id="pirogue" width="120" height="56" patternUnits="userSpaceOnUse">
-            <path d="M0 56 L15 0 L30 56 Z" fill="#f4b942" />
-            <path d="M30 56 L45 0 L60 56 Z" fill="#ef5b39" />
-            <path d="M60 56 L75 0 L90 56 Z" fill="#3fbf9a" />
-            <path d="M90 56 L105 0 L120 56 Z" fill="#6fc2e0" />
+          <pattern id="frame" width="120" height="56" patternUnits="userSpaceOnUse">
+            <rect x="6" y="6" width="48" height="44" rx="6" fill="#cdff4f" />
+            <rect x="66" y="6" width="48" height="44" rx="6" fill="#ff6b4a" />
+            <rect x="6" y="6" width="48" height="44" rx="6" fill="none" stroke="#0d0f14" stroke-width="3" />
+            <rect x="66" y="6" width="48" height="44" rx="6" fill="none" stroke="#0d0f14" stroke-width="3" />
           </pattern>
         </defs>
-        <rect width="1200" height="56" fill="url(#pirogue)" />
+        <rect width="1200" height="56" fill="url(#frame)" />
       </svg>
     </header>
 
@@ -674,7 +695,7 @@
         <div>
           <h2 class="section-title">Trois questions, un format qui correspond</h2>
           <p class="section-intro">
-            Le projet finder traduit votre contexte en l'un des quatre métiers du studio.
+            Le format finder traduit votre contexte en l'un des quatre formats du studio.
             Aucune donnée n'est envoyée : tout se passe dans cette page.
           </p>
         </div>
@@ -690,32 +711,32 @@
 
     <section class="services" id="services">
       <div class="wrap">
-        <h2 class="section-title">Quatre métiers, une seule équipe</h2>
+        <h2 class="section-title">Quatre formats, une seule direction</h2>
         <p class="section-intro">
-          De l'image à l'interaction : le studio conçoit, prototype et produit dans un même
-          atelier, à Dakar.
+          Cadre, lumière, étalonnage puis génération : le studio écrit, tourne et monte
+          dans le même atelier, à Dakar.
         </p>
 
         <div class="service-list">
-          <article class="service" style="--key: var(--sun)">
-            <div class="key">Image en mouvement</div>
-            <h3>Animation 3D</h3>
-            <p>Film de marque, motion design et habillage animé, du storyboard au rendu final.</p>
+          <article class="service" style="--key: var(--lime)">
+            <div class="key">Campagne</div>
+            <h3>Film publicitaire</h3>
+            <p>Spots courts pour campagnes et lancements, du concept au déclinage réseaux.</p>
           </article>
-          <article class="service" style="--key: var(--coral)">
-            <div class="key">Espaces augmentés</div>
-            <h3>Expériences XR</h3>
-            <p>Réalité augmentée et virtuelle pour la culture, l'éducation et l'industrie.</p>
+          <article class="service" style="--key: var(--corail)">
+            <div class="key">Récit</div>
+            <h3>Institutionnel</h3>
+            <p>Films de marque et récits d'organisations, pensés pour la durée et la clarté.</p>
           </article>
-          <article class="service" style="--key: var(--sea)">
-            <div class="key">Jouable</div>
-            <h3>Jeux vidéo</h3>
-            <p>Prototype jouable, jeu promotionnel et expérience interactive sur mesure.</p>
+          <article class="service" style="--key: var(--ciel)">
+            <div class="key">Vertical</div>
+            <h3>Clip &amp; social</h3>
+            <p>Séquences verticales et clips, calibrés pour les plateformes et leurs formats.</p>
           </article>
-          <article class="service" style="--key: var(--sky)">
-            <div class="key">Génératif</div>
-            <h3>IA générative</h3>
-            <p>Outils et prototypes qui intègrent l'IA générative dans vos processus créatifs.</p>
+          <article class="service" style="--key: var(--violet)">
+            <div class="key">Transmission</div>
+            <h3>Ateliers</h3>
+            <p>Sessions courtes pour internaliser la chaîne : cadrage, prompt, étalonnage.</p>
           </article>
         </div>
       </div>
@@ -723,41 +744,41 @@
 
     <section class="portfolio" id="projets">
       <div class="wrap">
-        <h2 class="section-title">Emplacements de projets</h2>
+        <h2 class="section-title">Emplacements de séquences</h2>
         <p class="section-intro">
           Six emplacements ouverts, à remplir au fil des productions. Rien n'est publié avant
           l'accord de l'équipe.
         </p>
 
         <div class="portfolio-grid">
-          <article class="project" style="--key: var(--sun)">
+          <article class="project" style="--key: var(--lime)">
             <div class="frame"></div>
-            <div class="cat">Animation 3D</div>
+            <div class="cat">Film publicitaire</div>
             <div class="placeholder">[Projet à venir]</div>
           </article>
-          <article class="project" style="--key: var(--coral)">
+          <article class="project" style="--key: var(--corail)">
             <div class="frame"></div>
-            <div class="cat">XR</div>
+            <div class="cat">Institutionnel</div>
             <div class="placeholder">[Projet à venir]</div>
           </article>
-          <article class="project" style="--key: var(--sea)">
+          <article class="project" style="--key: var(--ciel)">
             <div class="frame"></div>
-            <div class="cat">Jeu vidéo</div>
+            <div class="cat">Clip &amp; social</div>
             <div class="placeholder">[Projet à venir]</div>
           </article>
-          <article class="project" style="--key: var(--sky)">
+          <article class="project" style="--key: var(--violet)">
             <div class="frame"></div>
-            <div class="cat">IA générative</div>
+            <div class="cat">Atelier</div>
             <div class="placeholder">[Projet à venir]</div>
           </article>
-          <article class="project" style="--key: var(--coral)">
+          <article class="project" style="--key: var(--corail)">
             <div class="frame"></div>
-            <div class="cat">Animation 3D</div>
+            <div class="cat">Film publicitaire</div>
             <div class="placeholder">[Projet à venir]</div>
           </article>
-          <article class="project" style="--key: var(--sun)">
+          <article class="project" style="--key: var(--ciel)">
             <div class="frame"></div>
-            <div class="cat">XR</div>
+            <div class="cat">Clip &amp; social</div>
             <div class="placeholder">[Projet à venir]</div>
           </article>
         </div>
@@ -770,7 +791,7 @@
           <h2 class="section-title">Décrivez votre projet</h2>
           <p class="contact-note">
             Dites-nous le contexte, le format envisagé et l'échéance. Écrivez aussi à
-            <a href="mailto:contact@ata.example">contact@ata.example</a>.
+            <a href="mailto:hello@sequence.studio">hello@sequence.studio</a>.
           </p>
         </div>
 
@@ -810,8 +831,8 @@
 
     <footer>
       <div class="wrap">
-        <span><strong>ATA suarl</strong> — Dakar, Sénégal</span>
-        <span>contact@ata.example</span>
+        <span><strong>Séquence</strong> — Dakar, Sénégal</span>
+        <span>hello@sequence.studio</span>
       </div>
     </footer>
 
@@ -825,7 +846,7 @@
         {
           label: "Question 2 sur 3",
           question: "Quel format vous intéresse ?",
-          options: ["Animation", "XR", "Jeu", "IA"],
+          options: ["Publicité", "Institutionnel", "Clip", "Atelier"],
         },
         {
           label: "Question 3 sur 3",
@@ -835,19 +856,20 @@
       ];
 
       var formatColors = {
-        Animation: "#f4b942",
-        XR: "#ef5b39",
-        Jeu: "#3fbf9a",
-        IA: "#6fc2e0",
+        Publicité: "#cdff4f",
+        Institutionnel: "#ff6b4a",
+        Clip: "#7cc4ff",
+        Atelier: "#b7a4ff",
       };
 
       var offers = {
-        Animation:
-          "Animation 3D : film de marque, motion design ou habillage animé, du storyboard au rendu final.",
-        XR:
-          "Expérience XR : réalité augmentée ou virtuelle pour vos espaces, expositions et formations.",
-        Jeu: "Jeu vidéo : prototype jouable ou série interactive pour faire découvrir votre univers.",
-        IA: "IA générative : assistant visuel ou prototype intégrant l'IA dans vos processus créatifs.",
+        Publicité:
+          "Film publicitaire : spot court pour votre campagne, du concept au déclinage réseaux.",
+        Institutionnel:
+          "Institutionnel : film de marque ou récit d'organisation, pensé pour la durée et la clarté.",
+        Clip: "Clip & social : séquences verticales calibrées pour les plateformes et leurs formats.",
+        Atelier:
+          "Atelier : session courte pour internaliser la chaîne complète — cadrage, prompt, étalonnage.",
       };
 
       var answers = [];
@@ -891,7 +913,7 @@
           '<div class="quiz-options">';
 
         step.options.forEach(function (opt, i) {
-          var color = formatColors[opt] || "#3fbf9a";
+          var color = formatColors[opt] || "#cdff4f";
           html +=
             '<button class="quiz-option" type="button" style="--opt:' + color +
             '" data-index="' + i + '">' + opt + "</button>";

@@ -1,7 +1,7 @@
-# ATA suarl — landing page (03-landing)
+# Séquence — landing page (03-landing)
 
 Projet d'exercice : deux versions de la même page, à comparer côte à côte.
-- `../v1-no-skill/index.html` — version de référence, volontairement générique.
+- `../v1-no-skill/index.html` — version de référence.
 - `index.html` (ici) — même contenu, direction artistique appliquée.
 
 ## Aperçu
@@ -16,16 +16,21 @@ Pas de build, pas de serveur, pas de dépendance npm.
   Les emplacements de projets restent écrits `[Projet à venir]`.
 - Les deux versions gardent les mêmes sections et la même logique de quiz
   (secteur → format → budget → recommandation), sinon la comparaison ne vaut plus.
+- Images générées : toujours légendées comme générées, jamais présentées comme
+  des tournages réels.
 
 ## Règles de design (V2 uniquement)
 
-Tokens dans `:root` : ocean `#0F3B4F`, paper `#EEF1EE`, encre `#123039`,
-et les 4 couleurs de service : sun `#F4B942`, coral `#EF5B39`, sea `#3FBF9A`, sky `#6FC2E0`.
+Tokens dans `:root` : nuit `#0D0F14`, papier `#F5F2EA`, encre `#14161C`,
+accents lime `#CDFF4F` et corail `#FF6B4A`, neutre gris `#8A8F98`,
+et les 4 couleurs de format : lime `#CDFF4F`, corail `#FF6B4A`,
+ciel `#7CC4FF`, violet `#B7A4FF`.
 
-- Polices : Bricolage Grotesque (titres) + Newsreader (texte), chargées par
+- Polices : Space Grotesk (titres) + Inter (texte), chargées par
   Google Fonts, avec repli système si le réseau est absent.
-- Une couleur = un métier : la même teinte code le même métier dans le quiz,
-  les services et le portfolio. Ne pas réutiliser une couleur à tort.
+- Une couleur = un format : la même teinte code le même format dans le quiz,
+  les services et le portfolio. Lime = action/CTA, corail = accent éditorial
+  (un seul par section). Ne pas réutiliser une couleur à tort.
 - Jamais de : capitales espacées en étiquette, points médians dans les méta,
   flèche « → » en fin de bouton, cartes arrondies identiques, numéros 01/02/03
   hors séquence réelle.

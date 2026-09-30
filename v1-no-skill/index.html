@@ -3,10 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ATA suarl — Studio de technologie créative à Dakar</title>
+    <title>Séquence — Studio de production vidéo par IA à Dakar</title>
     <meta
       name="description"
-      content="ATA suarl, studio de technologie créative à Dakar : animation 3D, XR, jeux vidéo et IA générative."
+      content="Séquence, studio de production vidéo par IA à Dakar : film publicitaire, institutionnel, clip & social, ateliers."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500&display=swap"
+      rel="stylesheet"
     />
     <style>
       * {
@@ -16,15 +22,16 @@
       }
 
       :root {
-        --primary: #2563eb;
-        --primary-dark: #1d4ed8;
-        --text: #1f2937;
-        --muted: #6b7280;
-        --bg: #ffffff;
-        --surface: #f9fafb;
-        --border: #e5e7eb;
-        --radius: 16px;
-        --shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+        --nuit: #0d0f14;
+        --papier: #f5f2ea;
+        --surface: #ffffff;
+        --encre: #14161c;
+        --lime: #cdff4f;
+        --corail: #ff6b4a;
+        --gris: #8a8f98;
+        --line: rgba(20, 22, 28, 0.12);
+        --radius: 18px;
+        --shadow: 0 14px 34px rgba(13, 15, 20, 0.09);
       }
 
       html {
@@ -32,10 +39,20 @@
       }
 
       body {
-        font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
-        color: var(--text);
-        background: var(--bg);
+        font-family: "Inter", system-ui, -apple-system, Roboto, Arial, sans-serif;
+        color: var(--encre);
+        background: var(--papier);
         line-height: 1.6;
+      }
+
+      h1,
+      h2,
+      h3,
+      .btn,
+      .eyebrow,
+      .tag,
+      .logo {
+        font-family: "Space Grotesk", system-ui, sans-serif;
       }
 
       .container {
@@ -46,45 +63,47 @@
 
       .btn {
         display: inline-block;
-        padding: 12px 24px;
-        border: none;
-        border-radius: 8px;
-        background: var(--primary);
-        color: #fff;
+        padding: 13px 26px;
+        border: 1px solid transparent;
+        border-radius: 999px;
+        background: var(--lime);
+        color: var(--nuit);
         font-size: 16px;
-        font-weight: 600;
+        font-weight: 700;
         cursor: pointer;
         text-decoration: none;
-        transition: background 0.2s ease;
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
       }
 
       .btn:hover {
-        background: var(--primary-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 24px rgba(205, 255, 79, 0.35);
       }
 
       .btn-secondary {
-        background: #fff;
-        color: var(--primary);
-        border: 1px solid var(--primary);
+        background: transparent;
+        color: var(--papier);
+        border-color: rgba(245, 242, 234, 0.4);
       }
 
       .btn-secondary:hover {
-        background: #eff6ff;
+        border-color: var(--lime);
+        color: var(--lime);
+        box-shadow: none;
       }
 
       .eyebrow {
-        display: block;
-        text-align: center;
-        font-size: 13px;
+        display: inline-block;
+        font-size: 12px;
         font-weight: 700;
-        letter-spacing: 2px;
+        letter-spacing: 0.18em;
         text-transform: uppercase;
-        color: var(--primary);
-        margin-bottom: 12px;
+        color: var(--corail);
+        margin-bottom: 14px;
       }
 
       .section {
-        padding: 72px 0;
+        padding: 76px 0;
       }
 
       .section-alt {
@@ -92,40 +111,46 @@
       }
 
       h2 {
-        font-size: 32px;
+        font-size: 34px;
         text-align: center;
+        letter-spacing: -0.5px;
         margin-bottom: 12px;
       }
 
       .section-sub {
         text-align: center;
-        color: var(--muted);
+        color: var(--gris);
         max-width: 640px;
-        margin: 0 auto 40px;
+        margin: 0 auto 42px;
       }
 
       /* Hero */
       .hero {
-        background: linear-gradient(135deg, #eff6ff 0%, #ffffff 60%);
+        background:
+          radial-gradient(800px 420px at 88% -10%, rgba(205, 255, 79, 0.16) 0%, transparent 60%),
+          radial-gradient(600px 380px at -10% 110%, rgba(255, 107, 74, 0.16) 0%, transparent 60%),
+          var(--nuit);
+        color: var(--papier);
         text-align: center;
-        padding: 90px 0 80px;
+        padding: 96px 0 86px;
       }
 
       .hero h1 {
-        font-size: 46px;
-        line-height: 1.2;
-        margin-bottom: 18px;
+        font-size: clamp(34px, 6vw, 56px);
+        line-height: 1.08;
+        letter-spacing: -1.5px;
+        margin-bottom: 20px;
       }
 
       .hero h1 span {
-        color: var(--primary);
+        color: var(--lime);
       }
 
       .hero p {
         font-size: 19px;
-        color: var(--muted);
-        max-width: 620px;
-        margin: 0 auto 30px;
+        color: rgba(245, 242, 234, 0.78);
+        max-width: 640px;
+        margin: 0 auto 32px;
       }
 
       .hero-actions {
@@ -139,11 +164,11 @@
       .quiz {
         max-width: 720px;
         margin: 0 auto;
-        background: #fff;
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 24px;
         box-shadow: var(--shadow);
-        padding: 32px;
+        padding: 34px;
       }
 
       .quiz-progress {
@@ -156,17 +181,18 @@
         flex: 1;
         height: 6px;
         border-radius: 999px;
-        background: var(--border);
+        background: var(--line);
       }
 
       .quiz-progress span.active {
-        background: var(--primary);
+        background: var(--nuit);
       }
 
       .quiz-step-label {
+        font-family: "Space Grotesk", system-ui, sans-serif;
         font-size: 13px;
         font-weight: 700;
-        color: var(--primary);
+        color: var(--corail);
         text-transform: uppercase;
         letter-spacing: 1px;
         margin-bottom: 8px;
@@ -185,18 +211,20 @@
       .quiz-option {
         text-align: left;
         padding: 16px;
-        border: 1px solid var(--border);
-        border-radius: 10px;
-        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: var(--papier);
         font-size: 16px;
-        color: var(--text);
+        font-family: inherit;
+        color: var(--encre);
         cursor: pointer;
         transition: 0.15s ease;
       }
 
       .quiz-option:hover {
-        border-color: var(--primary);
-        background: #eff6ff;
+        border-color: var(--nuit);
+        background: var(--nuit);
+        color: var(--papier);
       }
 
       .quiz-result {
@@ -204,18 +232,18 @@
       }
 
       .quiz-result h3 {
-        color: var(--primary);
+        color: var(--encre);
       }
 
       .quiz-result p {
-        color: var(--muted);
+        color: var(--gris);
         margin-bottom: 20px;
       }
 
       .quiz-back {
         background: none;
         border: none;
-        color: var(--muted);
+        color: var(--gris);
         font-size: 14px;
         cursor: pointer;
         margin-top: 18px;
@@ -226,15 +254,21 @@
       .grid-4 {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        gap: 24px;
+        gap: 22px;
       }
 
       .card {
-        background: #fff;
-        border: 1px solid var(--border);
+        background: var(--surface);
+        border: 1px solid var(--line);
         border-radius: var(--radius);
         box-shadow: var(--shadow);
         padding: 26px;
+        transition: transform 0.18s ease, border-color 0.18s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-4px);
+        border-color: var(--nuit);
       }
 
       .card .icon {
@@ -250,46 +284,54 @@
 
       .card p {
         font-size: 15px;
-        color: var(--muted);
+        color: var(--gris);
         margin-bottom: 14px;
       }
 
       .card a {
-        color: var(--primary);
+        color: var(--encre);
         font-weight: 600;
         text-decoration: none;
         font-size: 15px;
+        border-bottom: 2px solid var(--lime);
+        padding-bottom: 1px;
       }
 
       .card a:hover {
-        text-decoration: underline;
+        border-color: var(--corail);
       }
 
       .grid-6 {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 24px;
+        gap: 22px;
       }
 
       .project-thumb {
         height: 150px;
-        border-radius: 10px;
-        background: linear-gradient(135deg, #e5e7eb, #f3f4f6);
+        border-radius: 12px;
+        background: repeating-linear-gradient(
+          45deg,
+          var(--papier),
+          var(--papier) 12px,
+          #efece2 12px,
+          #efece2 24px
+        );
         display: flex;
         align-items: center;
         justify-content: center;
-        color: var(--muted);
+        color: var(--gris);
         font-size: 15px;
         margin-bottom: 16px;
-        border: 1px dashed #cbd5e1;
+        border: 1px dashed var(--line);
       }
 
       .tag {
         display: inline-block;
         font-size: 12px;
         font-weight: 700;
-        color: var(--primary);
-        background: #eff6ff;
+        color: var(--nuit);
+        background: var(--lime);
         border-radius: 999px;
         padding: 4px 12px;
         margin-bottom: 10px;
@@ -299,11 +341,11 @@
       .form {
         max-width: 640px;
         margin: 0 auto;
-        background: #fff;
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 24px;
         box-shadow: var(--shadow);
-        padding: 32px;
+        padding: 34px;
       }
 
       .field {
@@ -320,19 +362,20 @@
       input,
       textarea {
         width: 100%;
-        padding: 12px 14px;
-        border: 1px solid var(--border);
-        border-radius: 8px;
+        padding: 13px 15px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
         font-size: 15px;
         font-family: inherit;
-        color: var(--text);
+        color: var(--encre);
+        background: var(--papier);
       }
 
       input:focus,
       textarea:focus {
-        outline: 2px solid var(--primary);
+        outline: 2px solid var(--nuit);
         outline-offset: 1px;
-        border-color: var(--primary);
+        border-color: var(--nuit);
       }
 
       textarea {
@@ -342,14 +385,14 @@
 
       .error {
         display: none;
-        color: #dc2626;
+        color: var(--corail);
         font-size: 13px;
         margin-top: 5px;
       }
 
       .field.invalid input,
       .field.invalid textarea {
-        border-color: #dc2626;
+        border-color: var(--corail);
       }
 
       .field.invalid .error {
@@ -358,38 +401,36 @@
 
       .form-message {
         display: none;
-        background: #ecfdf5;
-        border: 1px solid #a7f3d0;
-        color: #047857;
-        border-radius: 8px;
+        background: var(--lime);
+        border: 1px solid var(--nuit);
+        color: var(--nuit);
+        border-radius: 12px;
         padding: 14px;
         margin-bottom: 18px;
         font-size: 15px;
+        font-weight: 500;
       }
 
       footer {
-        background: #111827;
-        color: #9ca3af;
+        background: var(--nuit);
+        color: rgba(245, 242, 234, 0.7);
         text-align: center;
-        padding: 30px 20px;
+        padding: 34px 20px;
         font-size: 14px;
       }
 
       footer strong {
-        color: #fff;
+        color: var(--lime);
+        font-family: "Space Grotesk", system-ui, sans-serif;
       }
 
       @media (max-width: 640px) {
-        .hero h1 {
-          font-size: 32px;
-        }
-
         h2 {
           font-size: 26px;
         }
 
         .section {
-          padding: 52px 0;
+          padding: 54px 0;
         }
 
         .quiz,
@@ -402,14 +443,14 @@
   <body>
     <section class="hero">
       <div class="container">
-        <span class="eyebrow">Studio créatif · Dakar · Sénégal</span>
-        <h1>Des mondes réels et <span>imaginaires</span>, fabriqués à Dakar</h1>
+        <span class="eyebrow">Studio vidéo IA · Dakar · Sénégal</span>
+        <h1>La vidéo générée, <span>dirigée comme un tournage</span></h1>
         <p>
-          ATA suarl accompagne les marques et les institutions culturelles en animation 3D,
-          expériences XR, jeux vidéo et IA générative.
+          Séquence accompagne les marques et les institutions culturelles : film publicitaire,
+          institutionnel, clip &amp; social et ateliers, du storyboard à l'étalonnage.
         </p>
         <div class="hero-actions">
-          <a class="btn" href="#quiz">Trouver mon projet →</a>
+          <a class="btn" href="#quiz">Trouver mon format →</a>
           <a class="btn btn-secondary" href="#contact">Nous contacter →</a>
         </div>
       </div>
@@ -417,7 +458,7 @@
 
     <section class="section section-alt" id="quiz">
       <div class="container">
-        <span class="eyebrow">Projet finder</span>
+        <span class="eyebrow">Format finder</span>
         <h2>Trouvez le bon format pour votre projet</h2>
         <p class="section-sub">
           Trois questions rapides, une recommandation adaptée à votre besoin.
@@ -434,35 +475,35 @@
 
     <section class="section" id="services">
       <div class="container">
-        <span class="eyebrow">Nos services</span>
-        <h2>Quatre expertises, une même exigence</h2>
+        <span class="eyebrow">Nos formats</span>
+        <h2>Quatre formats, une même direction</h2>
         <p class="section-sub">
-          De l'image à l'interaction, nous concevons des expériences numériques sur mesure.
+          Chaque vidéo est cadrée, éclairée et étalonnée avant d'être générée.
         </p>
 
         <div class="grid-4">
           <article class="card">
             <span class="icon">🎬</span>
-            <h3>Animation 3D</h3>
-            <p>Films de marque, motion design et habillage animé, du storyboard au rendu final.</p>
+            <h3>Film publicitaire</h3>
+            <p>Spots courts pour campagnes et lancements, du concept au déclinage réseaux.</p>
             <a href="#contact">En savoir plus →</a>
           </article>
           <article class="card">
-            <span class="icon">🥽</span>
-            <h3>Expériences XR</h3>
-            <p>Réalité augmentée et virtuelle pour la culture, l'éducation et l'industrie.</p>
+            <span class="icon">🏛️</span>
+            <h3>Institutionnel</h3>
+            <p>Films de marque et récits d'organisations, pensés pour la durée et la clarté.</p>
             <a href="#contact">En savoir plus →</a>
           </article>
           <article class="card">
-            <span class="icon">🎮</span>
-            <h3>Jeux vidéo</h3>
-            <p>Prototypes jouables, jeux promotionnels et expériences interactives.</p>
+            <span class="icon">📱</span>
+            <h3>Clip &amp; social</h3>
+            <p>Séquences verticales et clips, calibrés pour les plateformes et leurs formats.</p>
             <a href="#contact">En savoir plus →</a>
           </article>
           <article class="card">
-            <span class="icon">✨</span>
-            <h3>IA générative</h3>
-            <p>Outils et prototypes qui intègrent l'IA générative dans vos processus créatifs.</p>
+            <span class="icon">🎯</span>
+            <h3>Ateliers</h3>
+            <p>Sessions courtes pour internaliser la chaîne : cadrage, prompt, étalonnage.</p>
             <a href="#contact">En savoir plus →</a>
           </article>
         </div>
@@ -472,7 +513,7 @@
     <section class="section section-alt" id="projets">
       <div class="container">
         <span class="eyebrow">Réalisations</span>
-        <h2>Nos projets</h2>
+        <h2>Nos séquences</h2>
         <p class="section-sub">
           Les emplacements ci-dessous seront remplis au fil des productions de l'équipe.
         </p>
@@ -480,37 +521,37 @@
         <div class="grid-6">
           <article class="card">
             <div class="project-thumb">[Projet à venir]</div>
-            <span class="tag">Animation 3D</span>
+            <span class="tag">Film publicitaire</span>
             <h3>Emplacement 1</h3>
             <p>Prochaine production à venir.</p>
           </article>
           <article class="card">
             <div class="project-thumb">[Projet à venir]</div>
-            <span class="tag">XR</span>
+            <span class="tag">Institutionnel</span>
             <h3>Emplacement 2</h3>
             <p>Prochaine production à venir.</p>
           </article>
           <article class="card">
             <div class="project-thumb">[Projet à venir]</div>
-            <span class="tag">Jeu vidéo</span>
+            <span class="tag">Clip &amp; social</span>
             <h3>Emplacement 3</h3>
             <p>Prochaine production à venir.</p>
           </article>
           <article class="card">
             <div class="project-thumb">[Projet à venir]</div>
-            <span class="tag">IA générative</span>
+            <span class="tag">Atelier</span>
             <h3>Emplacement 4</h3>
             <p>Prochaine production à venir.</p>
           </article>
           <article class="card">
             <div class="project-thumb">[Projet à venir]</div>
-            <span class="tag">Animation 3D</span>
+            <span class="tag">Film publicitaire</span>
             <h3>Emplacement 5</h3>
             <p>Prochaine production à venir.</p>
           </article>
           <article class="card">
             <div class="project-thumb">[Projet à venir]</div>
-            <span class="tag">XR</span>
+            <span class="tag">Clip &amp; social</span>
             <h3>Emplacement 6</h3>
             <p>Prochaine production à venir.</p>
           </article>
@@ -559,8 +600,8 @@
     </section>
 
     <footer>
-      <p><strong>ATA suarl</strong> — Studio de technologie créative · Dakar, Sénégal</p>
-      <p>contact@ata.example</p>
+      <p><strong>Séquence</strong> — Studio de production vidéo par IA · Dakar, Sénégal</p>
+      <p>hello@sequence.studio</p>
     </footer>
 
     <script>
@@ -573,7 +614,7 @@
         {
           label: "Étape 2 sur 3",
           question: "Quel format vous intéresse ?",
-          options: ["Animation", "XR", "Jeu", "IA"],
+          options: ["Publicité", "Institutionnel", "Clip", "Atelier"],
         },
         {
           label: "Étape 3 sur 3",
@@ -583,12 +624,13 @@
       ];
 
       var offers = {
-        Animation:
-          "Animation 3D : film de marque, motion design ou habillage animé, du storyboard au rendu final.",
-        XR:
-          "Expérience XR : réalité augmentée ou virtuelle pour vos espaces, expositions et formations.",
-        Jeu: "Jeu vidéo : prototype jouable ou série interactive pour faire découvrir votre univers.",
-        IA: "IA générative : assistant visuel ou prototype intégrant l'IA dans vos processus créatifs.",
+        Publicité:
+          "Film publicitaire : spot court pour votre campagne, du concept au déclinage réseaux.",
+        Institutionnel:
+          "Institutionnel : film de marque ou récit d'organisation, pensé pour la durée et la clarté.",
+        Clip: "Clip & social : séquences verticales calibrées pour les plateformes et leurs formats.",
+        Atelier:
+          "Atelier : session courte pour internaliser la chaîne complète — cadrage, prompt, étalonnage.",
       };
 
       var answers = [];
