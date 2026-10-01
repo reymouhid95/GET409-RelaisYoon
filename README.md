@@ -179,7 +179,9 @@ RelaisYoon (l'exemple du tutoriel = projet pilote NiayesBiz/GreenSprint).
 6. [x] Faux positifs CSS : `mvp/.vscode/settings.json` fourni
        (`css.validate: false` — §6 du tutoriel)
 7. [x] Modifier le code avec Copilot Chat (`Ctrl+Shift+I`) — prompts
-       adaptés ci-dessous, réponse documentée dans le template
+       adaptés ci-dessous ; 1re modification validée : logs de debug dev
+       (`NODE_ENV !== "production"`) + détail HTTP dans
+       `src/lib/dify.functions.ts`, sans jamais journaliser la clé
 8. [x] Tester le webhook Dify : page **Fiches du soir → « Consulter
        l'agent IA »** (notre équivalent de « Saisie Prix Terrain ») :
        « Hello » → INSUFFISANT, « Petersen vers Guédiawaye » → fiche
@@ -228,7 +230,9 @@ casserait ce modèle, et Vercel/Netlify sont écartés par choix.
 - [x] Fichier webhook Dify identifié : `src/lib/dify.functions.ts` →
       fonction `demanderAgent()` (fetch vers `api.dify.ai/v1/workflows/run`)
 - [ ] Question posée à Copilot Chat (réponse résumée dans le docx)
-- [ ] Au moins une modification réalisée avec Copilot (Section 4)
+- [x] Au moins une modification réalisée avec Copilot (Section 4) :
+      logs de debug de l'agent Dify dans `src/lib/dify.functions.ts`
+      (journal dev uniquement — question, statut HTTP, réponse brute)
 - [ ] `npm run build` : dossier `.output/` créé (taille notée)
 - [ ] Déploiement : URL Cloudflare Workers fonctionnelle et partagée
 - [ ] `git add . + git commit + git push` : modifications sauvegardées

@@ -4,8 +4,16 @@ import { z } from "zod";
 export const demanderAgent = createServerFn({ method: "POST" })
   .validator((data) => z.object({ question: z.string().min(1) }).parse(data))
   .handler(async ({ data }) => {
-    const apiKey = process.env["DIFY_API_KEY"]!;
+    const apiKey = process.env["DIFY_API_KEY"];
     const journalise = process.env["NODE_ENV"] !== "production";
+
+    if (!apiKey?.trim()) {
+      console.error(
+        "[agent Dify] DIFY_API_KEY absente ou vide. Vérifiez le fichier .env puis redémarrez Vite.",
+      );
+      return { ok: false as const, erreur: "Service temporairement indisponible" };
+    }
+
     const controleur = new AbortController();
     const minuteur = setTimeout(() => controleur.abort(), 10000);
 
