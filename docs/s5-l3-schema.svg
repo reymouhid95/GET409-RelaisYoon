@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" font-family="Arial, sans-serif">
+  <rect width="1200" height="420" fill="#0f172a"/>
+  <text x="600" y="36" fill="#ffffff" font-size="22" font-weight="bold" text-anchor="middle">RelaisYoon — Architecture V2 (S5) : MVP → Webhook → Agent → RAG → Base</text>
+  <g font-size="14">
+    <rect x="20" y="120" width="200" height="170" rx="12" fill="#1D4ED8"/>
+    <text x="120" y="150" fill="#fff" font-weight="bold" text-anchor="middle">1. MVP Lovable (UI)</text>
+    <text x="120" y="175" fill="#dbeafe" text-anchor="middle">relaisyoon.lovable.app</text>
+    <text x="120" y="197" fill="#dbeafe" text-anchor="middle">Page « Fiches du soir »</text>
+    <text x="120" y="219" fill="#dbeafe" text-anchor="middle">« Consulter l'agent IA »</text>
+    <text x="120" y="241" fill="#dbeafe" text-anchor="middle">Champ + bouton 🚌</text>
+    <text x="120" y="263" fill="#dbeafe" text-anchor="middle">Spinner + zone résultat</text>
+    <polygon points="220,195 258,195 258,185 278,200 258,215 258,205 220,205" fill="#94a3b8"/>
+    <rect x="278" y="120" width="200" height="170" rx="12" fill="#334155"/>
+    <text x="378" y="150" fill="#fff" font-weight="bold" text-anchor="middle">2. Webhook / API</text>
+    <text x="378" y="175" fill="#cbd5e1" text-anchor="middle">POST api.dify.ai/v1</text>
+    <text x="378" y="197" fill="#cbd5e1" text-anchor="middle">/workflows/run</text>
+    <text x="378" y="219" fill="#cbd5e1" text-anchor="middle">Bearer app-**** (serveur)</text>
+    <text x="378" y="241" fill="#cbd5e1" text-anchor="middle">body: { query }</text>
+    <text x="378" y="263" fill="#cbd5e1" text-anchor="middle">blocking + user-id</text>
+    <polygon points="478,195 516,195 516,185 536,200 516,215 516,205 478,205" fill="#94a3b8"/>
+    <rect x="536" y="120" width="220" height="170" rx="12" fill="#0F766E"/>
+    <text x="646" y="150" fill="#fff" font-weight="bold" text-anchor="middle">3. Agent Dify</text>
+    <text x="646" y="175" fill="#ccfbf1" text-anchor="middle">RelaisYoon_Fiche…_v1</text>
+    <text x="646" y="197" fill="#ccfbf1" text-anchor="middle">DÉBUT → RÉCUPÉRATION</text>
+    <text x="646" y="219" fill="#ccfbf1" text-anchor="middle">→ CHERCHEUR → SI/SINON</text>
+    <text x="646" y="241" fill="#ccfbf1" text-anchor="middle">IF erreur / ELSE fiche</text>
+    <text x="646" y="263" fill="#ccfbf1" text-anchor="middle">gpt-oss-20b via Groq</text>
+    <polygon points="756,195 794,195 794,185 814,200 794,215 794,205 756,205" fill="#94a3b8"/>
+    <rect x="814" y="120" width="180" height="170" rx="12" fill="#7c2d12"/>
+    <text x="904" y="150" fill="#fff" font-weight="bold" text-anchor="middle">4. Base RAG</text>
+    <text x="904" y="175" fill="#ffedd5" text-anchor="middle">RelaisYoon_KB_v1</text>
+    <text x="904" y="197" fill="#ffedd5" text-anchor="middle">releves-brt-s5.csv</text>
+    <text x="904" y="219" fill="#ffedd5" text-anchor="middle">8 lignes · Éco/Inversé</text>
+    <text x="904" y="241" fill="#ffedd5" text-anchor="middle">chunk 300 · Top K 3</text>
+    <text x="904" y="263" fill="#ffedd5" text-anchor="middle">🟢 Disponible</text>
+    <polygon points="994,195 1032,195 1032,185 1052,200 1032,215 1032,205 994,205" fill="#94a3b8"/>
+    <rect x="1052" y="120" width="128" height="170" rx="12" fill="#166534"/>
+    <text x="1116" y="150" fill="#fff" font-weight="bold" text-anchor="middle">5. Réponse</text>
+    <text x="1116" y="175" fill="#dcfce7" text-anchor="middle">fiche OU</text>
+    <text x="1116" y="197" fill="#dcfce7" text-anchor="middle">INSUFFISANT</text>
+    <text x="1116" y="219" fill="#dcfce7" text-anchor="middle">affichés</text>
+    <text x="1116" y="241" fill="#dcfce7" text-anchor="middle">dans le MVP</text>
+  </g>
+  <text x="600" y="340" fill="#94a3b8" font-size="14" text-anchor="middle">Question usager → fetch webhook → agent + 3 chunks CSV → fiche (ELSE) ou message d'erreur (IF) → zone résultat Lovable</text>
+  <text x="600" y="365" fill="#64748b" font-size="13" text-anchor="middle">GET409 S5 · Équipe RelaisYoon · 1 octobre 2026 · MVP https://relaisyoon.lovable.app · Workflow https://udify.app/workflow/Ssl70Rg8K9Q3epGM</text>
+  <text x="600" y="390" fill="#64748b" font-size="13" text-anchor="middle">Écarts assumés : index Économique (sandbox 0 crédit) · contexte via USER {x} (règle Template S3)</text>
+</svg>

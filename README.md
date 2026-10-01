@@ -122,6 +122,16 @@ Adaptation des 7 fichiers `class05/` au projet (cf. commit) :
 - [x] Prompts E1-E5 + S1-S6 : docs/s5-prompts-adaptes.md
       (diagnostic, audit, éthique, démo S6, Plan B)
 - [x] Créer `RelaisYoon_KB_v1` dans Dify + tester (Étape 2-3 du plan RAG)
-- [x] Re-pointer le nœud RÉCUPÉRATION + republier le workflow
+      — 4/4 tests OK (3 directs ✅, hors-base ⚠️ géré par INSUFFISANT)
+- [x] Re-pointer le nœud RÉCUPÉRATION + republier le workflow (v#8)
+      — Q1 → fiche ELSE, Q2 (poulet/Sandaga) → erreur IF
 - [x] Créer la clé API Dify + coller le prompt webhook dans Lovable
-- [ ] Tester le pipeline complet + captures (L1-L4 S5)
+      — « Consulter l'agent IA » sur Fiches du soir, clé côté serveur
+- [x] Tester le pipeline complet : « Hello » → INSUFFISANT,
+      Q1 → fiche 600 FCFA affichée dans le MVP
+- [x] L2 Pipeline RAG (30 pts) — docs/s5-l2-base.png + docs/s5-l2-workflow.png
+- [x] L3 Schéma Archi V2 (20 pts) — docs/s5-l3-schema.svg
+- [ ] L1 MVP V2 (30 pts) — https://relaisyoon.lovable.app à soumettre
+      sur e-Academy
+- [ ] L4 Journal S5 (20 pts) — 3 prompts (base + webhook + tests),
+      à finaliser ci-dessous dans le journal

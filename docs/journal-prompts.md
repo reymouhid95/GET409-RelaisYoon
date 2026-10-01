@@ -265,3 +265,33 @@ passées du premier coup en respectant cette discipline.
 
 Règles respectées : 1 prompt = 1 modification, aucun échec, pas de boucle.
 Protocole d'urgence du template non déclenché (Stop/Revert inutiles).
+
+## S5 — Intégration MVP & RAG (1 octobre, L4)
+
+### P1 Base RAG — Prompt structuré (E1/S1)
+
+- Données : `releves-brt-s5.csv`, 7 en-têtes ligne 1, 8 lignes, < 1 Ko.
+- Config : Généralités 300/50, Économique (index inversé), Top K 3.
+- Tests : 3 directs ✅ (Ndiarème 600, Grand-Médine 3 chunks, Yoff Non),
+  1 hors-base ⚠️ (index inversé remonte des matchs partiels — le garde-fou
+  INSUFFISANT du Chercheur absorbe le cas).
+- Note : 5/5. Base verte du premier import, chunking adapté aux lignes CSV.
+
+### P2 Webhook — Prompt Lovable (E3)
+
+- Prompt de `s5-webhook-prompt.md` : composant « Consulter l'agent IA »
+  sur Fiches du soir, POST api.dify.ai/v1/workflows/run, Bearer côté
+  serveur, `response.data.outputs` (notre workflow renvoie `fiche` ou
+  `message_erreur`, pas `answer` — écart doc template noté).
+- Résultat : « Hello » → INSUFFISANT ; Q1 → fiche Ndiarème 600 FCFA
+  affichée. Pipeline bout-en-bout ✅.
+- Note : 5/5.
+
+### P3 Cohérence — Zero-Shot (S2)
+
+- Q1/Q2 rejouées après re-pointage : ELSE → fiche Sam Notaire 500 FCFA,
+  puis Ndiarème 600 FCFA selon chunks remontés (les deux relevés valides) ;
+  Q2 poulet/Sandaga → INSUFFISANT motivé.
+- Leçon : avec une phrase complète, l'index inversé peut rater la bonne
+  ligne → diagnostiquer via TRACE/RÉCUPÉRATION avant de toucher au prompt.
+- Note : 5/5.
