@@ -164,11 +164,11 @@ RelaisYoon (l'exemple du tutoriel = projet pilote NiayesBiz/GreenSprint).
 
 1. [x] Prérequis : `git --version`, `node --version` (LTS), VS Code +
        extensions GitHub Copilot / GitLens / Live Server — le projet
-       tourne avec npm (`npm install && npm run dev`), pas besoin de bun
+       tourne avec pnpm (`pnpm install && pnpm dev`), pas besoin de bun
 2. [x] Cloner : `git clone https://github.com/reymouhid95/GET409-RelaisYoon.git`
        puis `cd GET409-RelaisYoon/mvp`
-3. [x] Dépendances : `npm install` (dossier `mvp/`)
-4. [x] Lancer : `npm run dev` → Vite affiche l'URL (localhost:808x),
+3. [x] Dépendances : `pnpm install` (dossier `mvp/`)
+4. [x] Lancer : `pnpm dev` → Vite affiche l'URL (localhost:808x),
        HMR actif, le port affiché fait foi
 5. [x] `.env` : `cp .env.example .env` puis y mettre `DIFY_API_KEY`
        — **Écart tutoriel assumé** : le tutoriel (projet pilote) utilise
@@ -178,7 +178,7 @@ RelaisYoon (l'exemple du tutoriel = projet pilote NiayesBiz/GreenSprint).
        `Ctrl+C` puis `npm run dev` après toute modification
 6. [x] Faux positifs CSS : `mvp/.vscode/settings.json` fourni
        (`css.validate: false` — §6 du tutoriel)
-7. [ ] Modifier le code avec Copilot Chat (`Ctrl+Shift+I`) — prompts
+7. [x] Modifier le code avec Copilot Chat (`Ctrl+Shift+I`) — prompts
        adaptés ci-dessous, réponse documentée dans le template
 8. [x] Tester le webhook Dify : page **Fiches du soir → « Consulter
        l'agent IA »** (notre équivalent de « Saisie Prix Terrain ») :
@@ -191,12 +191,12 @@ RelaisYoon (l'exemple du tutoriel = projet pilote NiayesBiz/GreenSprint).
 
 ### Prompts Copilot adaptés à RelaisYoon
 
-| Objectif | Prompt à utiliser |
-| --- | --- |
-| Comprendre le webhook | Explique-moi la fonction `demanderAgent` dans `src/lib/dify.functions.ts` |
-| Modifier la recherche | Dans `src/routes/fiches.tsx`, ajoute un filtre par statut (Disponible/Indisponible) |
-| Corriger une erreur | L'agent renvoie « Service temporairement indisponible » — vérifie la lecture de `DIFY_API_KEY` |
-| Créer une page | Crée une page `/aide` avec une FAQ sur les correspondances BRT |
+| Objectif              | Prompt à utiliser                                                                              |
+| --------------------- | ---------------------------------------------------------------------------------------------- |
+| Comprendre le webhook | Explique-moi la fonction `demanderAgent` dans `src/lib/dify.functions.ts`                      |
+| Modifier la recherche | Dans `src/routes/fiches.tsx`, ajoute un filtre par statut (Disponible/Indisponible)            |
+| Corriger une erreur   | L'agent renvoie « Service temporairement indisponible » — vérifie la lecture de `DIFY_API_KEY` |
+| Créer une page        | Crée une page `/aide` avec une FAQ sur les correspondances BRT                                 |
 
 ### Déploiement — Cloudflare Workers (ni Vercel, ni Netlify)
 
