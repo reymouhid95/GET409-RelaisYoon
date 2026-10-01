@@ -229,14 +229,6 @@ casserait ce modèle, et Vercel/Netlify sont écartés par choix.
       « DIFY_API_KEY absente » dans `wrangler tail` → le binding secret
       est bien résolu
 
-> ⚠️ **Bloqué côté Dify, pas côté déploiement** : la clé `DIFY_API_KEY`
-> du `.env` est refusée par l'API (`HTTP 401 — "Access token is
-> invalid"`). Le pipeline Cloudflare répond donc « Service temporairement
-> indisponible ». Il faut **régénérer la clé d'API dans Dify**
-> (workflow `RelaisYoon_FicheCorrespondance_v1_RelaisYoon` → Applications
-> → API Access) puis rejouer la commande `wrangler secret put` ci-dessus.
-> Le reste du déploiement est validé.
-
 ### Checklist finale à rendre (template_vscode_equipes.docx)
 
 - [x] Docx rempli : **docs/GET409_S7_VSCode_RelaisYoon.docx** — sections 0-5 +
