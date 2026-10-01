@@ -121,7 +121,7 @@ Adaptation des 7 fichiers `class05/` au projet (cf. commit) :
       (page Fiches du soir, bouton bleu 🚌, clé API à insérer)
 - [x] Prompts E1-E5 + S1-S6 : docs/s5-prompts-adaptes.md
       (diagnostic, audit, éthique, démo S6, Plan B)
-- [ ] Créer `RelaisYoon_KB_v1` dans Dify + tester (Étape 2-3 du plan RAG)
-- [ ] Re-pointer le nœud RÉCUPÉRATION + republier le workflow
-- [ ] Créer la clé API Dify + coller le prompt webhook dans Lovable
+- [x] Créer `RelaisYoon_KB_v1` dans Dify + tester (Étape 2-3 du plan RAG)
+- [x] Re-pointer le nœud RÉCUPÉRATION + republier le workflow
+- [x] Créer la clé API Dify + coller le prompt webhook dans Lovable
 - [ ] Tester le pipeline complet + captures (L1-L4 S5)
