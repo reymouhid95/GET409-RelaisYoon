@@ -1,4 +1,5 @@
 import type { Fiche } from "@/data/fiches";
+import { texteFicheRelaisYoon, urlPartageWhatsApp } from "@/lib/partage";
 
 export function StatutPastille({ statut }: { statut: Fiche["statut"] }) {
   const dispo = statut === "Disponible";
@@ -10,10 +11,7 @@ export function StatutPastille({ statut }: { statut: Fiche["statut"] }) {
           : "inline-flex items-center gap-1.5 rounded-full bg-danger-soft px-2.5 py-1 text-xs font-semibold text-danger"
       }
     >
-      <span
-        aria-hidden
-        className={`size-2 rounded-full ${dispo ? "bg-success" : "bg-danger"}`}
-      />
+      <span aria-hidden className={`size-2 rounded-full ${dispo ? "bg-success" : "bg-danger"}`} />
       {statut}
     </span>
   );
@@ -35,6 +33,22 @@ export function FicheCard({ fiche }: { fiche: Fiche }) {
         </p>
         <p className="text-sm text-muted-foreground">relevé {fiche.heure}</p>
       </div>
+      <a
+        href={urlPartageWhatsApp(
+          texteFicheRelaisYoon({
+            station: fiche.station,
+            quartier: fiche.quartier,
+            prix: `${fiche.prix} FCFA`,
+            heure: fiche.heure,
+            statut: fiche.statut,
+          }),
+        )}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-3 inline-flex items-center gap-2 rounded-full bg-[#25D366] px-4 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+      >
+        Partager sur WhatsApp
+      </a>
     </article>
   );
 }

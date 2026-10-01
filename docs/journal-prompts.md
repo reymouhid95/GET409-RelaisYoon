@@ -295,3 +295,21 @@ Protocole d'urgence du template non déclenché (Stop/Revert inutiles).
 - Leçon : avec une phrase complète, l'index inversé peut rater la bonne
   ligne → diagnostiquer via TRACE/RÉCUPÉRATION avant de toucher au prompt.
 - Note : 5/5.
+
+### P4-P6 Itérations MVP code (1 octobre, hors Lovable)
+
+Fichiers : `mvp/src/hooks/useVoiceInput.ts`, `mvp/src/lib/partage.ts`,
+`mvp/src/lib/ficheAgent.ts`, `mvp/src/components/AgentFicheCard.tsx`,
+`mvp/src/routes/fiches.tsx`, `mvp/src/components/FicheCard.tsx`.
+
+| # | Type | Objectif | Changement | Résultat |
+|---|---|---|---|---|
+| P4 | Fonctionnelle | notes vocales | Hook `useVoiceInput` (Web Speech API `fr-FR`) + bouton 🎤 à côté du champ agent, transcript injecté dans la question, état Écoute/arrêt, erreur si non supporté | ✅ |
+| P5 | Fonctionnelle | partage WhatsApp | `lib/partage.ts` (`wa.me/?text=` encodé) : bouton vert Partager sur chaque fiche + sous la réponse de l'agent | ✅ |
+| P6 | Visuelle | résultat structuré | Parser `parseFicheAgent` (STATION/QUARTIER/PRIX/HEURE/SOURCES) → `AgentFicheCard` façon FicheCard ; repli texte brut si INSUFFISANT | ✅ |
+| P7 | Correction | dépréciation API | `createServerFn().inputValidator()` → `.validator()` (warning Vite en `pnpm dev`) | ✅ |
+
+- Vérifications : `tsc --noEmit` 0 erreur, eslint propre (avec `--fix`),
+  `npm run build` OK (nitro/cloudflare).
+- Note : 5/5 — 1 prompt = 1 correction, aucune régression sur le pipeline
+  Dify (la clé reste côté serveur, aucun secret ajouté).

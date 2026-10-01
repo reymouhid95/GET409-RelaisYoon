@@ -2,7 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 
 export const demanderAgent = createServerFn({ method: "POST" })
-  .inputValidator((data) => z.object({ question: z.string().min(1) }).parse(data))
+  .validator((data) => z.object({ question: z.string().min(1) }).parse(data))
   .handler(async ({ data }) => {
     const apiKey = process.env["DIFY_API_KEY"]!;
     const controleur = new AbortController();

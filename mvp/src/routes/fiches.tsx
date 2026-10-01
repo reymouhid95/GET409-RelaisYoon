@@ -1,9 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 import { FicheCard } from "@/components/FicheCard";
+import { AgentFicheCard } from "@/components/AgentFicheCard";
+import { parseFicheAgent } from "@/lib/ficheAgent";
 import { fiches, filtresQuartier } from "@/data/fiches";
 import { demanderAgent } from "@/lib/dify.functions";
+import { useVoiceInput } from "@/hooks/useVoiceInput";
 
 export const Route = createFileRoute("/fiches")({
   head: () => ({
@@ -31,6 +34,11 @@ function AgentIa() {
   const [chargement, setChargement] = useState<boolean>(false);
   const [resultat, setResultat] = useState<string | null>(null);
   const [erreur, setErreur] = useState<string | null>(null);
+
+  const recoitDictee = useCallback((texte: string) => {
+    setQuestion(texte);
+  }, []);
+  const voix = useVoiceInput(recoitDictee);
 
   const demander = async () => {
     if (!question.trim() || chargement) return;
@@ -74,6 +82,27 @@ function AgentIa() {
         />
         <button
           type="button"
+          onClick={() => (voix.ecoute ? voix.arreter() : voix.demarrer())}
+          disabled={!voix.supporte || chargement}
+          title={
+            voix.supporte
+              ? voix.ecoute
+                ? "Arrêter la dictée"
+                : "Dicter la question au micro"
+              : "Dictée vocale non supportée par ce navigateur"
+          }
+          aria-label="Dicter la question au micro"
+          aria-pressed={voix.ecoute}
+          className={
+            voix.ecoute
+              ? "rounded-full bg-danger px-5 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
+              : "rounded-full border border-border bg-card px-5 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-secondary disabled:cursor-not-allowed disabled:opacity-50"
+          }
+        >
+          {voix.ecoute ? "⏹ Écoute…" : "🎤"}
+        </button>
+        <button
+          type="button"
           onClick={demander}
           disabled={chargement || !question.trim()}
           className="rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
@@ -81,6 +110,12 @@ function AgentIa() {
           Demander à l'agent 🚌
         </button>
       </div>
+
+      {voix.erreur && (
+        <p role="alert" className="mt-3 text-sm text-danger">
+          {voix.erreur}
+        </p>
+      )}
 
       {chargement && (
         <div className="mt-4 flex items-center gap-3 rounded-2xl bg-secondary p-5 text-sm text-muted-foreground">
@@ -93,18 +128,27 @@ function AgentIa() {
       )}
 
       {erreur && (
-        <p role="alert" className="mt-4 rounded-2xl bg-danger-soft p-5 text-sm font-semibold text-danger">
+        <p
+          role="alert"
+          className="mt-4 rounded-2xl bg-danger-soft p-5 text-sm font-semibold text-danger"
+        >
           {erreur}
         </p>
       )}
 
-      {resultat && !chargement && (
-        <div className="mt-4 rounded-2xl bg-secondary p-5 text-sm whitespace-pre-wrap">
-          {resultat}
-        </div>
-      )}
+      {resultat && !chargement && <ResultatAgent texte={resultat} />}
     </section>
   );
+}
+
+function ResultatAgent({ texte }: { texte: string }) {
+  const fiche = parseFicheAgent(texte);
+  if (!fiche) {
+    return (
+      <div className="mt-4 rounded-2xl bg-secondary p-5 text-sm whitespace-pre-wrap">{texte}</div>
+    );
+  }
+  return <AgentFicheCard fiche={fiche} />;
 }
 
 function FichesPage() {
@@ -112,11 +156,13 @@ function FichesPage() {
   const [recherche, setRecherche] = useState<string>("");
 
   const normalise = (valeur: string) =>
-    valeur.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    valeur
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
 
   const liste = fiches.filter((f) => {
-    const parQuartier =
-      filtre === "Tous" || normalise(f.quartier).includes(normalise(filtre));
+    const parQuartier = filtre === "Tous" || normalise(f.quartier).includes(normalise(filtre));
     const parRecherche = normalise(f.quartier).includes(normalise(recherche.trim()));
     return parQuartier && parRecherche;
   });

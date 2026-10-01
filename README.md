@@ -138,3 +138,18 @@ Adaptation des 7 fichiers `class05/` au projet (cf. commit) :
       synchronisé depuis le dépôt Lovable connecté)
 - [x] L4 Journal S5 (20 pts) — P1 base, P2 webhook, P3 cohérence,
       notés 5/5 dans docs/journal-prompts.md
+
+### Itérations MVP (code local, `mvp/`)
+
+- [x] P4 Notes vocales — dictée navigateur (`fr-FR`) dans « Consulter
+      l'agent IA », transcript injecté dans la question
+- [x] P5 WhatsApp — bouton « Partager sur WhatsApp » (`wa.me/?text=`)
+      sur les fiches et sous la réponse de l'agent
+- [x] P6 Résultat structuré — réponse agent parsée en carte
+      station/quartier/prix/heure (repli texte brut si INSUFFISANT)
+- [x] P7 Correction dépréciation `inputValidator()` → `validator()`
+- [x] Vérifs : `tsc` 0 erreur, eslint propre, `npm run build` OK
+
+> ⚠️ Ces changements sont sur `GET409-RelaisYoon/mvp/` (local) : pour les
+> voir sur https://relaisyoon.lovable.app, les pousser sur le dépôt Lovable
+> connecté `reymouhid95/relaisyoon` (redéploiement automatique).
