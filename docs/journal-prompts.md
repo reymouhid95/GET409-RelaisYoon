@@ -254,3 +254,14 @@ Checklist preview : 6/6 points OK.
 
 Leçon : 1 prompt = 1 correction (règle du template) — les 3 itérations sont
 passées du premier coup en respectant cette discipline.
+
+### Tableau L3 — journal des itérations (format template S4)
+
+| # | Type | Objectif | Prompt envoyé | Résultat |
+|---|---|---|---|---|
+| P1 | Correction | prix erroné | « Sur la page Fiches du soir, le relevé Keur Massar affiche 300 FCFA — corrige-le à 350 FCFA. » | ✅ |
+| P2 | Visuelle | bannière d'annonce | « Ajoute une bannière bleue sous le hero sur la page d'accueil avec le texte "Relevés du soir mis à jour chaque semaine" et l'emoji 📢. » | ✅ |
+| P3 | Fonctionnelle | recherche temps réel | « Sur la page Fiches du soir, ajoute un champ de recherche en haut qui filtre les relevés par nom de quartier en temps réel. » | ✅ |
+
+Règles respectées : 1 prompt = 1 modification, aucun échec, pas de boucle.
+Protocole d'urgence du template non déclenché (Stop/Revert inutiles).

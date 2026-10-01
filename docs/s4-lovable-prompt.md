@@ -9,7 +9,7 @@ Source : `class04/class04/etu/GET409_S4_Template_Lovable_Etudiants.docx`
 | Équipe | RelaisYoon (Amadou Oury BAH, Rogelle Mombo, Darvy Valtine) |
 | Projet | RelaisYoon — fiche correspondance BRT |
 | Persona | Awa Diop · 34 ans · commerciale · Guédiawaye · smartphone Android |
-| URL obtenue | https://screenshot-perfect-pixel-9922.lovable.app (publiée le 1/10/2026) |
+| URL obtenue | https://relaisyoon-lovable-app.lovable.app (publiée le 1/10/2026) |
 
 ## Étape 1 — Connexion
 
