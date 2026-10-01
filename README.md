@@ -2,11 +2,11 @@
 
 ## Notre equipe
 
-| Prenom Nom | Role | GitHub |
-|---|---|---|
-| Amadou Oury BAH | Dev UI (No-Code), Chef de Produit | @reymouhid95 |
-| Rogelle Mombo | Master Prompt Engineer | @Rogelle-2MR |
-| Darvy Valtine | Responsable Impact | @DarvyValtine |
+| Prenom Nom      | Role                              | GitHub        |
+| --------------- | --------------------------------- | ------------- |
+| Amadou Oury BAH | Dev UI (No-Code), Chef de Produit | @reymouhid95  |
+| Rogelle Mombo   | Master Prompt Engineer            | @Rogelle-2MR  |
+| Darvy Valtine   | Responsable Impact                | @DarvyValtine |
 
 Équipe arrêtée à 3 membres le 22 septembre 2026 (écart assumé : le handout demande 4 à 5, aucun membre fictif ajouté).
 
@@ -61,7 +61,7 @@ Phase HMW — terminée (4/4) :
 Transverse :
 
 - [x] docs/journal-prompts.md — 12 entrées S2 notées /5 (chapeaux,
-  VPC, HMW, pitch) + journal S3 L3
+      VPC, HMW, pitch) + journal S3 L3
 
 ## Livrables S3 — terminés le 29 septembre 2026
 
@@ -69,18 +69,18 @@ Infra Dify :
 
 - [x] Compte Dify créé (via GitHub) + workspace `GET409-RelaisYoon`
 - [x] Membres invités — clos : impossible sur le plan gratuit Dify
-  (sandbox 0 crédits, option d'invitation réservée aux plans payants) ;
-  répartition des rôles tracée dans docs/fiche-equipe.md
+      (sandbox 0 crédits, option d'invitation réservée aux plans payants) ;
+      répartition des rôles tracée dans docs/fiche-equipe.md
 - [x] Workflow `RelaisYoon_FicheCorrespondance_v1_RelaisYoon` (type Workflow) :
-  DÉBUT (query) → RÉCUPÉRATION (releve-test-s3.md) → CHERCHEUR →
-  SI/SINON → IF : Sortie erreur / ELSE : RÉDACTEUR → Sortie 2
+      DÉBUT (query) → RÉCUPÉRATION (releve-test-s3.md) → CHERCHEUR →
+      SI/SINON → IF : Sortie erreur / ELSE : RÉDACTEUR → Sortie 2
 - [x] Condition : Chercheur · text contient INSUFFISANT (capitales)
 - [x] SYSTEM P1/P2 conformes (sans variables) + messages USER via {x}
 - [x] Sorties configurées : message_erreur (Chercheur) / fiche (Rédacteur)
 - [x] Modèles : gpt-5 puis gpt-oss-20b via Groq (llama 404, écart documenté)
 - [x] Base de connaissances : embedding indisponible (sandbox 0 crédits) →
-  base `releve-test-s3` recréée en **Recherche Texte Intégral** (document
-  réindexé, segmenté par ligne)
+      base `releve-test-s3` recréée en **Recherche Texte Intégral** (document
+      réindexé, segmenté par ligne)
 - [x] Test Q2 (vague) : INSUFFISANT → Sortie, message affiché
 - [x] Test Q1 (précise) : ELSE → Rédacteur → fiche (29 sept.)
 - [x] Publication + URL publique : https://udify.app/workflow/Ssl70Rg8K9Q3epGM
@@ -88,9 +88,7 @@ Infra Dify :
 Livrables (100 pts, 48h sur e-Academy) :
 
 - [x] L1 Agent V1 (40 pts) — Q1/Q2 testés sur l'app publique,
-  captures docs/l1-q1-fiche.png + docs/l1-q2-erreur.png
+      captures docs/l1-q1-fiche.png + docs/l1-q2-erreur.png
 - [x] L2 Schéma d'architecture (30 pts) — docs/l2-schema.png
 - [x] L3 Journal S3 — docs/journal-prompts.md, Zero/Few/CoT + runs (20 pts)
 - [x] L4 Réflexion éthique — docs/reflexion-ethique-s3.md, 2 risques (10 pts)
-
-Reste hors livrables : `git push`, soumission du formulaire e-Academy.
