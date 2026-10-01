@@ -115,7 +115,6 @@ sur e-Academy sous 48h (L1, 35 pts).
 Adaptation des 7 fichiers `class05/` au projet (cf. commit) :
 
 - [x] Données : docs/releves-brt-s5.csv — 8 relevés BRT
-      (équivalent du spreadsheet prix légumes GreenSprint)
 - [x] Plan RAG : docs/s5-rag-plan.md — base `RelaisYoon_KB_v1`
       (Économique/Texte Intégral, chunk 300/50, Top K 3, 4 questions test)
 - [x] Prompt webhook : docs/s5-webhook-prompt.md — prêt à coller dans Lovable
