@@ -61,7 +61,8 @@ Phase HMW — terminée (4/4) :
 Transverse :
 
 - [x] docs/journal-prompts.md — 12 entrées S2 notées /5 (chapeaux,
-      VPC, HMW, pitch) + journaux L3 S3, S4 (tableau itérations) et S5 (P1-P3)
+      VPC, HMW, pitch) + journaux L3 S3, S4 (tableau itérations),
+      S5 (P1-P7) et S7 (P8-P11, itérations Copilot)
 
 ## Livrables S3 — terminés le 29 septembre 2026
 

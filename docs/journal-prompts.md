@@ -310,6 +310,37 @@ Fichiers : `mvp/src/hooks/useVoiceInput.ts`, `mvp/src/lib/partage.ts`,
 | P7 | Correction | dépréciation API | `createServerFn().inputValidator()` → `.validator()` (warning Vite en `pnpm dev`) | ✅ |
 
 - Vérifications : `tsc --noEmit` 0 erreur, eslint propre (avec `--fix`),
-  `npm run build` OK (nitro/cloudflare).
+  `pnpm build` OK (nitro/cloudflare).
 - Note : 5/5 — 1 prompt = 1 correction, aucune régression sur le pipeline
   Dify (la clé reste côté serveur, aucun secret ajouté).
+
+## S7 — VS Code + Copilot (1 octobre)
+
+Parcours du tutoriel `class07/class07/tutoriel_vscode_workflow_GET409.docx`
+appliqué à RelaisYoon (étapes, prompts Copilot et checklist de rendu
+documentés dans la section « Livrables S7 » du README).
+
+- Étapes validées : `pnpm install` → `pnpm dev` (localhost:8080) →
+  `.env` avec `DIFY_API_KEY` (clé côté serveur, écart assumé face au
+  `VITE_DIFY_API_KEY` du projet pilote) → `.vscode/settings.json`
+  (faux positifs CSS) → test agent local (fiche + INSUFFISANT).
+- Déploiement retenu : **Cloudflare Workers** (cible nitro intégrée,
+  SSR obligatoire pour la clé serveur) — Vercel/Netlify écartés,
+  GitHub Pages impossible (statique).
+
+### Tableau L3 — journal des itérations Copilot (Ctrl+Shift+I)
+
+| # | Type | Objectif | Prompt envoyé | Résultat |
+|---|---|---|---|---|
+| P8 | Fonctionnelle | logs debug agent | « Ajoute des logs pour voir les réponses lors de la soumission d'une question à l'agent dans la fiche du soir » | ✅ journal dev (`NODE_ENV !== "production"`) : question, statut HTTP + corps d'erreur, réponse brute — la clé n'est jamais journalisée |
+| P9 | Fonctionnelle | filtre statut | « Dans `src/routes/fiches.tsx`, ajoute un filtre par statut (Disponible/Indisponible) » | ✅ fieldset « Disponibilité » combiné aux filtres quartier + recherche |
+| P10 | Fonctionnelle | page FAQ | « Crée une page `/aide` avec une FAQ sur les correspondances BRT » | ✅ `src/routes/aide.tsx` (5 questions) + lien « Aide » dans `SiteHeader.tsx` |
+| P11 | Correction | lisibilité | « Réorganise les imports de `fiches.tsx` » | ✅ imports triés, aucun changement de comportement |
+
+- Commits : `ab8fb7e` (P8 + fix `validator()`), `bd18a7a` (P9 + P10),
+  `8f6606a` (P11 + README).
+- Vérifications finales : `tsc --noEmit` 0 erreur, `eslint src/` 0 erreur
+  (6 warnings shadcn préexistants + fix prettier `__root.tsx`),
+  `pnpm build` OK.
+- Note : 5/5 — règle 1 prompt = 1 correction respectée, 4/4 prompts
+  applicés du premier coup.
