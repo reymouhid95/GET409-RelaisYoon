@@ -183,8 +183,9 @@ RelaisYoon (l'exemple du tutoriel = projet pilote NiayesBiz/GreenSprint).
 8. [x] Tester le webhook Dify : page **Fiches du soir → « Consulter
        l'agent IA »** (notre équivalent de « Saisie Prix Terrain ») :
        « Hello » → INSUFFISANT, « Petersen vers Guédiawaye » → fiche
-       (erreurs type `HTTPError` : vérifier `.env` + relancer Vite +
-       workflow publié dans Dify)
+       — **testé en local le 1er octobre 2026** avec `.env` +
+       redémarrage de Vite (erreurs type `HTTPError` : vérifier `.env` +
+       relancer Vite + workflow publié dans Dify)
 9. [ ] Sauvegarder : `git add . && git commit -m "..." && git push`
        — si refusé : `git pull --rebase origin main` puis `git push`
 
@@ -221,8 +222,9 @@ casserait ce modèle, et Vercel/Netlify sont écartés par choix.
 - [x] Dépôt GitHub : code du MVP dans `GET409-RelaisYoon/mvp/`
       (repo `reymouhid95/GET409-RelaisYoon`)
 - [ ] VS Code installé avec les extensions Copilot + Live Server + GitLens
-- [ ] `npm install` réussi sans erreur critique (durée notée)
-- [ ] `npm run dev` : site visible sur localhost (URL notée)
+- [x] `npm install` réussi sans erreur critique (npm, 1er octobre 2026)
+- [x] `npm run dev` : site visible sur localhost:8080 (test local OK le
+      1er octobre 2026 : agent IA → fiche, INSUFFISANT sur hors-sujet)
 - [x] Fichier webhook Dify identifié : `src/lib/dify.functions.ts` →
       fonction `demanderAgent()` (fetch vers `api.dify.ai/v1/workflows/run`)
 - [ ] Question posée à Copilot Chat (réponse résumée dans le docx)
