@@ -256,4 +256,3 @@ Le template vierge source reste `class07/class07/template_vscode_equipes.docx` :
       — https://reymouhid95-get409-relaisyoon-mvp.thiernooury89.workers.dev
       (`/`, `/fiches`, `/aide` en 200 ; agent IA à revalider après
       régénération de la clé Dify, cf. § Déploiement)
-- [ ] `git add . + git commit + git push` : modifications sauvegardées

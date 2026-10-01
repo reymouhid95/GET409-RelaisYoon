@@ -1,4 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { MessageCircleQuestion, Plus } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/aide")({
   head: () => ({
@@ -39,41 +42,62 @@ const questions = [
     reponse:
       "Oui, utilisez le bouton microphone sur la page Fiches du soir. La dictée dépend de la prise en charge vocale de votre navigateur.",
   },
-];
+  {
+    question: "L'agent est-il disponible hors du créneau 18h–19h ?",
+    reponse:
+      "L'agent interroge la base des relevés, pas les véhicules en temps réel. En dehors du créneau de relevé, les chiffres restent ceux de la dernière collecte.",
+  },
+] as const;
 
 function AidePage() {
   return (
-    <main className="mx-auto max-w-3xl px-4 py-12">
-      <h1 className="text-3xl font-extrabold tracking-tight">Questions fréquentes</h1>
-      <p className="mt-2 text-muted-foreground">
-        Utiliser les relevés de correspondance BRT à Dakar.
-      </p>
+    <div className="mx-auto max-w-prose px-4 py-12 sm:px-6 sm:py-20">
+      <header className="animate-rise">
+        <p className="text-primary inline-flex items-center gap-1.5 text-[0.6875rem] font-bold tracking-widest uppercase">
+          <MessageCircleQuestion className="size-3.5" aria-hidden />
+          Aide
+        </p>
+        <h1 className="text-h1 mt-3">Questions fréquentes</h1>
+        <p className="text-muted-foreground text-lede mt-3">
+          Utiliser les relevés de correspondance BRT à Dakar, et comprendre ce que l&apos;agent peut
+          — ou ne peut pas — vous dire.
+        </p>
+      </header>
 
-      <div className="mt-8 divide-y divide-border border-y border-border">
+      <div className="border-border/70 divide-border/70 mt-10 divide-y border-y">
         {questions.map(({ question, reponse }) => (
-          <details key={question} className="group py-5">
-            <summary className="cursor-pointer list-none font-semibold text-foreground marker:hidden">
-              <span className="flex items-center justify-between gap-4">
+          <details key={question} className="group animate-rise">
+            <summary className="marker:hidden flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-left">
+              <h2 className="text-h3 group-hover:text-primary transition-colors duration-200">
                 {question}
-                <span
-                  aria-hidden="true"
-                  className="text-xl text-primary transition-transform group-open:rotate-45"
-                >
-                  +
-                </span>
+              </h2>
+              <span
+                aria-hidden
+                className="border-border bg-background text-muted-foreground group-hover:border-brand-300 group-hover:bg-brand-100 group-hover:text-brand-700 grid size-8 shrink-0 place-items-center rounded-full border transition-all duration-300 group-open:rotate-[135deg]"
+              >
+                <Plus className="size-4" />
               </span>
             </summary>
-            <p className="mt-3 max-w-2xl text-sm leading-6 text-muted-foreground">{reponse}</p>
+            <p className="text-muted-foreground animate-fade mb-5 max-w-2xl text-[0.9375rem] leading-relaxed">
+              {reponse}
+            </p>
           </details>
         ))}
       </div>
 
-      <Link
-        to="/fiches"
-        className="mt-8 inline-flex rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
-      >
-        Voir les fiches du soir
-      </Link>
-    </main>
+      <div className="from-brand-500/8 to-sun-400/8 mt-12 rounded-3xl bg-gradient-to-br p-8 text-center">
+        <h2 className="text-h3">Vous n'avez pas trouvé votre réponse&nbsp;?</h2>
+        <p className="text-muted-foreground mx-auto mt-2 max-w-sm text-sm">
+          Écrivez-nous : un prix a changé ou une correspondance manque, on corrige le relevé.
+        </p>
+        <Button asChild className="mt-6 h-11 rounded-full px-6">
+          <Link to="/contact">Nous écrire</Link>
+        </Button>
+      </div>
+
+      <Button asChild variant="ghost" className="text-primary mt-6 rounded-full">
+        <Link to="/fiches">Voir les fiches du soir</Link>
+      </Button>
+    </div>
   );
 }
