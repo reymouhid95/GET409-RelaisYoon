@@ -109,3 +109,20 @@ Livrables (100 pts, 48h sur e-Academy) :
 
 Reste hors livrables : `git push` (4 commits), soumission de l'URL
 sur e-Academy sous 48h (L1, 35 pts).
+
+## Livrables S5 — en cours (Intégration MVP & RAG, 1 octobre 2026)
+
+Adaptation des 7 fichiers `class05/` au projet (cf. commit) :
+
+- [x] Données : docs/releves-brt-s5.csv — 8 relevés BRT
+      (équivalent du spreadsheet prix légumes GreenSprint)
+- [x] Plan RAG : docs/s5-rag-plan.md — base `RelaisYoon_KB_v1`
+      (Économique/Texte Intégral, chunk 300/50, Top K 3, 4 questions test)
+- [x] Prompt webhook : docs/s5-webhook-prompt.md — prêt à coller dans Lovable
+      (page Fiches du soir, bouton bleu 🚌, clé API à insérer)
+- [x] Prompts E1-E5 + S1-S6 : docs/s5-prompts-adaptes.md
+      (diagnostic, audit, éthique, démo S6, Plan B)
+- [ ] Créer `RelaisYoon_KB_v1` dans Dify + tester (Étape 2-3 du plan RAG)
+- [ ] Re-pointer le nœud RÉCUPÉRATION + republier le workflow
+- [ ] Créer la clé API Dify + coller le prompt webhook dans Lovable
+- [ ] Tester le pipeline complet + captures (L1-L4 S5)
