@@ -221,8 +221,11 @@ casserait ce modèle, et Vercel/Netlify sont écartés par choix.
 
 ### Checklist finale à rendre (template_vscode_equipes.docx)
 
-À compléter en équipe dans `class07/class07/template_vscode_equipes.docx`
-(aucun `[CROCHET]` ne doit rester) :
+- [x] Docx rempli : **docs/GET409_S7_VSCode_RelaisYoon.docx** — sections 0-5 +
+      checklist (9/12 cochés), aucun placeholder restant, écart GitHub Pages
+      → Cloudflare Workers documenté dans le document
+
+Le template vierge source reste `class07/class07/template_vscode_equipes.docx` :
 
 - [x] Dépôt GitHub : code du MVP dans `GET409-RelaisYoon/mvp/`
       (repo `reymouhid95/GET409-RelaisYoon`)
