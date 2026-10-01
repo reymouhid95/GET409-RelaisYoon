@@ -61,7 +61,7 @@ Phase HMW — terminée (4/4) :
 Transverse :
 
 - [x] docs/journal-prompts.md — 12 entrées S2 notées /5 (chapeaux,
-      VPC, HMW, pitch) + journal S3 L3
+      VPC, HMW, pitch) + journaux L3 S3, S4 (tableau itérations) et S5 (P1-P3)
 
 ## Livrables S3 — terminés le 29 septembre 2026
 
@@ -72,8 +72,9 @@ Infra Dify :
       (sandbox 0 crédits, option d'invitation réservée aux plans payants) ;
       répartition des rôles tracée dans docs/fiche-equipe.md
 - [x] Workflow `RelaisYoon_FicheCorrespondance_v1_RelaisYoon` (type Workflow) :
-      DÉBUT (query) → RÉCUPÉRATION (releve-test-s3.md) → CHERCHEUR →
-      SI/SINON → IF : Sortie erreur / ELSE : RÉDACTEUR → Sortie 2
+      DÉBUT (query) → RÉCUPÉRATION (RelaisYoon_KB_v1 / releves-brt-s5.csv,
+      depuis S5 v#8 — remplace l'ancienne base releve-test-s3.md) →
+      CHERCHEUR → SI/SINON → IF : Sortie erreur / ELSE : RÉDACTEUR → Sortie 2
 - [x] Condition : Chercheur · text contient INSUFFISANT (capitales)
 - [x] SYSTEM P1/P2 conformes (sans variables) + messages USER via {x}
 - [x] Sorties configurées : message_erreur (Chercheur) / fiche (Rédacteur)
@@ -107,8 +108,8 @@ Livrables (100 pts, 48h sur e-Academy) :
 - [x] Étape 5 — publication (Public — Anyone with the URL)
 - [x] URL obtenue : https://relaisyoon.lovable.app
 
-Reste hors livrables : `git push` (4 commits), soumission de l'URL
-sur e-Academy sous 48h (L1, 35 pts).
+Reste hors livrables : soumission de l'URL sur e-Academy sous 48h (L1, 35 pts).
+Dépôt synchronisé avec GitHub (push OK).
 
 ## Livrables S5 — en cours (Intégration MVP & RAG, 1 octobre 2026)
 
@@ -133,5 +134,5 @@ Adaptation des 7 fichiers `class05/` au projet (cf. commit) :
 - [x] L3 Schéma Archi V2 (20 pts) — docs/s5-l3-schema.svg
 - [ ] L1 MVP V2 (30 pts) — https://relaisyoon.lovable.app à soumettre
       sur e-Academy
-- [ ] L4 Journal S5 (20 pts) — 3 prompts (base + webhook + tests),
-      à finaliser ci-dessous dans le journal
+- [x] L4 Journal S5 (20 pts) — P1 base, P2 webhook, P3 cohérence,
+      notés 5/5 dans docs/journal-prompts.md
