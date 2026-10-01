@@ -148,7 +148,7 @@ Adaptation des 7 fichiers `class05/` au projet (cf. commit) :
 - [x] P6 Résultat structuré — réponse agent parsée en carte
       station/quartier/prix/heure (repli texte brut si INSUFFISANT)
 - [x] P7 Correction dépréciation `inputValidator()` → `validator()`
-- [x] Vérifs : `tsc` 0 erreur, eslint propre, `npm run build` OK
+- [x] Vérifs : `tsc` 0 erreur, eslint propre, `pnpm build` OK
 
 > ⚠️ Ces changements sont sur `GET409-RelaisYoon/mvp/` (local) : pour les
 > voir sur https://relaisyoon.lovable.app, les pousser sur le dépôt Lovable
@@ -175,7 +175,7 @@ RelaisYoon (l'exemple du tutoriel = projet pilote NiayesBiz/GreenSprint).
        `VITE_DIFY_API_KEY` côté navigateur ; ici la clé reste **côté
        serveur** dans `src/lib/dify.functions.ts` (aucun préfixe `VITE_`),
        `.env` est dans `.gitignore` (jamais commité) ; redémarrer
-       `Ctrl+C` puis `npm run dev` après toute modification
+        `Ctrl+C` puis `pnpm dev` après toute modification
 6. [x] Faux positifs CSS : `mvp/.vscode/settings.json` fourni
        (`css.validate: false` — §6 du tutoriel)
 7. [x] Modifier le code avec Copilot Chat (`Ctrl+Shift+I`) — prompts
@@ -209,12 +209,12 @@ casserait ce modèle, et Vercel/Netlify sont écartés par choix.
 
 - [x] Cible intégrée au build : nitro → preset Cloudflare par défaut
       (génère `.output/server/wrangler.json`, worker
-      `reymouhid95-get409-relaisyoon-mvp`) + script `npm run deploy`
-- [ ] `npm run build`
-- [ ] `npx wrangler login` (compte gratuit, sans carte)
-- [ ] `npx wrangler secret put DIFY_API_KEY` (la clé devient un secret
+      `reymouhid95-get409-relaisyoon-mvp`) + script `pnpm run deploy`
+- [ ] `pnpm build`
+- [ ] `pnpm dlx wrangler login` (compte gratuit, sans carte)
+- [ ] `pnpm dlx wrangler secret put DIFY_API_KEY` (la clé devient un secret
       du Worker — jamais dans le code ni dans git)
-- [ ] `npm run deploy` → URL `*.workers.dev` à relever ici :
+- [ ] `pnpm run deploy` → URL `*.workers.dev` à relever ici :
       `https://________________________________.workers.dev`
 
 ### Checklist finale à rendre (template_vscode_equipes.docx)
@@ -224,9 +224,10 @@ casserait ce modèle, et Vercel/Netlify sont écartés par choix.
 
 - [x] Dépôt GitHub : code du MVP dans `GET409-RelaisYoon/mvp/`
       (repo `reymouhid95/GET409-RelaisYoon`)
-- [ ] VS Code installé avec les extensions Copilot + Live Server + GitLens
-- [x] `npm install` réussi sans erreur critique (npm, 1er octobre 2026)
-- [x] `npm run dev` : site visible sur localhost:8080 (test local OK le
+- [x] VS Code installé avec les extensions Copilot + Live Server + GitLens
+- [x] `pnpm install` réussi sans erreur critique (pnpm 10.33,
+      1er octobre 2026, `pnpm-lock.yaml` versionné)
+- [x] `pnpm dev` : site visible sur localhost:8080 (test local OK le
       1er octobre 2026 : agent IA → fiche, INSUFFISANT sur hors-sujet)
 - [x] Fichier webhook Dify identifié : `src/lib/dify.functions.ts` →
       fonction `demanderAgent()` (fetch vers `api.dify.ai/v1/workflows/run`)
@@ -235,6 +236,6 @@ casserait ce modèle, et Vercel/Netlify sont écartés par choix.
       3 modifications — logs de debug agent Dify (journal dev
       uniquement), filtre par statut sur `src/routes/fiches.tsx`,
       page FAQ `src/routes/aide.tsx` + nav `SiteHeader.tsx`
-- [ ] `npm run build` : dossier `.output/` créé (taille notée)
+- [ ] `pnpm build` : dossier `.output/` créé (taille notée)
 - [ ] Déploiement : URL Cloudflare Workers fonctionnelle et partagée
 - [ ] `git add . + git commit + git push` : modifications sauvegardées
