@@ -153,3 +153,80 @@ Adaptation des 7 fichiers `class05/` au projet (cf. commit) :
 > ⚠️ Ces changements sont sur `GET409-RelaisYoon/mvp/` (local) : pour les
 > voir sur https://relaisyoon.lovable.app, les pousser sur le dépôt Lovable
 > connecté `reymouhid95/relaisyoon` (redéploiement automatique).
+
+## Livrables S7 — VS Code + GitHub + Dify (en cours)
+
+Sources : `class07/class07/tutoriel_vscode_workflow_GET409.docx` +
+`template_vscode_equipes.docx` (checklist finale à rendre), adaptés à
+RelaisYoon (l'exemple du tutoriel = projet pilote NiayesBiz/GreenSprint).
+
+### Parcours — étapes du tutoriel adaptées
+
+1. [x] Prérequis : `git --version`, `node --version` (LTS), VS Code +
+       extensions GitHub Copilot / GitLens / Live Server — le projet
+       tourne avec npm (`npm install && npm run dev`), pas besoin de bun
+2. [x] Cloner : `git clone https://github.com/reymouhid95/GET409-RelaisYoon.git`
+       puis `cd GET409-RelaisYoon/mvp`
+3. [x] Dépendances : `npm install` (dossier `mvp/`)
+4. [x] Lancer : `npm run dev` → Vite affiche l'URL (localhost:808x),
+       HMR actif, le port affiché fait foi
+5. [x] `.env` : `cp .env.example .env` puis y mettre `DIFY_API_KEY`
+       — **Écart tutoriel assumé** : le tutoriel (projet pilote) utilise
+       `VITE_DIFY_API_KEY` côté navigateur ; ici la clé reste **côté
+       serveur** dans `src/lib/dify.functions.ts` (aucun préfixe `VITE_`),
+       `.env` est dans `.gitignore` (jamais commité) ; redémarrer
+       `Ctrl+C` puis `npm run dev` après toute modification
+6. [x] Faux positifs CSS : `mvp/.vscode/settings.json` fourni
+       (`css.validate: false` — §6 du tutoriel)
+7. [ ] Modifier le code avec Copilot Chat (`Ctrl+Shift+I`) — prompts
+       adaptés ci-dessous, réponse documentée dans le template
+8. [x] Tester le webhook Dify : page **Fiches du soir → « Consulter
+       l'agent IA »** (notre équivalent de « Saisie Prix Terrain ») :
+       « Hello » → INSUFFISANT, « Petersen vers Guédiawaye » → fiche
+       (erreurs type `HTTPError` : vérifier `.env` + relancer Vite +
+       workflow publié dans Dify)
+9. [ ] Sauvegarder : `git add . && git commit -m "..." && git push`
+       — si refusé : `git pull --rebase origin main` puis `git push`
+
+### Prompts Copilot adaptés à RelaisYoon
+
+| Objectif | Prompt à utiliser |
+| --- | --- |
+| Comprendre le webhook | Explique-moi la fonction `demanderAgent` dans `src/lib/dify.functions.ts` |
+| Modifier la recherche | Dans `src/routes/fiches.tsx`, ajoute un filtre par statut (Disponible/Indisponible) |
+| Corriger une erreur | L'agent renvoie « Service temporairement indisponible » — vérifie la lecture de `DIFY_API_KEY` |
+| Créer une page | Crée une page `/aide` avec une FAQ sur les correspondances BRT |
+
+### Déploiement — Cloudflare Workers (ni Vercel, ni Netlify)
+
+Choix imposé : le projet est **SSR** (fonctions serveur TanStack +
+clé Dify lue côté serveur) — un hébergeur statique type GitHub Pages
+casserait ce modèle, et Vercel/Netlify sont écartés par choix.
+
+- [x] Cible intégrée au build : nitro → preset Cloudflare par défaut
+      (génère `.output/server/wrangler.json`, worker
+      `reymouhid95-get409-relaisyoon-mvp`) + script `npm run deploy`
+- [ ] `npm run build`
+- [ ] `npx wrangler login` (compte gratuit, sans carte)
+- [ ] `npx wrangler secret put DIFY_API_KEY` (la clé devient un secret
+      du Worker — jamais dans le code ni dans git)
+- [ ] `npm run deploy` → URL `*.workers.dev` à relever ici :
+      `https://________________________________.workers.dev`
+
+### Checklist finale à rendre (template_vscode_equipes.docx)
+
+À compléter en équipe dans `class07/class07/template_vscode_equipes.docx`
+(aucun `[CROCHET]` ne doit rester) :
+
+- [x] Dépôt GitHub : code du MVP dans `GET409-RelaisYoon/mvp/`
+      (repo `reymouhid95/GET409-RelaisYoon`)
+- [ ] VS Code installé avec les extensions Copilot + Live Server + GitLens
+- [ ] `npm install` réussi sans erreur critique (durée notée)
+- [ ] `npm run dev` : site visible sur localhost (URL notée)
+- [x] Fichier webhook Dify identifié : `src/lib/dify.functions.ts` →
+      fonction `demanderAgent()` (fetch vers `api.dify.ai/v1/workflows/run`)
+- [ ] Question posée à Copilot Chat (réponse résumée dans le docx)
+- [ ] Au moins une modification réalisée avec Copilot (Section 4)
+- [ ] `npm run build` : dossier `.output/` créé (taille notée)
+- [ ] Déploiement : URL Cloudflare Workers fonctionnelle et partagée
+- [ ] `git add . + git commit + git push` : modifications sauvegardées
