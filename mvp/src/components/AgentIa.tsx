@@ -1,10 +1,11 @@
 import { useCallback, useState, type FormEvent } from "react";
-import { AlertCircle, Mic, MicOff, RotateCcw, Send, Sparkles } from "lucide-react";
+import { AlertCircle, MessageCircle, Mic, MicOff, RotateCcw, Send, Sparkles } from "lucide-react";
 
 import { AgentFicheCard } from "@/components/AgentFicheCard";
 import { useVoiceInput } from "@/hooks/useVoiceInput";
 import { demanderAgent } from "@/lib/dify.functions";
 import { parseFicheAgent } from "@/lib/ficheAgent";
+import { texteReponseAgent, urlPartageWhatsApp } from "@/lib/partage";
 import { cn } from "@/lib/utils";
 
 /* Amorces alignées sur les relevés réels : cliquer doit envoyer la question,
@@ -15,15 +16,31 @@ const AMORCES = [
   "Correspondance pour Keur Massar",
 ];
 
-function ResultatAgent({ texte }: { texte: string }) {
+/*
+ * Toute réponse de l'agent est partageable, y compris INSUFFISANT : c'est le
+ * cas le plus fréquent, et sans bouton l'usagère ne peut pas transmettre sa
+ * question — ni la faire reformuler par un proche qui a la donnée.
+ */
+function ResultatAgent({ texte, question }: { texte: string; question: string }) {
   const fiche = parseFicheAgent(texte);
+
   if (!fiche) {
     return (
-      <div className="animate-rise bg-surface text-muted-foreground mt-5 rounded-2xl p-5 text-sm leading-relaxed whitespace-pre-wrap">
-        {texte}
+      <div className="animate-rise bg-surface mt-5 rounded-2xl p-5">
+        <p className="text-muted-foreground text-sm leading-relaxed whitespace-pre-wrap">{texte}</p>
+        <a
+          href={urlPartageWhatsApp(texteReponseAgent({ question, reponse: texte }))}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-whatsapp hover:bg-whatsapp-hover focus-visible:ring-whatsapp mt-4 inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-bold text-white transition-all duration-200 active:scale-[0.98]"
+        >
+          <MessageCircle className="size-4" aria-hidden />
+          Partager la question sur WhatsApp
+        </a>
       </div>
     );
   }
+
   return <AgentFicheCard fiche={fiche} />;
 }
 
@@ -49,6 +66,7 @@ function ChargementAgent() {
 
 export function AgentIa() {
   const [question, setQuestion] = useState<string>("");
+  const [questionPosee, setQuestionPosee] = useState<string>("");
   const [chargement, setChargement] = useState<boolean>(false);
   const [resultat, setResultat] = useState<string | null>(null);
   const [erreur, setErreur] = useState<string | null>(null);
@@ -64,6 +82,7 @@ export function AgentIa() {
     setChargement(true);
     setResultat(null);
     setErreur(null);
+    setQuestionPosee(propre);
 
     try {
       const reponse = await demanderAgent({ data: { question: propre } });
@@ -214,7 +233,7 @@ export function AgentIa() {
           </div>
         )}
 
-        {resultat && !chargement && <ResultatAgent texte={resultat} />}
+        {resultat && !chargement && <ResultatAgent texte={resultat} question={questionPosee} />}
       </div>
     </section>
   );

@@ -1,11 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { CalendarClock, Search, SearchX, SlidersHorizontal, X } from "lucide-react";
+import { CalendarClock, History, Search, SearchX, SlidersHorizontal, X } from "lucide-react";
 
 import { AgentIa } from "@/components/AgentIa";
 import { FicheCard } from "@/components/FicheCard";
 import { Button } from "@/components/ui/button";
-import { fiches, filtresQuartier, type Statut } from "@/data/fiches";
+import { SESSION, ficheDisponible, filtresQuartier, fiches, type Statut } from "@/data/fiches";
+import { useFraicheur } from "@/lib/fraicheur";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/fiches")({
@@ -63,17 +64,51 @@ function PastilleFiltre({
   );
 }
 
+/**
+ * US-02 : quand tous les relevés sont périmés, on le dit franchement plutôt
+ * que de laisser croire que ces prix sont ceux de ce soir.
+ */
+function BanniereSession({ perime }: { perime: boolean }) {
+  if (!perime) return null;
+
+  return (
+    <p className="border-danger/25 bg-danger-soft text-danger animate-rise flex items-start gap-3 rounded-2xl border p-4 text-sm">
+      <History className="mt-0.5 size-4 shrink-0" aria-hidden />
+      <span>
+        <strong>La session du soir est terminée.</strong> Ces prix sont ceux du dernier relevé (
+        {SESSION.dateLisible}, semaine {SESSION.semaine}) et ne sont plus garantis. Confirmez auprès
+        du transporteur avant de monter.
+      </span>
+    </p>
+  );
+}
+
 function FichesPage() {
   const [filtre, setFiltre] = useState<string>("Tous");
   const [statutFiltre, setStatutFiltre] = useState<"Tous" | Statut>("Tous");
   const [recherche, setRecherche] = useState<string>("");
 
+  // Pilote la bannière : l'heure la plus récente du registre.
+  const dernierReleve = fiches
+    .flatMap((f) => f.departs)
+    .map((d) => d.releveLe)
+    .sort()
+    .at(-1);
+  const fraicheurGlobale = useFraicheur(dernierReleve ?? "");
+
   const liste = useMemo(
     () =>
       fiches.filter((f) => {
         const parQuartier = filtre === "Tous" || normalise(f.quartier).includes(normalise(filtre));
-        const parRecherche = normalise(f.quartier).includes(normalise(recherche.trim()));
-        const parStatut = statutFiltre === "Tous" || f.statut === statutFiltre;
+        const parRecherche = normalise(`${f.quartier} ${f.station}`).includes(
+          normalise(recherche.trim()),
+        );
+        const parStatut =
+          statutFiltre === "Tous"
+            ? true
+            : statutFiltre === "Disponible"
+              ? ficheDisponible(f)
+              : !ficheDisponible(f);
         return parQuartier && parRecherche && parStatut;
       }),
     [filtre, recherche, statutFiltre],
@@ -92,18 +127,22 @@ function FichesPage() {
       <header className="animate-rise">
         <p className="text-primary inline-flex items-center gap-1.5 text-[0.6875rem] font-bold tracking-widest uppercase">
           <CalendarClock className="size-3.5" aria-hidden />
-          Relevés du soir
+          Relevés du soir · {SESSION.semaine}
         </p>
         <h1 className="text-h1 mt-3">Fiches du soir</h1>
         <p className="text-muted-foreground text-lede mt-3 max-w-2xl">
-          Les correspondances notées sur le terrain entre 18h et 19h. Posez votre question à
-          l&apos;agent, ou parcourez les fiches.
+          Les correspondances notées sur le terrain entre 18h et 19h. Chaque prix affiche
+          l&apos;heure de son relevé et devient « périmé » au-delà d&apos;une heure.
         </p>
       </header>
 
+      <div className="mt-6">
+        <BanniereSession perime={fraicheurGlobale?.perime ?? false} />
+      </div>
+
       {/* L'agent passe en tête : c'est l'action principale de la page, elle
           était reléguée sous la grille de fiches. */}
-      <div className="mt-8">
+      <div className="mt-6">
         <AgentIa />
       </div>
 
@@ -144,19 +183,24 @@ function FichesPage() {
               type="search"
               value={recherche}
               onChange={(e) => setRecherche(e.target.value)}
-              placeholder="Rechercher un quartier…"
+              placeholder="Rechercher un quartier ou une station…"
               className="placeholder:text-muted-foreground/70 min-w-0 flex-1 bg-transparent py-3 pr-3 text-sm outline-none"
             />
           </div>
 
+          {/* Les pastilles viennent des données : impossible qu'un quartier
+              exister dans le registre sans être filtrable. */}
           <div className="mt-3 flex flex-wrap gap-2">
-            {["Tous", ...filtresQuartier].map((option) => (
+            <PastilleFiltre actif={filtre === "Tous"} onClick={() => setFiltre("Tous")}>
+              Tous
+            </PastilleFiltre>
+            {filtresQuartier.map(({ quartier, court }) => (
               <PastilleFiltre
-                key={option}
-                actif={filtre === option}
-                onClick={() => setFiltre(option)}
+                key={quartier}
+                actif={filtre === quartier}
+                onClick={() => setFiltre(quartier)}
               >
-                {option}
+                {court}
               </PastilleFiltre>
             ))}
           </div>

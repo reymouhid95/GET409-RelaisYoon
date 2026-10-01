@@ -74,7 +74,8 @@ const GARANTIES = [
 
 function Index() {
   const apercu = fiches.slice(0, 3);
-  const disponibles = fiches.filter((f) => f.statut === "Disponible").length;
+  const tousLesDeparts = fiches.flatMap((f) => f.departs);
+  const departsDisponibles = tousLesDeparts.filter((d) => d.statut === "Disponible").length;
 
   return (
     <div>
@@ -149,11 +150,13 @@ function Index() {
                     >
                       <div className="min-w-0">
                         <p className="truncate text-sm font-bold">{fiche.quartier}</p>
-                        <p className="text-muted-foreground truncate text-xs">{fiche.station}</p>
+                        <p className="text-muted-foreground truncate text-xs">
+                          {fiche.departs.map((d) => d.heure).join(" · ")} · {fiche.station}
+                        </p>
                       </div>
                       <p className="text-primary ry-num shrink-0 text-lg font-extrabold">
-                        {fiche.prix}
-                        <span className="text-muted-foreground ml-0.5 text-[0.625rem font-bold]">
+                        {Math.min(...fiche.departs.map((d) => d.prix))}
+                        <span className="text-muted-foreground ml-0.5 text-[0.625rem] font-bold">
                           FCFA
                         </span>
                       </p>
@@ -164,7 +167,7 @@ function Index() {
                 <div className="border-border/60 mt-5 flex items-center gap-2.5 border-t pt-4">
                   <Sparkles className="text-primary size-4 shrink-0" aria-hidden />
                   <p className="text-muted-foreground text-xs">
-                    {disponibles} correspondances disponibles sur {fiches.length} relevées
+                    {departsDisponibles} départs disponibles sur {tousLesDeparts.length} relevés
                   </p>
                 </div>
               </div>
@@ -177,8 +180,8 @@ function Index() {
       <section className="border-border/60 bg-card/50 border-b">
         <div className="mx-auto grid max-w-page grid-cols-2 divide-x divide-y sm:grid-cols-4 sm:divide-y-0">
           {[
-            { valeur: String(fiches.length), libelle: "relevés ce soir" },
-            { valeur: String(disponibles), libelle: "correspondances actives" },
+            { valeur: String(tousLesDeparts.length), libelle: "départs relevés" },
+            { valeur: String(departsDisponibles), libelle: "départs disponibles" },
             { valeur: "18h–19h", libelle: "créneau de relevé" },
             { valeur: "0", libelle: "prix inventés" },
           ].map((stat) => (
