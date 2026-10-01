@@ -1,12 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useCallback, useState } from "react";
 
-import { FicheCard } from "@/components/FicheCard";
 import { AgentFicheCard } from "@/components/AgentFicheCard";
-import { parseFicheAgent } from "@/lib/ficheAgent";
+import { FicheCard } from "@/components/FicheCard";
 import { fiches, filtresQuartier, type Statut } from "@/data/fiches";
-import { demanderAgent } from "@/lib/dify.functions";
 import { useVoiceInput } from "@/hooks/useVoiceInput";
+import { demanderAgent } from "@/lib/dify.functions";
+import { parseFicheAgent } from "@/lib/ficheAgent";
 
 export const Route = createFileRoute("/fiches")({
   head: () => ({

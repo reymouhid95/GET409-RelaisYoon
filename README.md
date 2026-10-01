@@ -175,7 +175,7 @@ RelaisYoon (l'exemple du tutoriel = projet pilote NiayesBiz/GreenSprint).
        `VITE_DIFY_API_KEY` côté navigateur ; ici la clé reste **côté
        serveur** dans `src/lib/dify.functions.ts` (aucun préfixe `VITE_`),
        `.env` est dans `.gitignore` (jamais commité) ; redémarrer
-        `Ctrl+C` puis `pnpm dev` après toute modification
+       `Ctrl+C` puis `pnpm dev` après toute modification
 6. [x] Faux positifs CSS : `mvp/.vscode/settings.json` fourni
        (`css.validate: false` — §6 du tutoriel)
 7. [x] Modifier le code avec Copilot Chat (`Ctrl+Shift+I`) — prompts
@@ -194,12 +194,13 @@ RelaisYoon (l'exemple du tutoriel = projet pilote NiayesBiz/GreenSprint).
 
 ### Prompts Copilot adaptés à RelaisYoon
 
-| Objectif              | Prompt à utiliser                                                                              |
-| --------------------- | ---------------------------------------------------------------------------------------------- |
-| Comprendre le webhook | Explique-moi la fonction `demanderAgent` dans `src/lib/dify.functions.ts`                      |
-| Modifier la recherche | Dans `src/routes/fiches.tsx`, ajoute un filtre par statut (Disponible/Indisponible)            |
-| Corriger une erreur   | L'agent renvoie « Service temporairement indisponible » — vérifie la lecture de `DIFY_API_KEY` |
-| Créer une page        | Crée une page `/aide` avec une FAQ sur les correspondances BRT                                 |
+| Objectif              | Prompt à utiliser                                                                                           |
+| --------------------- | ----------------------------------------------------------------------------------------------------------- |
+| Comprendre le webhook | Explique-moi la fonction `demanderAgent` dans `src/lib/dify.functions.ts`                                   |
+| Modifier la recherche | Dans `src/routes/fiches.tsx`, ajoute un filtre par statut (Disponible/Indisponible)                         |
+| Corriger une erreur   | L'agent renvoie « Service temporairement indisponible » — vérifie la lecture de `DIFY_API_KEY`              |
+| Créer une page        | Crée une page `/aide` avec une FAQ sur les correspondances BRT                                              |
+| Ajouter des logs      | Ajoute des logs pour voir les réponses lors de la soumission d'une question à l'agent dans la fiche du soir |
 
 ### Déploiement — Cloudflare Workers (ni Vercel, ni Netlify)
 
