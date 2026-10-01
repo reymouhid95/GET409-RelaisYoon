@@ -134,5 +134,7 @@ Adaptation des 7 fichiers `class05/` au projet (cf. commit) :
 - [x] L3 Schéma Archi V2 (20 pts) — docs/s5-l3-schema.svg
 - [x] L1 MVP V2 (30 pts) — https://relaisyoon.lovable.app,
       formulaire RAG fonctionnel (Q1 → fiche, hors-sujet → INSUFFISANT)
+- [x] Code source du MVP intégré dans `mvp/` (TanStack Start + shadcn,
+      synchronisé depuis le dépôt Lovable connecté)
 - [x] L4 Journal S5 (20 pts) — P1 base, P2 webhook, P3 cohérence,
       notés 5/5 dans docs/journal-prompts.md
