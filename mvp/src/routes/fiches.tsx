@@ -4,7 +4,7 @@ import { useCallback, useState } from "react";
 import { FicheCard } from "@/components/FicheCard";
 import { AgentFicheCard } from "@/components/AgentFicheCard";
 import { parseFicheAgent } from "@/lib/ficheAgent";
-import { fiches, filtresQuartier } from "@/data/fiches";
+import { fiches, filtresQuartier, type Statut } from "@/data/fiches";
 import { demanderAgent } from "@/lib/dify.functions";
 import { useVoiceInput } from "@/hooks/useVoiceInput";
 
@@ -153,6 +153,7 @@ function ResultatAgent({ texte }: { texte: string }) {
 
 function FichesPage() {
   const [filtre, setFiltre] = useState<string>("Tous");
+  const [statutFiltre, setStatutFiltre] = useState<"Tous" | Statut>("Tous");
   const [recherche, setRecherche] = useState<string>("");
 
   const normalise = (valeur: string) =>
@@ -164,7 +165,8 @@ function FichesPage() {
   const liste = fiches.filter((f) => {
     const parQuartier = filtre === "Tous" || normalise(f.quartier).includes(normalise(filtre));
     const parRecherche = normalise(f.quartier).includes(normalise(recherche.trim()));
-    return parQuartier && parRecherche;
+    const parStatut = statutFiltre === "Tous" || f.statut === statutFiltre;
+    return parQuartier && parRecherche && parStatut;
   });
 
   const options = ["Tous", ...filtresQuartier];
@@ -208,6 +210,30 @@ function FichesPage() {
           );
         })}
       </div>
+
+      <fieldset className="mt-5">
+        <legend className="mb-2 text-sm font-semibold">Disponibilité</legend>
+        <div className="flex flex-wrap gap-2">
+          {(["Tous", "Disponible", "Indisponible"] as const).map((statut) => {
+            const actif = statutFiltre === statut;
+            return (
+              <button
+                key={statut}
+                type="button"
+                onClick={() => setStatutFiltre(statut)}
+                aria-pressed={actif}
+                className={
+                  actif
+                    ? "rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground"
+                    : "rounded-full border border-border bg-card px-4 py-2 text-sm font-semibold text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                }
+              >
+                {statut}
+              </button>
+            );
+          })}
+        </div>
+      </fieldset>
 
       <p className="mt-6 text-sm text-muted-foreground">
         {liste.length} fiche{liste.length > 1 ? "s" : ""} affichée
