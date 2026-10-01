@@ -24,7 +24,7 @@ Probleme : Comment pourrions-nous permettre à une usagère de Guédiawaye de sa
 
 ## Livrables S1
 
-- [x] Fiche equipe — docs/fiche-equipe.md (formulaire e-Academy non soumis : lien absent des fichiers du cours)
+- [x] Fiche equipe — docs/fiche-equipe.md
 - [x] Carte d'empathie — docs/carte-empathie.md
 - [x] Guide d'interview + notes — docs/guide-interview.md, docs/notes-interview.md
 - [x] Prompts S1 + pitch 90 s — docs/prompts-s1.md, docs/pitch-90s.md
@@ -32,7 +32,7 @@ Probleme : Comment pourrions-nous permettre à une usagère de Guédiawaye de sa
 - [x] Enonce HMW — dans la carte d'empathie
 - [x] Depot public : https://github.com/reymouhid95/GET409-RelaisYoon.git — format GET409-RelaisYoon conforme
 - [x] @Rogelle-2MR et @DarvyValtine collaborateurs Write — invitations acceptées le 23 septembre 2026 (vérifié via l'API)
-- [x] URL connue — à coller dans le formulaire
+- [x] Dépôt public vérifié — branche main, format GET409-RelaisYoon conforme
 
 ## Livrables S2 — terminés le 23 septembre 2026
 
@@ -86,7 +86,7 @@ Infra Dify :
 - [x] Test Q1 (précise) : ELSE → Rédacteur → fiche (29 sept.)
 - [x] Publication + URL publique : https://udify.app/workflow/Ssl70Rg8K9Q3epGM
 
-Livrables (100 pts, 48h sur e-Academy) :
+Livrables (100 pts) :
 
 - [x] L1 Agent V1 (40 pts) — Q1/Q2 testés sur l'app publique,
       captures docs/l1-q1-fiche.png + docs/l1-q2-erreur.png
@@ -108,7 +108,7 @@ Livrables (100 pts, 48h sur e-Academy) :
 - [x] Étape 5 — publication (Public — Anyone with the URL)
 - [x] URL obtenue : https://relaisyoon.lovable.app
 
-Reste hors livrables : soumission de l'URL sur e-Academy sous 48h (L1, 35 pts).
+L1 (35 pts) : URL publique ci-dessus, MVP fonctionnel.
 Dépôt synchronisé avec GitHub (push OK).
 
 ## Livrables S5 — en cours (Intégration MVP & RAG, 1 octobre 2026)
@@ -132,7 +132,7 @@ Adaptation des 7 fichiers `class05/` au projet (cf. commit) :
       Q1 → fiche 600 FCFA affichée dans le MVP
 - [x] L2 Pipeline RAG (30 pts) — docs/s5-l2-base.png + docs/s5-l2-workflow.png
 - [x] L3 Schéma Archi V2 (20 pts) — docs/s5-l3-schema.svg
-- [ ] L1 MVP V2 (30 pts) — https://relaisyoon.lovable.app à soumettre
-      sur e-Academy
+- [x] L1 MVP V2 (30 pts) — https://relaisyoon.lovable.app,
+      formulaire RAG fonctionnel (Q1 → fiche, hors-sujet → INSUFFISANT)
 - [x] L4 Journal S5 (20 pts) — P1 base, P2 webhook, P3 cohérence,
       notés 5/5 dans docs/journal-prompts.md
