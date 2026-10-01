@@ -233,7 +233,7 @@ casserait ce modèle, et Vercel/Netlify sont écartés par choix.
       1er octobre 2026 : agent IA → fiche, INSUFFISANT sur hors-sujet)
 - [x] Fichier webhook Dify identifié : `src/lib/dify.functions.ts` →
       fonction `demanderAgent()` (fetch vers `api.dify.ai/v1/workflows/run`)
-- [ ] Question posée à Copilot Chat (réponse résumée dans le docx)
+- [x] Question posée à Copilot Chat (réponse résumée dans le docx)
 - [x] Au moins une modification réalisée avec Copilot (Section 4) :
       3 modifications — logs de debug agent Dify (journal dev
       uniquement), filtre par statut sur `src/routes/fiches.tsx`,
