@@ -237,3 +237,20 @@ itération si < 3/5.
      reste robuste car le texte final reste concaténé.
 - Reste : captures L1/L2 à verser dans docs/, invitation workspace
   membres, soumission formulaire e-Academy, push Git.
+
+## S4 — Lovable : 3 itérations (1 octobre)
+
+Prompt initial (Étape 2) : prompt S4 rempli (`s4-lovable-prompt.md`),
+RelaisYoon — 3 pages, 6 relevés, filtres quartier, généré en un envoi.
+Checklist preview : 6/6 points OK.
+
+- P1 Correction — « relevé Keur Massar 300 FCFA → 350 FCFA » → appliqué.
+  Note : 5/5, correction ciblée, aucune dérive sur les autres fiches.
+- P2 Visuelle — « bannière bleue sous le hero : Relevés du soir mis à jour
+  chaque semaine + 📢 » → appliquée. Note : 5/5, style cohérent avec le hero.
+- P3 Fonctionnelle — « champ de recherche filtrant les quartiers en temps
+  réel sur Fiches du soir » → fonctionnelle. Note : 5/5, comportement attendu
+  sans effet de bord sur les pastilles.
+
+Leçon : 1 prompt = 1 correction (règle du template) — les 3 itérations sont
+passées du premier coup en respectant cette discipline.
