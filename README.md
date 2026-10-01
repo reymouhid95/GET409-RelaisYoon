@@ -92,3 +92,20 @@ Livrables (100 pts, 48h sur e-Academy) :
 - [x] L2 Schéma d'architecture (30 pts) — docs/l2-schema.png
 - [x] L3 Journal S3 — docs/journal-prompts.md, Zero/Few/CoT + runs (20 pts)
 - [x] L4 Réflexion éthique — docs/reflexion-ethique-s3.md, 2 risques (10 pts)
+
+## Livrables S4 — terminés le 1 octobre 2026 (Lovable)
+
+Étapes du template (`GET409_S4_Template_Lovable_Etudiants.docx`) :
+
+- [x] Étape 1 — connexion GitHub à Lovable AVANT toute création
+- [x] Étape 2 — prompt rempli généré en un envoi :
+      docs/s4-lovable-prompt.md (RelaisYoon, 3 pages, 6 relevés réalistes)
+- [x] Étape 3 — checklist preview 6/6 (header, navigation, hero + 2 CTA,
+      6 cartes avec pastilles, filtres quartier, formulaire Contact)
+- [x] Étape 4 — 3 itérations (P1 correction, P2 visuelle, P3 fonctionnelle)
+      documentées au format tableau L3 dans docs/journal-prompts.md
+- [x] Étape 5 — publication (Public — Anyone with the URL)
+- [x] URL obtenue : https://relaisyoon.lovable.app
+
+Reste hors livrables : `git push` (4 commits), soumission de l'URL
+sur e-Academy sous 48h (L1, 35 pts).
