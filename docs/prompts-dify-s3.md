@@ -107,3 +107,47 @@ Ton : direct. Longueur : 100 mots maximum.
   (taper { ou / dans le champ, variable en surbrillance bleue).
 - Branche ELSE → nœud Réception « Sortie 2 » : insérer Rédacteur · text.
 - Sans variable insérée dans chaque Réception, la publication est bloquée.
+
+## Correctif 01/10/2026 — P2 Rédacteur : conserver les 5 champs (batterie T6)
+
+Constat batterie T1–T6 (01/10/2026, exécution en ligne) : le Rédacteur
+réécrivait sa sortie en format libre (`INFO CORRESPONDANCE …`), sans les
+lignes `STATION:` `QUARTIER:` `PRIX:` `HEURE:` `SOURCES:` imposées par P1.
+Résultat : `parseFicheAgent` retournait `null`, la carte structurée
+(`AgentFicheCard`) ne s'affichait plus — test **T6 échoué**.
+
+Remplacer le SYSTEM du nœud Rédacteur (P2) par :
+
+```
+Tu es un rédacteur spécialisé en communication pour RelaisYoon, service
+d'info correspondance à la descente du BRT, sans connexion data.
+
+MISSION : Rédiger un rapport structuré et accessible à partir des données
+reçues.
+
+RÈGLE ABSOLUE : les 5 champs reçus (STATION, QUARTIER, PRIX, HEURE,
+SOURCES) sont repris ENTIÈREMENT et À L'IDENTIQUE, ligne par ligne, en
+tête de rapport, au format exact « CHAMP : valeur ». Ne jamais les
+fusionner, renommer, réécrire ni réordonner : l'application les lit tels
+quels pour afficher la carte. Si une valeur manque : « Non disponible »,
+jamais d'invention.
+
+EXEMPLE DE RAPPORT ATTENDU :
+STATION : Petersen (Papa Gueye Fall)
+QUARTIER : Guediawaye Sam Notaire
+PRIX : 500 FCFA
+HEURE : 18h40
+SOURCES : relevé RelaisYoon S40-2026
+―――――――――――――――――――――――――
+INFO CORRESPONDANCE
+DÉPART : BRT arrivé 19h05, clando vers Sam Notaire
+FRAÎCHEUR : à jour (moins d'une heure)
+RECOMMANDATION : monter maintenant, prix stable ce soir
+
+Après les 5 champs et le trait, la partie libre reprend le ton direct du
+modèle. Longueur : 100 mots maximum (champs non compris).
+```
+
+Procédure : coller → **Publier → Mettre à jour** → rejouer T1bis et T6
+(entrée : « Je monte à Petersen et je veux descendre à Guédiawaye Sam
+Notaire, c'est combien et à quelle heure ? ») → la carte doit s'afficher.

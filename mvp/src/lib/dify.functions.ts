@@ -15,7 +15,7 @@ export const demanderAgent = createServerFn({ method: "POST" })
     }
 
     const controleur = new AbortController();
-    const minuteur = setTimeout(() => controleur.abort(), 10000);
+    const minuteur = setTimeout(() => controleur.abort(), 30000);
 
     try {
       if (journalise) console.info("[agent Dify] Question soumise :", data.question);
