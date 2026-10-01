@@ -212,12 +212,30 @@ casserait ce modèle, et Vercel/Netlify sont écartés par choix.
 - [x] Cible intégrée au build : nitro → preset Cloudflare par défaut
       (génère `.output/server/wrangler.json`, worker
       `reymouhid95-get409-relaisyoon-mvp`) + script `pnpm run deploy`
-- [ ] `pnpm build`
-- [ ] `pnpm dlx wrangler login` (compte gratuit, sans carte)
-- [ ] `pnpm dlx wrangler secret put DIFY_API_KEY` (la clé devient un secret
-      du Worker — jamais dans le code ni dans git)
-- [ ] `pnpm run deploy` → URL `*.workers.dev` à relever ici :
-      `https://________________________________.workers.dev`
+- [x] `pnpm build` — OK le 1er octobre 2026, `.output/` = 1,2 Mo
+      (260 Ko gzip), version `94c50c93-5b7f-4d48-a510-2f52b8b999e5`
+- [x] `pnpm dlx wrangler login` (compte gratuit, sans carte) — OAuth
+      via navigateur, callback `http://localhost:8976`
+- [x] Secret du Worker posé : `DIFY_API_KEY` (commande depuis `mvp/`)
+      — la clé devient un secret du Worker, jamais dans le code ni dans git :
+      `grep '^DIFY_API_KEY=' .env | cut -d= -f2- | pnpm dlx wrangler secret put DIFY_API_KEY --name reymouhid95-get409-relaisyoon-mvp`
+      (`--name` obligatoire : le `wrangler.json` généré par nitro vit dans
+      `.output/server/`, pas à la racine de `mvp/`)
+- [x] `pnpm run deploy` → URL publique :
+      `https://reymouhid95-get409-relaisyoon-mvp.thiernooury89.workers.dev`
+- [x] Vérifs en ligne : `/`, `/fiches`, `/aide` → HTTP 200, SSR actif
+      (contenu fiches rendu côté serveur, ex. « Petersen »)
+- [x] Secret bien lu par le Worker : aucun log
+      « DIFY_API_KEY absente » dans `wrangler tail` → le binding secret
+      est bien résolu
+
+> ⚠️ **Bloqué côté Dify, pas côté déploiement** : la clé `DIFY_API_KEY`
+> du `.env` est refusée par l'API (`HTTP 401 — "Access token is
+> invalid"`). Le pipeline Cloudflare répond donc « Service temporairement
+> indisponible ». Il faut **régénérer la clé d'API dans Dify**
+> (workflow `RelaisYoon_FicheCorrespondance_v1_RelaisYoon` → Applications
+> → API Access) puis rejouer la commande `wrangler secret put` ci-dessus.
+> Le reste du déploiement est validé.
 
 ### Checklist finale à rendre (template_vscode_equipes.docx)
 
@@ -241,6 +259,9 @@ Le template vierge source reste `class07/class07/template_vscode_equipes.docx` :
       3 modifications — logs de debug agent Dify (journal dev
       uniquement), filtre par statut sur `src/routes/fiches.tsx`,
       page FAQ `src/routes/aide.tsx` + nav `SiteHeader.tsx`
-- [ ] `pnpm build` : dossier `.output/` créé (taille notée)
-- [ ] Déploiement : URL Cloudflare Workers fonctionnelle et partagée
+- [x] `pnpm build` : dossier `.output/` créé (1,2 Mo / 260 Ko gzip)
+- [x] Déploiement : URL Cloudflare Workers fonctionnelle et partagée
+      — https://reymouhid95-get409-relaisyoon-mvp.thiernooury89.workers.dev
+      (`/`, `/fiches`, `/aide` en 200 ; agent IA à revalider après
+      régénération de la clé Dify, cf. § Déploiement)
 - [ ] `git add . + git commit + git push` : modifications sauvegardées
