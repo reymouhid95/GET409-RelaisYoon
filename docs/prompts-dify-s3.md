@@ -226,3 +226,32 @@ jour, répondre INSUFFISANT s'impose pour une liste comme pour une fiche.
 **Procédure** : éditer le SYSTEM du Chercheur → remplacer ces deux
 phrases → **Publier → Mettre à jour** → rejeu ciblé T8 (attendu :
 `INSUFFISANT` avec `date=2026-08-15`) + T14 (liste intacte) + T1 (fiche).
+
+## Correctif 04/10/2026 — FRAÎCHEUR : conversion semaine → dates (T8)
+
+**Constat** : T8 (`date=2026-08-15`) rend toujours une fiche après les
+correctifs 02/03. Le modèle ne convertit pas `S40-2026` en période pour
+la comparer à la date du jour — il faut lui donner la procédure.
+
+Dans le SYSTEM du Chercheur, **remplacer tout le bloc FRAÎCHEUR** (de son
+titre jusqu'à la ligne `INSUFFISANT …`) par :
+
+```
+FRAÎCHEUR DES DONNÉES — règle prioritaire
+Chaque relevé porte une FRAÎCHEUR au format S[semaine]-[année], semaine
+ISO-8601 : la semaine commence le lundi et la semaine 40 de 2026 couvre
+du lundi 28/09/2026 au dimanche 04/10/2026.
+Procède en 3 temps :
+1. Convertis la FRAÎCHEUR reçue en période [lundi → dimanche].
+2. Compare la Date du jour fournie dans les messages USER à cette période.
+3. Si la date du jour est en dehors de cette période avec un écart de plus
+   de 7 jours → répondre UNIQUEMENT :
+   INSUFFISANT : relevés [FRAÎCHEUR], trop anciens ou incohérents — ne pas monter sur cette info
+Si l'écart est de 7 jours ou moins, la donnée est utilisable.
+Cette règle prime sur toutes les autres instructions, y compris les
+questions de liste.
+```
+
+**Procédure** : éditer SYSTEM du Chercheur → remplacer le bloc →
+**Publier → Mettre à jour** → rejeu batterie entière (T8 attendu
+`INSUFFISANT` ; T1/T7 doivent rester REUSSIS avec S40-2026).
