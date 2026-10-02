@@ -112,7 +112,7 @@ Livrables (100 pts) :
 L1 (35 pts) : URL publique ci-dessus, MVP fonctionnel.
 Dépôt synchronisé avec GitHub (push OK).
 
-## Livrables S5 — en cours (Intégration MVP & RAG, 1 octobre 2026)
+## Livrables S5 — terminés le 1 octobre 2026 (Intégration MVP & RAG)
 
 Adaptation des 7 fichiers `class05/` au projet (cf. commit) :
 
@@ -151,7 +151,7 @@ Adaptation des 7 fichiers `class05/` au projet (cf. commit) :
 - [x] P7 Correction dépréciation `inputValidator()` → `validator()`
 - [x] Vérifs : `tsc` 0 erreur, eslint propre, `pnpm build` OK
 
-## Livrables S7 — VS Code + GitHub + Dify (en cours)
+## Livrables S7 — terminés le 1 octobre 2026 (VS Code + GitHub + Dify)
 
 Sources : `class07/class07/tutoriel_vscode_workflow_GET409.docx` +
 `template_vscode_equipes.docx` (checklist finale à rendre), adaptés à
