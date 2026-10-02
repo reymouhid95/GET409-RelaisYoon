@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AideRouteImport } from './routes/aide'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as FicheRouteImport } from './routes/fiche'
 import { Route as FichesRouteImport } from './routes/fiches'
 
 const IndexRoute = IndexRouteImport.update({
@@ -29,6 +30,11 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FicheRoute = FicheRouteImport.update({
+  id: '/fiche',
+  path: '/fiche',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FichesRoute = FichesRouteImport.update({
   id: '/fiches',
   path: '/fiches',
@@ -39,12 +45,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/aide': typeof AideRoute
   '/contact': typeof ContactRoute
+  '/fiche': typeof FicheRoute
   '/fiches': typeof FichesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/aide': typeof AideRoute
   '/contact': typeof ContactRoute
+  '/fiche': typeof FicheRoute
   '/fiches': typeof FichesRoute
 }
 export interface FileRoutesById {
@@ -52,20 +60,22 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/aide': typeof AideRoute
   '/contact': typeof ContactRoute
+  '/fiche': typeof FicheRoute
   '/fiches': typeof FichesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/aide' | '/contact' | '/fiches'
+  fullPaths: '/' | '/aide' | '/contact' | '/fiche' | '/fiches'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/aide' | '/contact' | '/fiches'
-  id: '__root__' | '/' | '/aide' | '/contact' | '/fiches'
+  to: '/' | '/aide' | '/contact' | '/fiche' | '/fiches'
+  id: '__root__' | '/' | '/aide' | '/contact' | '/fiche' | '/fiches'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AideRoute: typeof AideRoute
   ContactRoute: typeof ContactRoute
+  FicheRoute: typeof FicheRoute
   FichesRoute: typeof FichesRoute
 }
 
@@ -92,6 +102,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/fiche': {
+      id: '/fiche'
+      path: '/fiche'
+      fullPath: '/fiche'
+      preLoaderRoute: typeof FicheRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/fiches': {
       id: '/fiches'
       path: '/fiches'
@@ -106,6 +123,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AideRoute: AideRoute,
   ContactRoute: ContactRoute,
+  FicheRoute: FicheRoute,
   FichesRoute: FichesRoute,
 }
 export const routeTree = rootRouteImport
