@@ -331,8 +331,10 @@ vérification pour confirmer, correction minimale. Une seule hypothèse à la fo
   correctifs P2 + timeout)
 - ☑ Au moins 1 nouvelle fonctionnalité propre au projet : **P-A Fraîcheur**
   (spec, Dify D1–D4, app A1–A3, tests T7–T8 — 02/10/2026, journal § S5+)
-- ☐ Code poussé sur GitHub sans `mvp/.env` ; Workers à jour
-- ☐ Lien public testé depuis un autre appareil
-- ☐ Journal L4 complété (prompts exacts, résultats, notes /5)
-- ☐ Note d'éthique mise à jour (1 ligne par fonctionnalité)
-- ☐ Aucune clé collée dans un chat — sinon régénérée
+- ☑ Code poussé sur GitHub sans `mvp/.env` ; Workers à jour
+  (`main…origin/main` synchronisé, déployé + testé le 02/10/2026)
+- ☑ Lien public testé depuis un autre appareil (02/10/2026 — OK)
+- ☑ Journal L4 complété (prompts exacts, résultats, notes /5)
+- ☑ Note d'éthique mise à jour (1 ligne par fonctionnalité)
+- ☑ Aucune clé collée dans un chat — clé régénérée, `.env` vidé puis
+  secret serveur conservé
