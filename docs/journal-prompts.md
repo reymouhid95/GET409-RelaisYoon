@@ -544,3 +544,34 @@ Dify, tronqué 200 car sinon) ; message usager inchangé ; ligne mono grise
   réelle (401 simulé) plutôt que simulé à l'œil.
 
 **Parcours S5+ : A (veille) · B · C · D · E · F = complet.**
+
+## S5+ — Audit E5 + Option B « listes » (2 octobre)
+
+**Audit E5** exécuté en direct (API Dify, clé locale — le RPC auto en
+ligne casse car le hash de build diffère du dev). Note initiale **17/20** :
+Q1/Q3/Q4/Q5 ✅, **Q2 « quartiers depuis Grand-Médine » → INSUFFISANT**
+(écart avec S2 #2 du cours qui attend 3 chunks).
+
+**Décision produit : option B — autoriser les listes.** 5 itérations de
+correctifs (prompts collés/publiés par l'utilisateur, source unique
+`prompts-dify-s3.md`) :
+
+| Correctif | Constat | Correctif suivant |
+|---|---|---|
+| 02 — format LISTE P1 + P2 | T8 tombe : « station absente » abroge la fraîcheur | 03 |
+| 03 — fraîcheur prioritaire sur la liste | T8 toujours échec : S40 non converti | 04 |
+| 04 — conversion semaine ISO → dates | procédure abstraite ignorée par gpt-oss-20b | 05 |
+| 05 — exemple few-shot + piège USER | **9/9** | — |
+
+**Batterie v3 finale (API directe, `/tmp/opencode/battery-v3.mjs`) : 9/9**
+— T1–T7 inchangés (aucune régression des correctifs listes), T8
+`INSUFFISANT` (date 2026-08-15), nouveau **T14** liste complète
+(Pikine 450 · Parcelles 400 · Keur Massar 350, FRAÎCHEUR S40-2026).
+
+- D4 noté 4/5 : tests automatiques en ligne à refaire via API directe
+  (hash RPC divergent dev/prod) — pas un bug produit, une friction outil.
+- Réponse jury prête : « les listes existent, une fiche reste une
+  correspondance, et la fraîcheur prime sur tout ».
+- Note : 4/5 — l'audit a trouvé un vrai écart, 5 correctifs ont été
+  nécessaires (deux itérations de trop sur T8 : procédure puis exemple —
+  la leçon est notée : **modèle faible = exemple, pas procédure**).

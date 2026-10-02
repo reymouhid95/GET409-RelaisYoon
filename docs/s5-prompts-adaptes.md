@@ -42,7 +42,11 @@ quartiers depuis Grand-Médine ?" Q3 "Y a-t-il une correspondance vers
 Yoff ?" D2 Sources : les chunks remontés sont-ils les bons ?
 D3 Limites : Q4 "Météo Dakar demain ?" Q5 "Prix du poulet ?" → l'agent
 doit dire INSUFFISANT. D4 Intégration MVP : affichage OK dans Lovable ?
-Résultat : note /20 + 3 priorités avant S6. »
+Résultat (exécuté le 02/10/2026, API Dify directe) : **19/20** —
+D1 Précision 5/5 (après correctifs listes), D2 Sources 5/5, D3 Limites
+5/5, D4 Intégration 4/5. 3 priorités traitées : Q2 listes autorisées
+(correctifs 02→05), Plan B synchronisé, tests via API directe. Batterie
+finale 9/9 (T1–T8 + T14). »
 
 ## S1 — Préparer les documents (déjà fait : releves-brt-s5.csv)
 

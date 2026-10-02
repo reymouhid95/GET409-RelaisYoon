@@ -185,8 +185,10 @@ derniers relevés validés. ») :
 
 1. « Prix Petersen vers Ndiarème ce soir ? » → fiche **600 FCFA**,
    relevé 18h45.
-2. « Quartiers depuis Grand-Médine ? » → Parcelles **400**, Keur Massar
-   **350**, Pikine **450** — tous disponibles.
+2. « Quartiers depuis Grand-Médine ? » → Pikine Icotaf **450** (19h00),
+   Parcelles Assainies **400** (18h30), Keur Massar **350** (18h35) —
+   tous disponibles. (Ordre du run réel T14 du 02/10 — le Plan B copie
+   le comportement live, jamais l'inverse.)
 3. « Correspondance vers Yoff ? » → **INSUFFISANT** : aucune
    correspondance disponible ce soir. (Préférer `Station inexistante XYZ`
    si le run live a montré Yoff en fiche — ne jamais s'écarter du Plan B
