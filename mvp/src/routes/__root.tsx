@@ -105,7 +105,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Plus+Jakarta+Sans:wght@400..800&display=swap",
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      {
+        rel: "icon",
+        href: "/favicon.svg",
+        type: "image/svg+xml",
+      },
+      // Repli pour les navigateurs sans support SVG : l'ICO contient 7 tailles.
+      { rel: "icon", href: "/favicon.ico", sizes: "16x16 24x24 32x32 48x48 64x64 128x128 256x256" },
+      { rel: "apple-touch-icon", href: "/apple-touch-icon.png", sizes: "180x180" },
     ],
     scripts: [{ children: SCRIPT_THEME }],
   }),
