@@ -47,3 +47,15 @@ basse. Garde-fous : mémoire volatile React uniquement — ni localStorage,
 ni cookie, ni requête serveur ; bouton « Effacer » visible ; purge
 automatique à la fermeture de l'onglet. Vérifié par le test T10
 (recharge → liste vide).
+
+## Risque 4 — La fiche illisible pour qui n'entend pas le français
+
+Scénario : RelaisYoon promet l'audio à une usagère peu à l'aise avec
+l'écrit, mais son navigateur n'a aucune voix française — le bouton muet la
+laisse croire que l'app est cassée, ou pire : une voix non validée
+prononce mal un prix. Impactée : l'usagère (prix mal entendu = mauvais
+paiement). Garde-fous : détection stricte des voix `fr-*` avant d'afficher
+le bouton (masqué = jamais de promesse fausse) ; `utterance.lang =
+"fr-FR"` ; aucune traduction ni voix générée hors français sans validation
+humaine. Vérifié par T11/T12 (lecture + toggle) et par l'absence du bouton
+sur navigateur sans voix FR.

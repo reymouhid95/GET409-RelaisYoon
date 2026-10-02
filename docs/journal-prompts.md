@@ -467,3 +467,42 @@ Critère éthique central : ni localStorage, ni cookie, ni serveur.
   → mémoire volatile + Effacer + purge F5).
 - Note : 5/5 — zéro modification Dify conforme à la spec, tests réussis du
   premier coup après déploiement.
+
+## S5+ — Module D : P-C Lecture vocale (2 octobre)
+
+3e et dernier cycle du module D. Pattern 2 du catalogue [Cours] :
+`speechSynthesis` + bouton 🔊, garde-fou « voix de la langue visée avant de
+promettre l'audio ». **Impact Dify : aucun** (0 modif workflow).
+
+### Spécification (validée avant code)
+
+Bouton Écouter sur la carte fiche et sur le repli INSUFFISANT, seulement si
+speechSynthesis + voix `fr-*` présentes (sinon masqué) ; lecture `fr-FR`
+stricte ; toggle Écouter/Arrêter ; nouvelle question annule la lecture ;
+aucune traduction ni voix hors français.
+
+### Modifications application (commit `5d3837c`)
+
+- `src/hooks/useSpeech.ts` : détection voix FR (`voiceschanged` + contrôle
+  différé 2 s), `basculer`/`arreter`, annulation au démontage.
+- `src/components/BoutonLecture.tsx` : bouton réutilisable (masqué si
+  !dispo), état en lecture → icône 🔇 « Arrêter ».
+- `ficheAgent.ts` : `phraseFiche()` — phrase naturelle pour la voix.
+- `AgentIa.tsx` : hook monté une fois, `lecture.arreter()` en tête de
+  `demander()`, prop passée à `ResultatAgent` → carte/repli.
+
+### Tests
+
+- **T11** : fiche Petersen → Écouter → lecture FR complète (station, prix,
+  relevé, fraîcheur) + toggle stop ✅ (app déployée)
+- **T12** : INSUFFISANT lu tel quel, 2e clic stop, nouvelle question coupe
+  la lecture ✅
+
+- Prompt : spec P-Spec → « Validé ? » → code OpenCode en une passe.
+- Éthique : Risque 4 ajouté (exclusion linguistique → bouton masqué plutôt
+  que muet ; zéro traduction générée).
+- Note : 5/5 — garde-fou de voix respecté à la lettre, 0 dérive Dify,
+  tests réussis au 1er essai.
+
+**Module D complet** : P-A ✅ · P-B ✅ · P-C ✅ (3 cycles, 0 correction de
+spec, zéro modification Dify hors P-A).

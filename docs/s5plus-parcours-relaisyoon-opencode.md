@@ -239,6 +239,11 @@ publication → ligne au Journal + note d'éthique.
 Choix de l'utilisateur (recommandation : **P-A** — le plus aligné sur « prix et
 trajet **avant** de descendre », garde-fou date simple) [Analyse].
 
+**Statut (02/10/2026) — les 3 réalisées, cycle D complet chacune** :
+- ✅ **P-A** Fraîcheur — Dify D1–D4 + app A1–A3, tests T7/T8 (journal § S5+)
+- ✅ **P-B** Mémoire session — app seule, tests T9/T10 (journal § S5+)
+- ✅ **P-C** Lecture vocale — app seule, tests T11/T12 (journal § S5+)
+
 ### 5.2 Prompts types (à coller dans OpenCode)
 
 **P-Idées** —
