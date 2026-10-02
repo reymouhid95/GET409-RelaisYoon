@@ -12,6 +12,15 @@ function extrait(texte: string, cle: string): string | null {
   return m?.[1]?.trim() ?? null;
 }
 
+function nettoieSources(valeur: string): string {
+  /* gpt-oss-20b colle parfois le titre du rapport juste après SOURCES. */
+  return (valeur.split(/\s*Correspondance\b/i)[0] ?? valeur).trim();
+}
+
+function prixAffichable(valeur: string): string {
+  return /^\d/.test(valeur) && !/fcfa/i.test(valeur) ? `${valeur} FCFA` : valeur;
+}
+
 export function parseFicheAgent(texte: string): FicheAgent | null {
   if (/INSUFFISANT/i.test(texte)) return null;
   const station = extrait(texte, "STATION");
@@ -24,9 +33,9 @@ export function parseFicheAgent(texte: string): FicheAgent | null {
   return {
     station,
     quartier,
-    prix,
+    prix: prixAffichable(prix),
     heure,
-    sources: sources ?? "",
+    sources: sources ? nettoieSources(sources) : "",
     fraicheur: fraicheur ?? "",
   };
 }
