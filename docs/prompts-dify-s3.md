@@ -284,3 +284,56 @@ UNIQUEMENT : INSUFFISANT : aucune date du jour fournie (relevés invérifiables)
 Mettre à jour** → rejeu. Si la réponse T8 devient
 `INSUFFISANT : aucune date du jour fournie`, c'est que `{date}` ne circule
 plus : revoir D2 (USER avec `Date du jour : {date}`).
+
+## Correctif 06/10/2026 — Heure du trajet (P-G, test T18)
+
+L'usagère peut indiquer l'heure à laquelle elle compte prendre sa
+correspondance ; l'agent propose alors les départs les plus proches.
+Sans heure → comportement strictement inchangé.
+
+### D1 — Créer la variable `heure`
+
+Workflow → zone Variables → **Nouvelle variable** :
+
+- Nom : `heure` · Type : Texte · **Requise : NON** (identique à `date`).
+
+### D2 — USER du Chercheur : ajouter une ligne
+
+Nœud LLM **Chercheur** → onglet USER → après `Date du jour : {date}` :
+
+```
+Heure du trajet : {heure}
+```
+
+### D3 — SYSTEM du Chercheur : coller ce bloc à la fin
+
+Après le bloc EXEMPLE OBLIGATOIRE (correctif 05) :
+
+```
+HEURE DU TRAJET (facultative)
+Les messages USER peuvent contenir « Heure du trajet : HH:MM » : c'est
+l'heure à laquelle l'usagère veut prendre sa correspondance.
+· Ligne vide ou absente → ignore ce point, ne l'invente jamais.
+· Heure fournie → ajoute à ta sortie, juste après SOURCES, la ligne :
+  TRAJET DEMANDÉ : [heure fournie] → départs les plus proches : [heures]
+  (heures des relevés avant et après l'heure demandée, disponibles ce soir).
+Le reste du format de sortie ne change pas.
+```
+
+### D4 — SYSTEM du Rédacteur : coller ce bloc à la fin
+
+```
+HEURE DU TRAJET (bonus)
+Si les données du Chercheur contiennent une ligne « TRAJET DEMANDÉ »,
+cite ces départs dans la section DÉPART et termine la RECOMMANDATION par
+le départ à prendre (ex. : « ton départ idéal : 19h20 »).
+Sinon : ne mentionne aucune heure de trajet demandée.
+```
+
+**Procédure** : D1 → D2 → D3 → D4 → **Publier → Mettre à jour** →
+rejeu batterie (9/9 attendu) → T18.
+
+**Test T18** : question « Correspondance Petersen vers Guédiawaye ? »
+avec champ heure `19:30` → la réponse cite un départ proche de 19h30 ;
+même question sans heure → réponse identique à avant (pas de ligne
+« ton départ idéal »).

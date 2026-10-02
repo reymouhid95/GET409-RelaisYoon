@@ -17,7 +17,14 @@ function raisonDify(corps: string): string {
 }
 
 export const demanderAgent = createServerFn({ method: "POST" })
-  .validator((data) => z.object({ question: z.string().min(1) }).parse(data))
+  .validator((data) =>
+    z
+      .object({
+        question: z.string().min(1),
+        heure: z.string().max(8).optional().default(""),
+      })
+      .parse(data),
+  )
   .handler(async ({ data }) => {
     const apiKey = process.env["DIFY_API_KEY"];
     const journalise = process.env["NODE_ENV"] !== "production";
@@ -49,6 +56,7 @@ export const demanderAgent = createServerFn({ method: "POST" })
           inputs: {
             query: data.question,
             date: new Date().toISOString().slice(0, 10),
+            heure: data.heure ?? "",
           },
           query: data.question,
           response_mode: "blocking",

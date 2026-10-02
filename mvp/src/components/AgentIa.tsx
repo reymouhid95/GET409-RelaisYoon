@@ -104,6 +104,7 @@ function ChargementAgent() {
 
 export function AgentIa() {
   const [question, setQuestion] = useState<string>("");
+  const [heure, setHeure] = useState<string>("");
   const [questionPosee, setQuestionPosee] = useState<string>("");
   const [chargement, setChargement] = useState<boolean>(false);
   const [resultat, setResultat] = useState<string | null>(null);
@@ -136,7 +137,7 @@ export function AgentIa() {
     setQuestionPosee(propre);
 
     try {
-      const reponse = await demanderAgent({ data: { question: propre } });
+      const reponse = await demanderAgent({ data: { question: propre, heure } });
       if (reponse.ok) {
         setResultat(reponse.texte);
         setHistorique((precedent) =>
@@ -223,6 +224,17 @@ export function AgentIa() {
             />
 
             <div className="flex items-center gap-2">
+              <label className="sr-only" htmlFor="heure-agent">
+                Heure de ton trajet (facultatif)
+              </label>
+              <input
+                id="heure-agent"
+                type="time"
+                value={heure}
+                onChange={(e) => setHeure(e.target.value)}
+                title="Heure à laquelle tu prends ta correspondance (facultatif)"
+                className="border-border/70 bg-background text-foreground h-11 w-[5.75rem] shrink-0 rounded-xl border px-2 text-sm font-semibold outline-none focus:border-brand-400"
+              />
               {voix.supporte && (
                 <button
                   type="button"
