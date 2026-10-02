@@ -37,10 +37,16 @@ export function StatutPastille({ statut }: { statut: Fiche["departs"][number]["s
 }
 
 /**
- * Le marqueur de fraîcheur (US-02). Tant que le composant n'est pas monté, on
- * affiche le libellé statique issu de la donnée : le serveur et le client
- * rendront alors exactement la même chose, et l'heure relative n'apparaît
- * qu'ensuite, côté navigateur.
+ * Fraîcheur de la DONNÉE (US-02). À ne pas confondre avec la disponibilité du
+ * SERVICE : une correspondance peut très bien avoir été relevée « disponible »
+ * tout en étant une information vieille de quatre heures.
+ *
+ * D'où le code couleur — l'ambre signale un doute, pas une contradiction :
+ *   vert  = le service existe (disponible)
+ *   rouge = le service n'existe pas (indisponible)
+ *   ambre = l'info est ancienne, à reconfirmer auprès du transporteur
+ * Un badge rouge « périmé » posé à côté d'un badge vert « Disponible » se
+ * lisait comme deux verdicts incompatibles.
  */
 export function BadgeFraicheur({ depart }: { depart: Depart }) {
   const fraicheur = useFraicheur(depart.releveLe);
@@ -53,13 +59,22 @@ export function BadgeFraicheur({ depart }: { depart: Depart }) {
 
   return (
     <span
+      title={
+        fraicheur.perime
+          ? "Relevé ancien : le prix ou la disponibilité ont pu changer depuis. Confirmez auprès du transporteur."
+          : "Relevé récent, l'information est à jour."
+      }
       className={cn(
         "inline-flex items-center gap-1.5 text-xs font-semibold",
-        fraicheur.perime ? "text-danger" : "text-success",
+        fraicheur.perime ? "text-sun-600 dark:text-sun-400" : "text-success",
       )}
     >
-      {fraicheur.perime && <AlertTriangle className="size-3" aria-hidden />}
-      {fraicheur.perime ? "périmé" : `relevé ${fraicheur.libelle}`}
+      {fraicheur.perime ? (
+        <AlertTriangle className="size-3 shrink-0" aria-hidden />
+      ) : (
+        <Clock3 className="size-3 shrink-0" aria-hidden />
+      )}
+      {fraicheur.perime ? "à reconfirmer" : `relevé ${fraicheur.libelle}`}
     </span>
   );
 }
@@ -133,6 +148,10 @@ export function FicheCard({ fiche }: { fiche: Fiche }) {
               <MapPin className="size-3.5 shrink-0" aria-hidden />
               <span className="truncate">{fiche.quartier}</span>
             </p>
+            {/* Précise à quel moment le statut vert a été observé : sans ça,
+                « Disponible » se lit comme une promesse en temps réel, alors
+                que c'est un relevé de terrain daté. */}
+            <p className="text-muted-foreground/80 mt-1.5 text-xs">Statut relevé le {releveLe}</p>
           </div>
           <StatutPastille statut={statutFiche(fiche)} />
         </div>

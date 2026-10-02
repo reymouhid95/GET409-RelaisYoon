@@ -131,8 +131,9 @@ function FichesPage() {
         </p>
         <h1 className="text-h1 mt-3">Fiches du soir</h1>
         <p className="text-muted-foreground text-lede mt-3 max-w-2xl">
-          Les correspondances notées sur le terrain entre 18h et 19h. Chaque prix affiche
-          l&apos;heure de son relevé et devient « périmé » au-delà d&apos;une heure.
+          Les correspondances notées sur le terrain entre 18h et 19h. Le statut indique ce qui a été
+          relevé&nbsp;; au-delà d&apos;une heure, on le signale comme à reconfirmer plutôt que de le
+          présenter comme une vérité en temps réel.
         </p>
       </header>
 
