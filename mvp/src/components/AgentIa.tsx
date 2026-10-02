@@ -1,9 +1,11 @@
 import { useCallback, useState, type FormEvent } from "react";
 import { AlertCircle, MessageCircle, Mic, MicOff, RotateCcw, Send, Sparkles } from "lucide-react";
 
+import { AgentAvis } from "@/components/AgentAvis";
 import { AgentFavoris } from "@/components/AgentFavoris";
 import { AgentFicheCard } from "@/components/AgentFicheCard";
 import { BoutonLecture } from "@/components/BoutonLecture";
+import { useAvis } from "@/hooks/useAvis";
 import { useFavoris, type Favori } from "@/hooks/useFavoris";
 import { useSpeech, type Lecture } from "@/hooks/useSpeech";
 import { useVoiceInput } from "@/hooks/useVoiceInput";
@@ -30,11 +32,16 @@ function ResultatAgent({
   question,
   lecture,
   favoris,
+  avis,
 }: {
   texte: string;
   question: string;
   lecture: Lecture;
   favoris: { estFavori: (f: Favori) => boolean; basculer: (f: Favori) => void };
+  avis: {
+    avisDe: (q: string) => "up" | "down" | null;
+    noter: (q: string, a: "up" | "down") => void;
+  };
 }) {
   const fiche = parseFicheAgent(texte);
 
@@ -54,20 +61,24 @@ function ResultatAgent({
             Partager la question sur WhatsApp
           </a>
         </div>
+        <AgentAvis question={question} avisDe={avis.avisDe} noter={avis.noter} />
       </div>
     );
   }
 
   const cible = { station: fiche.station, quartier: fiche.quartier };
   return (
-    <AgentFicheCard
-      fiche={fiche}
-      lecture={lecture}
-      favori={{
-        actif: favoris.estFavori(cible),
-        onBasculer: () => favoris.basculer(cible),
-      }}
-    />
+    <>
+      <AgentFicheCard
+        fiche={fiche}
+        lecture={lecture}
+        favori={{
+          actif: favoris.estFavori(cible),
+          onBasculer: () => favoris.basculer(cible),
+        }}
+      />
+      <AgentAvis question={question} avisDe={avis.avisDe} noter={avis.noter} />
+    </>
   );
 }
 
@@ -106,6 +117,7 @@ export function AgentIa() {
   const voix = useVoiceInput(recoitDictee);
   const lecture = useSpeech();
   const favoris = useFavoris();
+  const avis = useAvis();
 
   const questionDepuisFavori = (f: Favori) => {
     const q = `Correspondance ${f.station} vers ${f.quartier} ?`;
@@ -357,6 +369,7 @@ export function AgentIa() {
             question={questionPosee}
             lecture={lecture}
             favoris={favoris}
+            avis={avis}
           />
         )}
       </div>
