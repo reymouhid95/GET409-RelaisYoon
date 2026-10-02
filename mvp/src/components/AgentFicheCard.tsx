@@ -1,10 +1,13 @@
 import { Clock3, MessageCircle, Sparkles } from "lucide-react";
 
+import { BoutonLecture } from "@/components/BoutonLecture";
 import { StatutPastille } from "@/components/FicheCard";
+import type { Lecture } from "@/hooks/useSpeech";
 import type { FicheAgent } from "@/lib/ficheAgent";
+import { phraseFiche } from "@/lib/ficheAgent";
 import { texteFicheRelaisYoon, urlPartageWhatsApp } from "@/lib/partage";
 
-export function AgentFicheCard({ fiche }: { fiche: FicheAgent }) {
+export function AgentFicheCard({ fiche, lecture }: { fiche: FicheAgent; lecture?: Lecture }) {
   return (
     <div className="ry-halo animate-pop bg-card relative mt-5 overflow-hidden rounded-2xl shadow-lift">
       <div className="from-brand-500/10 via-sun-400/8 pointer-events-none absolute inset-0 bg-gradient-to-br to-transparent" />
@@ -44,6 +47,15 @@ export function AgentFicheCard({ fiche }: { fiche: FicheAgent }) {
             <span className="font-bold">Sources : </span>
             {fiche.sources}
           </p>
+        )}
+
+        {lecture && (
+          <BoutonLecture
+            texte={phraseFiche(fiche)}
+            lecture={lecture}
+            label="Écouter la fiche"
+            className="mt-4 w-full"
+          />
         )}
 
         <a

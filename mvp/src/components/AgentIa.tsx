@@ -2,6 +2,8 @@ import { useCallback, useState, type FormEvent } from "react";
 import { AlertCircle, MessageCircle, Mic, MicOff, RotateCcw, Send, Sparkles } from "lucide-react";
 
 import { AgentFicheCard } from "@/components/AgentFicheCard";
+import { BoutonLecture } from "@/components/BoutonLecture";
+import { useSpeech, type Lecture } from "@/hooks/useSpeech";
 import { useVoiceInput } from "@/hooks/useVoiceInput";
 import { demanderAgent } from "@/lib/dify.functions";
 import { parseFicheAgent } from "@/lib/ficheAgent";
@@ -21,27 +23,38 @@ const AMORCES = [
  * cas le plus fréquent, et sans bouton l'usagère ne peut pas transmettre sa
  * question — ni la faire reformuler par un proche qui a la donnée.
  */
-function ResultatAgent({ texte, question }: { texte: string; question: string }) {
+function ResultatAgent({
+  texte,
+  question,
+  lecture,
+}: {
+  texte: string;
+  question: string;
+  lecture: Lecture;
+}) {
   const fiche = parseFicheAgent(texte);
 
   if (!fiche) {
     return (
       <div className="animate-rise bg-surface mt-5 rounded-2xl p-5">
         <p className="text-muted-foreground text-sm leading-relaxed whitespace-pre-wrap">{texte}</p>
-        <a
-          href={urlPartageWhatsApp(texteReponseAgent({ question, reponse: texte }))}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="bg-whatsapp hover:bg-whatsapp-hover focus-visible:ring-whatsapp mt-4 inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-bold text-white transition-all duration-200 active:scale-[0.98]"
-        >
-          <MessageCircle className="size-4" aria-hidden />
-          Partager la question sur WhatsApp
-        </a>
+        <div className="mt-4 flex flex-wrap gap-2">
+          <BoutonLecture texte={texte} lecture={lecture} label="Écouter la réponse" />
+          <a
+            href={urlPartageWhatsApp(texteReponseAgent({ question, reponse: texte }))}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-whatsapp hover:bg-whatsapp-hover focus-visible:ring-whatsapp inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-bold text-white transition-all duration-200 active:scale-[0.98]"
+          >
+            <MessageCircle className="size-4" aria-hidden />
+            Partager la question sur WhatsApp
+          </a>
+        </div>
       </div>
     );
   }
 
-  return <AgentFicheCard fiche={fiche} />;
+  return <AgentFicheCard fiche={fiche} lecture={lecture} />;
 }
 
 function ChargementAgent() {
@@ -76,10 +89,12 @@ export function AgentIa() {
     setQuestion(texte);
   }, []);
   const voix = useVoiceInput(recoitDictee);
+  const lecture = useSpeech();
 
   const demander = async (questionPosee: string) => {
     const propre = questionPosee.trim();
     if (!propre || chargement) return;
+    lecture.arreter();
     setChargement(true);
     setResultat(null);
     setErreur(null);
@@ -271,7 +286,9 @@ export function AgentIa() {
           </div>
         )}
 
-        {resultat && !chargement && <ResultatAgent texte={resultat} question={questionPosee} />}
+        {resultat && !chargement && (
+          <ResultatAgent texte={resultat} question={questionPosee} lecture={lecture} />
+        )}
       </div>
     </section>
   );
