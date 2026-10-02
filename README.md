@@ -151,10 +151,6 @@ Adaptation des 7 fichiers `class05/` au projet (cf. commit) :
 - [x] P7 Correction dépréciation `inputValidator()` → `validator()`
 - [x] Vérifs : `tsc` 0 erreur, eslint propre, `pnpm build` OK
 
-> ⚠️ Ces changements sont sur `GET409-RelaisYoon/mvp/` (local) : pour les
-> voir sur https://relaisyoon.lovable.app, les pousser sur le dépôt Lovable
-> connecté `reymouhid95/relaisyoon` (redéploiement automatique).
-
 ## Livrables S7 — VS Code + GitHub + Dify (en cours)
 
 Sources : `class07/class07/tutoriel_vscode_workflow_GET409.docx` +
@@ -190,8 +186,6 @@ RelaisYoon (l'exemple du tutoriel = projet pilote NiayesBiz/GreenSprint).
        — **testé en local le 1er octobre 2026** avec `.env` +
        redémarrage de Vite (erreurs type `HTTPError` : vérifier `.env` +
        relancer Vite + workflow publié dans Dify)
-9. [ ] Sauvegarder : `git add . && git commit -m "..." && git push`
-       — si refusé : `git pull --rebase origin main` puis `git push`
 
 ### Prompts Copilot adaptés à RelaisYoon
 
