@@ -142,8 +142,27 @@ export function AgentIa() {
             <Sparkles className="size-3.5" aria-hidden />
             Agent IA
           </p>
-          <span className="text-muted-foreground bg-surface-2 text-[0.6875rem] font-semibold">
-            {!voix.supporte ? "Clavier uniquement" : "Clavier ou micro"}
+          <span
+            title={
+              voix.supporte
+                ? "Pose ta question au micro ou au clavier"
+                : "Chrome et Edge permettent de dicter ta question au micro"
+            }
+            className={cn(
+              "inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[0.6875rem] font-bold tracking-widest uppercase",
+              voix.supporte
+                ? "bg-brand-500/10 text-brand-700 ring-brand-400/40 ring-1"
+                : "bg-surface-2 text-muted-foreground ring-border ring-1",
+            )}
+          >
+            <span
+              className={cn(
+                "size-2 rounded-full",
+                voix.supporte ? "bg-brand-500 animate-pulse" : "bg-muted-foreground/50",
+              )}
+              aria-hidden
+            />
+            {voix.supporte ? "Dictée au micro" : "Saisie directe"}
           </span>
         </div>
 
@@ -214,6 +233,14 @@ export function AgentIa() {
             </div>
           </div>
         </form>
+
+        {!voix.supporte && (
+          <p className="text-muted-foreground mt-2.5 text-xs leading-relaxed">
+            Tape ta question puis envoie — ou ouvre la page sur{" "}
+            <span className="text-foreground font-semibold">Chrome / Edge</span> pour
+            dicter au micro.
+          </p>
+        )}
 
         <div className="mt-4 flex flex-wrap items-center gap-2">
           <span className="text-muted-foreground text-xs font-semibold">Essaie&nbsp;:</span>
