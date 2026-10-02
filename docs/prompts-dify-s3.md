@@ -337,3 +337,8 @@ rejeu batterie (9/9 attendu) → T18.
 avec champ heure `19:30` → la réponse cite un départ proche de 19h30 ;
 même question sans heure → réponse identique à avant (pas de ligne
 « ton départ idéal »).
+
+> ✅ **Publié et validé le 02/10/2026** en une seule passe : T18 ✅
+> (« TRAJET DEMANDÉ : 19:30 → départs les plus proches : 18h40, 19h05 » ;
+> sans heure = aucune ligne « départ idéal ») et batterie v4 **10/10**
+> sans aucune régression sur T1–T8/T14.

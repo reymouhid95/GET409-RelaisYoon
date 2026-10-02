@@ -16,11 +16,12 @@ prompt — règle système « jamais de prix sans heure » dans le Rédacteur.
 **Mise à jour (02/10/2026 — module D, fonctionnalité P-A)** : garde-fous
 « technique » partiellement opérationnel — badge `Données du [Semaine]`
 sous chaque fiche (la fraîcheur est visible d'un coup d'œil, avant paiement)
-+ règle Chercheur « écart avec la date du jour > 7 jours → INSUFFISANT,
-aucun prix affiché ». Vérifié par le test T8 (date simulée 2026-08-15 →
-refus motivé). Reste ouvert : le marquage PÉRIMÉ « au-delà d'une heure de
-la descente » n'est pas implémenté — la donnée est hebdomadaire (S40-2026),
-pas horaire ; à documenter en soutenance si questionnée.
+
+- règle Chercheur « écart avec la date du jour > 7 jours → INSUFFISANT,
+  aucun prix affiché ». Vérifié par le test T8 (date simulée 2026-08-15 →
+  refus motivé). Reste ouvert : le marquage PÉRIMÉ « au-delà d'une heure de
+  la descente » n'est pas implémenté — la donnée est hebdomadaire (S40-2026),
+  pas horaire ; à documenter en soutenance si questionnée.
 
 ## Risque 2 — L'affichage public qui braque les chauffeurs
 
@@ -59,3 +60,19 @@ le bouton (masqué = jamais de promesse fausse) ; `utterance.lang =
 "fr-FR"` ; aucune traduction ni voix générée hors français sans validation
 humaine. Vérifié par T11/T12 (lecture + toggle) et par l'absence du bouton
 sur navigateur sans voix FR.
+
+## Risque 5 — Ce qui reste dans le navigateur après le test
+
+Scénario : Awa a testé RelaisYoon sur un téléphone de famille ; ses
+stations enregistrées (P-D) et ses avis 👍/👎 (E-P) restent dans le
+navigateur après son départ, et donnent l'impression qu'un compte ou un
+suivi existe. Impactée : l'usagère (données de trajet préférées,
+préférences). Probabilité certaine (c'est le fonctionnement voulu),
+impact faible mais urgence moyenne car c'est la seule mémoire
+**persistante** de l'app (l'historique P-B, lui, reste volatile — Risque
+3). Garde-fous : bandeau de consentement au premier ☆ (« reste sur cet
+appareil, rien n'est envoyé » + « J'ai compris ») avant tout stockage ;
+aucune requête serveur ni cookie — localStorage pur, borné (5 stations
+FIFO, 50 avis) ; « Tout effacer » visible à côté de « Mes stations » ;
+mention « reste sur ton appareil » sous les avis. Vérifié par T15
+(F5 conserve, Tout effacer vide) et T16 (F5 conserve, re-clic retire).
