@@ -83,6 +83,7 @@ export function AgentIa() {
   const [chargement, setChargement] = useState<boolean>(false);
   const [resultat, setResultat] = useState<string | null>(null);
   const [erreur, setErreur] = useState<string | null>(null);
+  const [detail, setDetail] = useState<string | null>(null);
   const [historique, setHistorique] = useState<string[]>([]);
 
   const recoitDictee = useCallback((texte: string) => {
@@ -98,6 +99,7 @@ export function AgentIa() {
     setChargement(true);
     setResultat(null);
     setErreur(null);
+    setDetail(null);
     setQuestionPosee(propre);
 
     try {
@@ -109,9 +111,11 @@ export function AgentIa() {
         );
       } else {
         setErreur(reponse.erreur);
+        setDetail(reponse.detail);
       }
     } catch {
       setErreur("Service temporairement indisponible");
+      setDetail("appel serveur impossible (réseau ou serveur injoignable)");
     } finally {
       setChargement(false);
     }
@@ -282,6 +286,11 @@ export function AgentIa() {
               <p className="mt-1 text-sm opacity-90">
                 Les fiches ci-dessous restent lisibles — consulte-les directement.
               </p>
+              {detail && (
+                <p className="text-muted-foreground mt-2 font-mono text-[0.6875rem] break-all">
+                  Diagnostic : {detail}
+                </p>
+              )}
             </div>
           </div>
         )}

@@ -1,6 +1,21 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 
+/* Module E : détail technique pour le diagnostic — code HTTP + raison Dify
+   extraite du corps d'erreur (jamais les headers, jamais la clé). */
+function raisonDify(corps: string): string {
+  try {
+    const json = JSON.parse(corps) as { code?: unknown; message?: unknown };
+    const morceaux = [json.code, json.message].filter(
+      (v): v is string => typeof v === "string" && v.length > 0,
+    );
+    if (morceaux.length > 0) return morceaux.join(" · ");
+  } catch {
+    /* corps non JSON : on retient un extrait brut */
+  }
+  return corps.slice(0, 200);
+}
+
 export const demanderAgent = createServerFn({ method: "POST" })
   .validator((data) => z.object({ question: z.string().min(1) }).parse(data))
   .handler(async ({ data }) => {
@@ -11,7 +26,11 @@ export const demanderAgent = createServerFn({ method: "POST" })
       console.error(
         "[agent Dify] DIFY_API_KEY absente ou vide. Vérifiez le fichier .env puis redémarrez Vite.",
       );
-      return { ok: false as const, erreur: "Service temporairement indisponible" };
+      return {
+        ok: false as const,
+        erreur: "Service temporairement indisponible",
+        detail: "DIFY_API_KEY absente côté serveur",
+      };
     }
 
     const controleur = new AbortController();
@@ -39,11 +58,11 @@ export const demanderAgent = createServerFn({ method: "POST" })
       });
 
       if (!reponse.ok) {
-        const detail = await reponse.text();
+        const detail = `Dify HTTP ${reponse.status} · ${raisonDify(await reponse.text())}`;
         if (journalise) {
-          console.error("[agent Dify] Réponse HTTP en erreur :", reponse.status, detail);
+          console.error("[agent Dify] Réponse HTTP en erreur :", detail);
         }
-        throw new Error(`Dify HTTP ${reponse.status}`);
+        return { ok: false as const, erreur: "Service temporairement indisponible", detail };
       }
 
       const json = await reponse.json();
@@ -61,9 +80,17 @@ export const demanderAgent = createServerFn({ method: "POST" })
     } catch (e) {
       if (journalise) console.error("[agent Dify] Échec de la requête :", e);
       if (e instanceof DOMException && e.name === "AbortError") {
-        return { ok: false as const, erreur: "La réponse prend trop de temps — réessayez" };
+        return {
+          ok: false as const,
+          erreur: "La réponse prend trop de temps — réessayez",
+          detail: "abort après 30 s",
+        };
       }
-      return { ok: false as const, erreur: "Service temporairement indisponible" };
+      return {
+        ok: false as const,
+        erreur: "Service temporairement indisponible",
+        detail: e instanceof Error ? e.message.slice(0, 200) : "erreur inconnue",
+      };
     } finally {
       clearTimeout(minuteur);
     }
