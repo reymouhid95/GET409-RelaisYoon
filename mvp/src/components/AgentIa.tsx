@@ -70,6 +70,7 @@ export function AgentIa() {
   const [chargement, setChargement] = useState<boolean>(false);
   const [resultat, setResultat] = useState<string | null>(null);
   const [erreur, setErreur] = useState<string | null>(null);
+  const [historique, setHistorique] = useState<string[]>([]);
 
   const recoitDictee = useCallback((texte: string) => {
     setQuestion(texte);
@@ -88,6 +89,9 @@ export function AgentIa() {
       const reponse = await demanderAgent({ data: { question: propre } });
       if (reponse.ok) {
         setResultat(reponse.texte);
+        setHistorique((precedent) =>
+          [propre, ...precedent.filter((q) => q !== propre)].slice(0, 3),
+        );
       } else {
         setErreur(reponse.erreur);
       }
@@ -209,6 +213,40 @@ export function AgentIa() {
             </button>
           ))}
         </div>
+
+        {historique.length > 0 && (
+          <div className="bg-surface mt-5 rounded-2xl p-4">
+            <div className="flex items-center justify-between gap-3">
+              <p className="text-muted-foreground text-[0.6875rem] font-bold uppercase tracking-widest">
+                Mes 3 derniers trajets
+              </p>
+              <button
+                type="button"
+                onClick={() => setHistorique([])}
+                className="text-muted-foreground hover:text-foreground text-xs font-semibold underline-offset-4 transition-colors hover:underline"
+              >
+                Effacer
+              </button>
+            </div>
+            <ul className="mt-1.5">
+              {historique.map((q) => (
+                <li key={q}>
+                  <button
+                    type="button"
+                    disabled={chargement}
+                    onClick={() => {
+                      setQuestion(q);
+                      void demander(q);
+                    }}
+                    className="text-foreground hover:text-brand-700 hover:bg-accent w-full truncate rounded-lg px-2 py-1.5 text-left text-sm font-medium transition-colors disabled:pointer-events-none disabled:opacity-50"
+                  >
+                    {q}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
 
         {voix.erreur && (
           <p role="alert" className="text-danger mt-4 text-sm font-medium">
