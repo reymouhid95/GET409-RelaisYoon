@@ -1,8 +1,10 @@
 import { useCallback, useState, type FormEvent } from "react";
 import { AlertCircle, MessageCircle, Mic, MicOff, RotateCcw, Send, Sparkles } from "lucide-react";
 
+import { AgentFavoris } from "@/components/AgentFavoris";
 import { AgentFicheCard } from "@/components/AgentFicheCard";
 import { BoutonLecture } from "@/components/BoutonLecture";
+import { useFavoris, type Favori } from "@/hooks/useFavoris";
 import { useSpeech, type Lecture } from "@/hooks/useSpeech";
 import { useVoiceInput } from "@/hooks/useVoiceInput";
 import { demanderAgent } from "@/lib/dify.functions";
@@ -27,10 +29,12 @@ function ResultatAgent({
   texte,
   question,
   lecture,
+  favoris,
 }: {
   texte: string;
   question: string;
   lecture: Lecture;
+  favoris: { estFavori: (f: Favori) => boolean; basculer: (f: Favori) => void };
 }) {
   const fiche = parseFicheAgent(texte);
 
@@ -54,7 +58,17 @@ function ResultatAgent({
     );
   }
 
-  return <AgentFicheCard fiche={fiche} lecture={lecture} />;
+  const cible = { station: fiche.station, quartier: fiche.quartier };
+  return (
+    <AgentFicheCard
+      fiche={fiche}
+      lecture={lecture}
+      favori={{
+        actif: favoris.estFavori(cible),
+        onBasculer: () => favoris.basculer(cible),
+      }}
+    />
+  );
 }
 
 function ChargementAgent() {
@@ -91,6 +105,13 @@ export function AgentIa() {
   }, []);
   const voix = useVoiceInput(recoitDictee);
   const lecture = useSpeech();
+  const favoris = useFavoris();
+
+  const questionDepuisFavori = (f: Favori) => {
+    const q = `Correspondance ${f.station} vers ${f.quartier} ?`;
+    setQuestion(q);
+    void demander(q);
+  };
 
   const demander = async (questionPosee: string) => {
     const propre = questionPosee.trim();
@@ -237,8 +258,8 @@ export function AgentIa() {
         {!voix.supporte && (
           <p className="text-muted-foreground mt-2.5 text-xs leading-relaxed">
             Tape ta question puis envoie — ou ouvre la page sur{" "}
-            <span className="text-foreground font-semibold">Chrome / Edge</span> pour
-            dicter au micro.
+            <span className="text-foreground font-semibold">Chrome / Edge</span> pour dicter au
+            micro.
           </p>
         )}
 
@@ -259,6 +280,14 @@ export function AgentIa() {
             </button>
           ))}
         </div>
+
+        <AgentFavoris
+          favoris={favoris.favoris}
+          consenti={favoris.consenti}
+          onUtiliser={questionDepuisFavori}
+          onEffacer={favoris.effacer}
+          onConsentir={favoris.accorder}
+        />
 
         {historique.length > 0 && (
           <div className="bg-surface mt-5 rounded-2xl p-4">
@@ -323,7 +352,12 @@ export function AgentIa() {
         )}
 
         {resultat && !chargement && (
-          <ResultatAgent texte={resultat} question={questionPosee} lecture={lecture} />
+          <ResultatAgent
+            texte={resultat}
+            question={questionPosee}
+            lecture={lecture}
+            favoris={favoris}
+          />
         )}
       </div>
     </section>
