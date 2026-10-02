@@ -4,6 +4,7 @@ export type FicheAgent = {
   prix: string;
   heure: string;
   sources: string;
+  fraicheur: string;
 };
 
 function extrait(texte: string, cle: string): string | null {
@@ -18,6 +19,14 @@ export function parseFicheAgent(texte: string): FicheAgent | null {
   const prix = extrait(texte, "PRIX");
   const heure = extrait(texte, "HEURE");
   const sources = extrait(texte, "SOURCES");
+  const fraicheur = extrait(texte, "FRA[IÎ]CHEUR");
   if (!station || !quartier || !prix || !heure) return null;
-  return { station, quartier, prix, heure, sources: sources ?? "" };
+  return {
+    station,
+    quartier,
+    prix,
+    heure,
+    sources: sources ?? "",
+    fraicheur: fraicheur ?? "",
+  };
 }

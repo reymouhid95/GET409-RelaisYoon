@@ -27,7 +27,10 @@ export const demanderAgent = createServerFn({ method: "POST" })
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          inputs: { query: data.question },
+          inputs: {
+            query: data.question,
+            date: new Date().toISOString().slice(0, 10),
+          },
           query: data.question,
           response_mode: "blocking",
           user: "user-relaisyoon-" + Date.now(),

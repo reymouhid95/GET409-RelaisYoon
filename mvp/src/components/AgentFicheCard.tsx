@@ -33,6 +33,12 @@ export function AgentFicheCard({ fiche }: { fiche: FicheAgent }) {
           </p>
         </div>
 
+        {fiche.fraicheur && (
+          <p className="bg-surface text-muted-foreground mt-3 inline-flex rounded-lg px-3 py-1.5 text-xs font-semibold">
+            Données du {fiche.fraicheur}
+          </p>
+        )}
+
         {fiche.sources && (
           <p className="text-muted-foreground/90 bg-surface mt-4 rounded-lg px-3 py-2 text-xs">
             <span className="font-bold">Sources : </span>
