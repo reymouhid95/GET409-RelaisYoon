@@ -6,7 +6,8 @@ import type { FicheAgent } from "@/lib/ficheAgent";
 
 type FichePartagee = FicheAgent;
 
-const chaine = (v: unknown): string => (typeof v === "string" ? v : "");
+const chaine = (v: unknown): string =>
+  typeof v === "string" ? v : v !== undefined && v !== null ? String(v) : "";
 
 export const Route = createFileRoute("/fiche")({
   validateSearch: (search: Record<string, unknown>): FichePartagee => ({
