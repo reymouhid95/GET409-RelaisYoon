@@ -37,3 +37,13 @@ collecte que station, quartier, prix, heure, aucune identité.
 Se taire plutôt qu'afficher faux : sans donnée fraîche, l'agent répond
 INSUFFISANT et la branche erreur s'affiche. Une info absente se contourne ;
 une info fausse fait rater la vraie voiture.
+
+## Risque 3 — L'historique de trajets laissé derrière soi
+
+Scénario : Awa consulte RelaisYoon sur un téléphone partagé ou emprunté ;
+ses 3 derniers trajets restent visibles après son départ. Impactée :
+l'usagère (trajets du soir). Probabilité faible, impact discret, urgence
+basse. Garde-fous : mémoire volatile React uniquement — ni localStorage,
+ni cookie, ni requête serveur ; bouton « Effacer » visible ; purge
+automatique à la fermeture de l'onglet. Vérifié par le test T10
+(recharge → liste vide).

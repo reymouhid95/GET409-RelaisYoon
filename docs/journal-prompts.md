@@ -437,3 +437,33 @@ uniquement issue de la colonne `Semaine` (jamais « à jour » inventé) ;
   T7/T8 écrits avant implémentation et réussis du premier coup après
   publication (1 échec T8 initial dû à un champ `date` non renseigné,
   corrigé par le rejeu).
+
+## S5+ — Module D : P-B Mémoire session (2 octobre)
+
+2e cycle du module D. Pattern 9 du catalogue [Cours] : état React en
+mémoire, rien persisté. **Impact Dify : aucun** (fonction 100 % app).
+
+### Spécification (validée avant code)
+
+Bloc « Mes 3 derniers trajets » : max 3 questions, plus récente en tête ;
+clic = re-soumission ; bouton Effacer ; recharge de page = tout vide.
+Critère éthique central : ni localStorage, ni cookie, ni serveur.
+
+### Modification application (commit `9ffac4d`)
+
+- `AgentIa.tsx` : state `historique: string[]` (max 3, doublons dédupés en
+  tête) alimenté seulement quand la réponse est `ok` ; bloc UI sous les
+  amorces ; bouton Effacer remet `[]`.
+
+### Tests
+
+- **T9** : 3 amorces posées dans l'ordre → 3 lignes, ordre décroissant
+  (dernière posée en tête), clic = relance ✅ (testé sur app déployée)
+- **T10** : Effacer → bloc dispo ; F5 → liste vide ✅
+
+- Prompt : spec P-Spec fournie puis « Validé ? » — code écrit par OpenCode
+  en une passe, aucun prompt Copilot (règle du tutoriel adaptée).
+- Éthique : Risque 3 ajouté à `reflexion-ethique-s3.md` (téléphone partagé
+  → mémoire volatile + Effacer + purge F5).
+- Note : 5/5 — zéro modification Dify conforme à la spec, tests réussis du
+  premier coup après déploiement.
