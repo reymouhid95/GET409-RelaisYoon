@@ -506,3 +506,41 @@ aucune traduction ni voix hors français.
 
 **Module D complet** : P-A ✅ · P-B ✅ · P-C ✅ (3 cycles, 0 correction de
 spec, zéro modification Dify hors P-A).
+
+## S5+ — Module E : diagnostic d'erreur côté UI (2 octobre)
+
+Dernier point « partiellement fait » du parcours. Le serveur loguait déjà
+code HTTP + corps Dify (P8) ; restait à **exposer le détail à l'étudiant
+sans jamais exposer la clé**.
+
+### Spécification (validée avant code)
+
+Champ `detail` renvoyé par le server fn (status + `code`/`message` du corps
+Dify, tronqué 200 car sinon) ; message usager inchangé ; ligne mono grise
+`Diagnostic : …` sous l'alerte ; invariant clé : aucun chemin client ne lit
+`DIFY_API_KEY`.
+
+### Modifications (commit `ec0a7c5`)
+
+- `dify.functions.ts` : helper `raisonDify()` (parse JSON du corps d'erreur
+  Dify → `code · message`, fallback extrait brut) + `detail` sur chaque
+  branche d'échec (HTTP, abort 30 s, clé absente, échec réseau).
+- `AgentIa.tsx` : state `detail`, reset à chaque question, ligne Diagnostic
+  dans le bandeau rouge.
+
+### Test T13
+
+- Dev local avec fausse clé (`DIFY_API_KEY=sk-test-invalide` en variable
+  shell — `.env` réel intact) ; appel RPC en direct :
+  `{"ok":false,"erreur":"Service temporairement indisponible","detail":
+  "Dify HTTP 401 · unauthorized · Access token is invalid"}` — **zéro clé**
+  dans la réponse ✅.
+- UI sur localhost : bandeau rouge + ligne Diagnostic exacte ✅ (testé
+  par l'utilisateur).
+
+- Prompt : spec mini-cycle E → « Validé ? » → code OpenCode.
+- Éthique : inchangé — la clé reste serveur-only (règle n°1).
+- Note : 5/5 — correction minimale du §6 du tutoriel, test d'exécution
+  réelle (401 simulé) plutôt que simulé à l'œil.
+
+**Parcours S5+ : A (veille) · B · C · D · E · F = complet.**

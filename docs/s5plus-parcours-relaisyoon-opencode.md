@@ -104,16 +104,17 @@ clé a été régénérée) :
 
 | Module | Contenu | Statut | Détail |
 |---|---|---|---|
-| **B** | Batterie de tests T1–T6 | **à faire — 1er pas** | Jamais écrite ; clé régénérée = revalidation obligatoire (§3) |
+| **B** | Batterie de tests T1–T6 | **fait (02/10)** | 6/6 après correctifs timeout 30 s + format P2 ; rejouée en ligne via server fn |
 | A | Modèle de l'agent (quota/clé) | **surveiller** | gpt-oss-20b via Groq ; `[Hypothèse]` Groq instable selon [Cours] → plan de secours Gemini AI Studio (§2.2) si Journaux = FAILURE |
 | C | Travailler en local | **fait** | `mvp/` cloné, pnpm, `.env` en place (§4.3 adapté) |
-| D | Fonctionnalité innovante | **après B** | 3 déjà livrées (voix, WhatsApp, carte structurée) ; 3 propositions au catalogue §5 adapté |
-| E | Diagnostiquer une erreur | **partiellement fait** | logs HTTP/Dify ajoutés côté serveur (P8) ; jamais la clé |
+| D | Fonctionnalité innovante | **fait (02/10)** | **P-A** fraîcheur (T7/T8) + **P-B** mémoire session (T9/T10) + **P-C** lecture vocale (T11/T12) — 3 cycles, journal § S5+ |
+| E | Diagnostiquer une erreur | **fait (02/10)** | logs serveur (P8) + **ligne Diagnostic UI** (`ec0a7c5`) : HTTP + raison Dify, zéro clé — test T13 (401 simulé) |
 | F | Mise en ligne hors Lovable | **fait** | Workers déployé + URL ; à maintenir après chaque push (§4.6) |
 
-**Parcours ordonné** : **B** (aujourd'hui) → A seulement si Journaux Dify montrent
-un échec → **D** (choix parmi §5) → E au besoin → F déjà fait, re-déployer à chaque
-modif. B est rejoué après **chaque** modification (prompt, modèle, base, code).
+**Parcours ordonné — état final (02/10/2026)** : **B ✅ → A (veille seule,
+point vert) → D ✅ (3 features) → E ✅ → F ✅** + démo S6 scriptée
+(`hmw-demo.md`, chrono `demo-timer.sh`). Reste en veille : A (Groq) et le
+re-déploy après chaque push.
 
 ---
 
