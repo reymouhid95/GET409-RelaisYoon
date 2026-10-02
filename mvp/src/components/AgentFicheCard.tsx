@@ -1,4 +1,5 @@
-import { Clock3, MessageCircle, Sparkles, Star } from "lucide-react";
+import { useState } from "react";
+import { Check, Clock3, Link2, MessageCircle, Sparkles, Star } from "lucide-react";
 
 import { BoutonLecture } from "@/components/BoutonLecture";
 import { StatutPastille } from "@/components/FicheCard";
@@ -17,6 +18,25 @@ export function AgentFicheCard({
   lecture?: Lecture;
   favori?: { actif: boolean; onBasculer: () => void };
 }) {
+  const [lieuCopie, setLieuCopie] = useState(false);
+
+  const copierLien = async () => {
+    const params = new URLSearchParams({
+      station: fiche.station,
+      quartier: fiche.quartier,
+      prix: fiche.prix,
+      heure: fiche.heure,
+      sources: fiche.sources,
+      fraicheur: fiche.fraicheur,
+    });
+    try {
+      await navigator.clipboard.writeText(`${window.location.origin}/fiche?${params}`);
+      setLieuCopie(true);
+      window.setTimeout(() => setLieuCopie(false), 2500);
+    } catch {
+      /* presse-papiers refusé : le bouton reste silencieux */
+    }
+  };
   return (
     <div className="ry-halo animate-pop bg-card relative mt-5 overflow-hidden rounded-2xl shadow-lift">
       <div className="from-brand-500/10 via-sun-400/8 pointer-events-none absolute inset-0 bg-gradient-to-br to-transparent" />
@@ -109,6 +129,19 @@ export function AgentFicheCard({
           <MessageCircle className="size-4" aria-hidden />
           Partager sur WhatsApp
         </a>
+
+        <button
+          type="button"
+          onClick={copierLien}
+          className="border-border/70 text-foreground hover:bg-accent mt-2 flex w-full items-center justify-center gap-2 rounded-xl border px-4 py-2.5 text-sm font-bold transition-all active:scale-[0.98]"
+        >
+          {lieuCopie ? (
+            <Check className="size-4 text-brand-600" aria-hidden />
+          ) : (
+            <Link2 className="size-4" aria-hidden />
+          )}
+          {lieuCopie ? "Lien copié !" : "Copier le lien de la fiche"}
+        </button>
       </div>
     </div>
   );
