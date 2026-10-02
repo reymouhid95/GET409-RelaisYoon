@@ -255,3 +255,32 @@ questions de liste.
 **Procédure** : éditer SYSTEM du Chercheur → remplacer le bloc →
 **Publier → Mettre à jour** → rejeu batterie entière (T8 attendu
 `INSUFFISANT` ; T1/T7 doivent rester REUSSIS avec S40-2026).
+
+## Correctif 05/10/2026 — Exemple few-shot pour T8 + détection USER cassé
+
+**Constat** : malgré la procédure 3 temps (correctif 04), gpt-oss-20b
+rend la fiche avec `date=2026-08-15`. Deux hypothèses : le modèle ignore
+une procédure abstraite (cas typique des modèles faibles → il faut un
+exemple), ou la variable `date` n'arrive plus dans le USER du Chercheur.
+
+**Étape 1 (10 s, à faire par l'utilisateur)** : ouvrir le nœud Chercheur
+→ onglet USER → vérifier qu'il contient bien `Date du jour : {date}`.
+
+**Étape 2** : ajouter ce paragraphe à la **fin du bloc FRAÎCHEUR** du
+SYSTEM (après « … y compris le format LISTE. ») :
+
+```
+EXEMPLE OBLIGATOIRE (appliquer exactement le même raisonnement) :
+· Date du jour = 2026-08-15 · FRAÎCHEUR = S40-2026 (28/09/2026 → 04/10/2026)
+  → écart = 44 jours, hors période de plus de 7 jours → répondre UNIQUEMENT :
+  INSUFFISANT : relevés du S40-2026, trop anciens ou incohérents — ne pas monter sur cette info
+· Date du jour = 2026-10-02 · FRAÎCHEUR = S40-2026 (28/09/2026 → 04/10/2026)
+  → date dans la période → donnée utilisable, continuer la fiche.
+Si aucune Date du jour n'est présente dans les messages USER → répondre
+UNIQUEMENT : INSUFFISANT : aucune date du jour fournie (relevés invérifiables).
+```
+
+**Procédure** : vérifier USER → coller l'exemple → **Publier →
+Mettre à jour** → rejeu. Si la réponse T8 devient
+`INSUFFISANT : aucune date du jour fournie`, c'est que `{date}` ne circule
+plus : revoir D2 (USER avec `Date du jour : {date}`).
