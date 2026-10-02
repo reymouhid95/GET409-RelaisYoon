@@ -329,8 +329,8 @@ vérification pour confirmer, correction minimale. Une seule hypothèse à la fo
 - ☑ T1–T6 écrites dans le Journal et **toutes réussies après la dernière
   modification** (01/10/2026 : 6/6 en ligne après régénération de clé,
   correctifs P2 + timeout)
-- ☐ Au moins 1 nouvelle fonctionnalité propre au projet : spec, Dify, app,
-  tests T7–T8
+- ☑ Au moins 1 nouvelle fonctionnalité propre au projet : **P-A Fraîcheur**
+  (spec, Dify D1–D4, app A1–A3, tests T7–T8 — 02/10/2026, journal § S5+)
 - ☐ Code poussé sur GitHub sans `mvp/.env` ; Workers à jour
 - ☐ Lien public testé depuis un autre appareil
 - ☐ Journal L4 complété (prompts exacts, résultats, notes /5)

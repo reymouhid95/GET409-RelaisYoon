@@ -13,6 +13,15 @@ technique — marquage PÉRIMÉ automatique au-delà d'une heure et alerte A2 ;
 transparence — l'heure du relevé est affichée dans le message lui-même ;
 prompt — règle système « jamais de prix sans heure » dans le Rédacteur.
 
+**Mise à jour (02/10/2026 — module D, fonctionnalité P-A)** : garde-fous
+« technique » partiellement opérationnel — badge `Données du [Semaine]`
+sous chaque fiche (la fraîcheur est visible d'un coup d'œil, avant paiement)
++ règle Chercheur « écart avec la date du jour > 7 jours → INSUFFISANT,
+aucun prix affiché ». Vérifié par le test T8 (date simulée 2026-08-15 →
+refus motivé). Reste ouvert : le marquage PÉRIMÉ « au-delà d'une heure de
+la descente » n'est pas implémenté — la donnée est hebdomadaire (S40-2026),
+pas horaire ; à documenter en soutenance si questionnée.
+
 ## Risque 2 — L'affichage public qui braque les chauffeurs
 
 Scénario : les prix des clandos affichés à la station sont vécus comme une

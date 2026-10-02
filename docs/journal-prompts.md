@@ -390,3 +390,50 @@ Temps d'exécution 0,7–4,7 s (aucun timeout).
   couverture → documenté au §5.1 du doc S5+ (biais connu, ethique S4).
 - Note : 5/5 — batterie écrite une fois, 2 défauts réels trouvés et
   corrigés, rejeu complet sans écart.
+
+## S5+ — Module D : P-A Fraîcheur des données (2 octobre)
+
+Cycle complet du module D du tutoriel S5+ adapté (spec → Dify → app →
+tests → publication → éthique). Choix utilisateur parmi les 3 propositions
+§5.1 : **P-A retenue** (P-B mémoire, P-C lecture vocale écartées cette séance).
+
+### Spécification (validée avant code)
+
+Pour l'usagère qui s'apprête à monter, quand elle demande une correspondance,
+l'agent cite la date réelle des relevés et refuse si elles sont trop
+anciennes. 3 critères : badge `Données du [Semaine]` visible ; valeur
+uniquement issue de la colonne `Semaine` (jamais « à jour » inventé) ;
+écart > 7 jours avec la date du jour → `INSUFFISANT`, aucun prix.
+
+### Modifications Dify (D1–D4, publiées)
+
+| # | Modification |
+|---|---|
+| D1 | DÉBUT : variable `date` (Texte, **non requise**) |
+| D2 | USER du Chercheur : `Date du jour : {date}` (variables jamais dans SYSTEM) |
+| D3 | SYSTEM Chercheur : bloc FRAÎCHEUR (citer `Semaine`, interdiction d'inventer, comparaison > 7 jours → INSUFFISANT) |
+| D4 | SYSTEM Rédacteur : 6e ligne facultative `FRAÎCHEUR` après SOURCES + suppression de l'exemple « à jour (moins d'une heure) » |
+
+### Modifications application (A1–A3, commit `8251fb5`)
+
+- `dify.functions.ts` : `inputs: { query, date }` avec date ISO serveur
+  (Dakar = UTC+0, pas de conversion).
+- `ficheAgent.ts` : champ `fraicheur` (regex `FRA[IÎ]CHEUR`, facultatif).
+- `AgentFicheCard.tsx` : badge « Données du {fraicheur} » sous le prix.
+
+### Tests
+
+| # | Résultat |
+|---|---|
+| T1–T6 | 7/7 revalidés en ligne (battery v2) |
+| T7 | `FRAÎCHEUR : S40-2026` présent, badge affiché en prod, zéro durée inventée ✅ |
+| T8 (Dify, date simulée `2026-08-15`) | `INSUFFISANT : relevés du S40-2026, trop anciens ou incohérents — ne pas monter sur cette info` ✅ |
+
+- Prompt : blocs D3/D4 fournis dans la conversation ; règle du projet
+  respectée (1 fonctionnalité = cycle complet, variables USER uniquement).
+- Éthique : Risque 1 de `reflexion-ethique-s3.md` mis à jour (garde-fou
+  badge + refus opérationnels ; marquage horaire « PÉRIMÉ 1 h » reste ouvert).
+- Note : 5/5 — spec respectée à la lettre, 0 dérive de périmètre, tests
+  T7/T8 écrits avant implémentation et réussis du premier coup après
+  publication (1 échec T8 initial dû à un champ `date` non renseigné,
+  corrigé par le rejeu).
