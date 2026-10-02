@@ -204,3 +204,25 @@ test **T14** : « Quartiers desservis depuis Grand-Médine ce soir » →
 liste de 3 (Parcelles Assainies 400 · Keur Massar 350 · Pikine Icotaf
 450). L'application affiche le repli texte (parse null sur liste),
 comportement voulu : pas de carte pour une liste.
+
+## Correctif 03/10/2026 — Le bloc LISTE ne doit pas abroger la fraîcheur (T8)
+
+**Constat** : avec le bloc LISTE publié, T8 (date simulée `2026-08-15`)
+retombe sur une fiche au lieu de `INSUFFISANT` — la phrase « INSUFFISANT
+uniquement si la station est absente » l'emportait sur la règle FRAÎCHEUR.
+
+Dans le SYSTEM du Chercheur, **remplacer les deux dernières phrases du
+bloc LISTE** (celles qui commencent par « Ne jamais répondre INSUFFISANT… »)
+par :
+
+```
+Ne jamais répondre INSUFFISANT au motif que la question porte sur
+plusieurs quartiers : si la station est dans les relevés, les lignes sont
+les données. En revanche, la règle FRAÎCHEUR ci-dessus reste PRIORITAIRE :
+si les relevés sont trop anciens ou incohérents par rapport à la date du
+jour, répondre INSUFFISANT s'impose pour une liste comme pour une fiche.
+```
+
+**Procédure** : éditer le SYSTEM du Chercheur → remplacer ces deux
+phrases → **Publier → Mettre à jour** → rejeu ciblé T8 (attendu :
+`INSUFFISANT` avec `date=2026-08-15`) + T14 (liste intacte) + T1 (fiche).
