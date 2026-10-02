@@ -151,3 +151,56 @@ modèle. Longueur : 100 mots maximum (champs non compris).
 Procédure : coller → **Publier → Mettre à jour** → rejouer T1bis et T6
 (entrée : « Je monte à Petersen et je veux descendre à Guédiawaye Sam
 Notaire, c'est combien et à quelle heure ? ») → la carte doit s'afficher.
+
+## Correctif 02/10/2026 — Questions de liste (audit E5, test S2 #2)
+
+**Constat** : « Quels quartiers depuis Grand-Médine ? » → `INSUFFISANT`
+(trop générale) alors que le tutoriel attend les 3 correspondances
+(400/350/450). Cause : le format fiche unique ne peut pas exprimer une
+liste. Décision d'équipe : **autoriser les listes** (option B, rejeu
+batterie obligatoire).
+
+### P1 — Chercheur : ajouter ce bloc à la fin du SYSTEM
+
+```
+CAS PARTICULIER — QUESTION DE LISTE
+Si la question demande plusieurs correspondances depuis une station
+(quels quartiers depuis X, liste des départs de X, quels quartiers sont
+desservis depuis X ce soir), analyser la station puis retourner UNIQUEMENT
+ce format :
+
+STATION : [nom de la station]
+LISTE :
+- [quartier] — [prix] FCFA — [heure] — [Disponible ou Indisponible]
+(une ligne par quartier présent dans les relevés, saut de ligne entre
+chaque ligne)
+SOURCES : [origine des informations]
+FRAÎCHEUR : [semaine des relevés]
+
+Ne jamais répondre INSUFFISANT au motif que la question porte sur
+plusieurs quartiers : si la station est dans les relevés, les lignes sont
+les données. INSUFFISANT uniquement si la station est absente des
+relevés.
+```
+
+### P2 — Rédacteur : ajouter ce bloc à la fin du SYSTEM
+
+```
+SI LE CHERCHEUR A RÉTOURNÉ UN FORMAT LISTE (plusieurs correspondances)
+Alors rédiger, SANS format carte et SANS ligne de recommandation :
+
+STATION : [nom]
+[quartier] — [prix] FCFA — [heure] — [disponibilité]
+(une ligne par quartier, retours à la ligne)
+FRAÎCHEUR : [semaine]
+
+Reprendre chaque ligne ENTIÈREMENT et À L'IDENTIQUE. Aucun prix inventé,
+aucun champ QUARTIER unique. Longueur : 100 mots maximum.
+```
+
+**Procédure** : coller chaque bloc à la fin du SYSTEM correspondant →
+**Publier → Mettre à jour** → rejouer la batterie entière (B) + nouveau
+test **T14** : « Quartiers desservis depuis Grand-Médine ce soir » →
+liste de 3 (Parcelles Assainies 400 · Keur Massar 350 · Pikine Icotaf
+450). L'application affiche le repli texte (parse null sur liste),
+comportement voulu : pas de carte pour une liste.
