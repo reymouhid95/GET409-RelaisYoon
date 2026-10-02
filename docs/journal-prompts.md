@@ -655,3 +655,25 @@ Correctif 06 sur les 9 tests antérieurs.
 
 **Module D au complet : P-A · P-B · P-C · P-D · P-E · P-F · P-G —
 7 features, T7–T18 tous validés.**
+
+## S5+ — Module A : plan B Gemini validé (2 octobre)
+
+Activation du plan de secours documenté au §2.2 : le workflow tourne
+depuis le 01/10 sur **Gemini Flash-Lite** (clé gratuite AI Studio) en
+lieu et place de gpt-oss-20b via Groq.
+
+- **Revalidation batterie v4 sur Gemini : 10/10** — T2/T3/T4/T5/T8
+  toujours `INSUFFISANT` (garde-fous §2.4 intacts malgré un modèle
+  « plus fort »), fraîcheur T7, liste T14, heure T18 : aucune
+  itération de renforcement nécessaire.
+- Script : `/tmp/opencode/battery-v4.mjs` (recréé — le dossier
+  `/tmp/opencode` avait été vidé entre-temps).
+
+- Prompt : constat utilisateur (« tout marche depuis hier ») →
+  validation par batterie complète plutôt que par tests manuels.
+- Éthique : inchangé — le garde-fou INSUFFISANT reste vérifié par les
+  tests automatisés, pas par la confiance dans le modèle.
+- Note : 5/5 — changement de modèle validé en un seul passage, zéro
+  dérive des sorties.
+
+**Module A au complet : veille + plan B opérationnel et testé.**

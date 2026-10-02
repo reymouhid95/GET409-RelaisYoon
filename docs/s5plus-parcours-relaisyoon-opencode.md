@@ -105,16 +105,17 @@ clé a été régénérée) :
 | Module | Contenu                       | Statut           | Détail                                                                                                                                                                                                                 |
 | ------ | ----------------------------- | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **B**  | Batterie de tests T1–T6       | **fait (02/10)** | 6/6 après correctifs timeout 30 s + format P2 ; rejouée en ligne via server fn                                                                                                                                         |
-| A      | Modèle de l'agent (quota/clé) | **surveiller**   | gpt-oss-20b via Groq ; `[Hypothèse]` Groq instable selon [Cours] → plan de secours Gemini AI Studio (§2.2) si Journaux = FAILURE                                                                                       |
+| A      | Modèle de l'agent (quota/clé) | **fait (02/10)** | Plan B actif : **Gemini Flash-Lite** (clé AI Studio) depuis le 01/10 — batterie **10/10** revalidée sur Gemini le 02/10, garde-fous intactes. Ancien : gpt-oss-20b via Groq (plan de secours historique)               |
 | C      | Travailler en local           | **fait**         | `mvp/` cloné, pnpm, `.env` en place (§4.3 adapté)                                                                                                                                                                      |
 | D      | Fonctionnalité innovante      | **fait (02/10)** | **7 features** : P-A fraîcheur (T7/T8), P-B mémoire session (T9/T10), P-C lecture vocale (T11/T12), P-D stations enregistrées (T15), P-E avis (T16), P-F lien partagé (T17), P-G heure du trajet (T18) — journal § S5+ |
 | E      | Diagnostiquer une erreur      | **fait (02/10)** | logs serveur (P8) + **ligne Diagnostic UI** (`ec0a7c5`) : HTTP + raison Dify, zéro clé — test T13 (401 simulé)                                                                                                         |
 | F      | Mise en ligne hors Lovable    | **fait**         | Workers déployé + URL ; à maintenir après chaque push (§4.6)                                                                                                                                                           |
 
-**Parcours ordonné — état final (02/10/2026)** : **B ✅ → A (veille seule,
-point vert) → D ✅ (7 features, T7–T18) → E ✅ → F ✅** + démo S6 scriptée
-(`hmw-demo.md`, chrono `demo-timer.sh`). Batterie **10/10** (v4). Reste en
-veille : A (Groq) et le re-déploy après chaque push.
+**Parcours ordonné — état final (02/10/2026)** : **B ✅ → A ✅ (plan B
+Gemini actif, batterie 10/10 sur le modèle en prod) → D ✅ (7 features,
+T7–T18) → E ✅ → F ✅** + démo S6 scriptée (`hmw-demo.md`, chrono
+`demo-timer.sh`). Batterie **10/10** (v4). Reste en veille : le
+re-déploy après chaque push.
 
 ---
 
@@ -124,7 +125,10 @@ veille : A (Groq) et le re-déploy après chaque push.
 
 - Symptôme : `Dify 400 : Model quota has been exceeded` ou Journaux en FAILURE →
   §6.2 du tutoriel.
-- Notre modèle actuel : **gpt-oss-20b via Groq** [Projet].
+- Notre modèle actuel : **Gemini Flash-Lite** (plan B activé le 01/10, clé
+  gratuite Google AI Studio) — **batterie 10/10 revalidée sur Gemini le
+  02/10**, garde-fous INSUFFISANT intactes. Modèle historique :
+  gpt-oss-20b via Groq.
   `[Hypothèse]` [Cours] : « GroqCloud — variable ; comptes suspendus chez certains
   étudiants : ne pas en dépendre » → **plan de secours** : clé gratuite Google Gemini
   AI Studio (`aistudio.google.com/apikey`) → Dify → Intégrations → fournisseur
