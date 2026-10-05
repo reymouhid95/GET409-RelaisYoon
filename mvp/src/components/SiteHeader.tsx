@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { BusFront, Moon, Sparkles, Sun } from "lucide-react";
+import { BusFront, Moon, Sun } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
@@ -51,11 +51,11 @@ function ThemeToggle() {
       onClick={basculer}
       aria-label={sombre ? "Passer en thème clair" : "Passer en thème sombre"}
       title={sombre ? "Thème clair" : "Thème sombre"}
-      className="border-border bg-card text-muted-foreground hover:bg-accent hover:text-accent-foreground hover:border-brand-300 focus-visible:ring-brand-400 grid size-10 shrink-0 place-items-center rounded-full border transition-all duration-200 active:scale-95"
+      className="border-border bg-card text-muted-foreground hover:bg-accent hover:text-accent-foreground hover:border-brand-300 grid size-10 shrink-0 place-items-center rounded-full border transition-[transform,border-color,background-color,color] duration-200 active:scale-95"
     >
       <span
         className={cn(
-          "grid place-items-center transition-all duration-300",
+          "grid place-items-center transition-[transform,opacity] duration-300",
           monte && !sombre ? "rotate-0 scale-100 opacity-100" : "-rotate-90 scale-50 opacity-0",
         )}
       >
@@ -63,13 +63,42 @@ function ThemeToggle() {
       </span>
       <span
         className={cn(
-          "grid place-items-center transition-all duration-300",
+          "grid place-items-center transition-[transform,opacity] duration-300",
           monte && sombre ? "rotate-0 scale-100 opacity-100" : "rotate-90 scale-50 opacity-0",
         )}
       >
         <Moon className="size-[1.15rem]" aria-hidden />
       </span>
     </button>
+  );
+}
+
+/*
+ * Lien de navigation : l'état actif est marqué par un filet ambre sous le
+ * libellé (code de signalétique) plutôt qu'une pilule colorée — on sait où
+ * on est sans que la nav bruite.
+ */
+function LienNav({
+  to,
+  label,
+  exact,
+}: {
+  to: "/" | "/fiches" | "/aide" | "/contact";
+  label: string;
+  exact?: boolean;
+}) {
+  return (
+    <Link
+      to={to}
+      activeOptions={exact ? { exact: true } : undefined}
+      className="text-muted-foreground hover:text-foreground relative rounded-md px-3 py-2 text-sm font-semibold transition-colors duration-150"
+      activeProps={{
+        className:
+          "text-foreground after:absolute after:inset-x-3 after:-bottom-0.5 after:h-0.5 after:rounded-full after:bg-sun-400",
+      }}
+    >
+      {label}
+    </Link>
   );
 }
 
@@ -82,12 +111,12 @@ export function SiteHeader() {
           className="group flex shrink-0 items-center gap-2.5 transition-opacity hover:opacity-85"
         >
           <span
-            className="from-brand-500 to-brand-700 shadow-glow group-hover:shadow-lift grid size-9 place-items-center rounded-xl bg-gradient-to-br text-white transition-all duration-300"
+            className="bg-board text-sun-400 grid size-9 place-items-center rounded-lg transition-transform duration-200 fine:group-hover:-translate-y-px"
             aria-hidden
           >
             <BusFront className="size-5" />
           </span>
-          <span className="text-[1.0625rem] font-extrabold tracking-tight">
+          <span className="font-display text-[1.0625rem] font-bold tracking-tight">
             Relais<span className="text-primary">Yoon</span>
           </span>
         </Link>
@@ -95,15 +124,7 @@ export function SiteHeader() {
         <div className="flex items-center gap-1">
           <nav className="hidden items-center gap-1 sm:flex" aria-label="Navigation principale">
             {navItems.map((item) => (
-              <Link
-                key={item.to}
-                to={item.to}
-                activeOptions={{ exact: item.to === "/" }}
-                className="text-muted-foreground hover:bg-accent hover:text-accent-foreground rounded-full px-3.5 py-2 text-sm font-semibold transition-colors duration-200"
-                activeProps={{ className: "bg-primary/10 !text-primary" }}
-              >
-                {item.label}
-              </Link>
+              <LienNav key={item.to} to={item.to} label={item.label} exact={item.to === "/"} />
             ))}
           </nav>
           <ThemeToggle />
@@ -115,19 +136,11 @@ export function SiteHeader() {
           et l'usagère consulte souvent le site juste après être descendue
           du BRT, donc sur téléphone. */}
       <nav
-        className="border-border/60 -mt-0.5 flex items-center gap-1 overflow-x-auto border-t pb-2.5 sm:hidden"
+        className="border-border/60 -mt-0.5 flex items-center gap-1 overflow-x-auto border-t px-2 pb-2 sm:hidden"
         aria-label="Navigation principale"
       >
         {navItems.map((item) => (
-          <Link
-            key={item.to}
-            to={item.to}
-            activeOptions={{ exact: item.to === "/" }}
-            className="text-muted-foreground hover:bg-accent hover:text-accent-foreground shrink-0 rounded-full px-3 py-1.5 text-sm font-semibold whitespace-nowrap transition-colors duration-200"
-            activeProps={{ className: "bg-primary/10 !text-primary" }}
-          >
-            {item.label}
-          </Link>
+          <LienNav key={item.to} to={item.to} label={item.label} exact={item.to === "/"} />
         ))}
       </nav>
     </header>
@@ -137,36 +150,34 @@ export function SiteHeader() {
 export function SiteFooter() {
   return (
     <footer className="border-border/60 relative mt-24 overflow-hidden border-t">
-      <div className="from-brand-500/8 pointer-events-none absolute inset-x-0 -top-px h-px bg-gradient-to-r via-sun-400/60 to-transparent" />
-      <div className="mx-auto max-w-page px-4 py-14 sm:px-6">
+      <div aria-hidden className="bg-sun-400 absolute inset-x-0 top-0 h-0.5" />
+      <div className="mx-auto max-w-page px-4 pt-14 pb-10 sm:px-6">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div className="sm:col-span-2 lg:col-span-1">
             <div className="flex items-center gap-2.5">
               <span
-                className="from-brand-500 to-brand-700 grid size-8 place-items-center rounded-lg bg-gradient-to-br text-white"
+                className="bg-board text-sun-400 grid size-8 place-items-center rounded-md"
                 aria-hidden
               >
                 <BusFront className="size-4" />
               </span>
-              <span className="font-extrabold tracking-tight">
+              <span className="font-display font-bold tracking-tight">
                 Relais<span className="text-primary">Yoon</span>
               </span>
             </div>
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
+            <p className="text-muted-foreground mt-4 max-w-xs text-sm leading-relaxed">
               Relevés de correspondance BRT effectués chaque soir sur le terrain, à Dakar.
             </p>
           </div>
 
           <div>
-            <h2 className="text-xs font-bold tracking-widest text-foreground/70 uppercase">
-              Navigation
-            </h2>
-            <ul className="mt-4 space-y-2.5">
+            <h2 className="text-sm font-semibold text-foreground">Navigation</h2>
+            <ul className="mt-3.5 space-y-2.5">
               {navItems.map((item) => (
                 <li key={item.to}>
                   <Link
                     to={item.to}
-                    className="text-muted-foreground hover:text-primary text-sm transition-colors duration-200"
+                    className="text-muted-foreground hover:text-primary text-sm transition-colors duration-150"
                   >
                     {item.label}
                   </Link>
@@ -176,10 +187,8 @@ export function SiteFooter() {
           </div>
 
           <div>
-            <h2 className="text-xs font-bold tracking-widest text-foreground/70 uppercase">
-              Nous trouver
-            </h2>
-            <p className="text-muted-foreground mt-4 text-sm leading-relaxed">
+            <h2 className="text-sm font-semibold text-foreground">Nous trouver</h2>
+            <p className="text-muted-foreground mt-3.5 text-sm leading-relaxed">
               Station Petersen
               <br />
               Avenue Malick Sy, Dakar
@@ -187,17 +196,14 @@ export function SiteFooter() {
           </div>
 
           <div>
-            <h2 className="text-xs font-bold tracking-widest text-foreground/70 uppercase">
-              Relevés
-            </h2>
-            <p className="text-muted-foreground mt-4 text-sm leading-relaxed">
+            <h2 className="text-sm font-semibold text-foreground">Relevés</h2>
+            <p className="text-muted-foreground mt-3.5 text-sm leading-relaxed">
               Chaque soir
               <br />
               de 18h à 19h
             </p>
-            <p className="text-muted-foreground/80 mt-4 flex items-center gap-1.5 text-xs">
-              <Sparkles className="text-sun-500 size-3.5" aria-hidden />
-              Données de terrain, non contractuelles
+            <p className="text-muted-foreground/80 mt-4 text-xs">
+              Données de terrain, non contractuelles.
             </p>
           </div>
         </div>

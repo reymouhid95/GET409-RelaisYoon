@@ -6,7 +6,6 @@ import {
   ClipboardCheck,
   MapPin,
   MessageCircle,
-  Sparkles,
   TrendingUp,
 } from "lucide-react";
 
@@ -80,35 +79,39 @@ function Index() {
   return (
     <div>
       {/* ---------------------------------------------------------- Hero */}
-      <section className="ry-mesh relative overflow-hidden border-b">
+      <section className="relative overflow-hidden border-b">
         <div aria-hidden className="ry-grid pointer-events-none absolute inset-0" />
 
         <div className="relative mx-auto max-w-page px-4 py-16 sm:px-6 sm:py-24 lg:py-28">
           <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
-            <div className="animate-rise">
-              <p className="border-brand-200 bg-brand-100/70 text-brand-700 dark:border-brand-800 dark:bg-brand-900/50 dark:text-brand-300 inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-xs font-bold tracking-wide uppercase">
-                <span className="bg-success animate-pulse size-1.5 rounded-full" aria-hidden />
+            {/* min-w-0 : sans ça, la colonne vaut la taille min-content d'un
+                enfant et le titre déborde (puis est rogné par overflow-hidden)
+                sur les petits écrans. */}
+            <div className="min-w-0">
+              {/* Filet de signalétique + libellé : pas de pilule décorative. */}
+              <p className="animate-fade text-muted-foreground flex items-center gap-2.5 text-sm font-semibold">
+                <span aria-hidden className="bg-sun-400 h-px w-8" />
                 Relevés du soir · Dakar
               </p>
 
-              <h1 className="text-display mt-6">
-                Savoir où monter
-                <br />
-                <span className="ry-gradient-text">avant de descendre.</span>
+              <h1 className="text-display animate-rise mt-5">
+                Savoir où monter avant de descendre.
               </h1>
 
-              <p className="text-muted-foreground text-lede mt-6 max-w-xl">
+              <p
+                className="text-muted-foreground text-lede animate-rise mt-6 max-w-xl"
+                style={{ animationDelay: "60ms" }}
+              >
                 Une usagère de Guédiawaye descend du BRT à Petersen. Il lui faut savoir si une
                 correspondance part vers son quartier, et à quel prix — sans finir le trajet à
                 l&apos;aveugle.
               </p>
 
-              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-                <Button
-                  asChild
-                  size="lg"
-                  className="from-brand-500 to-brand-700 shadow-glow hover:from-brand-600 hover:to-brand-800 h-13 rounded-full px-7 text-[0.9375rem]"
-                >
+              <div
+                className="animate-rise mt-9 flex flex-col gap-3 sm:flex-row"
+                style={{ animationDelay: "120ms" }}
+              >
+                <Button asChild size="lg" variant="signal" className="h-12 px-7 text-[0.9375rem]">
                   <Link to="/fiches">
                     Je cherche une correspondance
                     <ArrowRight className="size-4" aria-hidden />
@@ -118,45 +121,45 @@ function Index() {
                   asChild
                   size="lg"
                   variant="outline"
-                  className="border-border bg-card/70 h-13 rounded-full px-7 text-[0.9375rem] backdrop-blur"
+                  className="h-12 border-border bg-card/70 px-7 text-[0.9375rem] backdrop-blur"
                 >
                   <Link to="/contact">Je relève un prix</Link>
                 </Button>
               </div>
             </div>
 
-            {/* Aperçu produit : la preuve visuelle plutôt qu'une promesse. */}
-            <div className="animate-pop relative" style={{ animationDelay: "120ms" }}>
-              <div
-                aria-hidden
-                className="from-brand-500/20 to-sun-400/20 absolute -inset-6 -z-10 rounded-[2.5rem] bg-gradient-to-br blur-2xl"
-              />
-              <div className="bg-card/80 border-border/70 rounded-3xl border p-6 shadow-pop backdrop-blur-xl">
+            {/*
+              Le panneau de départs : l'objet mémorable de la page. Surface
+              sombre always-on (un objet du monde réel, pas une section
+              peinte), chiffres ambre alignés en tabulaire, filets pointillés.
+            */}
+            <div className="min-w-0 animate-rise" style={{ animationDelay: "160ms" }}>
+              <div className="ry-board rounded-xl p-6">
                 <div className="flex items-center justify-between gap-3">
-                  <p className="text-muted-foreground text-[0.6875rem] font-bold tracking-widest uppercase">
+                  <p className="text-board-foreground/60 text-[0.6875rem] font-bold tracking-widest uppercase">
                     Ce soir · 18h40
                   </p>
-                  <span className="bg-success-soft text-success inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[0.6875rem] font-bold uppercase">
-                    <span className="bg-success size-1.5 rounded-full" aria-hidden />
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-sun-400/15 px-2.5 py-1 text-[0.6875rem] font-bold text-sun-500 uppercase">
+                    <span className="bg-sun-400 size-1.5 rounded-full" aria-hidden />
                     En direct
                   </span>
                 </div>
 
-                <div className="mt-5 space-y-2.5">
+                <div className="mt-5">
                   {apercu.map((fiche) => (
                     <div
                       key={fiche.id}
-                      className="bg-background/70 border-border/60 flex items-center justify-between gap-3 rounded-xl border px-4 py-3"
+                      className="ry-board-row flex items-center justify-between gap-3 py-3"
                     >
                       <div className="min-w-0">
                         <p className="truncate text-sm font-bold">{fiche.quartier}</p>
-                        <p className="text-muted-foreground truncate text-xs">
+                        <p className="text-board-foreground/60 truncate text-xs">
                           {fiche.departs.map((d) => d.heure).join(" · ")} · {fiche.station}
                         </p>
                       </div>
-                      <p className="text-primary ry-num shrink-0 text-lg font-extrabold">
+                      <p className="ry-num shrink-0 text-lg font-bold text-sun-400">
                         {Math.min(...fiche.departs.map((d) => d.prix))}
-                        <span className="text-muted-foreground ml-0.5 text-[0.625rem] font-bold">
+                        <span className="text-board-foreground/60 ml-0.5 text-[0.625rem] font-semibold">
                           FCFA
                         </span>
                       </p>
@@ -164,9 +167,9 @@ function Index() {
                   ))}
                 </div>
 
-                <div className="border-border/60 mt-5 flex items-center gap-2.5 border-t pt-4">
-                  <Sparkles className="text-primary size-4 shrink-0" aria-hidden />
-                  <p className="text-muted-foreground text-xs">
+                <div className="border-board-line/60 mt-4 flex items-center gap-2.5 border-t pt-4">
+                  <span className="bg-success size-1.5 shrink-0 rounded-full" aria-hidden />
+                  <p className="text-board-foreground/70 text-xs">
                     {departsDisponibles} départs disponibles sur {tousLesDeparts.length} relevés
                   </p>
                 </div>
@@ -186,10 +189,10 @@ function Index() {
             { valeur: "0", libelle: "prix inventés" },
           ].map((stat) => (
             <div key={stat.libelle} className="px-4 py-7 text-center">
-              <p className="text-primary ry-num text-2xl font-extrabold tracking-tight sm:text-3xl">
+              <p className="ry-num font-display text-2xl font-bold tracking-tight sm:text-3xl">
                 {stat.valeur}
               </p>
-              <p className="text-muted-foreground mt-1.5 text-xs font-semibold">{stat.libelle}</p>
+              <p className="text-muted-foreground mt-1.5 text-xs font-medium">{stat.libelle}</p>
             </div>
           ))}
         </div>
@@ -198,30 +201,38 @@ function Index() {
       {/* ------------------------------------------------------ Méthode */}
       <section className="mx-auto max-w-page px-4 py-16 sm:px-6 sm:py-24">
         <div className="max-w-2xl">
-          <p className="text-primary text-[0.6875rem] font-bold tracking-widest uppercase">
+          <p className="text-muted-foreground flex items-center gap-2.5 text-sm font-semibold">
+            <span aria-hidden className="bg-sun-400 h-px w-8" />
             Comment ça marche
           </p>
-          <h2 className="text-h1 mt-3">Trois étapes, pas de détour</h2>
+          <h2 className="text-h1 mt-4">Trois étapes, pas de détour</h2>
         </div>
 
-        <div className="mt-10 grid gap-5 md:grid-cols-3">
+        {/*
+          Les étapes forment une vraie séquence : le motif « ligne de
+          itinéraire » (points d'arrêt + filet) encode l'information au lieu
+          de décorer. Chaque étape est une station sur la ligne.
+        */}
+        <ol className="mt-12 grid gap-10 md:grid-cols-3 md:gap-8">
           {ETAPES.map((etape, i) => (
-            <div
-              key={etape.titre}
-              className="group border-border/70 bg-card animate-rise relative rounded-2xl border p-6 shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-brand-300 hover:shadow-lift"
-              style={{ animationDelay: `${i * 80}ms` }}
-            >
-              <span className="text-brand-400 ry-num absolute top-5 right-6 text-4xl font-extrabold opacity-30">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <span className="from-brand-500 to-brand-700 shadow-card grid size-11 place-items-center rounded-xl bg-gradient-to-br text-white">
+            <li key={etape.titre} className="relative">
+              <div aria-hidden className="mb-6 flex items-center">
+                <span className="bg-sun-400 relative z-10 size-3.5 shrink-0 rounded-full ring-4 ring-sun-400/20" />
+                {i < ETAPES.length - 1 && (
+                  <span className="bg-border hidden h-px flex-1 md:block" />
+                )}
+              </div>
+              <span className="bg-surface-2 text-muted-foreground grid size-10 place-items-center rounded-md">
                 <etape.icone className="size-5" aria-hidden />
               </span>
-              <h3 className="text-h3 mt-5">{etape.titre}</h3>
+              <h3 className="text-h3 mt-4">{etape.titre}</h3>
               <p className="text-muted-foreground mt-2 text-sm leading-relaxed">{etape.texte}</p>
-            </div>
+              <span className="sr-only">
+                Étape {i + 1} sur {ETAPES.length}
+              </span>
+            </li>
           ))}
-        </div>
+        </ol>
       </section>
 
       {/* ------------------------------------------------ Derniers relevés */}
@@ -229,10 +240,11 @@ function Index() {
         <div className="mx-auto max-w-page px-4 py-16 sm:px-6 sm:py-20">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
-              <p className="text-primary text-[0.6875rem] font-bold tracking-widest uppercase">
+              <p className="text-muted-foreground flex items-center gap-2.5 text-sm font-semibold">
+                <span aria-hidden className="bg-sun-400 h-px w-8" />
                 Derniers relevés
               </p>
-              <h2 className="text-h1 mt-3">Ce qui part ce soir</h2>
+              <h2 className="text-h1 mt-4">Ce qui part ce soir</h2>
             </div>
             <Button asChild variant="ghost" className="text-primary rounded-full">
               <Link to="/fiches">
@@ -243,14 +255,8 @@ function Index() {
           </div>
 
           <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {apercu.map((fiche, i) => (
-              <div
-                key={fiche.id}
-                className="animate-rise"
-                style={{ animationDelay: `${i * 70}ms` }}
-              >
-                <FicheCard fiche={fiche} />
-              </div>
+            {apercu.map((fiche) => (
+              <FicheCard key={fiche.id} fiche={fiche} />
             ))}
           </div>
         </div>
@@ -258,17 +264,15 @@ function Index() {
 
       {/* ----------------------------------------------------- Garanties */}
       <section className="mx-auto max-w-page px-4 py-16 sm:px-6 sm:py-20">
-        <div className="grid gap-5 sm:grid-cols-3">
+        <h2 className="sr-only">Ce que garantit le relevé</h2>
+        <div className="border-border/70 grid divide-y rounded-xl border sm:grid-cols-3 sm:divide-x sm:divide-y-0">
           {GARANTIES.map((garantie) => (
-            <div
-              key={garantie.titre}
-              className="border-border/70 bg-card/60 flex gap-4 rounded-2xl border p-5"
-            >
-              <span className="bg-brand-100 text-brand-700 dark:bg-brand-900/60 dark:text-brand-300 grid size-10 shrink-0 place-items-center rounded-xl">
+            <div key={garantie.titre} className="flex gap-4 p-6">
+              <span className="bg-surface-2 text-primary grid size-10 shrink-0 place-items-center rounded-md">
                 <garantie.icone className="size-5" aria-hidden />
               </span>
               <div>
-                <h3 className="text-base font-bold">{garantie.titre}</h3>
+                <h3 className="text-base font-semibold">{garantie.titre}</h3>
                 <p className="text-muted-foreground mt-1 text-sm leading-relaxed">
                   {garantie.texte}
                 </p>
@@ -280,19 +284,17 @@ function Index() {
 
       {/* ---------------------------------------------------------- CTA */}
       <section className="mx-auto max-w-page px-4 pb-4 sm:px-6">
-        <div className="ry-mesh border-border/70 relative overflow-hidden rounded-3xl border p-10 text-center sm:p-16">
-          <div aria-hidden className="ry-grid pointer-events-none absolute inset-0" />
-          <div className="relative">
-            <h2 className="text-h1 mx-auto max-w-2xl">Vous descendez à Petersen dans une heure.</h2>
-            <p className="text-muted-foreground text-lede mx-auto mt-4 max-w-xl">
+        <div className="ry-board relative overflow-hidden rounded-xl p-10 sm:p-14">
+          <div aria-hidden className="ry-grid pointer-events-none absolute inset-0 opacity-40" />
+          <div className="relative max-w-2xl">
+            <h2 className="text-board-foreground text-h1">
+              Vous descendez à Petersen dans une heure.
+            </h2>
+            <p className="text-board-foreground/70 text-lede mt-4">
               Posez votre question à l&apos;agent et repartez avec le prix, le quartier et
               l&apos;heure du relevé.
             </p>
-            <Button
-              asChild
-              size="lg"
-              className="from-brand-500 to-brand-700 shadow-glow hover:from-brand-600 hover:to-brand-800 mt-8 h-13 rounded-full px-8 text-[0.9375rem]"
-            >
+            <Button asChild size="lg" variant="signal" className="mt-8 h-12 px-8 text-[0.9375rem]">
               <Link to="/fiches">
                 Consulter l&apos;agent
                 <ArrowRight className="size-4" aria-hidden />

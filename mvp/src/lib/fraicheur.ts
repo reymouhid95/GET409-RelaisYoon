@@ -49,3 +49,52 @@ export function useFraicheur(releveLe: string): Fraicheur | null {
 
   return fraicheur;
 }
+
+/**
+ * Instant absolu d'un départ : la date civile du relevé + l'heure notée sur
+ * le terrain. Le Sénégal est en UTC+0, d'où les méthodes UTC — le décompte
+ * reste correct quel que soit le fuseau de l'usagère.
+ */
+export function instantDepart(releveLe: string, heure: string): number | null {
+  const base = Date.parse(releveLe);
+  const m = /^(\d{1,2})h(\d{2})$/.exec(heure);
+  if (Number.isNaN(base) || !m) return null;
+  const d = new Date(base);
+  return Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), Number(m[1]), Number(m[2]));
+}
+
+/**
+ * Compte à rebours honnête : « dans X min » n'existe qu'ENTRE l'horodatage du
+ * relevé et le départ lui-même. Une fois la soirée passée (ou si les données
+ * sont d'un autre jour), on retourne null : l'heure seule est alors affichée,
+ * datée par le badge de fraîcheur. Règle d'or du board — jamais de temps
+ * réel inventé.
+ */
+export function compteARebours(
+  depart: { heure: string; releveLe: string },
+  maintenant: number | null,
+): number | null {
+  if (maintenant === null) return null;
+  const t = instantDepart(depart.releveLe, depart.heure);
+  const releve = Date.parse(depart.releveLe);
+  if (t === null || Number.isNaN(releve)) return null;
+  if (maintenant < releve || maintenant >= t) return null;
+  return Math.max(1, Math.round((t - maintenant) / MS_PAR_MINUTE));
+}
+
+/**
+ * Heure courante rafraîchie chaque minute ; null tant que le client n'a pas
+ * monté — même garde que useFraicheur : pas d'écart d'hydratation.
+ */
+export function useMaintenant(): number | null {
+  const [maintenant, setMaintenant] = useState<number | null>(null);
+
+  useEffect(() => {
+    const maj = () => setMaintenant(Date.now());
+    maj();
+    const minuteur = setInterval(maj, MS_PAR_MINUTE);
+    return () => clearInterval(minuteur);
+  }, []);
+
+  return maintenant;
+}

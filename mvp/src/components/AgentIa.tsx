@@ -47,7 +47,7 @@ function ResultatAgent({
 
   if (!fiche) {
     return (
-      <div className="animate-rise bg-surface mt-5 rounded-2xl p-5">
+      <div className="animate-rise bg-surface mt-5 rounded-lg p-5">
         <p className="text-muted-foreground text-sm leading-relaxed whitespace-pre-wrap">{texte}</p>
         <div className="mt-4 flex flex-wrap gap-2">
           <BoutonLecture texte={texte} lecture={lecture} label="Écouter la réponse" />
@@ -55,7 +55,7 @@ function ResultatAgent({
             href={urlPartageWhatsApp(texteReponseAgent({ question, reponse: texte }))}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-whatsapp hover:bg-whatsapp-hover focus-visible:ring-whatsapp inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-bold text-white transition-all duration-200 active:scale-[0.98]"
+            className="bg-whatsapp hover:bg-whatsapp-hover inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-bold text-white transition-[transform,background-color] duration-150 active:scale-[0.98]"
           >
             <MessageCircle className="size-4" aria-hidden />
             Partager la question sur WhatsApp
@@ -87,7 +87,7 @@ function ChargementAgent() {
     <div
       role="status"
       aria-live="polite"
-      className="animate-fade mt-5 rounded-2xl border border-border/70 bg-card p-5"
+      className="animate-fade mt-5 rounded-lg border border-border/70 bg-card p-5"
     >
       <div className="flex items-center gap-3">
         <Sparkles className="text-primary size-4 animate-pulse" aria-hidden />
@@ -163,17 +163,15 @@ export function AgentIa() {
   return (
     <section
       aria-labelledby="titre-agent"
-      className="ry-halo animate-rise bg-card relative overflow-hidden rounded-3xl shadow-lift"
+      className="animate-rise border-border/70 bg-card relative overflow-hidden rounded-xl border shadow-lift"
     >
-      <div
-        aria-hidden
-        className="from-brand-500/12 via-sun-400/10 pointer-events-none absolute inset-0 bg-gradient-to-br to-transparent"
-      />
+      {/* Filet de signalétique : l'agent est l'action principale de la page. */}
+      <div aria-hidden className="bg-sun-400 absolute inset-x-0 top-0 h-0.5" />
 
       <div className="relative p-6 sm:p-8">
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <p className="text-primary inline-flex items-center gap-1.5 text-[0.6875rem] font-bold tracking-widest uppercase">
-            <Sparkles className="size-3.5" aria-hidden />
+          <p className="text-muted-foreground flex items-center gap-2.5 text-sm font-semibold">
+            <span aria-hidden className="bg-sun-400 h-px w-6" />
             Agent IA
           </p>
           <span
@@ -183,10 +181,10 @@ export function AgentIa() {
                 : "Chrome et Edge permettent de dicter ta question au micro"
             }
             className={cn(
-              "inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[0.6875rem] font-bold tracking-widest uppercase",
+              "inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-semibold",
               voix.supporte
-                ? "bg-brand-500/10 text-brand-700 ring-brand-400/40 ring-1"
-                : "bg-surface-2 text-muted-foreground ring-border ring-1",
+                ? "bg-brand-100 text-brand-700 dark:bg-brand-900/60 dark:text-brand-300"
+                : "bg-surface-2 text-muted-foreground",
             )}
           >
             <span
@@ -212,7 +210,7 @@ export function AgentIa() {
           <label className="sr-only" htmlFor="question-agent">
             Quelle correspondance cherches-tu ce soir ?
           </label>
-          <div className="bg-background focus-within:border-brand-400 focus-within:ring-brand-400/25 flex flex-col gap-2.5 rounded-2xl border p-2 transition-all duration-200 focus-within:ring-4 sm:flex-row sm:items-center">
+          <div className="bg-background focus-within:border-brand-400 focus-within:ring-brand-400/25 flex flex-col gap-2.5 rounded-lg border p-2 transition-[border-color,box-shadow] duration-150 focus-within:ring-4 sm:flex-row sm:items-center">
             <input
               id="question-agent"
               type="text"
@@ -233,7 +231,7 @@ export function AgentIa() {
                 value={heure}
                 onChange={(e) => setHeure(e.target.value)}
                 title="Heure à laquelle tu prends ta correspondance (facultatif)"
-                className="border-border/70 bg-background text-foreground h-11 w-[5.75rem] shrink-0 rounded-xl border px-2 text-sm font-semibold outline-none focus:border-brand-400"
+                className="border-border/70 bg-background text-foreground h-11 w-[5.75rem] shrink-0 rounded-lg border px-2 text-sm font-semibold outline-none focus-visible:border-brand-400 focus-visible:ring-4 focus-visible:ring-brand-400/25"
               />
               {voix.supporte && (
                 <button
@@ -244,7 +242,7 @@ export function AgentIa() {
                   aria-label={voix.ecoute ? "Arrêter la dictée" : "Dicter la question au micro"}
                   aria-pressed={voix.ecoute}
                   className={cn(
-                    "grid size-11 shrink-0 place-items-center rounded-xl transition-all duration-200 active:scale-95 disabled:pointer-events-none disabled:opacity-50",
+                    "grid size-11 shrink-0 place-items-center rounded-lg transition-[transform,background-color,color] duration-150 active:scale-95 disabled:pointer-events-none disabled:opacity-50",
                     voix.ecoute
                       ? "bg-danger animate-pulse-ring text-danger-foreground"
                       : "text-muted-foreground hover:bg-accent hover:text-foreground",
@@ -261,7 +259,7 @@ export function AgentIa() {
               <button
                 type="submit"
                 disabled={chargement || !question.trim()}
-                className="from-brand-500 to-brand-700 shadow-glow hover:from-brand-600 hover:to-brand-800 inline-flex h-11 flex-1 items-center justify-center gap-2 rounded-xl bg-gradient-to-r px-5 text-sm font-bold text-white transition-all duration-200 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none sm:flex-none"
+                className="bg-sun-400 text-signal-ink hover:bg-sun-300 inline-flex h-11 flex-1 items-center justify-center gap-2 rounded-lg px-5 text-sm font-bold transition-[transform,background-color,box-shadow] duration-150 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50 sm:flex-none"
               >
                 {chargement ? (
                   <>
@@ -298,7 +296,7 @@ export function AgentIa() {
                 void demander(amorce);
               }}
               disabled={chargement}
-              className="border-border bg-background text-muted-foreground hover:border-brand-300 hover:bg-brand-100 hover:text-brand-700 dark:hover:text-brand-600 rounded-full border px-3 py-1.5 text-xs font-semibold transition-all duration-200 active:scale-95 disabled:pointer-events-none disabled:opacity-50"
+              className="border-border bg-background text-muted-foreground hover:border-brand-300 hover:bg-brand-100 hover:text-brand-700 dark:hover:text-brand-600 rounded-lg border px-3 py-1.5 text-xs font-semibold transition-[transform,border-color,background-color,color] duration-150 active:scale-95 disabled:pointer-events-none disabled:opacity-50"
             >
               {amorce}
             </button>
@@ -314,11 +312,9 @@ export function AgentIa() {
         />
 
         {historique.length > 0 && (
-          <div className="bg-surface mt-5 rounded-2xl p-4">
+          <div className="bg-surface mt-5 rounded-lg p-4">
             <div className="flex items-center justify-between gap-3">
-              <p className="text-muted-foreground text-[0.6875rem] font-bold uppercase tracking-widest">
-                Mes 3 derniers trajets
-              </p>
+              <p className="text-muted-foreground text-xs font-semibold">Mes 3 derniers trajets</p>
               <button
                 type="button"
                 onClick={() => setHistorique([])}
@@ -358,7 +354,7 @@ export function AgentIa() {
         {erreur && (
           <div
             role="alert"
-            className="border-danger/25 bg-danger-soft text-danger mt-5 flex items-start gap-3 rounded-2xl border p-5"
+            className="border-danger/25 bg-danger-soft text-danger mt-5 flex items-start gap-3 rounded-lg border p-5"
           >
             <AlertCircle className="mt-0.5 size-5 shrink-0" aria-hidden />
             <div>

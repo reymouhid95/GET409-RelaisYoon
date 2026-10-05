@@ -1,11 +1,18 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { Link, createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { CalendarClock, History, Search, SearchX, SlidersHorizontal, X } from "lucide-react";
+import { History, Search, SearchX, SlidersHorizontal, X } from "lucide-react";
 
 import { AgentIa } from "@/components/AgentIa";
 import { FicheCard } from "@/components/FicheCard";
 import { Button } from "@/components/ui/button";
-import { SESSION, ficheDisponible, filtresQuartier, fiches, type Statut } from "@/data/fiches";
+import {
+  SESSION,
+  dernierReleve,
+  ficheDisponible,
+  filtresQuartier,
+  fiches,
+  type Statut,
+} from "@/data/fiches";
 import { useFraicheur } from "@/lib/fraicheur";
 import { cn } from "@/lib/utils";
 
@@ -53,7 +60,7 @@ function PastilleFiltre({
       onClick={onClick}
       aria-pressed={actif}
       className={cn(
-        "rounded-full border px-3.5 py-2 text-sm font-semibold transition-all duration-200 active:scale-95",
+        "rounded-lg border px-3.5 py-2 text-sm font-semibold transition-[transform,border-color,background-color,color,box-shadow] duration-150 active:scale-95",
         actif
           ? "bg-primary border-primary text-primary-foreground shadow-card"
           : "border-border bg-background text-muted-foreground hover:border-brand-300 hover:bg-accent hover:text-foreground",
@@ -68,18 +75,65 @@ function PastilleFiltre({
  * US-02 : quand tous les relevés sont périmés, on le dit franchement plutôt
  * que de laisser croire que ces prix sont ceux de ce soir.
  */
-function BanniereSession({ perime }: { perime: boolean }) {
+/*
+ * Bannière de fraîcheur — pattern « service alert » des applis de transport
+ * (TfL, SNCF Connect, Citymapper) :
+ *   - rail ambre + fond pâle plutôt qu'un aplat rouge : l'avertissement se voit
+ *     sans écraser la page ;
+ *   - l'ambre, pas le rouge : dans notre langage couleur, le rouge dit « le
+ *     service n'existe pas » (indisponible), l'ambre dit « l'info a vieilli »
+ *     (à reconfirmer). Un bandeau rouge contredirait les cartes elles-mêmes ;
+ *   - hiérarchie : titre (quoi) > corps (que faire) > fraîcheur (depuis quand),
+ *     avec un lien vers l'aide pour « pourquoi ce message ».
+ */
+function BanniereSession({ perime, fraicheur }: { perime: boolean; fraicheur?: string }) {
   if (!perime) return null;
 
   return (
-    <p className="border-danger/25 bg-danger-soft text-danger animate-rise flex items-start gap-3 rounded-2xl border p-4 text-sm">
-      <History className="mt-0.5 size-4 shrink-0" aria-hidden />
-      <span>
-        <strong>La session du soir est terminée.</strong> Ces prix sont ceux du dernier relevé (
-        {SESSION.dateLisible}, semaine {SESSION.semaine}) et ne sont plus garantis. Confirmez auprès
-        du transporteur avant de monter.
-      </span>
-    </p>
+    <aside
+      role="status"
+      aria-label="Fraîcheur des relevés"
+      className="animate-rise border-sun-400/35 bg-sun-400/10 relative overflow-hidden rounded-xl border"
+    >
+      {/* Rail de signalétique : marque le bloc comme un état, pas comme une carte. */}
+      <span aria-hidden className="bg-sun-400 absolute inset-y-0 left-0 w-1" />
+
+      <div className="flex items-start gap-3 py-4 pr-4 pl-5">
+        <span
+          className="bg-sun-400/15 text-sun-700 dark:text-sun-300 mt-0.5 grid size-9 shrink-0 place-items-center rounded-lg"
+          aria-hidden
+        >
+          <History className="size-4" />
+        </span>
+
+        <div className="min-w-0 flex-1">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+            <p className="text-foreground font-display text-[0.9375rem] font-semibold">
+              La session du soir est terminée
+            </p>
+            <span className="bg-sun-400/15 text-sun-700 dark:text-sun-300 inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-bold">
+              <span aria-hidden className="bg-sun-400 size-1.5 rounded-full" />À reconfirmer
+              {fraicheur && (
+                <span className="text-sun-700/80 dark:text-sun-300/80 font-semibold">
+                  · {fraicheur}
+                </span>
+              )}
+            </span>
+          </div>
+
+          <p className="text-muted-foreground mt-1.5 max-w-2xl text-sm leading-relaxed">
+            Dernier relevé le {SESSION.dateLisible} (semaine {SESSION.semaine}) : ces prix ne sont
+            plus garantis. Confirmez auprès du transporteur avant de monter.{" "}
+            <Link
+              to="/aide"
+              className="text-primary font-semibold underline decoration-sun-400 decoration-2 underline-offset-4 hover:decoration-primary"
+            >
+              Pourquoi ce message&nbsp;?
+            </Link>
+          </p>
+        </div>
+      </div>
+    </aside>
   );
 }
 
@@ -88,13 +142,8 @@ function FichesPage() {
   const [statutFiltre, setStatutFiltre] = useState<"Tous" | Statut>("Tous");
   const [recherche, setRecherche] = useState<string>("");
 
-  // Pilote la bannière : l'heure la plus récente du registre.
-  const dernierReleve = fiches
-    .flatMap((f) => f.departs)
-    .map((d) => d.releveLe)
-    .sort()
-    .at(-1);
-  const fraicheurGlobale = useFraicheur(dernierReleve ?? "");
+  // Pilote la bannière : source unique `dernierReleve` (data/fiches.ts).
+  const fraicheurGlobale = useFraicheur(dernierReleve);
 
   const liste = useMemo(
     () =>
@@ -125,11 +174,11 @@ function FichesPage() {
   return (
     <div className="mx-auto max-w-page px-4 py-10 sm:px-6 sm:py-14">
       <header className="animate-rise">
-        <p className="text-primary inline-flex items-center gap-1.5 text-[0.6875rem] font-bold tracking-widest uppercase">
-          <CalendarClock className="size-3.5" aria-hidden />
+        <p className="text-muted-foreground flex items-center gap-2.5 text-sm font-semibold">
+          <span aria-hidden className="bg-sun-400 h-px w-8" />
           Relevés du soir · {SESSION.semaine}
         </p>
-        <h1 className="text-h1 mt-3">Fiches du soir</h1>
+        <h1 className="text-h1 mt-4">Fiches du soir</h1>
         <p className="text-muted-foreground text-lede mt-3 max-w-2xl">
           Les correspondances notées sur le terrain entre 18h et 19h. Le statut indique ce qui a été
           relevé&nbsp;; au-delà d&apos;une heure, on le signale comme à reconfirmer plutôt que de le
@@ -138,7 +187,10 @@ function FichesPage() {
       </header>
 
       <div className="mt-6">
-        <BanniereSession perime={fraicheurGlobale?.perime ?? false} />
+        <BanniereSession
+          perime={fraicheurGlobale?.perime ?? false}
+          fraicheur={fraicheurGlobale?.libelle}
+        />
       </div>
 
       {/* L'agent passe en tête : c'est l'action principale de la page, elle
@@ -177,7 +229,7 @@ function FichesPage() {
           <label className="sr-only" htmlFor="recherche-quartier">
             Rechercher un quartier
           </label>
-          <div className="border-border bg-background focus-within:border-brand-400 focus-within:ring-brand-400/25 flex items-center gap-2.5 rounded-xl border transition-all duration-200 focus-within:ring-4">
+          <div className="border-border bg-background focus-within:border-brand-400 focus-within:ring-brand-400/25 flex items-center gap-2.5 rounded-lg border transition-[border-color,box-shadow] duration-150 focus-within:ring-4">
             <Search className="text-muted-foreground ml-3 size-4 shrink-0" aria-hidden />
             <input
               id="recherche-quartier"
@@ -207,7 +259,7 @@ function FichesPage() {
           </div>
 
           <fieldset className="border-border/70 mt-3 border-t pt-3">
-            <legend className="text-muted-foreground flex items-center gap-1.5 px-1 text-[0.6875rem] font-bold tracking-widest uppercase">
+            <legend className="text-muted-foreground flex items-center gap-1.5 px-1 text-xs font-semibold">
               <SlidersHorizontal className="size-3" aria-hidden />
               Disponibilité
             </legend>
@@ -235,7 +287,7 @@ function FichesPage() {
               Ce soir, aucune correspondance ne correspond à cette combinaison. Élargissez la
               recherche ou consultez les questions fréquentes.
             </p>
-            <Button onClick={reinitialiser} className="mt-6 rounded-full px-5">
+            <Button onClick={reinitialiser} variant="signal" className="mt-6 px-5">
               Voir tous les relevés
             </Button>
           </div>
@@ -244,7 +296,7 @@ function FichesPage() {
             {liste.map((fiche, i) => (
               <div
                 key={fiche.id}
-                className="animate-rise"
+                className="min-w-0 animate-rise"
                 style={{ animationDelay: `${Math.min(i, 8) * 45}ms` }}
               >
                 <FicheCard fiche={fiche} />

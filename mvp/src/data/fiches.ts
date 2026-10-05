@@ -105,6 +105,17 @@ export const SESSION = {
   dateLisible: "1ᵉʳ octobre 2026",
 };
 
+/**
+ * Horodatage le plus récent du registre — pilote l'état global (barre d'état)
+ * et la bannière de fraîcheur. Source unique : ne pas recalculer ailleurs.
+ */
+export const dernierReleve: string =
+  fiches
+    .flatMap((f) => f.departs)
+    .map((d) => d.releveLe)
+    .sort()
+    .at(-1) ?? "";
+
 /*
  * Les quartiers sont dérivés des données : la liste ne peut plus diverger du
  * contenu, contrairement à une constante écrite à la main (3 quartiers

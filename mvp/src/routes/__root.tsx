@@ -13,6 +13,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
+import { BarreEtatReseau } from "@/components/BarreEtatReseau";
 import { Button } from "@/components/ui/button";
 
 /*
@@ -25,12 +26,13 @@ function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center px-4">
       <div className="max-w-md text-center">
-        <p className="ry-num text-brand-500 text-display font-extrabold">404</p>
-        <h1 className="mt-2 text-h2">Page introuvable</h1>
-        <p className="mt-3 text-lede text-muted-foreground">
+        <p className="ry-num text-sun-600 dark:text-sun-400 text-display font-bold">404</p>
+        <div aria-hidden className="bg-border mx-auto mt-5 h-px w-24" />
+        <h1 className="mt-5 text-h2">Page introuvable</h1>
+        <p className="text-muted-foreground mt-3 text-lede">
           Cette page n'existe pas ou a été déplacée.
         </p>
-        <Button asChild size="lg" className="mt-8 h-12 rounded-full px-7 text-[0.9375rem]">
+        <Button asChild size="lg" variant="signal" className="mt-8 h-12 px-7 text-[0.9375rem]">
           <Link to="/">Retour à l'accueil</Link>
         </Button>
       </div>
@@ -57,7 +59,8 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <Button
             size="lg"
-            className="h-12 rounded-full px-7 text-[0.9375rem]"
+            variant="signal"
+            className="h-12 px-7 text-[0.9375rem]"
             onClick={() => {
               router.invalidate();
               reset();
@@ -65,12 +68,7 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
           >
             Réessayer
           </Button>
-          <Button
-            asChild
-            size="lg"
-            variant="outline"
-            className="h-12 rounded-full px-7 text-[0.9375rem]"
-          >
+          <Button asChild size="lg" variant="outline" className="h-12 px-7 text-[0.9375rem]">
             <Link to="/">Accueil</Link>
           </Button>
         </div>
@@ -90,7 +88,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content: "Fiches de correspondance BRT relevées chaque soir à Dakar.",
       },
       { name: "theme-color", content: "#ffffff", media: "(prefers-color-scheme: light)" },
-      { name: "theme-color", content: "#141821", media: "(prefers-color-scheme: dark)" },
+      { name: "theme-color", content: "#07101b", media: "(prefers-color-scheme: dark)" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -103,7 +101,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Plus+Jakarta+Sans:wght@400..800&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Familjen+Grotesk:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@400..800&display=swap",
       },
       {
         rel: "icon",
@@ -149,6 +147,8 @@ function RootComponent() {
           Aller au contenu
         </a>
         <SiteHeader />
+        {/* État des relevés, visible depuis toutes les pages (pattern Citymapper). */}
+        <BarreEtatReseau />
         <main id="contenu" className="flex-1">
           {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
           <Outlet />

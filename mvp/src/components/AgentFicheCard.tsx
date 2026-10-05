@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Check, Clock3, Link2, MessageCircle, Sparkles, Star } from "lucide-react";
+import { Check, Clock3, Link2, MessageCircle, Star } from "lucide-react";
 
 import { BoutonLecture } from "@/components/BoutonLecture";
 import { StatutPastille } from "@/components/FicheCard";
@@ -38,42 +38,38 @@ export function AgentFicheCard({
     }
   };
   return (
-    <div className="ry-halo animate-pop bg-card relative mt-5 overflow-hidden rounded-2xl shadow-lift">
-      <div className="from-brand-500/10 via-sun-400/8 pointer-events-none absolute inset-0 bg-gradient-to-br to-transparent" />
-
-      <div className="relative p-6">
-        <p className="text-primary inline-flex items-center gap-1.5 text-[0.6875rem] font-bold tracking-widest uppercase">
-          <Sparkles className="size-3.5" aria-hidden />
+    <div className="animate-pop bg-board text-board-foreground relative mt-5 overflow-hidden rounded-xl">
+      <div className="p-6">
+        <p className="flex items-center gap-2.5 text-xs font-semibold text-board-foreground/60">
+          <span aria-hidden className="bg-sun-400 h-px w-6" />
           Réponse de l&apos;agent
         </p>
 
         <div className="mt-4 flex items-start justify-between gap-3">
           <div className="min-w-0">
-            <h3 className="text-h3">{fiche.station}</h3>
-            <p className="text-muted-foreground mt-1 text-sm">{fiche.quartier}</p>
+            <h3 className="text-h3 text-board-foreground">{fiche.station}</h3>
+            <p className="mt-1 text-sm text-board-foreground/70">{fiche.quartier}</p>
           </div>
           <StatutPastille statut="Disponible" />
         </div>
 
-        <div className="border-border/70 mt-5 flex items-end justify-between gap-3 border-t pt-4">
-          <p className="text-primary ry-num text-3xl leading-none font-extrabold tracking-tight">
-            {fiche.prix}
-          </p>
-          <p className="text-muted-foreground ry-num flex items-center gap-1.5 text-xs font-semibold">
+        <div className="border-board-line mt-5 flex items-end justify-between gap-3 border-t pt-4">
+          <p className="ry-num text-3xl leading-none font-bold text-sun-400">{fiche.prix}</p>
+          <p className="ry-num flex items-center gap-1.5 text-xs font-semibold text-board-foreground/70">
             <Clock3 className="size-3.5" aria-hidden />
             relevé {fiche.heure}
           </p>
         </div>
 
         {fiche.fraicheur && (
-          <p className="bg-surface text-muted-foreground mt-3 inline-flex rounded-lg px-3 py-1.5 text-xs font-semibold">
+          <p className="mt-3 inline-flex rounded-md bg-white/10 px-3 py-1.5 text-xs font-semibold text-board-foreground/80">
             Données du {fiche.fraicheur}
           </p>
         )}
 
         {fiche.sources && (
-          <p className="text-muted-foreground/90 bg-surface mt-4 rounded-lg px-3 py-2 text-xs">
-            <span className="font-bold">Sources : </span>
+          <p className="mt-4 rounded-md bg-white/10 px-3 py-2 text-xs text-board-foreground/80">
+            <span className="font-bold text-board-foreground">Sources : </span>
             {fiche.sources}
           </p>
         )}
@@ -89,10 +85,10 @@ export function AgentFicheCard({
                 : "Garder cette station sur cet appareil"
             }
             className={cn(
-              "mt-4 flex w-full items-center justify-center gap-2 rounded-xl border px-4 py-2.5 text-sm font-bold transition-all active:scale-[0.98]",
+              "mt-4 flex w-full items-center justify-center gap-2 rounded-lg border px-4 py-2.5 text-sm font-bold transition-[transform,border-color,background-color,color] duration-150 active:scale-[0.98]",
               favori.actif
-                ? "border-sun-400/60 bg-sun-400/10 text-foreground"
-                : "border-border/70 text-foreground hover:bg-accent",
+                ? "border-sun-400/60 bg-sun-400/15 text-sun-300"
+                : "border-board-line text-board-foreground hover:bg-white/10",
             )}
           >
             <Star
@@ -108,7 +104,7 @@ export function AgentFicheCard({
             texte={phraseFiche(fiche)}
             lecture={lecture}
             label="Écouter la fiche"
-            className="mt-4 w-full"
+            className="border-board-line text-board-foreground hover:bg-white/10 mt-4 w-full"
           />
         )}
 
@@ -124,7 +120,7 @@ export function AgentFicheCard({
           )}
           target="_blank"
           rel="noopener noreferrer"
-          className="bg-whatsapp hover:bg-whatsapp-hover focus-visible:ring-whatsapp mt-4 flex w-full items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-bold text-white transition-all duration-200 active:scale-[0.98]"
+          className="bg-whatsapp hover:bg-whatsapp-hover mt-4 flex w-full items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-bold text-white transition-[transform,background-color] duration-150 active:scale-[0.98]"
         >
           <MessageCircle className="size-4" aria-hidden />
           Partager sur WhatsApp
@@ -133,14 +129,14 @@ export function AgentFicheCard({
         <button
           type="button"
           onClick={copierLien}
-          className="border-border/70 text-foreground hover:bg-accent mt-2 flex w-full items-center justify-center gap-2 rounded-xl border px-4 py-2.5 text-sm font-bold transition-all active:scale-[0.98]"
+          className="border-board-line text-board-foreground hover:bg-white/10 mt-2 flex w-full items-center justify-center gap-2 rounded-lg border px-4 py-2.5 text-sm font-bold transition-[transform,background-color] duration-150 active:scale-[0.98]"
         >
           {lieuCopie ? (
-            <Check className="size-4 text-brand-600" aria-hidden />
+            <Check className="size-4 text-sun-400" aria-hidden />
           ) : (
             <Link2 className="size-4" aria-hidden />
           )}
-          {lieuCopie ? "Lien copié !" : "Copier le lien de la fiche"}
+          {lieuCopie ? "Lien copié" : "Copier le lien de la fiche"}
         </button>
       </div>
     </div>

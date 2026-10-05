@@ -24,7 +24,7 @@ export function AgentAvis({
         aria-label="Réponse utile"
         title="Réponse utile"
         className={cn(
-          "grid size-8 place-items-center rounded-lg transition-all active:scale-95",
+          "grid size-8 place-items-center rounded-md transition-[transform,background-color,color,box-shadow] duration-150 active:scale-95",
           actuel === "up"
             ? "bg-brand-500/15 text-brand-700 ring-brand-400/40 ring-1"
             : "text-muted-foreground hover:bg-accent hover:text-foreground",
@@ -39,7 +39,7 @@ export function AgentAvis({
         aria-label="Réponse à améliorer"
         title="Réponse à améliorer"
         className={cn(
-          "grid size-8 place-items-center rounded-lg transition-all active:scale-95",
+          "grid size-8 place-items-center rounded-md transition-[transform,background-color,color,box-shadow] duration-150 active:scale-95",
           actuel === "down"
             ? "bg-danger/15 text-danger ring-danger/40 ring-1"
             : "text-muted-foreground hover:bg-accent hover:text-foreground",

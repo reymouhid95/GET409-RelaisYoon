@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 import { AgentFicheCard } from "@/components/AgentFicheCard";
 import type { FicheAgent } from "@/lib/ficheAgent";
@@ -38,8 +38,8 @@ function FichePartageePage() {
 
   return (
     <main className="mx-auto w-full max-w-xl px-4 py-10">
-      <p className="text-primary inline-flex items-center gap-1.5 text-[0.6875rem] font-bold tracking-widest uppercase">
-        <Sparkles className="size-3.5" aria-hidden />
+      <p className="text-muted-foreground flex items-center gap-2.5 text-sm font-semibold">
+        <span aria-hidden className="bg-sun-400 h-px w-6" />
         Fiche partagée
       </p>
 
@@ -62,7 +62,7 @@ function FichePartageePage() {
 
       <Link
         to="/fiches"
-        className="from-brand-500 to-brand-700 shadow-glow hover:from-brand-600 hover:to-brand-800 mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r px-5 py-3 text-sm font-bold text-white transition-all duration-200 active:scale-[0.98]"
+        className="bg-sun-400 text-signal-ink hover:bg-sun-300 mt-5 inline-flex w-full items-center justify-center gap-2 rounded-lg px-5 py-3 text-sm font-bold transition-[transform,background-color] duration-150 active:scale-[0.98]"
       >
         Poser la question à l&apos;agent
         <ArrowRight className="size-4" aria-hidden />

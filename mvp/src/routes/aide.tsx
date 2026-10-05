@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { MessageCircleQuestion, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
@@ -53,11 +53,11 @@ function AidePage() {
   return (
     <div className="mx-auto max-w-prose px-4 py-12 sm:px-6 sm:py-20">
       <header className="animate-rise">
-        <p className="text-primary inline-flex items-center gap-1.5 text-[0.6875rem] font-bold tracking-widest uppercase">
-          <MessageCircleQuestion className="size-3.5" aria-hidden />
+        <p className="text-muted-foreground flex items-center gap-2.5 text-sm font-semibold">
+          <span aria-hidden className="bg-sun-400 h-px w-8" />
           Aide
         </p>
-        <h1 className="text-h1 mt-3">Questions fréquentes</h1>
+        <h1 className="text-h1 mt-4">Questions fréquentes</h1>
         <p className="text-muted-foreground text-lede mt-3">
           Utiliser les relevés de correspondance BRT à Dakar, et comprendre ce que l&apos;agent peut
           — ou ne peut pas — vous dire.
@@ -73,7 +73,7 @@ function AidePage() {
               </h2>
               <span
                 aria-hidden
-                className="border-border bg-background text-muted-foreground group-hover:border-brand-300 group-hover:bg-brand-100 group-hover:text-brand-700 grid size-8 shrink-0 place-items-center rounded-full border transition-all duration-300 group-open:rotate-[135deg]"
+                className="border-border bg-background text-muted-foreground group-hover:border-brand-300 group-hover:bg-brand-100 group-hover:text-brand-700 grid size-8 shrink-0 place-items-center rounded-full border transition-[transform,border-color,background-color,color] duration-200 group-open:rotate-45"
               >
                 <Plus className="size-4" />
               </span>
@@ -85,12 +85,12 @@ function AidePage() {
         ))}
       </div>
 
-      <div className="from-brand-500/8 to-sun-400/8 mt-12 rounded-3xl bg-gradient-to-br p-8 text-center">
+      <div className="from-brand-500/8 to-sun-400/10 mt-12 rounded-xl bg-gradient-to-br p-8 text-center">
         <h2 className="text-h3">Vous n'avez pas trouvé votre réponse&nbsp;?</h2>
         <p className="text-muted-foreground mx-auto mt-2 max-w-sm text-sm">
           Écrivez-nous : un prix a changé ou une correspondance manque, on corrige le relevé.
         </p>
-        <Button asChild className="mt-6 h-11 rounded-full px-6">
+        <Button asChild variant="signal" className="mt-6 h-11 px-6">
           <Link to="/contact">Nous écrire</Link>
         </Button>
       </div>

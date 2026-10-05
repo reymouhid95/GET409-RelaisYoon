@@ -34,9 +34,17 @@ function fabriqueReconnaissance(): Reconnaissance | null {
 
 export function useVoiceInput(onTexteFinal: (texte: string) => void, langue = "fr-FR") {
   const [ecoute, setEcoute] = useState(false);
-  const [supporte] = useState(() => fabriqueReconnaissance() !== null);
+  // Faux côté serveur (pas de window), puis évalué après hydratation :
+  // initialisé dans le useState, la valeur divergerait entre le HTML SSR et
+  // le premier rendu client, et React régénérerait tout l'arbre (erreur
+  // d'hydratation visible en console).
+  const [supporte, setSupporte] = useState(false);
   const [erreur, setErreur] = useState<string | null>(null);
   const recoRef = useRef<Reconnaissance | null>(null);
+
+  useEffect(() => {
+    setSupporte(fabriqueReconnaissance() !== null);
+  }, []);
 
   useEffect(() => {
     return () => {

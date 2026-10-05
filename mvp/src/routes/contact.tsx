@@ -46,13 +46,16 @@ function ContactPage() {
   const [envoye, setEnvoye] = useState(false);
 
   const champClass =
-    "border-input bg-background focus:border-brand-400 focus:ring-brand-400/25 mt-2 w-full rounded-xl border px-4 py-3 text-sm transition-all duration-200 outline-none focus:ring-4";
+    "border-input bg-background focus:border-brand-400 focus:ring-brand-400/25 mt-2 w-full rounded-lg border px-4 py-3 text-sm transition-[border-color,box-shadow] duration-150 outline-none focus:ring-4";
 
   return (
     <div className="mx-auto max-w-page px-4 py-12 sm:px-6 sm:py-20">
       <header className="animate-rise max-w-2xl">
-        <p className="text-primary text-[0.6875rem] font-bold tracking-widest uppercase">Contact</p>
-        <h1 className="text-h1 mt-3">Un prix a changé&nbsp;?</h1>
+        <p className="text-muted-foreground flex items-center gap-2.5 text-sm font-semibold">
+          <span aria-hidden className="bg-sun-400 h-px w-8" />
+          Contact
+        </p>
+        <h1 className="text-h1 mt-4">Un prix a changé&nbsp;?</h1>
         <p className="text-muted-foreground text-lede mt-3">
           Une correspondance manque, un tarif n&apos;est plus le bon&nbsp;? Dites-le nous — le
           relevé est corrigé pour tout le monde.
@@ -61,7 +64,7 @@ function ContactPage() {
 
       <div className="mt-10 grid gap-6 lg:grid-cols-[1.5fr_1fr] lg:gap-8">
         <form
-          className="border-border/70 bg-card animate-rise rounded-3xl border p-6 shadow-card sm:p-8"
+          className="border-border/70 bg-card animate-rise rounded-xl border p-6 shadow-card sm:p-8"
           onSubmit={(e) => {
             e.preventDefault();
             setEnvoye(true);
@@ -73,6 +76,7 @@ function ContactPage() {
               Nom
               <input
                 required
+                name="nom"
                 value={form.nom}
                 onChange={(e) => setForm({ ...form, nom: e.target.value })}
                 className={champClass}
@@ -85,11 +89,13 @@ function ContactPage() {
               <input
                 required
                 type="email"
+                name="email"
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
                 className={champClass}
                 placeholder="awa@exemple.sn"
                 autoComplete="email"
+                spellCheck={false}
               />
             </label>
           </div>
@@ -98,10 +104,12 @@ function ContactPage() {
             Station habituelle
             <input
               required
+              name="station"
+              autoComplete="off"
               value={form.station}
               onChange={(e) => setForm({ ...form, station: e.target.value })}
               className={champClass}
-              placeholder="Petersen (Papa Gueye Fall)"
+              placeholder="Petersen (Papa Gueye Fall)…"
             />
           </label>
 
@@ -109,17 +117,19 @@ function ContactPage() {
             Message
             <textarea
               required
+              name="message"
               rows={5}
               value={form.message}
               onChange={(e) => setForm({ ...form, message: e.target.value })}
               className={cn(champClass, "resize-y")}
-              placeholder="Le prix vers Sam Notaire est passé à 600 FCFA ce soir."
+              placeholder="Le prix vers Sam Notaire est passé à 600 FCFA ce soir…"
             />
           </label>
 
           <Button
             type="submit"
-            className="from-brand-500 to-brand-700 shadow-glow hover:from-brand-600 hover:to-brand-800 mt-6 h-12 w-full rounded-full text-[0.9375rem] sm:w-auto sm:px-7"
+            variant="signal"
+            className="mt-6 h-12 w-full text-[0.9375rem] sm:w-auto sm:px-7"
           >
             <Send className="size-4" aria-hidden />
             Envoyer le relevé
@@ -128,10 +138,10 @@ function ContactPage() {
           {envoye && (
             <p
               role="status"
-              className="border-success/25 bg-success-soft text-success animate-pop mt-5 flex items-start gap-3 rounded-xl border p-4 text-sm font-semibold"
+              className="border-success/25 bg-success-soft text-success animate-pop mt-5 flex items-start gap-3 rounded-lg border p-4 text-sm font-semibold"
             >
               <CheckCircle2 className="mt-px size-4 shrink-0" aria-hidden />
-              Merci ! Votre message a bien été pris en compte.
+              Votre message a bien été pris en compte.
             </p>
           )}
         </form>

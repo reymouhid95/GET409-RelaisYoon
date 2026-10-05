@@ -22,7 +22,7 @@ export function BoutonLecture({
       onClick={() => lecture.basculer(texte)}
       aria-label={lecture.enLecture ? "Arrêter la lecture" : label}
       className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-xl border border-border/70 px-4 py-2.5 text-sm font-bold transition-all active:scale-[0.98]",
+        "inline-flex items-center justify-center gap-2 rounded-lg border border-border/70 px-4 py-2.5 text-sm font-bold transition-[transform,border-color,background-color,color] duration-150 active:scale-[0.98]",
         lecture.enLecture ? "bg-primary/10 text-primary" : "text-foreground hover:bg-accent",
         className,
       )}

@@ -10,6 +10,10 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: "bg-primary text-primary-foreground shadow hover:bg-primary/90",
+        // CTA « signal » : ambre de signalétique, encre sombre dessus. Contraste
+        // ~7:1 dans les deux thèmes — l'ambre ne devient jamais couleur de texte.
+        signal:
+          "bg-sun-400 text-signal-ink shadow-sm hover:bg-sun-300 hover:shadow-md active:translate-y-px",
         destructive: "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
         outline:
           "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
