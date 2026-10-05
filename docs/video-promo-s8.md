@@ -83,9 +83,37 @@ clair) si on produit une 2e vidéo.
 
 ## Étape 3 — Découpage en plans
 
-*(à remplir)*
+Concept « 19h20 » — total **60 s**, 10 plans, dont **2 screens réels**.
+Continuité : Awa porte la même tenue partout (tag `K1_Awa`, verrouillé
+étape 5) ; le premier plan validé à Petersen devient la référence de décor.
 
-* ☐ Découpage rempli, total égal à 60 s
+| N° | Temps | Durée | Intention | Tâche | Tags |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| P01 | 0-4 s | 4 s | **Hook** : 19h12 — les portes du BRT s'ouvrent à Petersen, Awa descend et hésite | reference-to-video | K1_Awa |
+| P02 | 4-10 s | 6 s | **Problème** : elle regarde les correspondances qui s'élancent, panique (« Et si je montais dans la mauvaise ? ») | reference-to-video | K1_Awa |
+| P03 | 10-16 s | 6 s | **Réaction** : elle sort son téléphone, ouvre RelaisYoon, écran uni (incrustation post) | reference-to-video | K1_Awa, P02 |
+| P04 | 16-24 s | 8 s | **App en action** : elle tape « Petersen vers Guédiawaye », la fiche apparaît (350 FCFA, 18h35) | screen recording (post) | captures |
+| P05 | 24-30 s | 6 s | **Soulagement** : elle sourit, l'heure qui compte « 19h20 » | reference-to-video | K1_Awa, P01 |
+| P06 | 30-36 s | 6 s | **Feature heure** : champ 🕐 « 19h30 » → « ton départ idéal : 19h20 » | screen recording (post) | captures |
+| P07 | 36-42 s | 6 s | **Bénéfice** : elle monte dans la bonne correspondance, paie le prix exact annoncé | reference-to-video | K1_Awa, K7_Salif |
+| P08 | 42-48 s | 6 s | **Tranquillité** : dans le véhicule, elle regarde par la fenêtre, détendue | reference-to-video | K1_Awa, P07 |
+| P09 | 48-54 s | 6 s | **Preuve sociale** : son amie demande « et moi vers Yeumbeul ? », Awa lui montre l'app | reference-to-video | K1_Awa, K8_Aminata, P08 |
+| P10 | 54-60 s | 6 s | **CTA** : plan final, logo + URL en post (« Savoir où monter avant de descendre ») | reference-to-video | K1_Awa, P09 |
+
+**Total : 4+6+6+8+6+6+6+6+6+6 = 60 s** ✅
+
+Règles appliquées :
+
+- Générer **+2 s** sur chaque plan reference-to-video (couper sur
+  l'instant fort) ; ratio/durée se règlent dans Flow, pas dans le prompt.
+- 2 plans de **screen recording réel** (P04, P06) — jamais d'interface
+  générée.
+- Max 2-3 personnages nets par plan (P09 : 2).
+- Continuité notée : tenue Awa (`K1_Awa`) identique ; décors référencés
+  par le plan précédent (`the bus stop shown in P01`,
+  `the vehicle shown in P07`).
+
+* ☐ Découpage rempli, total égal à la durée cible
 * ☐ Au moins un plan de screen recording réel prévu
 
 ## Étape 4 — Projet Flow et bible de l'agent
