@@ -38,7 +38,44 @@ Tutoriel source : `class07/class07/Tutoriel — Vidéo promo d'une app avec Goog
 
 ## Étape 2 — Concept et cadrage
 
-*(à remplir après validation de l'étape 1)*
+### Les 5 idées notées (1 à 4 — viralité / clarté de l'app / facilité de production)
+
+| # | Idée | Format | Viralité | Clarté | Prod | Total |
+| :-- | :--- | :-- | :-- | :-- | :-- | :-- |
+| 1 | **« 19h20 »** — il est 19h12 à Petersen, Awa a 8 min pour savoir quelle correspondance partir : l'app donne l'heure, le prix et la station avant qu'elle descende | Compte à rebours | 3 | **4** | **3** | **10** |
+| 2 | POV humour — « Et là, tu montes quand même… » : le passager demande dans le doute, contre l'app qui répond en une fiche avant la descente | POV humour | **4** | 3 | 3 | 10 |
+| 3 | Avant/Après — sortir 1 000 FCFA au hasard vs la fiche : 350 FCFA, 18h35, DISPONIBLE | Transformation | 3 | **4** | 3 | 10 |
+| 4 | La routine du soir — voix off d'Awa dans le BRT : « avant de descendre, je regarde… » | GRWM | 2 | 4 | 2 | 8 |
+| 5 | Sons du bus (portes, monnaie) + la fiche qui claque à l'écran | ASMR | 3 | 1 | 3 | 7 |
+
+**Concept retenu : idée 1 — « 19h20 »** (le concept principal doit d'abord
+montrer clairement l'app : clarté 4 + l'échéance crée la tension jusqu'à la
+fin). L'idée 2 est gardée comme **contenu d'engagement** (viral mais moins
+clair) si on produit une 2e vidéo.
+
+### Arc narratif
+
+1. **Problème** — 19h12, Awa descend à Petersen sans savoir : « Et si je
+   montais dans la mauvaise correspondance ? »
+2. **App en action** — elle ouvre RelaisYoon, tape la question (screen
+   recording réel, étape 8)
+3. **Bénéfice concret** — la fiche : 350 FCFA, part à 19h20 — elle monte
+   en confiance
+4. **Call-to-action** — l'URL, sur le dernier plan
+
+### Tableau de cadrage
+
+| Paramètre | Réponse RelaisYoon |
+| :-- | :-- |
+| Objectif et plateforme | Faire connaître RelaisYoon aux usagers BRT de Dakar (profil Awa) sur **TikTok, Reels, Snapchat** ; action attendue : essayer l'app (URL en bio + CTA écran) |
+| Durée et ratio | **60 s, 9:16** (export 1080 × 1920) |
+| Références | Captures écran de l'app (à prendre, étape 1), logo `favicon.svg`, personnages générés (**Awa**, usagère ; 1 passager secondaire), couleurs bleu RelaisYoon + jaune soleil |
+| Audio | Dialogues en **français, tutoiement** (registre de l'agent) ; pas de musique dans les clips générés → **une piste posée au montage** ; sous-titres obligatoires en post |
+
+### Pitch en une phrase (26 mots)
+
+> Il est 19h12 à Petersen : en 8 minutes, Awa sait quelle correspondance
+> part, à quelle heure et combien elle coûte — avant même de descendre du BRT.
 
 * ☐ 5 idées notées, 1 concept choisi
 * ☐ Tableau de cadrage rempli
