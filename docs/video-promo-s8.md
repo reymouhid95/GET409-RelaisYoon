@@ -118,7 +118,46 @@ Règles appliquées :
 
 ## Étape 4 — Projet Flow et bible de l'agent
 
-*(à remplir — gabarit anglais du tutoriel §4)*
+**À faire dans Flow** : créer un projet nommé **« 19h20 »**, ouvrir
+l'agent du projet, coller le bloc ci-dessous dans son champ
+d'instructions. Mettre la bible à jour à chaque changement de casting,
+de tenue ou de style.
+
+**Bible (en anglais, à coller telle quelle)** :
+
+```text
+PROJECT: "19h20" - a 60-second vertical social ad (9:16) for RelaisYoon, a free web app that tells BRT riders in Dakar which correspondance (shared taxi) to take from a bus stop, its exact fare and departure time, before they step off the bus. Target audience: daily BRT commuters in Dakar, mainly young adults, watching on TikTok, Reels and Snapchat.
+
+STORY: At 19:12 Awa gets off the BRT at Petersen with 8 minutes before her next departure. She asks RelaisYoon on her phone and instantly gets the fiche: 350 FCFA, ideal departure 19:20. She boards the right vehicle with confidence, and shares the app with a friend.
+
+VISUAL STYLE: highly realistic observational documentary look. Handheld camera with subtle natural movement, 35mm lens feel, natural available light only, light film grain, true-to-life skin tones, no glossy commercial look. Authentic and respectful representation of Dakar.
+
+CAST (locked, never redesign):
+- [TBD at step 5], provisional main character: a Senegalese woman around 28, daily commuter, warm and practical. Outfit: [TBD], one outfit for the whole video.
+- [TBD at step 5], provisional secondary: the correspondance attendant at the stop, man around 40.
+- [TBD at step 5], provisional secondary: her friend at the end, woman around 30.
+Once a character sheet is approved, use it as the only identity reference for that character.
+
+VOICES (keep identical in every shot):
+- Awa: young woman, around 28, Senegalese French accent, warm, confident, everyday tone.
+All dialogue is spoken in French, with the vouvoiement-free friendly register of the app.
+
+RULES FOR EVERY GENERATION:
+- No on-screen text, captions, labels, subtitles or watermarks.
+- No logos or brands. Phones and devices are generic, with a plain blank screen, never readable interface.
+- Videos: single continuous shot unless I give timecodes. No music, only ambient sound and sound effects.
+- Maximum three main subjects in focus per shot. Background people stay out of focus.
+- Never modify an approved asset. Ask me before regenerating anything already approved.
+- Default: 4 variations per request.
+
+ASSET NAMING: K1_Awa (main character), K7_Salif (correspondance attendant), K8_Aminata (friend) for characters, P01 to P10 for video shots. Keep approved assets in a collection named "19h20_References".
+```
+
+*Notes* : CAST volontairement **provisoire** (étape 5 le verrouille) ;
+dialogues en **français** avec le registre tutoiement de l'app ; les
+règles « No on-screen text / generic devices / no music » sont celles du
+tutoriel — le texte et l'interface viendront des captures réelles et du
+montage.
 
 * ☐ Projet Flow créé
 * ☐ Bible collée dans l'agent
