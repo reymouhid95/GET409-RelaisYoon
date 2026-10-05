@@ -250,3 +250,33 @@ Le template vierge source reste `class07/class07/template_vscode_equipes.docx` :
       — https://reymouhid95-get409-relaisyoon-mvp.thiernooury89.workers.dev
       (`/`, `/fiches`, `/aide` en 200 ; agent IA à revalider après
       régénération de la clé Dify, cf. § Déploiement)
+
+## Livrables S8 — Vidéo promo avec Google Flow (class07, en cours)
+
+Consigne : `class07/class07/Tutoriel — Vidéo promo d'une app avec Google
+Flow (Omni Flash).docx.md` (séance du 2 octobre 2026).
+
+Livrable : vidéo de **60 s en 9:16** (1080×1920) présentant le MVP
+RelaisYoon, produite étape par étape avec validation enseignant à chaque
+étape.
+
+Dossier de production : **docs/video-promo-s8.md** — images de référence
+dans `docs/video-promo/turnarounds/`.
+
+- [x] Étape 1 — Fiche App (nom, problème, promesse, cible, preuve)
+      : `docs/video-promo-s8.md` § 1 (`2c8ecd1`)
+- [x] Étape 2 — Concept **« 19h20 »** : tableau de cadrage 10 plans +
+      pitch de 26 mots (`a953ba8`)
+- [x] Étape 3 — Découpage en 10 plans = 60 s dont 2 écrans réels
+      (P04 fiche, P06 heure) (`ddc4c76`)
+- [x] Étape 4 — Projet Flow créé + bible agent en anglais
+      (`fbc0f1f`)
+- [x] Étape 5 — 3 planches tournantes validées et déposées
+      (K1_Awa / K7_Salif / K8_Aminata) (`3418e7f`)
+- [x] Étape 6 — 10 prompts de plans (8 Flow + 2 écrans) avec fiches de
+      livraison et négatifs (`f4dad04`)
+- [ ] Étape 7 — Génération des plans P01→P10 dans Flow + journal des
+      éditions (défauts relevés / prompts retravaillés)
+- [ ] Étape 8 — Screen recordings réels (P04 fiche, P06 heure sur
+      Chrome), montage 1080×1920, 1 piste musique
+- [ ] Rendu final 60 s + auto-évaluation /20 (grille du tutoriel)
