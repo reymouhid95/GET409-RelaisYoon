@@ -1,6 +1,6 @@
 # PromptLens — decision log
 
-## 2026-10-02 — Initial build
+## 2026-10-04 — Initial build
 
 **What** — Phase 1 of PromptLens: a searchable library of 20 built-in shot
 presets plus a journal per production (counter, delete, duplicate), persisted
@@ -28,3 +28,30 @@ in `localStorage` behind a small `EntryRepository` interface.
 
 **Verified** — `npm run typecheck`, `npm test`, `npm run build` green;
 browser check: add 3 entries, reload → entries survive.
+
+## 2026-10-04 — AI backend
+
+**What** — Two callable Cloud Functions (2nd gen, TypeScript) wrapping Gemini:
+`describeShotFromText` and `describeShotFromImage`, returning one shared shot
+schema (shotSize, cameraAngle, focalLengthMm, lighting, palette, mood,
+generationPrompt in English, confidence).
+
+**Why**
+- Gemini is called server-side only: the key lives in `defineSecret`
+  (`GEMINI_API_KEY`), never in the client, never in a `VITE_` variable.
+- `gemini-flash-latest` (official alias) instead of a pinned model id: model
+  names rotate, the alias tracks the current Flash — the exact drift the course
+  warns about (Context7 docs check; MCP configured in `opencode.json`, active
+  after the next opencode restart).
+- zod validates both the inputs (text ≤ 2000 chars, image ≤ 4 MB decoded,
+  mime allow-list) and the model's JSON output, so a malformed completion
+  becomes an `internal` HttpsError instead of corrupt data.
+
+**Trade-offs / deferred**
+- Emulator project is `demo-promptlens` (`.firebaserc`): runs without
+  `firebase login`; replace with the real project id before deploying.
+- `firebase-tools` is not a dependency — commands go through `npx
+  firebase-tools` (no global install rights on this machine).
+- `functions/.secret.local` is created empty and git-ignored; the key is
+  pasted by the operator, never by the agent (read/edit deny rules).
+- Confidence is model self-assessment, not calibrated — treat as a hint.
