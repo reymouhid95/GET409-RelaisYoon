@@ -55,3 +55,19 @@ generationPrompt in English, confidence).
 - `functions/.secret.local` is created empty and git-ignored; the key is
   pasted by the operator, never by the agent (read/edit deny rules).
 - Confidence is model self-assessment, not calibrated — treat as a hint.
+
+## 2026-10-04 — AI backend: switch to Flash Lite
+
+**What** — `MODEL` in `functions/src/gemini.ts` changed from
+`gemini-flash-latest` to `gemini-flash-lite-latest`.
+
+**Why** — `gemini-flash-latest` resolved to `gemini-3.8-flash`, whose free tier
+allows only 20 generateContent requests per day, per project, per model
+(`GenerateRequestsPerDayPerProjectPerModel-FreeTier`); repeated E2E runs
+exhausted it (429, retry in ~22 h). Quotas are scoped per model, and Flash Lite
+keeps its own, larger budget — also the model family the course cited
+originally. The `*-latest` alias keeps tracking renames either way.
+
+**Trade-off** — Lite is slightly less capable than full Flash; acceptable for
+structured shot descriptions. To move up later, change the one `MODEL`
+constant.

@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   LocalStorageEntryRepository,
+  createAiEntry,
   createEntry,
   type StorageLike,
 } from "./entryRepository";
@@ -65,5 +66,52 @@ describe("createEntry", () => {
     expect(a.id).not.toBe(b.id);
     expect(a.createdAt).toBeGreaterThan(0);
     expect(a).toMatchObject({ production: "Ma production", presetId: "plan-large" });
+  });
+});
+
+describe("phase 2 compatibility", () => {
+  it("normalizes legacy entries without a source to 'preset'", () => {
+    const storage = new MemoryStorage();
+    storage.setItem(
+      KEY,
+      JSON.stringify([
+        { id: "old", production: "P", presetId: "plan-large", createdAt: 1 },
+      ]),
+    );
+    const loaded = new LocalStorageEntryRepository(storage).load();
+    expect(loaded).toHaveLength(1);
+    expect(loaded[0]?.source).toBe("preset");
+  });
+
+  it("round-trips AI entries with their description", () => {
+    const repo = new LocalStorageEntryRepository(new MemoryStorage());
+    const description = {
+      shotSize: "Gros plan",
+      cameraAngle: "Face",
+      focalLengthMm: 85,
+      lighting: "Douce",
+      palette: ["#101010", "#ff6b4a"],
+      mood: "Intime",
+      generationPrompt: "Close-up with soft window light",
+      confidence: 0.9,
+    };
+    const entry = createAiEntry("P", "image", description);
+    repo.save([entry]);
+    expect(repo.load()).toEqual([entry]);
+    expect(entry.source).toBe("image");
+    expect(entry.presetId).toBeUndefined();
+  });
+
+  it("drops entries carrying an unknown source value", () => {
+    const storage = new MemoryStorage();
+    storage.setItem(
+      KEY,
+      JSON.stringify([
+        { id: "x", production: "P", createdAt: 1, source: "banana" },
+        { id: "y", production: "P", createdAt: 2, source: "text" },
+      ]),
+    );
+    const loaded = new LocalStorageEntryRepository(storage).load();
+    expect(loaded.map((entry) => entry.id)).toEqual(["y"]);
   });
 });

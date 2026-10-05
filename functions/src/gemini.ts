@@ -7,10 +7,11 @@ import {
 } from "./schema";
 
 /**
- * `gemini-flash-latest` is Google's stable alias for the newest Flash model,
- * so the name keeps tracking renames without code changes.
+ * `gemini-flash-lite-latest` is Google's stable alias for the current Flash
+ * Lite model: the name tracks renames, and Lite keeps a separate (larger)
+ * free-tier daily budget than full Flash (20 req/day/model on Flash).
  */
-const MODEL = "gemini-flash-latest";
+const MODEL = "gemini-flash-lite-latest";
 
 const SYSTEM_PROMPT = [
   "You are a cinematography reference analyst for AI video productions.",
