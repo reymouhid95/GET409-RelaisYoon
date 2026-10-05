@@ -21,6 +21,16 @@ function prixAffichable(valeur: string): string {
   return /^\d/.test(valeur) && !/fcfa/i.test(valeur) ? `${valeur} FCFA` : valeur;
 }
 
+/* Nettoie les champs d'une fiche venue d'un lien partagé (URL brute,
+   éventuellement copiée avant un correctif d'affichage). */
+export function normaliseFichePartagee(fiche: FicheAgent): FicheAgent {
+  return {
+    ...fiche,
+    sources: fiche.sources ? nettoieSources(fiche.sources) : "",
+    prix: fiche.prix ? prixAffichable(fiche.prix) : fiche.prix,
+  };
+}
+
 export function parseFicheAgent(texte: string): FicheAgent | null {
   if (/INSUFFISANT/i.test(texte)) return null;
   const station = extrait(texte, "STATION");

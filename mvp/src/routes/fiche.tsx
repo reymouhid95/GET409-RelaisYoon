@@ -3,6 +3,7 @@ import { ArrowRight, Sparkles } from "lucide-react";
 
 import { AgentFicheCard } from "@/components/AgentFicheCard";
 import type { FicheAgent } from "@/lib/ficheAgent";
+import { normaliseFichePartagee } from "@/lib/ficheAgent";
 
 type FichePartagee = FicheAgent;
 
@@ -31,7 +32,8 @@ export const Route = createFileRoute("/fiche")({
 });
 
 function FichePartageePage() {
-  const fiche = Route.useSearch();
+  const recherche = Route.useSearch();
+  const fiche = normaliseFichePartagee(recherche);
   const complet = !!(fiche.station && fiche.quartier && fiche.prix && fiche.heure);
 
   return (
