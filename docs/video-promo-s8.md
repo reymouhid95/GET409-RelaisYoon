@@ -218,13 +218,123 @@ planche d'origine ; prompt de correction :
 * ☐ Vue de dos cohérente avec la vue de face
 * ☐ Bible mise à jour (CAST verrouillé)
 
-* ☐ K1_Awa validée
-* ☐ K7_Salif validé
-* ☐ K8_Aminata validée
+* ☐ K1_Awa validée ✅ (05/10)
+* ☐ K7_Salif validé ✅ (05/10)
+* ☐ K8_Aminata validée ✅ (05/10)
+
+*(Validation : 4 vues conformes, checklist OK — planches dans
+`docs/video-promo/turnarounds/`, commit `3418e7f`.)*
 
 ## Étape 6 — Prompts des plans vidéo
 
-*(à remplir — 6 blocs, 1 prompt + 1 fiche par plan)*
+Règles : **un plan à la fois, validé avant le suivant**. Params Flow
+communs : **9:16**, durée générée = utile + 2 s, résolution max. Tags à
+attacher : `K1_Awa` (+ `K7_Salif` / `K8_Aminata` selon les plans).
+
+### P01 — Hook : 19h12 (0-4 s)
+
+**Fiche** : reference-to-video · Flow : 9:16, 6 s générées pour 4 s ·
+tags : K1_Awa · vigilance : l'heure « 19h12 » sera ajoutée **en post**,
+pas dans le clip.
+
+```text
+Single continuous shot, no scene cuts. The woman shown in K1_Awa steps down from a city bus through the open rear door at a busy bus stop in Dakar, holds her small black shoulder bag and looks around uncertainly. Setting: Petersen bus stop at dusk, warm street light, minibus taxis waiting in a line, people softly out of focus in the background. Handheld medium shot, slight natural movement, observational documentary style, natural light only. Audio: bus doors closing, evening street ambience, distant engines. No music. No captions. No on-screen text.
+```
+
+### P02 — Le problème (4-10 s)
+
+**Fiche** : reference-to-video · 9:16, 8 s pour 6 s · tags : K1_Awa,
+P01 (décor) · vigilance : réplique angoissée, 5 mots.
+
+```text
+Single continuous shot, no scene cuts. The woman shown in K1_Awa stands at the edge of the bus stop and watches two shared taxis pull away; she takes a small step forward and stops, unsure. She says in French, anxious: "Et si je me trompe ?" Setting: the bus stop shown in P01 at dusk, tail lights of departing vehicles, warm street light. Handheld close-medium shot, observational documentary style, natural light only. Audio: engines accelerating, street ambience. No music. No captions. No on-screen text.
+```
+
+### P03 — Elle ouvre l'app (10-16 s)
+
+**Fiche** : reference-to-video · 9:16, 8 s pour 6 s · tags : K1_Awa,
+P01 · vigilance : **écran uni obligatoire** (l'UI sera incrustée en post).
+
+```text
+Single continuous shot, no scene cuts. The woman shown in K1_Awa takes her phone from her shoulder bag, holds it in one hand and taps the screen with a focused expression; the phone screen is plain uniform light grey with no content, no icons and no reflections. She says in French, determined: "On regarde." Setting: the bus stop shown in P01 at dusk. Handheld medium close-up, observational documentary style, natural light only. Audio: street ambience, a light tap sound. No music. No captions. No on-screen text.
+```
+
+### P04 — L'app répond (16-24 s) — SCREEN RÉEL
+
+**Fiche** : **screen recording (post)**, aucune génération Flow ·
+durée : 8 s utiles (enregistrer ~10 s) · contenu : sur **Chrome/Edge**,
+taper `Petersen vers Guédiawaye ?` → **Demander** → la fiche
+(Grand-Médine… 350 FCFA, relevé 18h35, DISPONIBLE) qui se charge ·
+vigilance : plein écran vertical, mode sombre, notifications masquées,
+parcours lent et fluide **sans hésitation**, 3 prises gardes la plus
+nette.
+
+### P05 — Soulagement : « 19h20, parfait » (24-30 s)
+
+**Fiche** : reference-to-video · 9:16, 8 s pour 6 s · tags : K1_Awa,
+P01 · vigilance : le téléphone reste **écran uni**.
+
+```text
+Single continuous shot, no scene cuts. The woman shown in K1_Awa looks at her phone, then up at the arriving shared taxi, and smiles with relief. She says in French, calm: "19h20, parfait." Setting: the bus stop shown in P01 at dusk, headlights of an approaching vehicle. Handheld medium shot, observational documentary style, natural light only. Audio: approaching vehicle engine, street ambience. No music. No captions. No on-screen text.
+```
+
+### P06 — Feature heure (30-36 s) — SCREEN RÉEL
+
+**Fiche** : **screen recording (post)** · durée : 6 s utiles ·
+contenu : champ 🕐 `19:30` → réponse « ton départ idéal : 19h20 » ·
+vigilance : même prise que P04 (même session d'enregistrement),
+données réelles S40-2026 uniquement.
+
+### P07 — Elle monte, prix exact (36-42 s)
+
+**Fiche** : reference-to-video · 9:16, 8 s pour 6 s · tags : K1_Awa,
+K7_Salif · vigilance : **2 personnages nets max** ; les pièces comptent
+(audio).
+
+```text
+Single continuous shot, no scene cuts. The woman shown in K1_Awa hands coins to the man shown in K7_Salif at the open door of a shared taxi; he counts them with a nod and she steps inside. He says in French, warm: "C'est 350, monte." Setting: the vehicle and the bus stop shown in P01 at dusk. Handheld medium shot, observational documentary style, natural light only. Audio: coins clinking, vehicle idling, street ambience. No music. No captions. No on-screen text.
+```
+
+### P08 — Le trajet tranquille (42-48 s)
+
+**Fiche** : reference-to-video · 9:16, 8 s pour 6 s · tags : K1_Awa,
+P07 (intérieur véhicule) · vigilance : fenêtres = flou lumineux, pas de
+marques visibles.
+
+```text
+Single continuous shot, no scene cuts. The woman shown in K1_Awa sits by the window inside the moving shared taxi; she leans back and watches Dakar street life pass by, relaxed. Setting: interior of the vehicle shown in P07 at night, blurred city lights outside the window. Handheld medium close-up from the seat in front, observational documentary style, natural light only. Audio: engine hum, muffled street sounds. No music. No captions. No on-screen text.
+```
+
+### P09 — La preuve : elle partage l'app (48-54 s)
+
+**Fiche** : reference-to-video · 9:16, 8 s pour 6 s · tags : K1_Awa,
+K8_Aminata · vigilance : écran uni ; 2 répliques courtes.
+
+```text
+Single continuous shot, no scene cuts. The woman shown in K8_Aminata approaches the woman shown in K1_Awa, who is holding her phone, and asks her a question; Awa turns the phone so her friend can see the screen, which is plain uniform light grey with no content. Aminata says in French, curious: "Et moi vers Yeumbeul ?" then Awa answers in French, helpful: "Regarde." Setting: the bus stop shown in P01 at night. Handheld two-shot, observational documentary style, natural light only. Audio: quiet street ambience. No music. No captions. No on-screen text.
+```
+
+### P10 — CTA (54-60 s)
+
+**Fiche** : reference-to-video · 9:16, 8 s pour 6 s · tags : K1_Awa,
+P09 · vigilance : **logo + URL + slogan en post** (zone centrale
+libre) ; pas de nom de marque dans la réplique.
+
+```text
+Single continuous shot, no scene cuts. The woman shown in K1_Awa stands at the bus stop at night, lowers her phone after checking it, and smiles calmly toward the street as her vehicle arrives. She says in French, confident: "On sait avant de descendre." Setting: the bus stop shown in P01 at night, warm street light, soft bokeh of city lights behind. Handheld medium shot, observational documentary style, natural light only. Audio: quiet night street, distant engine. No music. No captions. No on-screen text.
+```
+
+### Conseils de génération
+
+- 4 variations par demande ; garder **la meilleure**, ne pas revenir en
+  arrière sur un plan validé.
+- Défaut n°1 → texte parasite : le négatif final est déjà dans chaque
+  prompt ; sinon éditer : `Remove all on-screen text. Keep everything
+  else the same.`
+- Défaut n°2 → écran inventé : `Make the phone screen a plain, uniform
+  light grey with no content, no icons and no reflections.`
+- Un clip enchaîne plusieurs plans ? Le premier bloc « Single
+  continuous shot » a sauté → éditer.
 
 * ☐ Un prompt par plan, chacun avec sa fiche
 * ☐ Plans générés et approuvés un par un
