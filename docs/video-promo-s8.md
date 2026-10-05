@@ -164,9 +164,63 @@ montage.
 
 ## Étape 5 — Casting et turnarounds
 
-*(à remplir)*
+**Nommage** : `K1_Awa` (principal, tenue unique du début à la fin),
+`K7_Salif` (gardien de correspondance), `K8_Aminata` (amie). Options :
+`K1b_Awa_face` (planche visage, si besoin de gros plans), plans `P01`–`P10`.
 
-* ☐ Turnarounds validés (personnages, 4 vues)
+**Cohérence des tenues** : Awa en **bleu** (couleur de marque, seul son
+tenue la plus marquante), Salif en **vert olive**, Aminata en **terracotta**
+— aucune concurrence dans un même plan, chacun tient sur fond de rue du soir.
+
+### K1_Awa — planche principale (exécuter dans Flow)
+
+Paramètres : **16:9, 4 variations**. Garder **une seule** et ne plus jamais
+la régénérer.
+
+```text
+Create the character turnaround sheet for Awa, named K1_Awa. Four full-body views of the same 28-year-old Senegalese woman, side by side, evenly spaced, identical scale and lighting: front view, three-quarter view, side profile, back view. Dark brown skin, short natural hair, warm friendly face, slim build. She wears a light-blue short-sleeve blouse tucked into a long dark-blue skirt, white sneakers and a small black shoulder bag. Neutral relaxed standing pose, arms by the sides. Plain light grey studio background, soft even front light, no cast shadows. Photorealistic, natural skin texture, sharp focus. No text, no labels, no numbers.
+```
+
+### K7_Salif — planche secondaire
+
+```text
+Create the character turnaround sheet for Salif, named K7_Salif. Four full-body views of the same 40-year-old Senegalese man, side by side, evenly spaced, identical scale and lighting: front view, three-quarter view, side profile, back view. Dark brown skin, close-cropped hair, short greying beard, calm reassuring presence. He wears an olive-green polo shirt, dark trousers and black shoes. Neutral relaxed standing pose, arms by the sides. Plain light grey studio background, soft even front light, no cast shadows. Photorealistic, natural skin texture, sharp focus. No text, no labels, no numbers.
+```
+
+### K8_Aminata — planche secondaire
+
+```text
+Create the character turnaround sheet for Aminata, named K8_Aminata. Four full-body views of the same 30-year-old Senegalese woman, side by side, evenly spaced, identical scale and lighting: front view, three-quarter view, side profile, back view. Medium brown skin, shoulder-length braided hair, bright curious expression. She wears a terracotta midi dress in plain fabric and simple sandals. Neutral relaxed standing pose, arms by the sides. Plain light grey studio background, soft even front light, no cast shadows. Photorealistic, natural skin texture, sharp focus. No text, no labels, no numbers.
+```
+
+### Après validation : verrouiller dans la bible
+
+Remplacer la section CAST (provisoire) de la bible par :
+
+```text
+CAST (locked, never redesign):
+- K1_Awa, 28, main character. Dark brown skin, short natural hair, warm friendly face. Outfit: light-blue short-sleeve blouse, long dark-blue skirt, white sneakers, small black shoulder bag — worn in every shot.
+- K7_Salif, 40, correspondance attendant. Dark brown skin, close-cropped hair, short greying beard. Outfit: olive-green polo shirt, dark trousers, black shoes — worn in P07.
+- K8_Aminata, 30, Awa's friend. Medium brown skin, shoulder-length braided hair. Outfit: terracotta midi dress, sandals — worn in P09.
+Once a character sheet is approved, use it as the only identity reference for that character.
+```
+
+**Dérive d'identité** (défaut n°1) : comparer chaque résultat à la
+planche d'origine ; prompt de correction :
+`In image 1, change only the [woman's/man's] face and skin in all four views to match the person in image 2: same facial features, same age around [AGE], same [SKIN TONE] on face, neck, arms and feet. Keep the outfit, hair, poses, background, lighting and framing of image 1 exactly as they are. No text, no labels. Keep everything else the same.`
+
+### Checklist de validation (par personnage)
+
+* ☐ Même visage, même teint et même coiffure sur les 4 vues
+* ☐ Âge conforme au prompt
+* ☐ Aucun libellé ajouté (« FRONT », « SIDE »)
+* ☐ Mains à 5 doigts, pieds corrects
+* ☐ Vue de dos cohérente avec la vue de face
+* ☐ Bible mise à jour (CAST verrouillé)
+
+* ☐ K1_Awa validée
+* ☐ K7_Salif validé
+* ☐ K8_Aminata validée
 
 ## Étape 6 — Prompts des plans vidéo
 
