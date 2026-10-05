@@ -4,7 +4,7 @@
     "runtime": "nodejs20"
   },
   "firestore": {
-    "rules": "firestore.rules"
+    "rules": "firestore.dev.rules"
   },
   "emulators": {
     "functions": {

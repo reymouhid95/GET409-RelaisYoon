@@ -6,11 +6,8 @@ import { LibraryView } from "./components/LibraryView";
 import { ProductionPicker } from "./components/ProductionPicker";
 import { PRESETS } from "./features/presets/presets";
 import { filterPresets } from "./features/presets/search";
-import {
-  createAiEntry,
-  createDefaultRepository,
-  createEntry,
-} from "./lib/entryRepository";
+import { createWorkspaceRepository } from "./lib/createRepository";
+import { createAiEntry, createEntry, type EntryRepository } from "./lib/entryRepository";
 import type { Entry, ShotDescription } from "./types";
 
 type Tab = "presets" | "describe" | "image" | "journal";
@@ -25,15 +22,34 @@ const TABS: { id: Tab; label: string }[] = [
 ];
 
 export default function App() {
-  const repo = useMemo(() => createDefaultRepository(), []);
-  const [entries, setEntries] = useState<Entry[]>(() => repo.load());
+  const [repo, setRepo] = useState<EntryRepository | null>(null);
+  const [entries, setEntries] = useState<Entry[]>([]);
+  const [booting, setBooting] = useState(true);
   const [production, setProduction] = useState(DEFAULT_PRODUCTION);
   const [tab, setTab] = useState<Tab>("presets");
   const [query, setQuery] = useState("");
 
   useEffect(() => {
-    repo.save(entries);
-  }, [repo, entries]);
+    let cancelled = false;
+    void (async () => {
+      const selected = await createWorkspaceRepository();
+      const loaded = await selected.load();
+      if (cancelled) return;
+      setRepo(selected);
+      setEntries(loaded);
+      setBooting(false);
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!repo || booting) return;
+    repo.save(entries).catch((error: unknown) => {
+      console.warn("PromptLens: saving entries failed.", error);
+    });
+  }, [repo, booting, entries]);
 
   const productions = useMemo(
     () => [...new Set(entries.map((entry) => entry.production))].sort(),
@@ -93,24 +109,32 @@ export default function App() {
       </nav>
 
       <main>
-        {tab === "presets" && (
-          <LibraryView
-            presets={visiblePresets}
-            query={query}
-            onQueryChange={setQuery}
-            onAdd={addPreset}
-          />
-        )}
-        {tab === "describe" && <DescribeView onSaved={(d) => addAiEntry("text", d)} />}
-        {tab === "image" && <ImageView onSaved={(d) => addAiEntry("image", d)} />}
-        {tab === "journal" && (
-          <JournalView
-            entries={entries}
-            production={currentProduction}
-            presets={PRESETS}
-            onDelete={removeEntry}
-            onDuplicate={duplicateEntry}
-          />
+        {booting ? (
+          <p className="empty" role="status">
+            Chargement du journal…
+          </p>
+        ) : (
+          <>
+            {tab === "presets" && (
+              <LibraryView
+                presets={visiblePresets}
+                query={query}
+                onQueryChange={setQuery}
+                onAdd={addPreset}
+              />
+            )}
+            {tab === "describe" && <DescribeView onSaved={(d) => addAiEntry("text", d)} />}
+            {tab === "image" && <ImageView onSaved={(d) => addAiEntry("image", d)} />}
+            {tab === "journal" && (
+              <JournalView
+                entries={entries}
+                production={currentProduction}
+                presets={PRESETS}
+                onDelete={removeEntry}
+                onDuplicate={duplicateEntry}
+              />
+            )}
+          </>
         )}
       </main>
     </div>

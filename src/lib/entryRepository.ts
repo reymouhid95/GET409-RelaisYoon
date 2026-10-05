@@ -6,9 +6,13 @@ export interface StorageLike {
   setItem(key: string, value: string): void;
 }
 
+/**
+ * Async on purpose: the localStorage and Firestore implementations share one
+ * interface, so components never care where entries are stored (Phase 3).
+ */
 export interface EntryRepository {
-  load(): Entry[];
-  save(entries: Entry[]): void;
+  load(): Promise<Entry[]>;
+  save(entries: Entry[]): Promise<void>;
 }
 
 const STORAGE_KEY = "promptlens.entries.v1";
@@ -38,10 +42,11 @@ function normalize(entry: PersistedEntry): Entry {
   return { ...entry, source };
 }
 
-/**
- * Phase 1 storage: localStorage behind a small interface so Firestore can
- * replace it in Phase 3 without touching the components.
- */
+/** Validate one stored document (Firestore or JSON) at the API boundary. */
+export function parseStoredEntry(value: unknown): Entry | null {
+  return isPersistedEntry(value) ? normalize(value) : null;
+}
+
 export class LocalStorageEntryRepository implements EntryRepository {
   private readonly storage: StorageLike;
 
@@ -49,19 +54,21 @@ export class LocalStorageEntryRepository implements EntryRepository {
     this.storage = storage;
   }
 
-  load(): Entry[] {
+  async load(): Promise<Entry[]> {
     try {
       const raw = this.storage.getItem(STORAGE_KEY);
       if (raw === null) return [];
       const parsed: unknown = JSON.parse(raw);
       if (!Array.isArray(parsed)) return [];
-      return parsed.filter(isPersistedEntry).map(normalize);
+      return parsed
+        .map(parseStoredEntry)
+        .filter((entry): entry is Entry => entry !== null);
     } catch {
       return [];
     }
   }
 
-  save(entries: Entry[]): void {
+  async save(entries: Entry[]): Promise<void> {
     try {
       this.storage.setItem(STORAGE_KEY, JSON.stringify(entries));
     } catch {
@@ -70,7 +77,7 @@ export class LocalStorageEntryRepository implements EntryRepository {
   }
 }
 
-export function createDefaultRepository(): EntryRepository {
+export function createLocalRepository(): EntryRepository {
   if (typeof window === "undefined") {
     throw new Error("No browser storage available");
   }

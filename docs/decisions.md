@@ -71,3 +71,40 @@ originally. The `*-latest` alias keeps tracking renames either way.
 **Trade-off** — Lite is slightly less capable than full Flash; acceptable for
 structured shot descriptions. To move up later, change the one `MODEL`
 constant.
+
+## 2026-10-04 — Firestore migration (bonus)
+
+**What** — Journal entries move from localStorage to Firestore through an
+async `EntryRepository` interface with a second implementation,
+`FirestoreEntryRepository`. Startup picks the repository in
+`createRepository.ts` and performs a one-shot migration of existing
+localStorage entries when Firestore is empty.
+
+**Why** — Phase 3 needs server-side persistence and cross-device access;
+the async interface means components never care which backend is active.
+
+**Security rules** (user-reviewed and approved before any wiring):
+- `firestore.rules` (production, pointed at by `firebase.json`):
+  `allow read, write: if false` — deny-all until Firebase Auth exists.
+- `firestore.dev.rules` (emulator only, pointed at by `firebase.dev.json`):
+  open read/write for local development.
+- Emulator command loads the dev file via the global `--config` flag:
+  `npx -y firebase-tools --config firebase.dev.json emulators:start --only functions,firestore`.
+  `firebase deploy` always reads `firebase.json`, so test rules can never
+  be deployed.
+
+**Trade-offs / deferred**
+- If Firestore is unreachable at startup the app falls back to
+  localStorage (console warning) and re-probes on the next load — no
+  in-session failover loop.
+- Save failures after startup are logged, not retried; in-memory state
+  survives until reload.
+- Full-collection read on every save (journal scale); batching chunks at
+  400 ops per write batch.
+- Firebase Auth still pending: production rules stay deny-all.
+
+**Emulator probe** — observed during E2E: the Firestore SDK resolves
+`getDocs` with an empty list instead of throwing while the dev emulator is
+down, so repository selection probes the emulator port itself (`fetch`,
+no-cors) before trusting Firestore; only a refused connection triggers the
+localStorage fallback.

@@ -21,41 +21,41 @@ class MemoryStorage implements StorageLike {
 const KEY = "promptlens.entries.v1";
 
 describe("LocalStorageEntryRepository", () => {
-  it("returns an empty list on a fresh storage", () => {
+  it("returns an empty list on a fresh storage", async () => {
     const repo = new LocalStorageEntryRepository(new MemoryStorage());
-    expect(repo.load()).toEqual([]);
+    await expect(repo.load()).resolves.toEqual([]);
   });
 
-  it("round-trips entries through save/load", () => {
+  it("round-trips entries through save/load", async () => {
     const storage = new MemoryStorage();
     const repo = new LocalStorageEntryRepository(storage);
     const entry = createEntry("Court métrage", "gros-plan-visage");
-    repo.save([entry]);
-    expect(repo.load()).toEqual([entry]);
+    await repo.save([entry]);
+    await expect(repo.load()).resolves.toEqual([entry]);
   });
 
-  it("returns an empty list when the stored value is corrupt", () => {
+  it("returns an empty list when the stored value is corrupt", async () => {
     const storage = new MemoryStorage();
     storage.setItem(KEY, "{not json");
-    expect(new LocalStorageEntryRepository(storage).load()).toEqual([]);
+    await expect(new LocalStorageEntryRepository(storage).load()).resolves.toEqual([]);
   });
 
-  it("drops entries that do not match the Entry shape", () => {
+  it("drops entries that do not match the Entry shape", async () => {
     const storage = new MemoryStorage();
     storage.setItem(KEY, JSON.stringify([42, { id: "x" }, createEntry("P", "plan-large")]));
-    const loaded = new LocalStorageEntryRepository(storage).load();
+    const loaded = await new LocalStorageEntryRepository(storage).load();
     expect(loaded).toHaveLength(1);
     expect(loaded[0]?.presetId).toBe("plan-large");
   });
 
-  it("swallows storage write errors (quota / private mode)", () => {
+  it("swallows storage write errors (quota / private mode)", async () => {
     const throwing: StorageLike = {
       getItem: () => null,
       setItem: () => {
         throw new Error("QuotaExceededError");
       },
     };
-    expect(() => new LocalStorageEntryRepository(throwing).save([])).not.toThrow();
+    await expect(new LocalStorageEntryRepository(throwing).save([])).resolves.toBeUndefined();
   });
 });
 
@@ -70,7 +70,7 @@ describe("createEntry", () => {
 });
 
 describe("phase 2 compatibility", () => {
-  it("normalizes legacy entries without a source to 'preset'", () => {
+  it("normalizes legacy entries without a source to 'preset'", async () => {
     const storage = new MemoryStorage();
     storage.setItem(
       KEY,
@@ -78,12 +78,12 @@ describe("phase 2 compatibility", () => {
         { id: "old", production: "P", presetId: "plan-large", createdAt: 1 },
       ]),
     );
-    const loaded = new LocalStorageEntryRepository(storage).load();
+    const loaded = await new LocalStorageEntryRepository(storage).load();
     expect(loaded).toHaveLength(1);
     expect(loaded[0]?.source).toBe("preset");
   });
 
-  it("round-trips AI entries with their description", () => {
+  it("round-trips AI entries with their description", async () => {
     const repo = new LocalStorageEntryRepository(new MemoryStorage());
     const description = {
       shotSize: "Gros plan",
@@ -96,13 +96,13 @@ describe("phase 2 compatibility", () => {
       confidence: 0.9,
     };
     const entry = createAiEntry("P", "image", description);
-    repo.save([entry]);
-    expect(repo.load()).toEqual([entry]);
+    await repo.save([entry]);
+    await expect(repo.load()).resolves.toEqual([entry]);
     expect(entry.source).toBe("image");
     expect(entry.presetId).toBeUndefined();
   });
 
-  it("drops entries carrying an unknown source value", () => {
+  it("drops entries carrying an unknown source value", async () => {
     const storage = new MemoryStorage();
     storage.setItem(
       KEY,
@@ -111,7 +111,7 @@ describe("phase 2 compatibility", () => {
         { id: "y", production: "P", createdAt: 2, source: "text" },
       ]),
     );
-    const loaded = new LocalStorageEntryRepository(storage).load();
+    const loaded = await new LocalStorageEntryRepository(storage).load();
     expect(loaded.map((entry) => entry.id)).toEqual(["y"]);
   });
 });

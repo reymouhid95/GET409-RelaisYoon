@@ -11,7 +11,7 @@ Gemini through Firebase Cloud Functions to enrich entries.
 ## Stack & versions
 
 - Vite + React + TypeScript, `strict: true`, no `any`
-- Firebase: Hosting, Cloud Functions (Node 20); Firestore arrives in Phase 3
+- Firebase: Hosting, Cloud Functions (Node 20), Firestore (local emulator; production deny-all until Auth)
 - Node 20+, npm; Vitest for tests
 - Gemini is called server-side only (Cloud Functions), never from the browser
 
@@ -23,7 +23,7 @@ Gemini through Firebase Cloud Functions to enrich entries.
 | Production build | `npm run build` |
 | Type check | `npm run typecheck` |
 | Tests | `npm test` |
-| Firebase emulators | `npx -y firebase-tools emulators:start --only functions` |
+| Firebase emulators | `npx -y firebase-tools --config firebase.dev.json emulators:start --only functions,firestore` |
 | Deploy (Hosting + Functions) | `npm run deploy` |
 
 ## Folder structure (target)
