@@ -283,3 +283,31 @@ HTTP 200.
 `cloudbuild`/`artifactregistry`/`secretmanager` → Anonymous provider (or
 `initializeAuth`) → `firebase functions:secrets:set GEMINI_API_KEY` →
 `npm run deploy` (gen2 as-is) → App Check.
+
+## 2026-10-06 — E14 follow-up: Gemini endpoint in a Cloudflare Worker
+
+**What** — A new `worker/` project (Cloudflare `cf` CLI, deployed as
+`promptlens-gemini.thiernooury89.workers.dev`) now serves the two analysis
+endpoints in production: `POST /describe-text` and `POST /describe-image`.
+It requires a Firebase ID token (verified locally against Google's JWKS —
+signature, issuer, audience, expiry), validates payloads with the shared
+zod schemas from `functions/src/schema.ts`, and calls Gemini's REST API
+(`responseJsonSchema`, model and prompt shared via `functions/src/prompt.ts`).
+`shotApi.ts` calls the Worker when `VITE_GEMINI_WORKER_URL` is set (prod)
+and falls back to the callable against the emulator (dev).
+
+**Why** — The Firebase functions deploy needs Cloud Build + Artifact
+Registry, which cannot be enabled without an open billing account (M-6).
+The Worker runs on the Cloudflare free tier with no billing, so the
+production app gets Gemini without touching the card.
+
+**Verified** — worker typecheck + `cf deploy --dry-run` clean; probes
+against the deployed URL: no token → 401, forged token → 401, invalid
+payload → 400, text → 200 with a full ShotDescription (~1.9 s), image →
+200 (~1.5 s); host front bundle contains the Worker URL; root typecheck +
+15/15 tests green.
+
+**Deferred** — Firebase functions stay undeployed (M-6, billing); in dev
+the callables + emulator workflow is unchanged. When billing opens,
+functions become a second server-side path but the Worker stays the
+production endpoint unless we decide otherwise.

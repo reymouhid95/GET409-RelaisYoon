@@ -5,15 +5,21 @@
 PromptLens is a web app for logging visual references used in AI video productions.
 Each entry is a **shot**: how the frame is composed, lit, prompted and tagged, so a
 production can be reproduced and compared later. Three ways to add an entry: pick one
-of 20 built-in shot presets, describe a shot in text, or upload a frame. Phase 2 calls
-Gemini through Firebase Cloud Functions to enrich entries.
+of 20 built-in shot presets, describe a shot in text, or upload a frame. Gemini
+enriches entries: through Firebase Cloud Functions in dev (emulator), through a
+Cloudflare Worker in production.
 
 ## Stack & versions
 
 - Vite + React + TypeScript, `strict: true`, no `any`
-- Firebase: Hosting, Cloud Functions (Node 20), Firestore (local emulator; production deny-all until Auth)
+- Firebase: Hosting, Cloud Functions (Node 20, gen2), Firestore (per-user
+  `users/{uid}/**` rules live in production)
+- Cloudflare Worker (`worker/`): production Gemini endpoint, requires a
+  Firebase ID token, secret `GEMINI_API_KEY` (deployed with `cf deploy
+  --secrets-file`)
 - Node 20+, npm; Vitest for tests
-- Gemini is called server-side only (Cloud Functions), never from the browser
+- Gemini is called server-side only (callable in dev, Worker in prod), never
+  from the browser
 
 ## Commands
 
@@ -25,6 +31,9 @@ Gemini through Firebase Cloud Functions to enrich entries.
 | Tests | `npm test` |
 | Firebase emulators | `npx -y firebase-tools --config firebase.dev.json emulators:start --only functions,firestore,auth` |
 | Deploy (Hosting + Functions) | `npm run deploy` |
+| Worker dev server | `cd worker && cf dev` |
+| Worker typecheck | `cd worker && npm run typecheck` |
+| Worker deploy (prod Gemini) | `cd worker && cf deploy` |
 
 ## Folder structure (target)
 
@@ -35,7 +44,8 @@ src/
   lib/             # typed helpers; no business logic inside components
   types/           # shared types: Shot, Preset, GenerationPrompt
   App.tsx          # routes and layout only
-functions/         # Cloud Functions (Phase 2: Gemini calls)
+functions/         # Cloud Functions (dev: Gemini calls against emulator)
+worker/            # Cloudflare Worker (prod: Gemini calls, cf CLI)
 public/presets/    # thumbnails for the 20 shot presets
 docs/decisions.md  # decision log, updated by the Workflow below
 ```
