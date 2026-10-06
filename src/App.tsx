@@ -63,8 +63,15 @@ export default function App() {
     setEntries((previous) => [createEntry(currentProduction, presetId), ...previous]);
   }
 
-  function addAiEntry(source: "text" | "image", description: ShotDescription): void {
-    setEntries((previous) => [createAiEntry(currentProduction, source, description), ...previous]);
+  function addAiEntry(
+    source: "text" | "image",
+    description: ShotDescription,
+    frameId?: string,
+  ): void {
+    setEntries((previous) => [
+      createAiEntry(currentProduction, source, description, frameId),
+      ...previous,
+    ]);
     setTab("journal");
   }
 
@@ -138,7 +145,9 @@ export default function App() {
               />
             )}
             {tab === "describe" && <DescribeView onSaved={(d) => addAiEntry("text", d)} />}
-            {tab === "image" && <ImageView onSaved={(d) => addAiEntry("image", d)} />}
+            {tab === "image" && (
+              <ImageView onSaved={(d, frameId) => addAiEntry("image", d, frameId)} />
+            )}
             {tab === "journal" && (
               <JournalView
                 entries={entries}

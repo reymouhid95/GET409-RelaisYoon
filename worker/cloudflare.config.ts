@@ -8,6 +8,8 @@ export default defineConfig({
 		entrypoint,
 		env: {
 			FIREBASE_PROJECT_ID: bindings.text("promptlens-prod"),
+			GEMINI_API_KEY: bindings.secret(),
+			FRAMES: bindings.r2({ name: "promptlens-frames" }),
 		},
 	},
 });

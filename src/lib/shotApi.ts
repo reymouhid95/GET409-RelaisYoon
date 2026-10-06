@@ -7,9 +7,16 @@ import type { ShotDescription } from "../types";
  * In production the analysis lives in a Cloudflare Worker (Gemini called
  * server-side, ID token required); in dev the callable hits the emulator.
  */
-const WORKER_URL = import.meta.env.VITE_GEMINI_WORKER_URL as
+export const GEMINI_WORKER_URL = import.meta.env.VITE_GEMINI_WORKER_URL as
   | string
   | undefined;
+
+const WORKER_URL = GEMINI_WORKER_URL;
+
+/** Public URL of a stored frame (R2 via the worker), or undefined in dev. */
+export function frameUrl(frameId: string): string | undefined {
+  return WORKER_URL ? `${WORKER_URL}/frames/${encodeURIComponent(frameId)}` : undefined;
+}
 
 const describeText = httpsCallable<{ text: string }, ShotDescription>(
   functions,
@@ -65,10 +72,7 @@ async function unwrap(
   return data;
 }
 
-async function workerCall(
-  path: string,
-  body: unknown,
-): Promise<ShotDescription> {
+async function workerAuthHeader(): Promise<string> {
   const user = auth.currentUser;
   if (!user) {
     throw new Error(
@@ -76,6 +80,14 @@ async function workerCall(
     );
   }
   const token = await user.getIdToken();
+  return `Bearer ${token}`;
+}
+
+async function workerCall(
+  path: string,
+  body: unknown,
+): Promise<ShotDescription> {
+  const authHeader = await workerAuthHeader();
 
   let response: Response;
   try {
@@ -83,7 +95,7 @@ async function workerCall(
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
+        Authorization: authHeader,
       },
       body: JSON.stringify(body),
     });
@@ -131,4 +143,36 @@ export async function analyzeImage(
     return workerCall("/describe-image", { imageBase64, mimeType });
   }
   return unwrap(describeImage({ imageBase64, mimeType }));
+}
+
+/**
+ * Best-effort persistence of the analysed frame in R2: returns the frame id
+ * (worker key) on success, `undefined` in dev (no worker) or on failure —
+ * a storage problem never loses the analysis itself.
+ */
+export async function uploadFrame(
+  imageBase64: string,
+  mimeType: string,
+): Promise<string | undefined> {
+  if (!WORKER_URL) return undefined;
+  try {
+    await ensureAnonymousAuth();
+    const response = await fetch(`${WORKER_URL}/frames`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: await workerAuthHeader(),
+      },
+      body: JSON.stringify({ imageBase64, mimeType }),
+    });
+    if (!response.ok) throw new Error(`Upload failed: ${response.status}`);
+    const data = (await response.json()) as { frameId?: unknown };
+    if (typeof data.frameId !== "string" || !data.frameId) {
+      throw new Error("Unexpected upload response.");
+    }
+    return data.frameId;
+  } catch (error) {
+    console.warn("PromptLens: frame upload skipped.", error);
+    return undefined;
+  }
 }

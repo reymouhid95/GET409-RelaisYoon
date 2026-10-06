@@ -33,6 +33,8 @@ export interface Entry {
   source: EntrySource;
   presetId?: string;
   description?: ShotDescription;
+  /** R2 key of the uploaded frame (Cloudflare Worker), when stored. */
+  frameId?: string;
 }
 
 /** Phase 1: a logged shot is a journal entry; text/frame paths arrive later. */

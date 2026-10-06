@@ -162,11 +162,20 @@
   box-shadow: 0 1px 2px rgb(16 22 34 / 5%);
 }
 
-.entry-row > div:first-child {
+/* first-of-type (not first-child): image entries add a thumbnail before it. */
+.entry-row > div:first-of-type {
   display: flex;
   flex-direction: column;
   gap: 4px;
   width: 100%;
+}
+
+.entry-thumb {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--line);
 }
 
 .entry-row strong {

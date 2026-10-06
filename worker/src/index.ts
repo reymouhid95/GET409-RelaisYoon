@@ -18,10 +18,14 @@ type WorkerEnv = Env & { GEMINI_API_KEY: string };
 
 const CORS_HEADERS = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Methods": "POST, OPTIONS",
+  "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
   "Access-Control-Allow-Headers": "Content-Type, Authorization",
   "Access-Control-Max-Age": "86400",
 };
+
+/** Stored keys look like `uid/uuid.ext`; anything else never reaches R2. */
+const FRAME_KEY_PATTERN =
+  /^[A-Za-z0-9_-]+\/[A-Za-z0-9-]+\.(png|jpg|webp|heic|heif)$/;
 
 function json(body: unknown, status = 200): Response {
   return new Response(JSON.stringify(body), {
@@ -30,7 +34,8 @@ function json(body: unknown, status = 200): Response {
   });
 }
 
-async function requireAuth(request: Request): Promise<Response | null> {
+/** Returns the verified uid, or the error Response to send back. */
+async function requireAuth(request: Request): Promise<string | Response> {
   const header = request.headers.get("Authorization") ?? "";
   const token = header.startsWith("Bearer ") ? header.slice(7) : "";
   if (!token) return json({ error: "Sign-in required." }, 401);
@@ -39,7 +44,76 @@ async function requireAuth(request: Request): Promise<Response | null> {
     (env as WorkerEnv).FIREBASE_PROJECT_ID,
   );
   if (!uid) return json({ error: "Sign-in required." }, 401);
-  return null;
+  return uid;
+}
+
+function invalidImageResponse(): Response {
+  return json(
+    { error: "Image invalide : formats PNG, JPEG, WebP, HEIC ou HEIF attendus." },
+    400,
+  );
+}
+
+function decodeFrame(base64: string): Uint8Array {
+  const clean = base64.replace(/[\r\n]/g, "");
+  const binary = atob(clean);
+  const bytes = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i += 1) bytes[i] = binary.charCodeAt(i);
+  return bytes;
+}
+
+/**
+ * POST /frames stores an authenticated user's frame in R2 and returns its
+ * key; GET /frames/<key> streams it back. The key embeds the uid and a
+ * random uuid, so a GET is only possible with the exact key handed out at
+ * upload time (image tags cannot carry an Authorization header).
+ */
+async function handleFramesRoute(
+  request: Request,
+  pathname: string,
+): Promise<Response> {
+  if (pathname === "/frames" && request.method === "POST") {
+    const auth = await requireAuth(request);
+    if (auth instanceof Response) return auth;
+
+    let payload: unknown;
+    try {
+      payload = await request.json();
+    } catch {
+      return json({ error: "Body JSON invalide." }, 400);
+    }
+    const parsed = imageInputSchema.safeParse(payload);
+    if (!parsed.success) return invalidImageResponse();
+    if (decodedImageBytes(parsed.data.imageBase64) > MAX_IMAGE_BYTES) {
+      return json({ error: "Image trop volumineuse : 4 Mo maximum." }, 400);
+    }
+
+    const extension =
+      parsed.data.mimeType === "image/jpeg"
+        ? "jpg"
+        : parsed.data.mimeType.slice("image/".length);
+    const key = `${auth}/${crypto.randomUUID()}.${extension}`;
+    await env.FRAMES.put(key, decodeFrame(parsed.data.imageBase64), {
+      httpMetadata: { contentType: parsed.data.mimeType },
+    });
+    return json({ frameId: key }, 201);
+  }
+
+  if (pathname.startsWith("/frames/") && request.method === "GET") {
+    const key = decodeURIComponent(pathname.slice("/frames/".length));
+    if (!FRAME_KEY_PATTERN.test(key)) return json({ error: "Not found." }, 404);
+    const object = await env.FRAMES.get(key);
+    if (!object) return json({ error: "Not found." }, 404);
+    return new Response(object.body, {
+      headers: {
+        "Content-Type": object.httpMetadata?.contentType ?? "image/jpeg",
+        "Cache-Control": "public, max-age=31536000, immutable",
+        ...CORS_HEADERS,
+      },
+    });
+  }
+
+  return json({ error: "Not found." }, 404);
 }
 
 function upstreamError(error: GeminiFailure): Response {
@@ -72,14 +146,18 @@ export default {
     }
 
     const { pathname } = new URL(request.url);
+    if (pathname === "/frames" || pathname.startsWith("/frames/")) {
+      return handleFramesRoute(request, pathname);
+    }
+
     const isText = pathname === "/describe-text";
     const isImage = pathname === "/describe-image";
     if (request.method !== "POST" || (!isText && !isImage)) {
       return json({ error: "Not found." }, 404);
     }
 
-    const authError = await requireAuth(request);
-    if (authError) return authError;
+    const auth = await requireAuth(request);
+    if (auth instanceof Response) return auth;
 
     let payload: unknown;
     try {
@@ -100,15 +178,7 @@ export default {
       input = parsed.data;
     } else {
       const parsed = imageInputSchema.safeParse(payload);
-      if (!parsed.success) {
-        return json(
-          {
-            error:
-              "Image invalide : formats PNG, JPEG, WebP, HEIC ou HEIF attendus.",
-          },
-          400,
-        );
-      }
+      if (!parsed.success) return invalidImageResponse();
       if (decodedImageBytes(parsed.data.imageBase64) > MAX_IMAGE_BYTES) {
         return json(
           { error: "Image trop volumineuse : 4 Mo maximum." },

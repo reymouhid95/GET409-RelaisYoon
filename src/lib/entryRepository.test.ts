@@ -114,4 +114,39 @@ describe("phase 2 compatibility", () => {
     const loaded = await new LocalStorageEntryRepository(storage).load();
     expect(loaded.map((entry) => entry.id)).toEqual(["y"]);
   });
+
+  it("round-trips an image entry with its stored frameId", async () => {
+    const repo = new LocalStorageEntryRepository(new MemoryStorage());
+    const entry = createAiEntry(
+      "P",
+      "image",
+      {
+        shotSize: "Plan large",
+        cameraAngle: "Contre-plongée",
+        focalLengthMm: 24,
+        lighting: "Naturelle",
+        palette: ["#224466"],
+        mood: "Calme",
+        generationPrompt: "Wide shot of a quiet street at dawn",
+        confidence: 0.9,
+      },
+      "uid-1/abc-123.jpg",
+    );
+    await repo.save([entry]);
+    const [loaded] = await repo.load();
+    expect(loaded.frameId).toBe("uid-1/abc-123.jpg");
+  });
+
+  it("drops entries whose frameId is not a string", async () => {
+    const storage = new MemoryStorage();
+    storage.setItem(
+      KEY,
+      JSON.stringify([
+        { id: "x", production: "P", createdAt: 1, source: "image", frameId: 42 },
+        { id: "y", production: "P", createdAt: 2, source: "image", frameId: "uid/ok.jpg" },
+      ]),
+    );
+    const loaded = await new LocalStorageEntryRepository(storage).load();
+    expect(loaded.map((entry) => entry.id)).toEqual(["y"]);
+  });
 });

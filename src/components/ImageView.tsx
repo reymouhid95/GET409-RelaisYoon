@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { analyzeImage } from "../lib/shotApi";
+import { analyzeImage, uploadFrame } from "../lib/shotApi";
 import type { ShotDescription } from "../types";
 import { ShotReviewCard } from "./ShotReviewCard";
 
 interface ImageViewProps {
-  onSaved: (description: ShotDescription) => void;
+  onSaved: (description: ShotDescription, frameId?: string) => void;
 }
 
 const MAX_DIMENSION = 1600;
@@ -52,6 +52,7 @@ export function ImageView({ onSaved }: ImageViewProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [draft, setDraft] = useState<ShotDescription | null>(null);
+  const [frameId, setFrameId] = useState<string | undefined>(undefined);
 
   async function handleFile(file: File | undefined): Promise<void> {
     if (!file) return;
@@ -74,7 +75,9 @@ export function ImageView({ onSaved }: ImageViewProps) {
     setLoading(true);
     setError(null);
     try {
-      setDraft(await analyzeImage(picked.base64, picked.mimeType));
+      const description = await analyzeImage(picked.base64, picked.mimeType);
+      setDraft(description);
+      setFrameId(await uploadFrame(picked.base64, picked.mimeType));
     } catch (err) {
       setError(err instanceof Error ? err.message : "Erreur inattendue.");
     } finally {
@@ -85,7 +88,11 @@ export function ImageView({ onSaved }: ImageViewProps) {
   if (draft) {
     return (
       <section className="view" aria-label="Fiche image">
-        <ShotReviewCard initial={draft} onSave={onSaved} onCancel={() => setDraft(null)} />
+        <ShotReviewCard
+          initial={draft}
+          onSave={(saved) => onSaved(saved, frameId)}
+          onCancel={() => setDraft(null)}
+        />
       </section>
     );
   }

@@ -29,6 +29,7 @@ function isPersistedEntry(value: unknown): value is PersistedEntry {
     typeof record.production === "string" &&
     typeof record.createdAt === "number" &&
     (record.presetId === undefined || typeof record.presetId === "string") &&
+    (record.frameId === undefined || typeof record.frameId === "string") &&
     (record.description === undefined ||
       (typeof record.description === "object" && record.description !== null)) &&
     (record.source === undefined ||
@@ -98,6 +99,7 @@ export function createAiEntry(
   production: string,
   source: "text" | "image",
   description: ShotDescription,
+  frameId?: string,
 ): Entry {
   return {
     id: crypto.randomUUID(),
@@ -105,5 +107,6 @@ export function createAiEntry(
     createdAt: Date.now(),
     source,
     description,
+    ...(frameId ? { frameId } : {}),
   };
 }

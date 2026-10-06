@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { frameUrl } from "../lib/shotApi";
 import type { Entry, EntrySource, Preset } from "../types";
 
 interface JournalViewProps {
@@ -101,8 +102,12 @@ export function JournalView({ entries, production, presets, onDelete, onDuplicat
                 const meta = [SOURCE_LABELS[entry.source], focal, formatDate(entry.createdAt)]
                   .filter((part) => part !== undefined && part !== "")
                   .join(" · ");
+                const thumb = entry.frameId ? frameUrl(entry.frameId) : undefined;
                 return (
                   <li key={entry.id} className="entry-row">
+                    {thumb && (
+                      <img className="entry-thumb" src={thumb} alt="" loading="lazy" />
+                    )}
                     <div>
                       <strong>{title}</strong>
                       <span className="entry-meta">{meta}</span>
