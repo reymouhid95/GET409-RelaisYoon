@@ -257,3 +257,29 @@ GEMINI_API_KEY`, `npm run deploy`, then App Check.
 
 **Verified** — root `typecheck` + 15/15 tests green; production build
 embeds the real config; hosting URL answers 200 on `/` and a SPA route.
+
+## 2026-10-06 — E14 M-6: blocked on billing, gen1 conversion reverted
+
+**What** — Attempted the first full deploy (Anonymous provider, Gemini
+secret, functions) on `promptlens-prod`. Every remaining step is gated by
+billing: the linked account ("Paiement de Firebase", `012C1B-42FC07-103603`)
+stays closed because the card is declined, so Cloud Build, Artifact
+Registry, Secret Manager and the Identity Platform initialization cannot be
+enabled. A gen1 conversion of the two callables (v1 API, no Cloud Run) was
+implemented on `lab/e14-gen1` and reverted: firebase-tools enables Cloud
+Build + Artifact Registry for **any** functions deploy, so gen1 buys
+nothing. Code stays gen2; M-5 rules and hosting remain live.
+
+**Why** — No free-lunch deploy path exists on this project until the
+billing account is open; the console-only Anonymous activation is pending
+verification (the Identity Toolkit config API is unreachable without
+initialization).
+
+**Verified** — after revert: root typecheck + 15/15 tests green,
+functions typecheck/build green, `functions:list` empty, hosting URL still
+HTTP 200.
+
+**Next, once the card works** — open the billing account → enable
+`cloudbuild`/`artifactregistry`/`secretmanager` → Anonymous provider (or
+`initializeAuth`) → `firebase functions:secrets:set GEMINI_API_KEY` →
+`npm run deploy` (gen2 as-is) → App Check.
