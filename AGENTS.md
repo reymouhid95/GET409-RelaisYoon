@@ -14,9 +14,10 @@ Cloudflare Worker in production.
 - Vite + React + TypeScript, `strict: true`, no `any`
 - Firebase: Hosting, Cloud Functions (Node 20, gen2), Firestore (per-user
   `users/{uid}/**` rules live in production)
-- Cloudflare Worker (`worker/`): production Gemini endpoint, requires a
-  Firebase ID token, secret `GEMINI_API_KEY` (deployed with `cf deploy
-  --secrets-file`)
+- Cloudflare Worker (`worker/`): production Gemini endpoint (`/describe-*`)
+  and frame storage (`POST /frames` / `GET /frames/:key` on the private R2
+  bucket `promptlens-frames`), requires a Firebase ID token, secret
+  `GEMINI_API_KEY` (deployed with `cf deploy --secrets-file`)
 - Node 20+, npm; Vitest for tests
 - Gemini is called server-side only (callable in dev, Worker in prod), never
   from the browser

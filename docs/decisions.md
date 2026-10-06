@@ -311,3 +311,30 @@ payload → 400, text → 200 with a full ShotDescription (~1.9 s), image →
 the callables + emulator workflow is unchanged. When billing opens,
 functions become a second server-side path but the Worker stays the
 production endpoint unless we decide otherwise.
+
+## 2026-10-06 — Frame storage: Cloudflare R2
+
+**What** — Uploaded frames are now persisted: `POST /frames` on the
+existing Worker (Firebase ID token required) validates the image with the
+shared zod schema, stores it in the private R2 bucket `promptlens-frames`
+under `uid/uuid.ext`, and returns the key as `frameId`. `GET /frames/:key`
+streams it back (strict key regex, immutable cache). `Entry` gained an
+optional `frameId` (validated at the repository boundary),
+`uploadFrame()` in `shotApi.ts` runs best-effort after the analysis, and
+the journal shows a 16:9 thumbnail for entries that have one.
+
+**Why** — The frame was only ever a `dataURL` in component state: it died
+on reload, so image entries could not be re-seen. R2 (free tier, 10 GB)
+stores bytes cheaply and stays inside the same Cloudflare account as the
+Worker; the bucket stays private and reads go through the Worker because
+`<img>` tags cannot send an `Authorization` header.
+
+**Verified** — worker typecheck + `cf build` + front typecheck + build,
+17/17 tests (frameId round-trip, non-string frameId dropped); probes
+against the deployed Worker: no token → 401, forged token → 401, invalid
+payload → 400, upload → 201 with `frameId`, GET → 200 `image/png`
+(valid 1×1 PNG), unknown key → 404, traversal → rejected.
+
+**Trade-off** — Upload failures are swallowed (`console.warn`): a storage
+hiccup never loses the analysis, the entry simply has no thumbnail.
+Dev (no `VITE_GEMINI_WORKER_URL`) skips the upload entirely.
