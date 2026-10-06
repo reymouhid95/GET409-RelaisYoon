@@ -89,8 +89,22 @@ export default function App() {
         <div>
           <h1>PromptLens</h1>
           <p className="tagline">Journal de références visuelles pour productions vidéo par IA</p>
+          <p className="header-date">
+            {new Date().toLocaleDateString("fr-FR", {
+              weekday: "long",
+              day: "numeric",
+              month: "long",
+              year: "numeric",
+            })}
+          </p>
         </div>
-        <ProductionPicker value={production} productions={productions} onChange={setProduction} />
+        <ProductionPicker
+          value={production}
+          productions={productions}
+          onChange={setProduction}
+          count={currentCount}
+          total={entries.length}
+        />
       </header>
 
       <nav className="tabs" aria-label="Sections">

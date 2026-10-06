@@ -1,3 +1,4 @@
+import { useMemo, useState } from "react";
 import type { Entry, EntrySource, Preset } from "../types";
 
 interface JournalViewProps {
@@ -24,7 +25,22 @@ function formatDate(timestamp: number): string {
 
 export function JournalView({ entries, production, presets, onDelete, onDuplicate }: JournalViewProps) {
   const presetById = new Map(presets.map((preset) => [preset.id, preset]));
-  const productionEntries = entries.filter((entry) => entry.production === production);
+  const productionEntries = useMemo(
+    () => entries.filter((entry) => entry.production === production),
+    [entries, production],
+  );
+  const [sizeFilter, setSizeFilter] = useState<string | null>(null);
+
+  const shotSizeOf = (entry: Entry): string | undefined =>
+    entry.description?.shotSize ??
+    (entry.presetId ? presetById.get(entry.presetId)?.shotSize : undefined);
+
+  const sizes = [...new Set(productionEntries.map(shotSizeOf).filter((s): s is string => !!s))].sort(
+    (a, b) => a.localeCompare(b, "fr"),
+  );
+  const visible = sizeFilter
+    ? productionEntries.filter((entry) => shotSizeOf(entry) === sizeFilter)
+    : productionEntries;
 
   return (
     <section className="view" aria-label="Journal des prises">
@@ -40,39 +56,74 @@ export function JournalView({ entries, production, presets, onDelete, onDuplicat
           Aucune prise pour cette production. Ajoutez des presets, une description ou une image.
         </p>
       ) : (
-        <ul className="entry-list">
-          {productionEntries.map((entry) => {
-            const preset = entry.presetId ? presetById.get(entry.presetId) : undefined;
-            const title = entry.description
-              ? `${entry.description.shotSize} — ${entry.description.mood}`
-              : (preset?.name ?? "Preset inconnu");
-            const focal = entry.description
-              ? `${entry.description.focalLengthMm} mm`
-              : preset?.focalLength;
-            const meta = [SOURCE_LABELS[entry.source], focal, formatDate(entry.createdAt)]
-              .filter((part) => part !== undefined && part !== "")
-              .join(" · ");
-            return (
-              <li key={entry.id} className="entry-row">
-                <div>
-                  <strong>{title}</strong>
-                  <span className="entry-meta">{meta}</span>
-                  {entry.description && (
-                    <span className="entry-prompt">{entry.description.generationPrompt}</span>
-                  )}
-                </div>
-                <div className="entry-actions">
-                  <button type="button" onClick={() => onDuplicate(entry.id)}>
-                    Dupliquer
-                  </button>
-                  <button type="button" className="danger" onClick={() => onDelete(entry.id)}>
-                    Supprimer
-                  </button>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
+        <>
+          {sizes.length > 1 && (
+            <div className="filter-chips" role="group" aria-label="Filtrer par taille de plan">
+              <button
+                type="button"
+                className={sizeFilter === null ? "active" : ""}
+                aria-pressed={sizeFilter === null}
+                onClick={() => setSizeFilter(null)}
+              >
+                Toutes
+              </button>
+              {sizes.map((size) => (
+                <button
+                  key={size}
+                  type="button"
+                  className={sizeFilter === size ? "active" : ""}
+                  aria-pressed={sizeFilter === size}
+                  onClick={() => setSizeFilter(size)}
+                >
+                  {size}
+                </button>
+              ))}
+            </div>
+          )}
+
+          {visible.length === 0 ? (
+            <p className="empty">
+              Aucune prise en « {sizeFilter} » pour cette production.{" "}
+              <button type="button" className="linklike" onClick={() => setSizeFilter(null)}>
+                Voir toutes les prises
+              </button>
+            </p>
+          ) : (
+            <ul className="entry-list">
+              {visible.map((entry) => {
+                const preset = entry.presetId ? presetById.get(entry.presetId) : undefined;
+                const title = entry.description
+                  ? `${entry.description.shotSize} — ${entry.description.mood}`
+                  : (preset?.name ?? "Preset inconnu");
+                const focal = entry.description
+                  ? `${entry.description.focalLengthMm} mm`
+                  : preset?.focalLength;
+                const meta = [SOURCE_LABELS[entry.source], focal, formatDate(entry.createdAt)]
+                  .filter((part) => part !== undefined && part !== "")
+                  .join(" · ");
+                return (
+                  <li key={entry.id} className="entry-row">
+                    <div>
+                      <strong>{title}</strong>
+                      <span className="entry-meta">{meta}</span>
+                      {entry.description && (
+                        <span className="entry-prompt">{entry.description.generationPrompt}</span>
+                      )}
+                    </div>
+                    <div className="entry-actions">
+                      <button type="button" onClick={() => onDuplicate(entry.id)}>
+                        Dupliquer
+                      </button>
+                      <button type="button" className="danger" onClick={() => onDelete(entry.id)}>
+                        Supprimer
+                      </button>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+        </>
       )}
     </section>
   );

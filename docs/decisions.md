@@ -108,3 +108,43 @@ the async interface means components never care which backend is active.
 down, so repository selection probes the emulator port itself (`fetch`,
 no-cors) before trusting Firestore; only a refused connection triggers the
 localStorage fallback.
+
+## 2026-10-06 — Ralph round 1: what changed
+
+**Issues ranked (frontend-design review, before/after screenshots in
+`screenshots/e10-ralph-*`):** (1) horizontal overflow at 360 px — the tab
+row was a no-wrap flex, `scrollWidth` 391 > 360; (2) no date in the header
+and no per-production progress, both required by the Ralph brief; (3) the
+journal was a stack of full-width rows with dead space, not cards.
+
+**Fixed (top 3):**
+- Tabs now `flex-wrap: wrap` — pills flow to a second line at 360 px, no
+  horizontal scroll (verified: no element past the viewport).
+- Header shows today's date (fr-FR, weekday + long date); the production
+  picker gained a progress bar with `count / total prises`
+  (`role="progressbar"`, ARIA values).
+- Journal entries became a responsive card grid
+  (`auto-fill minmax(300px, 1fr)`): vertical card anatomy (title, meta,
+  clamped prompt, actions at the bottom).
+
+**Checks:** `npm run typecheck`, `npm test` (15/15), `npm run build` all
+green. `functions/`, `.env*` and Firebase rules untouched.
+
+## 2026-10-06 — Ralph round 2: what changed
+
+**Remaining brief gap:** filter by shot size in the journal. Everything
+else from round 1 held up under re-review (no overflow at 360 px, header
+date and progress present, card grid intact).
+
+**Fixed:**
+- Journal gained a shot-size filter: pill chips ("Toutes" + every size
+  present in the production, fr-sorted), `aria-pressed` toggles, reset via
+  a specific empty state with a "Voir toutes les prises" action.
+- Filter state is local to `JournalView`; entries are derived with
+  `useMemo` so large journals stay cheap.
+
+**Checks:** `npm run typecheck`, `npm test` (15/15), `npm run build`
+green; headless verification: `scrollWidth` 360/360 at 360 px, filter
+shows 1 of 2 entries on "Premier plan" and restores both on "Toutes",
+progress bar reports a valid `aria-valuenow`.
+`functions/`, `.env*` and Firebase rules untouched (per brief).
