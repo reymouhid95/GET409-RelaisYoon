@@ -231,3 +231,29 @@ firestore:rules` happens at the first real deploy (M-5/M-6).
 **Deferred** — data already sitting in the legacy `entries` collection on
 any live project is copied on first load; the legacy docs themselves stay
 deny-all and can be deleted later.
+
+## 2026-10-06 — E14 M-5 (partial): real project wired, first hosting release
+
+**What** — Firebase project `promptlens-prod` created from the CLI (alias
+`prod`), web app registered (App ID `1:751740675752:web:c464911c3061813059c49d`),
+its config written to gitignored `.env.local` (6 `VITE_FIREBASE_*` vars,
+values never printed) and `src/lib/firebase.ts` now prefers those vars with
+the demo config as fallback for emulators. Enabled the Firestore, Identity
+Toolkit, Cloud Functions and Firebase Hosting APIs, created the Firestore
+database (`europe-west1`, closed by default), released the M-4 production
+rules (`firebase deploy --only firestore:rules`) and shipped the first
+Hosting release: https://promptlens-prod.web.app (HTTP 200, SPA rewrites OK).
+
+**Why** — E14 M-5/M-6: the app must run on a real project instead of the
+demo config; rules were human-approved in M-4 and only needed releasing.
+
+**Blocked — no billing account on the Google Cloud project.** The Anonymous
+provider stays OFF (`identityPlatform:initializeAuth` →
+`BILLING_NOT_ENABLED`) and the Cloud Build / Artifact Registry / Cloud Run
+APIs cannot be enabled, so the functions deploy (`npm run deploy`) and App
+Check are deferred. Once a billing account is linked in the console (free
+tier), the rest is: re-enable Anonymous, `firebase functions:secrets:set
+GEMINI_API_KEY`, `npm run deploy`, then App Check.
+
+**Verified** — root `typecheck` + 15/15 tests green; production build
+embeds the real config; hosting URL answers 200 on `/` and a SPA route.

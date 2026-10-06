@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "demo-promptlens"
-  }
+    "default": "demo-promptlens",
+    "prod": "promptlens-prod"
+  },
+  "targets": {},
+  "etags": {}
 }
