@@ -1,4 +1,5 @@
 import { httpsCallable } from "firebase/functions";
+import { ensureAnonymousAuth } from "./auth";
 import { functions } from "./firebase";
 import type { ShotDescription } from "../types";
 
@@ -54,10 +55,15 @@ async function unwrap(call: Promise<{ data: unknown }>): Promise<ShotDescription
   return data;
 }
 
-export function analyzeText(text: string): Promise<ShotDescription> {
+export async function analyzeText(text: string): Promise<ShotDescription> {
+  await ensureAnonymousAuth();
   return unwrap(describeText({ text }));
 }
 
-export function analyzeImage(imageBase64: string, mimeType: string): Promise<ShotDescription> {
+export async function analyzeImage(
+  imageBase64: string,
+  mimeType: string,
+): Promise<ShotDescription> {
+  await ensureAnonymousAuth();
   return unwrap(describeImage({ imageBase64, mimeType }));
 }

@@ -179,3 +179,28 @@ HTTP 200 (open default, dev flow intact), default `firebase.json` → HTTP 403
 **Deferred (audit, needs product decisions)** — H-1 callable auth/App Check;
 M-4 `users/{uid}/entries/{id}` structure (requires Auth); M-5/M-6 real
 Firebase project config instead of `demo-*`.
+
+## 2026-10-06 — E14 H-1: callable auth gate
+
+**What** — Both Gemini callables (`describeShotFromText`,
+`describeShotFromImage`) now reject unauthenticated requests via a
+`requireAuth` guard (`functions/src/auth.ts`). The frontend signs the user
+in anonymously on demand (`src/lib/auth.ts`, called before each callable)
+and connects to the Auth emulator in dev (`firebase.ts`, port 9099 added to
+both emulator configs; AGENTS.md emulator command now includes `auth`).
+
+**Why** — Audit finding H-1: anyone could invoke the callables and spend
+the Gemini quota (billing risk once hosting is deployed). Anonymous auth
+keeps the flow invisible to users while giving every request a
+platform-verified ID token.
+
+**Verified** — root `typecheck` + `build` functions + 15/15 tests green;
+emulator A/B probe (`functions,auth`, demo project): no token →
+`HTTP 401 UNAUTHENTICATED` on both callables, anonymous ID token +
+invalid payload → `HTTP 400 INVALID_ARGUMENT` (auth passed, validation
+reached, no Gemini call made).
+
+**Deferred** — App Check needs a real Firebase project (with M-5/M-6);
+the **Anonymous provider must be enabled in the Firebase console before the
+first production deploy**, otherwise sign-in fails and callables stay
+closed.

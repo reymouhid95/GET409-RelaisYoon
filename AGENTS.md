@@ -23,7 +23,7 @@ Gemini through Firebase Cloud Functions to enrich entries.
 | Production build | `npm run build` |
 | Type check | `npm run typecheck` |
 | Tests | `npm test` |
-| Firebase emulators | `npx -y firebase-tools --config firebase.dev.json emulators:start --only functions,firestore` |
+| Firebase emulators | `npx -y firebase-tools --config firebase.dev.json emulators:start --only functions,firestore,auth` |
 | Deploy (Hosting + Functions) | `npm run deploy` |
 
 ## Folder structure (target)

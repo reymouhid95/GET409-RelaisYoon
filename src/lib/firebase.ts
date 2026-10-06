@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app";
+import { connectAuthEmulator, getAuth } from "firebase/auth";
 import {
   connectFirestoreEmulator,
   getFirestore,
@@ -15,10 +16,14 @@ const app = initializeApp({
   projectId: "demo-promptlens",
 });
 
+export const auth = getAuth(app);
 export const functions = getFunctions(app, "us-central1");
 export const db = getFirestore(app);
 
 if (import.meta.env.DEV) {
+  connectAuthEmulator(auth, "http://127.0.0.1:9099", {
+    disableWarnings: true,
+  });
   connectFunctionsEmulator(functions, "127.0.0.1", 5001);
   connectFirestoreEmulator(db, "127.0.0.1", 8080);
 }

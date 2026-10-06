@@ -1,5 +1,6 @@
 import { defineSecret } from "firebase-functions/params";
 import { HttpsError, onCall } from "firebase-functions/v2/https";
+import { requireAuth } from "./auth";
 import { describeShot } from "./gemini";
 import {
   MAX_IMAGE_BYTES,
@@ -50,6 +51,7 @@ export const describeShotFromText = onCall(
     memory: "256MiB",
   },
   async (request) => {
+    requireAuth(request);
     const parsed = textInputSchema.safeParse(request.data);
     if (!parsed.success) {
       throw invalidArgument("Texte invalide : 1 à 2000 caractères attendus.");
@@ -70,6 +72,7 @@ export const describeShotFromImage = onCall(
     memory: "256MiB",
   },
   async (request) => {
+    requireAuth(request);
     const parsed = imageInputSchema.safeParse(request.data);
     if (!parsed.success) {
       throw invalidArgument(
