@@ -16,7 +16,8 @@ _(created by /ingest as people are encountered)_
 
 ## Projects
 
-_(created by /ingest as projects start)_
+- [[projects/Notion workspace]] — connected Notion account (MCP), template workspace
+- [[projects/morning-brief/2026-10-06]] — first daily brief (Notion-only mode)
 
 ## Sources (read-only)
 
