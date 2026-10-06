@@ -19,10 +19,11 @@ function invalidArgument(message: string): HttpsError {
 function toHttpsError(error: unknown): HttpsError {
   if (error instanceof HttpsError) return error;
   const status = (error as { status?: unknown }).status;
-  console.error(
-    "Gemini call failed:",
-    error instanceof Error ? `${error.name}: ${error.message}` : String(error),
-  );
+  const detail =
+    error instanceof Error
+      ? `${error.name}: ${error.message.replace(/([?&]key=)[^&\s]+/g, "$1<redacted>")}`
+      : String(error);
+  console.error("Gemini call failed:", detail);
   if (status === 429) {
     return new HttpsError(
       "resource-exhausted",

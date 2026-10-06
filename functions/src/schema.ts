@@ -7,8 +7,15 @@ export const textInputSchema = z.object({
   text: z.string().trim().min(1, "Le texte ne peut pas être vide.").max(2000),
 });
 
+/** Longest base64 string that can decode to MAX_IMAGE_BYTES, with slack for line breaks. */
+const MAX_IMAGE_BASE64_CHARS = Math.ceil(MAX_IMAGE_BYTES / 3) * 4 + 64;
+
 export const imageInputSchema = z.object({
-  imageBase64: z.string().min(1, "L'image ne peut pas être vide."),
+  imageBase64: z
+    .string()
+    .min(1, "L'image ne peut pas être vide.")
+    .regex(/^[A-Za-z0-9+/=\r\n]+$/, "Base64 invalide.")
+    .max(MAX_IMAGE_BASE64_CHARS, "Image trop volumineuse : 4 Mo maximum."),
   mimeType: z.string().regex(/^image\/(png|jpeg|webp|heic|heif)$/),
 });
 

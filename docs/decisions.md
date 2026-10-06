@@ -86,12 +86,16 @@ the async interface means components never care which backend is active.
 **Security rules** (user-reviewed and approved before any wiring):
 - `firestore.rules` (production, pointed at by `firebase.json`):
   `allow read, write: if false` — deny-all until Firebase Auth exists.
-- `firestore.dev.rules` (emulator only, pointed at by `firebase.dev.json`):
-  open read/write for local development.
-- Emulator command loads the dev file via the global `--config` flag:
+- `firestore.dev.rules` — **removed 2026-10-06** (E14 audit, M-2): the dev
+  config carries no `firestore` section anymore, so the emulator falls back
+  to firebase-tools' built-in open default ("no rules file specified" →
+  allow all reads and writes), while `deploy --config firebase.dev.json`
+  has no rules target left to publish. Correcting an earlier claim (M-3):
+  `firebase deploy` reads `firebase.json` **unless `--config` is passed** —
+  that lever no longer points at any rules file, which is what actually
+  makes open rules undeployable.
+- Emulator command unchanged:
   `npx -y firebase-tools --config firebase.dev.json emulators:start --only functions,firestore`.
-  `firebase deploy` always reads `firebase.json`, so test rules can never
-  be deployed.
 
 **Trade-offs / deferred**
 - If Firestore is unreachable at startup the app falls back to
@@ -148,3 +152,30 @@ green; headless verification: `scrollWidth` 360/360 at 360 px, filter
 shows 1 of 2 entries on "Premier plan" and restores both on "Toutes",
 progress bar reports a valid `aria-valuenow`.
 `functions/`, `.env*` and Firebase rules untouched (per brief).
+
+## 2026-10-06 — Pre-deploy security review (E14 safe fixes)
+
+**What** — First batch of `firebase-reviewer` audit fixes (the "safe" batch,
+no product decision): `storage.rules` deny-all + `storage` key in
+`firebase.json` (M-1); `firestore.dev.rules` deleted and the `firestore`
+section removed from `firebase.dev.json` so the emulator uses its built-in
+open default while no open rules file exists to deploy (M-2/M-3); hosting
+block (`public: dist`, SPA rewrite) + `npm run deploy` script (L-4);
+base64 charset/length validation on `imageBase64` (L-2); `key=` redaction
+in the Gemini error log (L-1); unused `firebase-admin` dependency removed
+(L-3).
+
+**Why** — The audit showed the only way to publish open rules was
+`firebase deploy --config firebase.dev.json --only firestore:rules`; the
+lever is now gone instead of only documented. Storage gets a deny-all file
+before any bucket exists, so the first upload cannot ship with default
+rules.
+
+**Verified** — `functions: typecheck + build`, root `typecheck`, `npm test`
+15/15 green; emulator A/B probe (JDK 21): `--config firebase.dev.json` →
+HTTP 200 (open default, dev flow intact), default `firebase.json` → HTTP 403
+`PERMISSION_DENIED @ firestore.rules:12`.
+
+**Deferred (audit, needs product decisions)** — H-1 callable auth/App Check;
+M-4 `users/{uid}/entries/{id}` structure (requires Auth); M-5/M-6 real
+Firebase project config instead of `demo-*`.

@@ -3,9 +3,6 @@
     "source": "functions",
     "runtime": "nodejs20"
   },
-  "firestore": {
-    "rules": "firestore.dev.rules"
-  },
   "emulators": {
     "functions": {
       "port": 5001
