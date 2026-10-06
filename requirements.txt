@@ -1,0 +1,5 @@
+openai-agents
+python-dotenv
+ipykernel
+pandas
+litellm
