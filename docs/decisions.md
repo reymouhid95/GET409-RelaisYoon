@@ -204,3 +204,30 @@ reached, no Gemini call made).
 the **Anonymous provider must be enabled in the Firebase console before the
 first production deploy**, otherwise sign-in fails and callables stay
 closed.
+
+## 2026-10-06 — E14 M-4: per-user entries subtree
+
+**What** — Entries moved from the root `entries` collection to
+`users/{uid}/entries/{entryId}`: `FirestoreEntryRepository` now takes the
+uid, the workspace bootstrap signs in anonymously first (the auth helper
+now returns the uid), and a one-shot migration copies legacy root
+documents (else localStorage) into the per-user subtree when it is empty.
+`firestore.rules` changed from total deny-all to owner-only access on
+`users/{uid}/**` (authenticated + `request.auth.uid == userId`), deny-all
+everywhere else including the legacy root collection. Human-approved per
+AGENTS.md (rules change requires asking).
+
+**Why** — Audit M-4: a flat shared collection cannot be isolated per user;
+rules alone were impossible without Auth. Anonymous Auth now ships (H-1),
+so ownership can be enforced at the path level.
+
+**Verified** — root `typecheck` + 15/15 tests green; emulator probe
+(`auth,firestore` with the production `firestore.rules`, JS SDK path):
+own-subtree write/read allowed, read of another uid →
+`permission-denied`, legacy root write → `permission-denied`, final own
+read still OK. Rules are edited only — `firebase deploy --only
+firestore:rules` happens at the first real deploy (M-5/M-6).
+
+**Deferred** — data already sitting in the legacy `entries` collection on
+any live project is copied on first load; the legacy docs themselves stay
+deny-all and can be deleted later.

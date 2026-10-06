@@ -10,20 +10,29 @@ import {
 import { parseStoredEntry, type EntryRepository } from "./entryRepository";
 import type { Entry } from "../types";
 
-const COLLECTION = "entries";
 /** Firestore batches cap at 500 operations; stay safely below it. */
 const BATCH_LIMIT = 400;
 
+/**
+ * Per-user subtree (audit M-4): every read/write goes through
+ * `users/{uid}/entries` so security rules can isolate owners by uid.
+ */
 export class FirestoreEntryRepository implements EntryRepository {
   private readonly db: Firestore;
+  private readonly uid: string;
 
-  constructor(db: Firestore) {
+  constructor(db: Firestore, uid: string) {
     this.db = db;
+    this.uid = uid;
+  }
+
+  private entriesCollection() {
+    return collection(this.db, "users", this.uid, "entries");
   }
 
   async load(): Promise<Entry[]> {
     const snapshot = await getDocs(
-      query(collection(this.db, COLLECTION), orderBy("createdAt", "desc")),
+      query(this.entriesCollection(), orderBy("createdAt", "desc")),
     );
     const entries: Entry[] = [];
     for (const document of snapshot.docs) {
@@ -34,7 +43,7 @@ export class FirestoreEntryRepository implements EntryRepository {
   }
 
   async save(entries: Entry[]): Promise<void> {
-    const snapshot = await getDocs(collection(this.db, COLLECTION));
+    const snapshot = await getDocs(this.entriesCollection());
     const wanted = new Set(entries.map((entry) => entry.id));
     const deletions = snapshot.docs.filter((document) => !wanted.has(document.id));
 
@@ -51,7 +60,10 @@ export class FirestoreEntryRepository implements EntryRepository {
     for (let start = 0; start < entries.length; start += BATCH_LIMIT) {
       const batch = writeBatch(this.db);
       for (const entry of entries.slice(start, start + BATCH_LIMIT)) {
-        batch.set(doc(this.db, COLLECTION, entry.id), entry);
+        batch.set(
+          doc(this.db, "users", this.uid, "entries", entry.id),
+          entry,
+        );
       }
       await batch.commit();
     }

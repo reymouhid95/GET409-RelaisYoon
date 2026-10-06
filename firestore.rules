@@ -1,13 +1,16 @@
 rules_version = '2';
 
 // PRODUCTION rules — read by `firebase deploy --only firestore:rules`.
-// PromptLens has no authentication yet, so nobody may touch the data.
-// When Firebase Auth ships, replace the deny with a per-user rule such as:
-//   allow read, write: if request.auth != null
-//     && request.auth.uid == resource.data.uid;
-// NEVER deploy firestore.dev.rules (the emulator file) to production.
+// Entries live under users/{uid}/entries (M-4): the owner (any signed-in
+// user, matching their own uid) may read/write their subtree; everything
+// else — including the legacy root `entries` collection — stays deny-all.
+// NEVER deploy firestore.dev.rules (deleted in E14) to production.
 service cloud.firestore {
   match /databases/{database}/documents {
+    match /users/{userId}/{document=**} {
+      allow read, write: if request.auth != null
+        && request.auth.uid == userId;
+    }
     match /{document=**} {
       allow read, write: if false;
     }
