@@ -16,6 +16,13 @@ function raisonDify(corps: string): string {
   return corps.slice(0, 200);
 }
 
+/* Garde-fou serveur : longueur maximale d'une question, en caractères.
+   Refusée ici même avant l'appel Dify — et non dans le schéma zod du
+   validator, car une exception de validation remonterait au client qui
+   l'afficherait comme « Service temporairement indisponible » alors que le
+   service fonctionne : on renvoie donc une erreur structurée explicite. */
+const QUESTION_MAX = 500;
+
 export const demanderAgent = createServerFn({ method: "POST" })
   .validator((data) =>
     z
@@ -26,6 +33,14 @@ export const demanderAgent = createServerFn({ method: "POST" })
       .parse(data),
   )
   .handler(async ({ data }) => {
+    if (data.question.length > QUESTION_MAX) {
+      return {
+        ok: false as const,
+        erreur: `Question trop longue (${QUESTION_MAX} caractères maximum)`,
+        detail: `question refusée sans appel Dify : ${data.question.length} caractères`,
+      };
+    }
+
     const apiKey = process.env["DIFY_API_KEY"];
     const journalise = process.env["NODE_ENV"] !== "production";
 

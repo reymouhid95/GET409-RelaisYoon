@@ -11,7 +11,8 @@ import {
 
 import { FicheCard } from "@/components/FicheCard";
 import { Button } from "@/components/ui/button";
-import { fiches } from "@/data/fiches";
+import { dernierReleve, fiches } from "@/data/fiches";
+import { useFraicheur } from "@/lib/fraicheur";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -76,6 +77,13 @@ function Index() {
   const tousLesDeparts = fiches.flatMap((f) => f.departs);
   const departsDisponibles = tousLesDeparts.filter((d) => d.statut === "Disponible").length;
 
+  // « En direct » n'est honnête que si le relevé le plus récent a moins
+  // d'une heure (SEUIL_PERIME_MINUTES) : au-delà, pas de badge du tout plutôt
+  // qu'une prétention de temps réel. Null côté serveur → badge absent à
+  // l'hydratation, il n'apparaît que si la donnée est réellement fraîche.
+  const fraicheur = useFraicheur(dernierReleve);
+  const enDirect = fraicheur !== null && !fraicheur.perime;
+
   return (
     <div>
       {/* ---------------------------------------------------------- Hero */}
@@ -139,10 +147,12 @@ function Index() {
                   <p className="text-board-foreground/60 text-[0.6875rem] font-bold tracking-widest uppercase">
                     Ce soir · 18h40
                   </p>
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-sun-400/15 px-2.5 py-1 text-[0.6875rem] font-bold text-sun-500 uppercase">
-                    <span className="bg-sun-400 size-1.5 rounded-full" aria-hidden />
-                    En direct
-                  </span>
+                  {enDirect && (
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-sun-400/15 px-2.5 py-1 text-[0.6875rem] font-bold text-sun-500 uppercase">
+                      <span className="bg-sun-400 size-1.5 rounded-full" aria-hidden />
+                      En direct
+                    </span>
+                  )}
                 </div>
 
                 <div className="mt-5">
