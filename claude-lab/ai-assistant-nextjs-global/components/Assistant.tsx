@@ -1,0 +1,192 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import Chat, { type Message } from "./Chat";
+import Describe from "./Describe";
+import Header, { type LevelId } from "./Header";
+import ImageLab from "./ImageLab";
+import Journal from "./Journal";
+import Presets from "./Presets";
+import { getStudentId } from "@/lib/student";
+import { useProduction } from "@/lib/production";
+
+type PanelId = "catalog" | "journal" | "describe" | "image";
+
+const PANELS: { id: PanelId; label: string }[] = [
+  { id: "catalog", label: "Catalogue" },
+  { id: "journal", label: "Journal" },
+  { id: "describe", label: "Décrire" },
+  { id: "image", label: "Image" },
+];
+
+type View = "chat" | PanelId;
+
+export default function Assistant() {
+  const [level, setLevel] = useState<LevelId>("master1");
+  const [history, setHistory] = useState<Message[]>([]);
+  const [value, setValue] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [panel, setPanel] = useState<PanelId>("catalog");
+  // On phones the chat and the panel swap instead of stacking, so the
+  // bottom bar never leaves the student scrolling through the conversation.
+  const [mobileView, setMobileView] = useState<View>("chat");
+  const [journalVersion, setJournalVersion] = useState(0);
+  const bumpJournal = () => setJournalVersion((v) => v + 1);
+  // REC lit la vérité : le chat (loading) et les analyses (analyzing).
+  const [analyzing, setAnalyzing] = useState(false);
+  const busy = loading || analyzing;
+  const [production, setProduction] = useProduction();
+  const inputRef = useRef<HTMLInputElement>(null);
+  const bottomRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+  }, [history.length, loading]);
+
+  const send = async (text = value) => {
+    const message = text.trim();
+    if (!message || loading) return;
+
+    setLoading(true);
+    setValue("");
+    setHistory((prev) => [...prev, { role: "user", content: message }]);
+
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message, student_level: level, student_id: getStudentId() }),
+      });
+      const data = (await res.json()) as { response?: string; error?: string };
+      setHistory((prev) => [
+        ...prev,
+        {
+          role: "assistant",
+          content:
+            data.response ??
+            data.error ??
+            "Je n'ai pas pu formuler de réponse. Reformule ta question.",
+        },
+      ]);
+    } catch {
+      setHistory((prev) => [
+        ...prev,
+        { role: "assistant", content: "Connexion perdue avec le serveur. Réessaie dans un instant." },
+      ]);
+    } finally {
+      setLoading(false);
+      inputRef.current?.focus();
+    }
+  };
+
+  return (
+    <div className="flex min-h-screen flex-col">
+      <a
+        href="#contenu"
+        className="sr-only bg-amber px-4 py-2 text-[0.9rem] font-semibold text-[#0e1418] focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-40"
+      >
+        Aller au contenu
+      </a>
+      <Header
+        level={level}
+        onLevelChange={setLevel}
+        production={production}
+        onProductionChange={setProduction}
+        busy={busy}
+      />
+
+      <main
+        id="contenu"
+        className="mx-auto grid w-full max-w-6xl flex-1 gap-x-10 gap-y-10 px-5 pt-8 pb-28 lg:grid-cols-[minmax(0,1fr)_20rem] lg:pb-8"
+      >
+        <div
+          className={`${mobileView === "chat" ? "flex" : "hidden"} min-h-0 flex-col lg:flex`}
+        >
+          <Chat
+            history={history}
+            loading={loading}
+            value={value}
+            onChange={setValue}
+            onSend={() => send()}
+            inputRef={inputRef}
+          />
+          <div ref={bottomRef} />
+        </div>
+
+        <div
+          className={`${mobileView === "chat" ? "hidden" : ""} lg:block lg:border-l lg:border-white/10 lg:pl-8`}
+        >
+          <div className="mb-5 hidden flex-wrap gap-x-5 gap-y-1 lg:flex">
+            {PANELS.map((p) => (
+              <button
+                key={p.id}
+                type="button"
+                onClick={() => setPanel(p.id)}
+                aria-current={panel === p.id}
+                className={`flex min-h-11 items-end border-b-2 pb-1.5 text-[0.85rem] font-medium transition-colors duration-150 ${
+                  panel === p.id
+                    ? "border-amber text-ivory"
+                    : "border-transparent text-mute hover:text-ivory"
+                }`}
+              >
+                {p.label}
+              </button>
+            ))}
+          </div>
+
+          {panel === "catalog" && (
+            <Presets
+              level={level}
+              production={production}
+              onPick={(prompt) => {
+                setValue(prompt);
+                // Phone: the composer lives behind the chat tab — show it.
+                setMobileView("chat");
+                inputRef.current?.focus();
+              }}
+              onLogged={bumpJournal}
+            />
+          )}
+          {panel === "journal" && (
+            <Journal level={level} version={journalVersion} production={production} />
+          )}
+          {panel === "describe" && (
+            <Describe onLogged={bumpJournal} production={production} onBusyChange={setAnalyzing} />
+          )}
+          {panel === "image" && (
+            <ImageLab onLogged={bumpJournal} production={production} onBusyChange={setAnalyzing} />
+          )}
+        </div>
+      </main>
+
+      {/* Phone navigation: fixed bottom bar, replaces the panel tabs. */}
+      <nav
+        aria-label="Sections"
+        className="fixed inset-x-0 bottom-0 z-30 border-t border-white/10 bg-bezel/95 pb-[env(safe-area-inset-bottom)] backdrop-blur lg:hidden"
+      >
+        <ul className="flex">
+          {([{ id: "chat" as const, label: "Chat" }, ...PANELS]).map((item) => {
+            const active = mobileView === item.id;
+            return (
+              <li key={item.id} className="min-w-0 flex-1">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMobileView(item.id);
+                    if (item.id !== "chat") setPanel(item.id);
+                  }}
+                  aria-current={active}
+                  className={`flex min-h-14 w-full flex-col items-center justify-center gap-0.5 px-1 font-mono text-[0.62rem] tracking-[0.08em] uppercase transition-colors duration-150 ${
+                    active ? "text-amber" : "text-mute"
+                  }`}
+                >
+                  {item.label}
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+    </div>
+  );
+}

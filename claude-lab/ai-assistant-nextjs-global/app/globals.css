@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+@theme {
+  /* Régie / salle de montage : nuit d'étalonnage, pas noir pur */
+  --color-base: #0e1418;
+  --color-bezel: #18202a;
+  --color-bezel-2: #212b37;
+  --color-ivory: #ede7da;
+  --color-amber: #ff7a18;
+  --color-mute: #8b95a1;
+
+  --font-display: var(--font-bricolage), system-ui, sans-serif;
+  --font-sans: var(--font-plex), system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+}
+
+body {
+  background: var(--color-base);
+  color: var(--color-ivory);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/*
+ * Grain de régie : une texture fine, fixe et immobile au-dessus de tout
+ * (pointer-events: none), pour briser la platitude du vecteur numérique.
+ */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+::selection {
+  background: var(--color-amber);
+  color: var(--color-base);
+}
+
+*:focus-visible {
+  outline: 2px solid var(--color-amber);
+  outline-offset: 2px;
+}
+
+/* Témoin REC : le seul mouvement non déclenché par l'utilisateur */
+@keyframes rec-blink {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  55%,
+  100% {
+    opacity: 0.15;
+  }
+}
+
+.rec-dot {
+  animation: rec-blink 1.4s steps(1, end) infinite;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rise {
+  animation: rise 0.28s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rec-dot,
+  .rise {
+    animation: none;
+  }
+}
