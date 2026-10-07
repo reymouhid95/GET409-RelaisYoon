@@ -36,3 +36,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Playwright MCP snapshots & review screenshots (never shipped)
+.playwright-mcp/
+refonte-*.png
