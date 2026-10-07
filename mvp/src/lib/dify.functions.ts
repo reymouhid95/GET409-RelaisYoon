@@ -37,7 +37,9 @@ export const demanderAgent = createServerFn({ method: "POST" })
       return {
         ok: false as const,
         erreur: `Question trop longue (${QUESTION_MAX} caractères maximum)`,
-        detail: `question refusée sans appel Dify : ${data.question.length} caractères`,
+        // Pas de détail technique affiché : le message ci-dessus est déjà
+        // explicite pour l'usagère, le diagnostic mono serait du bruit.
+        detail: null,
       };
     }
 
