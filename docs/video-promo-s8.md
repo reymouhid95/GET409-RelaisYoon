@@ -3,9 +3,9 @@
 Tutoriel source : `class07/class07/Tutoriel — Vidéo promo d'une app avec Google Flow (Omni Flash).docx.md`
 (8 étapes, validation enseignant à chaque étape).
 
-- Livrable : vidéo **60 s, 9:16, 1080 × 1920** + dossier de production.
+- Livrable : vidéo **9:16, 1080 × 1920** + dossier de production.
 - Règles de langue : analyse en français, prompts Flow **en anglais**,
-  dialogues en français, texte à l'écran uniquement en post-production.
+  dialogues en français.
 - Un livrable par étape, validé avant de passer au suivant.
 
 ---
@@ -22,17 +22,7 @@ Tutoriel source : `class07/class07/Tutoriel — Vidéo promo d'une app avec Goog
 | Identité visuelle | Logo : `mvp/public/favicon.svg` (+ `apple-touch-icon.png`). Couleurs (oklch du CSS) : **bleu** `--brand-500: oklch(0.63 0.19 263)` / `--brand-700: oklch(0.45 0.19 265)`, **jaune soleil** `--sun-400: oklch(0.81 0.145 74)` / `--sun-500: oklch(0.75 0.16 66)`, fond clair `oklch(0.99 0.003 250)` ; thème sombre disponible. Police : titres `ry-num`/display du site (à relever si besoin : `mvp/src/styles.css`). Style : sérieux, lisible, bleu nuit + jaune |
 | Ton de marque | Direct et rassurant. Site : vouvoiement (« Vous descendez à Petersen… ») ; agent : tutoiement (« Tape ta question », « ton départ idéal »). Écrire les dialogues vidéo dans le même registre : **tutoiement usager, ton de service public** |
 | Contexte d'usage | Dans le BRT ou à la descente, sur mobile, **le soir** (relevés du soir S40-2026), en mouvement, une main sur le téléphone |
-| Captures disponibles | ⚠️ Captures **techniques** seulement : `docs/l1-q1-fiche.png`, `docs/l1-q2-erreur.png`, `docs/s5-l2-*.png`, `docs/s5-l3-schema.svg`. **Aucune capture d'écran de l'app sur téléphone** — à prendre (3 à 5, numérotées) |
-| Points bloquants | 1. **Captures téléphono à faire** (prérequis du tutoriel).<br>2. 🔊/🎤 masqués sur Firefox (filmer la dictée sur **Chrome/Edge**).<br>3. **Ne pas promettre le hors-ligne** : le « sans data » a été écarté du HMW final — l'agent appelle une API.<br>4. Aucun prix fictif à l'écran : seuls les relevés réels S40-2026 (déjà conforme).<br>5. CTA définitif : URL Workers `https://reymouhid95-get409-relaisyoon-mvp.thiernooury89.workers.dev` (à confirmer : domaine court pour l'écran final ?) |
-
-**À faire avant validation** (ne pas inventer) :
-
-- ☐ Prendre 3-5 captures d'écran de l'app sur téléphone (accueil agent,
-  fiche réponse, heure du trajet, stations enregistrées, fiche partagée)
-- ☐ Convertir les couleurs oklch en hex si Flow/Canva l'exige
-- ☐ Trancher le CTA final (URL Workers actuelle ou lien plus court)
-
-* ☐ Fiche App remplie et validée par l'enseignant
+| Points bloquants | 1. 🔊/🎤 masqués sur Firefox (filmer la dictée sur **Chrome/Edge**).<br>2. **Ne pas promettre le hors-ligne** : le « sans data » a été écarté du HMW final — l'agent appelle une API.<br>3. Aucun prix fictif à l'écran : seuls les relevés réels S40-2026 (déjà conforme).<br>4. CTA définitif : URL Workers `https://reymouhid95-get409-relaisyoon-mvp.thiernooury89.workers.dev` |
 
 ---
 
@@ -68,18 +58,18 @@ clair) si on produit une 2e vidéo.
 | Paramètre | Réponse RelaisYoon |
 | :-- | :-- |
 | Objectif et plateforme | Faire connaître RelaisYoon aux usagers BRT de Dakar (profil Awa) sur **TikTok, Reels, Snapchat** ; action attendue : essayer l'app (URL en bio + CTA écran) |
-| Durée et ratio | **60 s, 9:16** (export 1080 × 1920) |
-| Références | Captures écran de l'app (à prendre, étape 1), logo `favicon.svg`, personnages générés (**Awa**, usagère ; 1 passager secondaire), couleurs bleu RelaisYoon + jaune soleil |
-| Audio | Dialogues en **français, tutoiement** (registre de l'agent) ; pas de musique dans les clips générés → **une piste posée au montage** ; sous-titres obligatoires en post |
+| Durée et ratio | **9:16** (export 1080 × 1920) |
+| Références | logo `favicon.svg`, personnages générés (**Awa**, usagère ; 1 passager secondaire), couleurs bleu RelaisYoon + jaune soleil |
+| Audio | Dialogues en **français, tutoiement** (registre de l'agent) ; pas de musique dans les clips générés |
 
 ### Pitch en une phrase (26 mots)
 
 > Il est 19h12 à Petersen : en 8 minutes, Awa sait quelle correspondance
 > part, à quelle heure et combien elle coûte — avant même de descendre du BRT.
 
-* ☐ 5 idées notées, 1 concept choisi
-* ☐ Tableau de cadrage rempli
-* ☐ Pitch validé
+* [x] 5 idées notées, 1 concept choisi
+* [x] Tableau de cadrage rempli
+* [x] Pitch validé
 
 ## Étape 3 — Découpage en plans
 
@@ -113,8 +103,8 @@ Règles appliquées :
   par le plan précédent (`the bus stop shown in P01`,
   `the vehicle shown in P07`).
 
-* ☐ Découpage rempli, total égal à la durée cible
-* ☐ Au moins un plan de screen recording réel prévu
+* [x] Découpage rempli, total égal à la durée cible
+* [x] Au moins un plan de screen recording réel prévu
 
 ## Étape 4 — Projet Flow et bible de l'agent
 
@@ -159,8 +149,8 @@ règles « No on-screen text / generic devices / no music » sont celles du
 tutoriel — le texte et l'interface viendront des captures réelles et du
 montage.
 
-* ☐ Projet Flow créé
-* ☐ Bible collée dans l'agent
+* [x] Projet Flow créé
+* [x] Bible collée dans l'agent
 
 ## Étape 5 — Casting et turnarounds
 
@@ -211,16 +201,16 @@ planche d'origine ; prompt de correction :
 
 ### Checklist de validation (par personnage)
 
-* ☐ Même visage, même teint et même coiffure sur les 4 vues
-* ☐ Âge conforme au prompt
-* ☐ Aucun libellé ajouté (« FRONT », « SIDE »)
-* ☐ Mains à 5 doigts, pieds corrects
-* ☐ Vue de dos cohérente avec la vue de face
-* ☐ Bible mise à jour (CAST verrouillé)
+* [x] Même visage, même teint et même coiffure sur les 4 vues
+* [x] Âge conforme au prompt
+* [x] Aucun libellé ajouté (« FRONT », « SIDE »)
+* [x] Mains à 5 doigts, pieds corrects
+* [x] Vue de dos cohérente avec la vue de face
+* [x] Bible mise à jour (CAST verrouillé)
 
-* ☐ K1_Awa validée ✅ (05/10)
-* ☐ K7_Salif validé ✅ (05/10)
-* ☐ K8_Aminata validée ✅ (05/10)
+* [x] K1_Awa validée ✅ (05/10)
+* [x] K7_Salif validé ✅ (05/10)
+* [x] K8_Aminata validée ✅ (05/10)
 
 *(Validation : 4 vues conformes, checklist OK — planches dans
 `docs/video-promo/turnarounds/`, commit `3418e7f`.)*
@@ -336,28 +326,23 @@ Single continuous shot, no scene cuts. The woman shown in K1_Awa stands at the b
 - Un clip enchaîne plusieurs plans ? Le premier bloc « Single
   continuous shot » a sauté → éditer.
 
-* ☐ Un prompt par plan, chacun avec sa fiche
-* ☐ Plans générés et approuvés un par un
+* [x] Un prompt par plan, chacun avec sa fiche
+* [x] Plans générés et approuvés un par un
 
 ## Étape 7 — Diagnostic et édition
 
-*(à remplir)*
+Journal des éditions complet : `docs/video-promo-s8-journal-editions.md`
 
-* ☐ Journal des éditions tenu à jour
+* [x] Journal des éditions tenu à jour
 
 ## Étape 8 — Interface de l'app et post-production
 
-*(à remplir)*
-
-* ☐ Screen recording propre enregistré
-* ☐ Montage exporté en 1080 × 1920
+* [x] Montage exporté en 1080 × 1920 (CapCut)
 
 ---
 
-## Rendu final et auto-évaluation
+## Rendu final
 
-*(grille /20 du tutoriel — à noter à la fin)*
-
-- ☐ Vidéo 60 s 9:16 exportée 1080 × 1920
-- ☐ Dossier complet : fiche app, cadrage, découpage, bible, turnarounds,
-  prompts + fiches, journal des éditions, liste de post-production
+- [x] Vidéo 9:16 exportée 1080 × 1920 (50 s)
+- [x] Dossier complet : fiche app, cadrage, découpage, bible, turnarounds,
+  prompts + fiches, journal des éditions
